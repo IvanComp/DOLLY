@@ -38,8 +38,8 @@ export const routes: readonly ViewRouteObject[] = [
     handle: { icon: 'null', title: 'Main' },
     children: [
       { path: '/', element: <DashboardView />, handle: { icon: 'la la-tachometer', title: 'Dashboard' } },
-      { path: '/model', element: <HelloReactView />, handle: { icon: 'la la-file-code-o', title: 'Model Page' } },
-      { path: '/microservices', element: <MicroservicesView />, handle: { icon: 'la la-tachometer', title: 'List of Microservices' } },
+      { path: '/model', element: <HelloReactView />, handle: { icon: 'la la-file-code-o', title: 'Microservice' } },
+      { path: '/microservices', element: <MicroservicesView />, handle: { icon: 'la la-tachometer', title: 'List of Devices' } },
       { path: '/about', element: <AboutView />, handle: { icon: 'la la-info', title: 'About' } },
     ],
   },

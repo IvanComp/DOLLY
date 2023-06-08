@@ -1,7 +1,9 @@
-from flask import Flask, jsonify, request
 import random
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 fanStatus = False  # Initial fan status
 
@@ -40,13 +42,13 @@ def get_humidity():
 @app.route('/wind', methods=['GET'])
 def get_wind():
     wind_speed = random.uniform(0.0, 100.0)  # Generate a random variable between 20.0 and 30.0
-    response = {'sensor': 'temperature', 'value': f'{wind_speed}m/s'}
+    response = {'sensor': 'temperature', 'value': f'{wind_speed} m/s'}
     return jsonify(response)
 
 @app.route('/rain', methods=['GET'])
 def get_rain():
     rain_quantity = random.uniform(0.0, 600.0)  # Generate a random variable between 20.0 and 30.0
-    response = {'sensor': 'temperature', 'value': f'{rain_quantity}mm/h'}
+    response = {'sensor': 'temperature', 'value': f'{rain_quantity} mm/h'}
     return jsonify(response)
 
 @app.route('/uv', methods=['GET'])
