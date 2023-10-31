@@ -89,4 +89,4 @@ def toggle_fanStatus():
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='localhost', port=8081)

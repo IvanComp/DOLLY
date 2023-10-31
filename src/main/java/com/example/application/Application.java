@@ -26,13 +26,13 @@ public class Application implements AppShellConfigurator {
         simulatedStation();
 
         //Start the MERODE IoT Web App
-        merodeIoTApp();
+        //merodeIoTApp();
 
     }
 
     private static void simulatedStation() {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("python", "Simulated Python Station/main.py");
+            ProcessBuilder processBuilder = new ProcessBuilder("py", "Simulated Python Station/main.py");
             Process process = processBuilder.start();
             int exitCode = process.waitFor();
 
@@ -43,7 +43,7 @@ public class Application implements AppShellConfigurator {
                 System.out.println("Simulated IoT Station succesfully generated!");
 
                 Runtime rt = Runtime.getRuntime();
-                String url = "http://127.0.0.1:5000/";
+                String url = "http://localhost:8081/";
                 String[] browsers = { "google-chrome", "firefox", "mozilla", "epiphany", "konqueror",
                         "netscape", "opera", "links", "lynx" };
 
@@ -65,10 +65,16 @@ public class Application implements AppShellConfigurator {
 
     private static void merodeIoTApp() throws IOException {
 
-        ProcessBuilder pb = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-service.bat");
+        ProcessBuilder pb = new ProcessBuilder("IoT-EDG-Rest-Services/extras/build-application.bat");
+        ProcessBuilder pb2 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-db-server.bat");
+        ProcessBuilder pb3 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/init-db.bat");
+        ProcessBuilder pb4 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-service.bat");
         pb.redirectError();
         try {
             Process p = pb.start();
+            Process p2 = pb.start();
+            Process p3 = pb.start();
+            Process p4 = pb.start();
             try (InputStream inputStream = p.getInputStream()) {
                 int in = -1;
                 while ((in = inputStream.read()) != -1) {
