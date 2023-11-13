@@ -79,14 +79,34 @@ export default function MicroservicesView() {
         }
     };
 
-    const deletePlatform = (index: number) => {
+    const deletePlatform = async (index: number) => {
         const platformId = dataArray[index].id;
         const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
 
         if (confirmation) {
-            // Rimuovi l'elemento corrispondente da dataArray
-            const updatedDataArray = dataArray.filter(item => item.id !== platformId);
-            setDataArray(updatedDataArray);
+            setIsLoading(true);
+
+            try {
+                const url = `http://localhost:4567/platform/${platformId}`;
+
+                // Chiamata DELETE all'API
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+
+                // Rimuovi l'elemento corrispondente da dataArray
+                const updatedDataArray = dataArray.filter(item => item.id !== platformId);
+                setDataArray(updatedDataArray);
+
+            } catch (error) {
+                console.error('Error during deleting the Platform:', error);
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
