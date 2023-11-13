@@ -40,12 +40,11 @@ export default function MicroservicesView() {
             const response = await axios.post('http://localhost:4567/platform/mecrplatform', data, {
                 headers: {
                     'Content-Type': 'text/plain',
-                    'Access-Control-Allow-Origin': 'http://localhost:4567'
                 }
             });
 
             console.log(JSON.stringify(response.data));
-            fetchData(); // Aggiorna i dati dopo la creazione della piattaforma
+            await fetchData(); // Aspetta che fetchData sia completato prima di continuare
         } catch (error) {
             console.error('Errore durante la creazione della piattaforma:', error);
         } finally {
@@ -53,24 +52,41 @@ export default function MicroservicesView() {
         }
     };
 
-    const deletePlatform = async (index: number) => {
-        setIsLoading(true);
-        let data = '{\r\n    "name": "Test",\r\n }';
 
-        try {
-            const response = await axios.post('http://localhost:4567/platform/mecrplatform', data, {
-                headers: {
-                    'Content-Type': 'text/plain',
-                    'Access-Control-Allow-Origin': 'http://localhost:4567'
-                }
-            });
+    const endPlatform = async (index: number) => {
+        const platformId = dataArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
 
-            console.log(JSON.stringify(response.data));
-            fetchData(); // Aggiorna i dati dopo la creazione della piattaforma
-        } catch (error) {
-            console.error('Errore durante la creazione della piattaforma:', error);
-        } finally {
-            setIsLoading(false);
+        if (confirmation) {
+            setIsLoading(true);
+
+            try {
+                const url = `http://localhost:4567/platform/${platformId}/meendplatform`;
+
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();
+            } catch (error) {
+                console.error('Error during deleting the Platform:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+
+    const deletePlatform = (index: number) => {
+        const platformId = dataArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
+
+        if (confirmation) {
+            // Rimuovi l'elemento corrispondente da dataArray
+            const updatedDataArray = dataArray.filter(item => item.id !== platformId);
+            setDataArray(updatedDataArray);
         }
     };
 
@@ -106,28 +122,52 @@ export default function MicroservicesView() {
                                         <span style={{ fontWeight: 'bold', verticalAlign: 'middle' }}>State: </span>
                                         <div style={{ width: '12px', height: '10px', borderRadius: '50%', backgroundColor: '#30ff02', display: 'inline-block', verticalAlign: 'middle', marginRight: '5px', border: '1px solid black' }}></div>
                                     </div>
-
                                 ) : (
-                                    <span style={{ fontWeight: 'bold' }}>State: {item.state}</span>
+                                    <div>
+                                        <span style={{ fontWeight: 'bold' }}>State: </span>
+                                        {item.state === 'ended' && (
+                                            <div style={{ width: '12px', height: '10px', borderRadius: '50%', backgroundColor: 'red', display: 'inline-block', verticalAlign: 'middle', marginLeft: '5px', border: '1px solid black' }}></div>
+                                        )}
+                                    </div>
                                 )}
                             </div>
-                            <button
-                                style={{
-                                    fontSize: "17px",
-                                    backgroundColor: '#da1540',
-                                    color: 'white',
-                                    fontWeight: "bold",
-                                    padding: '5px 13px',
-                                    border: '2px solid red',
-                                    borderRadius: '3px',
-                                    cursor: 'pointer',
-                                    position: 'relative',
-                                    bottom: '-5px'
-                                }}
-                                onClick={() => deletePlatform(index)}
-                            >
-                                Delete Platform
-                            </button>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => endPlatform(index)}
+                                >
+                                    End Platform
+                                </button>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => deletePlatform(index)}
+                                >
+                                    Delete Platform
+                                </button>
+                            </div>
+
                             <div className="small-font">{item.id}</div>
                         </div>
                     ))}
