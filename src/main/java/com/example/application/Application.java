@@ -26,7 +26,7 @@ public class Application implements AppShellConfigurator {
         simulatedStation();
 
         //Start the MERODE IoT Web App
-        //merodeIoTApp();
+        merodeIoTApp();
 
     }
 
@@ -37,26 +37,20 @@ public class Application implements AppShellConfigurator {
             int exitCode = process.waitFor();
 
             if (exitCode != 0) {
-                System.out.println("Error during the generation of the Simulated IoT Station.");
-            }
-            else {
-                System.out.println("Simulated IoT Station succesfully generated!");
+                System.out.println("Errore durante la generazione della Simulated IoT Station.");
+            } else {
+                System.out.println("Simulated IoT Station generata con successo!");
 
-                Runtime rt = Runtime.getRuntime();
-                String url = "http://localhost:8081/";
-                String[] browsers = { "google-chrome", "firefox", "mozilla", "epiphany", "konqueror",
-                        "netscape", "opera", "links", "lynx" };
+                String url = "http://localhost:8081";
+                String chromePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"; // Inserisci il percorso corretto di Chrome
 
-                StringBuffer cmd = new StringBuffer();
-                for (int i = 0; i < browsers.length; i++)
-                    if(i == 0)
-                        cmd.append(String.format(    "%s \"%s\"", browsers[i], url));
-                    else
-                        cmd.append(String.format(" || %s \"%s\"", browsers[i], url));
-                // If the first didn't work, try the next browser and so on
+                ProcessBuilder browserProcessBuilder = new ProcessBuilder(chromePath, url);
 
-                rt.exec(new String[] { "sh", "-c", cmd.toString() });
-
+                try {
+                    browserProcessBuilder.start();
+                } catch (IOException e) {
+                    System.err.println("Errore durante l'apertura di Google Chrome: " + e.getMessage());
+                }
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -65,29 +59,43 @@ public class Application implements AppShellConfigurator {
 
     private static void merodeIoTApp() throws IOException {
 
-        ProcessBuilder pb = new ProcessBuilder("IoT-EDG-Rest-Services/extras/build-application.bat");
+        // Creare ProcessBuilder per ogni file .bat
+        ProcessBuilder pb1 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/build-application.bat");
         ProcessBuilder pb2 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-db-server.bat");
         ProcessBuilder pb3 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/init-db.bat");
         ProcessBuilder pb4 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-service.bat");
-        pb.redirectError();
+
+        // Eseguire il primo processo e attendere che termini
+        executeAndPrint(pb1);
+
+        // Eseguire il secondo processo e attendere che termini
+        executeAndPrint(pb2);
+
+        // Eseguire il terzo processo e attendere che termini
+        executeAndPrint(pb3);
+
+        // Eseguire il quarto processo e attendere che termini
+        executeAndPrint(pb4);
+
+        // Alla fine
+        System.out.println("IoT-EDG-Rest-Services successfully started!");
+        Runtime.getRuntime().exec("google-chrome-stable " + "http://localhost:4567/");
+    }
+
+    private static void executeAndPrint(ProcessBuilder pb) {
         try {
             Process p = pb.start();
-            Process p2 = pb.start();
-            Process p3 = pb.start();
-            Process p4 = pb.start();
             try (InputStream inputStream = p.getInputStream()) {
-                int in = -1;
+                int in;
                 while ((in = inputStream.read()) != -1) {
-                    System.out.print((char)in);
+                    System.out.print((char) in);
                 }
             }
             System.out.println("Exited with " + p.waitFor());
         } catch (IOException | InterruptedException ex) {
             ex.printStackTrace();
         }
+    }
 
-                System.out.println("IoT-EDG-Rest-Services succesfully started!");
-                Runtime.getRuntime().exec("google-chrome-stable " + "http://localhost:4567/");
-            }
 
 }

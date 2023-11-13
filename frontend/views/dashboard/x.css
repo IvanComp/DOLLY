@@ -1,0 +1,22 @@
+/* styles.css */
+h1.available-platforms {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.library-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.platform-container {
+    background-color: green;
+    border-radius: 10px;
+    height: 250px;
+    width: 200px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
