@@ -98,7 +98,8 @@
     "bpmn-js-properties-panel": "$bpmn-js-properties-panel",
     "react-icons": "$react-icons",
     "line-awesome": "$line-awesome",
-    "react-aws-icons": "$react-aws-icons"
+    "react-aws-icons": "$react-aws-icons",
+    "cors": "$cors"
   },
   "vaadin": {
     "dependencies": {
@@ -143,6 +144,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "ff0c50184dcb67a4ca3fad5bfe08be5be22e3a1ede19e84c35f211d7758bc8e6"
+    "hash": "a20402b39db6cf25151b6f6c000c8d4ca109e93def5ef080e960df41163d51a5"
   }
 }

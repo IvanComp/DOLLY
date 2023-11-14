@@ -836,19 +836,23 @@ public class MerodeApplicationService {
 			meendplatform.put("href", "/platform/"+platformId+"/meendplatform");
 			resources.add(meendplatform);
 
-			// Format Data
-			result.put("end_events", resources);
-			Gson gson2 = new Gson();
-			String responseContent = gson2.toJson(result);
-			
-			response.status(300);
+			try {
+				eh.deletePlatform(platformId);
+				result = ResponseFactory.makeSuccess("deletePlatform");
+			} catch(Exception exc) {
+				response.status(403);
+				result = ResponseFactory.makeFail(exc.getMessage());
+			}
+
+			/// Format Data
+			Gson gson = new Gson();
+			String responseContent = gson.toJson(result);
+
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
 		get("property", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllProperty();

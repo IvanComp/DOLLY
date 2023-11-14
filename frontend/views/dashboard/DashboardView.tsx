@@ -34,24 +34,34 @@ export default function MicroservicesView() {
 
     const createPlatform = async () => {
         setIsLoading(true);
-        let data = '{\r\n    "name": "Test",\r\n }';
 
         try {
-            const response = await axios.post('http://localhost:4567/platform/mecrplatform', data, {
-                headers: {
-                    'Content-Type': 'text/plain',
-                }
-            });
+            // Chiedi all'utente di inserire il nome della piattaforma
+            const platformName = window.prompt('Enter the name for the platform:', 'DefaultName');
 
-            console.log(JSON.stringify(response.data));
-            await fetchData(); // Aspetta che fetchData sia completato prima di continuare
+            // Verifica se l'utente ha inserito un nome
+            if (platformName !== null) {
+                const data = {
+                    name: platformName,
+                };
+
+                const response = await axios.post('http://localhost:4567/platform/mecrplatform', data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();
+            } else {
+                console.log('User canceled platform creation.');
+            }
         } catch (error) {
             console.error('Errore durante la creazione della piattaforma:', error);
         } finally {
             setIsLoading(false);
         }
     };
-
 
     const endPlatform = async (index: number) => {
         const platformId = dataArray[index].id;
@@ -138,15 +148,17 @@ export default function MicroservicesView() {
                             <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
                             <div>
                                 {item.state === 'exists' ? (
-                                    <div style={{ display: 'inline-block' }}>
-                                        <span style={{ fontWeight: 'bold', verticalAlign: 'middle' }}>State: </span>
-                                        <div style={{ width: '12px', height: '10px', borderRadius: '50%', backgroundColor: '#30ff02', display: 'inline-block', verticalAlign: 'middle', marginRight: '5px', border: '1px solid black' }}></div>
+                                    <div>
+                                        <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight:"normal"}}>{item.state}</span>
+                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight:"normal"}}> Online <div className="online-dot"></div></span>
                                     </div>
                                 ) : (
                                     <div>
-                                        <span style={{ fontWeight: 'bold' }}>State: </span>
                                         {item.state === 'ended' && (
-                                            <div style={{ width: '12px', height: '10px', borderRadius: '50%', backgroundColor: 'red', display: 'inline-block', verticalAlign: 'middle', marginLeft: '5px', border: '1px solid black' }}></div>
+                                            <div>
+                                                <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight:"normal"}}>{item.state}</span>
+                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight:"normal"}}> Offline<div className="offline-dot"></div></span>
+                                            </div>
                                         )}
                                     </div>
                                 )}
