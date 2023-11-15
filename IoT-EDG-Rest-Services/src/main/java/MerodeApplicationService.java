@@ -677,26 +677,29 @@ public class MerodeApplicationService {
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendfeatureofinterest = new HashMap<String, String>();
 			meendfeatureofinterest.put("method", "DELETE");
 			meendfeatureofinterest.put("href", "/featureofinterest/"+featureofinterestId+"/meendfeatureofinterest");
 			resources.add(meendfeatureofinterest);
 
+			try {
+				eh.deleteFeatureofinterest(featureofinterestId);
+				result = ResponseFactory.makeSuccess("deleteFeatureofinterest");
+			} catch(Exception exc) {
+				response.status(403);
+				result = ResponseFactory.makeFail(exc.getMessage());
+			}
+
 			// Format Data
-			result.put("end_events", resources);
-			Gson gson2 = new Gson();
-			String responseContent = gson2.toJson(result);
-			
-			response.status(300);
+			Gson gson = new Gson();
+			String responseContent = gson.toJson(result);
+
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
 		get("platform", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllPlatform();
@@ -712,8 +715,6 @@ public class MerodeApplicationService {
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
 
 		post("platform", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();

@@ -8,11 +8,14 @@ interface Platform {
     state: any;
 }
 
+interface Device {
+    id: any;
+    name: any;
+    state: any;
+}
 export default function MicroservicesView() {
     const [dataArray, setDataArray] = useState<Platform[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [showCreateButton, setShowCreateButton] = useState(true);
-    const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
     const [featureArray, setFeatureArray] = useState<any[]>([]);
     const [deviceArray, setDeviceArray] = useState<any[]>([]);
     const [selectedFeature, setSelectedFeature] = useState<any | null>(null);
@@ -353,19 +356,19 @@ export default function MicroservicesView() {
                 <div className="library-container" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                     {dataArray.map((item: Platform, index: number) => (
                         <div key={index} className="platform-container">
-                            <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
+                            <div style={{ fontSize: "35px", fontWeight: "bold" }}>{item.name}</div>
                             <div>
                                 {item.state === 'exists' ? (
                                     <div>
-                                        <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight:"normal"}}>{item.state}</span>
-                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight:"normal"}}> Online <div className="online-dot"></div></span>
+                                        <span style={{ fontWeight: "bold" }}> State:</span> <span style={{ fontWeight: "normal" }}>{item.state}</span>
+                                        <span style={{ fontWeight: "bold" }}> Availability:</span> <span style={{ fontWeight: "normal" }}> Online <div className="online-dot"></div></span>
                                     </div>
                                 ) : (
                                     <div>
                                         {item.state === 'ended' && (
                                             <div>
-                                                <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight:"normal"}}>{item.state}</span>
-                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight:"normal"}}> Offline<div className="offline-dot"></div></span>
+                                                <span style={{ fontWeight: "bold" }}> State:</span> <span style={{ fontWeight: "normal" }}>{item.state}</span>
+                                                <span style={{ fontWeight: "bold" }}> Availability:</span> <span style={{ fontWeight: "normal" }}> Offline<div className="offline-dot"></div></span>
                                             </div>
                                         )}
                                     </div>
@@ -412,7 +415,7 @@ export default function MicroservicesView() {
                         </div>
                     ))}
 
-            <button className="platform-container" style={{background:'white', color: '#10ad73', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed green', cursor: 'pointer', marginTop: '2%', marginBottom:'0.42cm',justifyContent: 'center', alignItems: 'center', textAlign: 'center',}} onClick={createPlatform}> + <br></br>Create Platform</button>
+                    <button className="platform-container" style={{ background: 'white', color: '#10ad73', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed green', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center', }} onClick={createPlatform}> + <br></br>Create Platform</button>
 
                 </div>
             )}
@@ -421,67 +424,146 @@ export default function MicroservicesView() {
             {featureArray.length >= 0 && (
                 <div className="library-container" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                     {featureArray.map((item: any, index: number) => (
-                        <div key={index} className="feature-container">
+                        <div key={index} className="platform-feature">
                             <div style={{ fontSize: "35px", fontWeight: "bold" }}>{item.name}</div>
-                            <div className="small-font">{item.id}</div>
+                            <div>
+                                {item.state === 'exists' ? (
+                                    <div>
+                                        <span style={{ fontWeight: "bold" }}> State:</span> <span style={{ fontWeight: "normal" }}>{item.state}</span>
+                                        <span style={{ fontWeight: "bold" }}> Availability:</span> <span style={{ fontWeight: "normal" }}> Online <div className="online-dot"></div></span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {item.state === 'ended' && (
+                                            <div>
+                                                <span style={{ fontWeight: "bold" }}> State:</span> <span style={{ fontWeight: "normal" }}>{item.state}</span>
+                                                <span style={{ fontWeight: "bold" }}> Availability:</span> <span style={{ fontWeight: "normal" }}> Offline<div className="offline-dot"></div></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => endFeature(index)}
+                                >
+                                    End Feature of Interest
+                                </button>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => deleteFeature(index)}
+                                >
+                                    Delete Feature of Interest
+                                </button>
+                            </div>
+
+                            <div style={{fontSize: "70%",
+                                fontWeight: "bold",
+                                position: "relative",
+                                color: "#343232",
+                                bottom: "-12px"}}>{item.id}</div>
                         </div>
                     ))}
-                    <button
-                        className="feature-container"
-                        style={{
-                            background: 'white',
-                            color: '#10ad73',
-                            fontSize: '20px',
-                            padding: '10px 30px',
-                            borderRadius: '5px',
-                            border: '1px dashed green',
-                            cursor: 'pointer',
-                            marginTop: '2%',
-                            marginBottom: '0.42cm',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                        }}
-                        onClick={createFeature}
-                    >
-                        + <br></br>Create Feature
-                    </button>
+
+                    <button className="platform-feature" style={{ background: 'white', color: '#9bbbd5', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed #9BBBD5FF', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center', }} onClick={createFeature}> + <br></br>Create <br></br>Feature Of Interest</button>
+
                 </div>
             )}
 
 
-            {/* Rendering per Device */}
             <h1 style={{ marginLeft: '5px', marginTop: '5px' }}>Available Devices:</h1>
             {deviceArray.length >= 0 && (
                 <div className="library-container" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                     {deviceArray.map((item: any, index: number) => (
-                        <div key={index} className="device-container">
+                        <div key={index} className="platform-device">
                             <div style={{ fontSize: "35px", fontWeight: "bold" }}>{item.name}</div>
-                            {/* Personalizza il rendering per ogni dispositivo secondo le tue esigenze */}
-                            {/* Ad esempio, puoi visualizzare ulteriori informazioni sul dispositivo */}
-                            <div className="small-font">{item.id}</div>
+                            <div>
+                                {item.state === 'exists' ? (
+                                    <div>
+                                        <span style={{ fontWeight: "bold" }}> State:</span> <span style={{ fontWeight: "normal" }}>{item.state}</span>
+                                        <span style={{ fontWeight: "bold" }}> Availability:</span> <span style={{ fontWeight: "normal" }}> Online <div className="online-dot"></div></span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {item.state === 'ended' && (
+                                            <div>
+                                                <span style={{ fontWeight: "bold" }}> State:</span> <span style={{ fontWeight: "normal" }}>{item.state}</span>
+                                                <span style={{ fontWeight: "bold" }}> Availability:</span> <span style={{ fontWeight: "normal" }}> Offline<div className="offline-dot"></div></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => endDevice(index)}
+                                >
+                                    End Device
+                                </button>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => deleteDevice(index)}
+                                >
+                                    Delete Device
+                                </button>
+                            </div>
+
+                            <div style={{fontSize: "70%",
+                                fontWeight: "bold",
+                                position: "relative",
+                                color: "#343232",
+                                bottom: "-12px"}}>{item.id}</div>
                         </div>
                     ))}
-                    <button
-                        className="device-container"
-                        style={{
-                            background: 'white',
-                            color: '#10ad73',
-                            fontSize: '20px',
-                            padding: '10px 30px',
-                            borderRadius: '5px',
-                            border: '1px dashed green',
-                            cursor: 'pointer',
-                            marginTop: '2%',
-                            marginBottom: '0.42cm',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                        }}
-                        onClick={createDevice}
-                    >
-                        + <br></br>Create Device
-                    </button>
+
+                    <button className="platform-feature" style={{ background: 'white', color: '#d5cb9b', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed #D5CB9BFF', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center', }} onClick={createDevice}> + <br></br>Create <br></br>Device</button>
+
                 </div>
             )}
 

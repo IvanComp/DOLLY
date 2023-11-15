@@ -16,6 +16,30 @@ h1.available-platforms {
     align-items: center;
 }
 
+.platform-feature {
+    background-color: #9bbbd5;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 140px;
+    width: 280px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.platform-device {
+    background-color: #d5cb9b;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 140px;
+    width: 280px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .small-font {
     font-size: 70%;
     font-weight: bold;
@@ -38,7 +62,7 @@ h1.available-platforms {
 }
 
 /* Stile per lo status "Online" */
-.platform-container .online-dot {
+.online-dot {
     width: 12px;
     height: 10px;
     border-radius: 50%;
@@ -50,7 +74,7 @@ h1.available-platforms {
 }
 
 /* Stile per lo status "Offline" */
-.platform-container .offline-dot {
+.offline-dot {
     width: 12px;
     height: 10px;
     border-radius: 50%;
