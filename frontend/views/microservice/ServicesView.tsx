@@ -58,8 +58,8 @@ export default function BpmnEditor() {
     return (
         <div>
             <div id="bpmn-container" style={{ height:"600px", border:"solid 0.1px",margin:"15px"}}></div>
-            <button style={{margin:"15px"}}onClick={createNewDiagram}>Create New Diagram</button>
-            <button style={{margin:"15px"}}onClick={deployDiagram}>Deploy Diagram</button>
+            <button style={{margin:"15px"}} onClick={createNewDiagram}>Create New Diagram</button>
+            <button style={{margin:"15px"}} onClick={deployDiagram}>Deploy Diagram</button>
             <button style={{margin:"15px"}} onClick={saveDiagram}>Save Diagram</button>
         </div>
     );

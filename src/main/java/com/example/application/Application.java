@@ -5,10 +5,8 @@ import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.awt.Desktop;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URI;
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -18,15 +16,15 @@ import static java.awt.SystemColor.desktop;
 @Theme(value = "merodemicroservicesbuilderforiot")
 public class Application implements AppShellConfigurator {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         SpringApplication.run(Application.class, args);
 
+        //Start the MERODE IoT Web App
+        //merodeIoTApp();
+
         //Start the Python Simulated Station
         simulatedStation();
-
-        //Start the MERODE IoT Web App
-        merodeIoTApp();
 
     }
 
@@ -42,7 +40,7 @@ public class Application implements AppShellConfigurator {
                 System.out.println("Simulated IoT Station generata con successo!");
 
                 String url = "http://localhost:8081";
-                String chromePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"; // Inserisci il percorso corretto di Chrome
+                String chromePath = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"; // Inserisci il percorso corretto di Chrome
 
                 ProcessBuilder browserProcessBuilder = new ProcessBuilder(chromePath, url);
 
@@ -57,45 +55,48 @@ public class Application implements AppShellConfigurator {
         }
     }
 
-    private static void merodeIoTApp() throws IOException {
-
-        // Creare ProcessBuilder per ogni file .bat
-        ProcessBuilder pb1 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/build-application.bat");
-        ProcessBuilder pb2 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-db-server.bat");
-        ProcessBuilder pb3 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/init-db.bat");
-        ProcessBuilder pb4 = new ProcessBuilder("IoT-EDG-Rest-Services/extras/start-service.bat");
-
-        // Eseguire il primo processo e attendere che termini
-        executeAndPrint(pb1);
-
-        // Eseguire il secondo processo e attendere che termini
-        executeAndPrint(pb2);
-
-        // Eseguire il terzo processo e attendere che termini
-        executeAndPrint(pb3);
-
-        // Eseguire il quarto processo e attendere che termini
-        executeAndPrint(pb4);
-
-        // Alla fine
-        System.out.println("IoT-EDG-Rest-Services successfully started!");
-        Runtime.getRuntime().exec("google-chrome-stable " + "http://localhost:4567/");
-    }
-
-    private static void executeAndPrint(ProcessBuilder pb) {
+    private static void merodeIoTApp() {
         try {
-            Process p = pb.start();
-            try (InputStream inputStream = p.getInputStream()) {
-                int in;
-                while ((in = inputStream.read()) != -1) {
-                    System.out.print((char) in);
-                }
-            }
-            System.out.println("Exited with " + p.waitFor());
-        } catch (IOException | InterruptedException ex) {
-            ex.printStackTrace();
+            // Percorsi dei file batch
+            String initDB = "IoT-EDG-Rest-Services\\extras\\init-db.bat";
+            String startDBServer = "IoT-EDG-Rest-Services\\extras\\start-server.bat";
+            String startService = "IoT-EDG-Rest-Services\\extras\\start-service.bat";
+
+            // Esegui i file batch in sequenza
+            runBatchFile(initDB);
+            runBatchFile(startDBServer);
+            runBatchFile(startService);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
+    private static void runBatchFile(String filePath) throws IOException, InterruptedException {
+        System.out.println("Esecuzione del file batch: " + filePath);
+
+        ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", filePath);
+        processBuilder.redirectErrorStream(true); // Unisce l'output standard e l'output di errore
+
+        Process process = processBuilder.start();
+        int exitCode = process.waitFor();
+
+        // Cattura l'output del processo
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            String line;
+            System.out.println("Output del processo:");
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
+
+        System.out.println("Codice di uscita del processo: " + exitCode);
+
+        if (exitCode != 0) {
+            System.out.println("Errore durante l'esecuzione del file batch: " + filePath);
+        } else {
+            System.out.println("File batch eseguito con successo: " + filePath);
+        }
+    }
 
 }

@@ -13,6 +13,10 @@ export default function MicroservicesView() {
     const [isLoading, setIsLoading] = useState(false);
     const [showCreateButton, setShowCreateButton] = useState(true);
     const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
+    const [featureArray, setFeatureArray] = useState<any[]>([]);
+    const [deviceArray, setDeviceArray] = useState<any[]>([]);
+    const [selectedFeature, setSelectedFeature] = useState<any | null>(null);
+    const [selectedDevice, setSelectedDevice] = useState<any | null>(null);
 
     useEffect(() => {
         fetchData();
@@ -22,8 +26,14 @@ export default function MicroservicesView() {
         try {
             setIsLoading(true);
 
-            const response = await getPlatform();
-            setDataArray(response);
+            const platformResponse = await getPlatform();
+            setDataArray(platformResponse);
+
+            const featureResponse = await getFeature();
+            setFeatureArray(featureResponse);
+
+            const deviceResponse = await getDevice();
+            setDeviceArray(deviceResponse);
 
             setIsLoading(false);
         } catch (error) {
@@ -62,7 +72,6 @@ export default function MicroservicesView() {
             setIsLoading(false);
         }
     };
-
     const endPlatform = async (index: number) => {
         const platformId = dataArray[index].id;
         const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
@@ -88,7 +97,6 @@ export default function MicroservicesView() {
             }
         }
     };
-
     const deletePlatform = async (index: number) => {
         const platformId = dataArray[index].id;
         const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
@@ -119,7 +127,6 @@ export default function MicroservicesView() {
             }
         }
     };
-
     const getPlatform = async (): Promise<Platform[]> => {
         try {
             const response = await axios.get('http://localhost:4567/platform', {
@@ -136,12 +143,213 @@ export default function MicroservicesView() {
         }
     };
 
+    const createFeature = async () => {
+        setIsLoading(true);
+
+        try {
+            // Chiedi all'utente di inserire il nome della feature
+            const featureName = window.prompt('Enter the name for the feature:', 'DefaultFeature');
+
+            // Verifica se l'utente ha inserito un nome
+            if (featureName !== null) {
+                const data = {
+                    name: featureName,
+                };
+
+                const response = await axios.post('http://localhost:4567/featureofinterest/mecrfeatureofinterest', data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();
+            } else {
+                console.log('User canceled feature creation.');
+            }
+        } catch (error) {
+            console.error('Errore durante la creazione della feature:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const endFeature = async (index: number) => {
+        const featureId = featureArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Feature with ID: ${featureId}?`);
+
+        if (confirmation) {
+            setIsLoading(true);
+
+            try {
+                const url = `http://localhost:4567/featureofinterest/${featureId}/meendfeatureofinterest`;
+
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();
+            } catch (error) {
+                console.error('Error during deleting the Feature:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+    const deleteFeature = async (index: number) => {
+        const featureId = featureArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Feature with ID: ${featureId}?`);
+
+        if (confirmation) {
+            setIsLoading(true);
+
+            try {
+                const url = `http://localhost:4567/featureofinterest/${featureId}`;
+
+                // Chiamata DELETE all'API
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+
+                // Rimuovi l'elemento corrispondente da featureArray
+                const updatedFeatureArray = featureArray.filter(item => item.id !== featureId);
+                setFeatureArray(updatedFeatureArray);
+
+            } catch (error) {
+                console.error('Error during deleting the Feature:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+    const getFeature = async (): Promise<any[]> => {
+        try {
+            const response = await axios.get('http://localhost:4567/featureofinterest', {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+            });
+
+            console.log(JSON.stringify(response.data));
+            return response.data;
+        } catch (error) {
+            console.error('Errore durante il recupero dei dati della Feature:', error);
+            throw error;
+        }
+    };
+
+    const createDevice = async () => {
+        setIsLoading(true);
+
+        try {
+            // Chiedi all'utente di inserire il nome del dispositivo
+            const deviceName = window.prompt('Enter the name for the device:', 'DefaultDevice');
+
+            // Verifica se l'utente ha inserito un nome
+            if (deviceName !== null) {
+                const data = {
+                    name: deviceName,
+                };
+
+                const response = await axios.post('http://localhost:4567/device/mecrdevice', data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();
+            } else {
+                console.log('User canceled device creation.');
+            }
+        } catch (error) {
+            console.error('Errore durante la creazione del dispositivo:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const endDevice = async (index: number) => {
+        const deviceId = deviceArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Device with ID: ${deviceId}?`);
+
+        if (confirmation) {
+            setIsLoading(true);
+
+            try {
+                const url = `http://localhost:4567/device/${deviceId}/meenddevice`;
+
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();
+            } catch (error) {
+                console.error('Error during deleting the Device:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+    const deleteDevice = async (index: number) => {
+        const deviceId = deviceArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Device with ID: ${deviceId}?`);
+
+        if (confirmation) {
+            setIsLoading(true);
+
+            try {
+                const url = `http://localhost:4567/device/${deviceId}`;
+
+                // Chiamata DELETE all'API
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+
+                // Rimuovi l'elemento corrispondente da deviceArray
+                const updatedDeviceArray = deviceArray.filter(item => item.id !== deviceId);
+                setDeviceArray(updatedDeviceArray);
+
+            } catch (error) {
+                console.error('Error during deleting the Device:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+    };
+    const getDevice = async (): Promise<any[]> => {
+        try {
+            const response = await axios.get('http://localhost:4567/device', {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+            });
+
+            console.log(JSON.stringify(response.data));
+            return response.data;
+        } catch (error) {
+            console.error('Errore durante il recupero dei dati del Device:', error);
+            throw error;
+        }
+    };
+
     return (
         <div className="flex flex-col items-start justify-start p-l text-center box-border">
             <h1 style={{ marginLeft: '5px', marginTop: '5px' }}>Available Platforms:</h1>
-            <button style={{background:'#10ad73', color: 'white', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: 'none', cursor: 'pointer', marginTop: '2%', marginBottom:'0.42cm'}} onClick={createPlatform}>Create Platform</button>
 
-            {dataArray.length > 0 && (
+            {dataArray.length >= 0 && (
                 <div className="library-container" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                     {dataArray.map((item: Platform, index: number) => (
                         <div key={index} className="platform-container">
@@ -204,14 +412,79 @@ export default function MicroservicesView() {
                         </div>
                     ))}
 
+            <button className="platform-container" style={{background:'white', color: '#10ad73', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed green', cursor: 'pointer', marginTop: '2%', marginBottom:'0.42cm',justifyContent: 'center', alignItems: 'center', textAlign: 'center',}} onClick={createPlatform}> + <br></br>Create Platform</button>
+
                 </div>
             )}
 
-            {selectedPlatform && (
-                <div>
-                    <p>Dettagli della piattaforma selezionata: {selectedPlatform.name}</p>
+            <h1 style={{ marginLeft: '5px', marginTop: '5px' }}>Available Features of Interest:</h1>
+            {featureArray.length >= 0 && (
+                <div className="library-container" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
+                    {featureArray.map((item: any, index: number) => (
+                        <div key={index} className="feature-container">
+                            <div style={{ fontSize: "35px", fontWeight: "bold" }}>{item.name}</div>
+                            <div className="small-font">{item.id}</div>
+                        </div>
+                    ))}
+                    <button
+                        className="feature-container"
+                        style={{
+                            background: 'white',
+                            color: '#10ad73',
+                            fontSize: '20px',
+                            padding: '10px 30px',
+                            borderRadius: '5px',
+                            border: '1px dashed green',
+                            cursor: 'pointer',
+                            marginTop: '2%',
+                            marginBottom: '0.42cm',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                        }}
+                        onClick={createFeature}
+                    >
+                        + <br></br>Create Feature
+                    </button>
                 </div>
             )}
+
+
+            {/* Rendering per Device */}
+            <h1 style={{ marginLeft: '5px', marginTop: '5px' }}>Available Devices:</h1>
+            {deviceArray.length >= 0 && (
+                <div className="library-container" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
+                    {deviceArray.map((item: any, index: number) => (
+                        <div key={index} className="device-container">
+                            <div style={{ fontSize: "35px", fontWeight: "bold" }}>{item.name}</div>
+                            {/* Personalizza il rendering per ogni dispositivo secondo le tue esigenze */}
+                            {/* Ad esempio, puoi visualizzare ulteriori informazioni sul dispositivo */}
+                            <div className="small-font">{item.id}</div>
+                        </div>
+                    ))}
+                    <button
+                        className="device-container"
+                        style={{
+                            background: 'white',
+                            color: '#10ad73',
+                            fontSize: '20px',
+                            padding: '10px 30px',
+                            borderRadius: '5px',
+                            border: '1px dashed green',
+                            cursor: 'pointer',
+                            marginTop: '2%',
+                            marginBottom: '0.42cm',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                        }}
+                        onClick={createDevice}
+                    >
+                        + <br></br>Create Device
+                    </button>
+                </div>
+            )}
+
         </div>
     );
 }

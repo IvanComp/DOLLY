@@ -1,9 +1,8 @@
-import HelloReactView from 'Frontend/views/helloreact/HelloReactView.js';
 import MainLayout from 'Frontend/views/MainLayout.js';
 import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
 import { lazy } from 'react';
 import { createBrowserRouter, IndexRouteObject, NonIndexRouteObject, useMatches } from 'react-router-dom';
-import MicroservicesView from "Frontend/views/microservice/MicroservicesView.js";
+import ServicesView from "Frontend/views/microservice/ServicesView.js";
 import {MdOutlineMiscellaneousServices} from "react-icons/md";
 import DashboardView from "Frontend/views/dashboard/DashboardView.js";
 
@@ -38,8 +37,7 @@ export const routes: readonly ViewRouteObject[] = [
     handle: { icon: 'null', title: 'Main' },
     children: [
       { path: '/', element: <DashboardView />, handle: { icon: 'la la-tachometer', title: 'Dashboard' } },
-      { path: '/model', element: <HelloReactView />, handle: { icon: 'la la-file-code-o', title: 'Microservice' } },
-      { path: '/microservices', element: <MicroservicesView />, handle: { icon: 'la la-tachometer', title: 'List of Devices' } },
+      { path: '/services', element: <ServicesView />, handle: { icon: 'la la-tachometer', title: 'Digital Twin Services' } },
       { path: '/about', element: <AboutView />, handle: { icon: 'la la-info', title: 'About' } },
     ],
   },
