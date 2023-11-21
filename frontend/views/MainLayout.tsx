@@ -4,10 +4,13 @@ import { Item } from '@hilla/react-components/Item.js';
 import { Scroller } from '@hilla/react-components/Scroller.js';
 import Placeholder from 'Frontend/components/placeholder/Placeholder.js';
 import { MenuProps, routes, useViewMatches, ViewRouteObject } from 'Frontend/routes.js';
-import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import css from './MainLayout.module.css';
 import logo from "./../img/logo.png"
+import {HiAcademicCap} from "react-icons/hi";
+import {MdAlternateEmail} from "react-icons/md";
+import Modal from 'react-modal';
+import React, {Suspense, useEffect, useState} from 'react';
 
 type MenuRoute = ViewRouteObject &
   Readonly<{
@@ -50,6 +53,28 @@ export default function MenuOnLeftLayout() {
             </NavLink>
           ))}
         </nav>
+
+        <div style={{position: 'absolute', bottom: '5px', left: '0', width: '100%', margin: '0 auto'}}>
+          <hr style={{color: 'red', backgroundColor:'#5b5b65', border:'none', height: '1px', margin: '5px 5%', width: '90%'}} />
+          <div style={{textAlign: 'center'}}>
+            <p style={{fontSize:"15px", color: '#eae9e9"', margin: '0'}}>Version: 1.0.0</p>
+            <p style={{ fontSize: '16px', marginBottom: '2%', marginTop: '0' }}>
+              <HiAcademicCap style={{ marginBottom: '0.1cm', fontSize: '18px' }} />
+              <a
+                  style={{ marginLeft: '1%', fontSize: '14px', marginRight: '10%',  color: "#005fdb", cursor: "pointer"}}
+
+              >
+                References
+              </a>
+              <MdAlternateEmail style={{ marginBottom: '0.1cm' }} />
+              <a style={{ marginLeft: '1%', fontSize: '14px' }} href="mailto:ivan.compagnucci@unicam.it">
+                Contact
+              </a>
+            </p>
+
+          </div>
+        </div>
+
       </Scroller>
       <footer slot="drawer" />
 
@@ -57,6 +82,8 @@ export default function MenuOnLeftLayout() {
       <h2 slot="navbar" className="text-l m-0">
         {currentTitle}
       </h2>
+
+
 
       <Suspense fallback={<Placeholder />}>
         <Outlet />

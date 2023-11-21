@@ -35,7 +35,7 @@ public class Application implements AppShellConfigurator {
             int exitCode = process.waitFor();
 
             if (exitCode != 0) {
-                System.out.println("Errore durante la generazione della Simulated IoT Station.");
+                System.out.println("Errore durante la generazione della Simulated IoT Sttion.");
             } else {
                 System.out.println("Simulated IoT Station generata con successo!");
 

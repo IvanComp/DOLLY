@@ -38,6 +38,7 @@
     "react-aws-icons": "^1.2.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.4.2",
     "toastify": "^2.0.1"
   },
@@ -48,6 +49,7 @@
     "@types/classnames": "^2.3.1",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "@types/react-modal": "^3.16.3",
     "@vitejs/plugin-react": "~3.0.1",
     "async": "3.2.2",
     "glob": "7.2.3",
@@ -99,7 +101,8 @@
     "react-icons": "$react-icons",
     "line-awesome": "$line-awesome",
     "react-aws-icons": "$react-aws-icons",
-    "cors": "$cors"
+    "cors": "$cors",
+    "react-modal": "$react-modal"
   },
   "vaadin": {
     "dependencies": {
@@ -144,6 +147,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "a20402b39db6cf25151b6f6c000c8d4ca109e93def5ef080e960df41163d51a5"
+    "hash": "bcdf2283a8d700c266f4835f5eba892e915231f3c690a60f75ee3b85f07bf719"
   }
 }
