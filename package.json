@@ -106,7 +106,8 @@
     "react-aws-icons": "$react-aws-icons",
     "cors": "$cors",
     "react-modal": "$react-modal",
-    "three": "$three"
+    "three": "$three",
+    "react-toastify": "$react-toastify"
   },
   "vaadin": {
     "dependencies": {
@@ -151,6 +152,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "0ce3259c8d3cbb4796f9dc30dba9bec21b92dabb1e730aee57644fd4fad1f324"
+    "hash": "8de5bd5c2408ab422e7ce8e71ea34b876b48413584754df2e74b5d2eefd68d3d"
   }
 }

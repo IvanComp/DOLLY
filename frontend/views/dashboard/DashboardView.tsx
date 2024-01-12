@@ -352,7 +352,7 @@ export default function MicroservicesView() {
 
     async function open3D() {
         try {
-            const url = 'frontend/views/3d/ThreeDee.tsx';
+            const url = '3d';
             window.open(url, '_blank');
             toast.success('All files deleted successfully!', {
                 position: "bottom-right",

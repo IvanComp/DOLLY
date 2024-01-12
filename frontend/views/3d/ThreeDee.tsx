@@ -1,6 +1,28 @@
 import React, { useEffect } from 'react';
 import * as THREE from 'three';
 
+class ErrorBoundary extends React.Component {
+    constructor(props: {} | Readonly<{}>) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    componentDidCatch(error: any, errorInfo: any) {
+        console.error(error, errorInfo);
+        // Puoi anche inviare l'errore a un servizio di log o fare altre operazioni di gestione dell'errore
+    }
+
+    render() {
+        // @ts-ignore
+        if (this.state.hasError) {
+            return <h1>Something went wrong.</h1>;
+        }
+
+        // @ts-ignore
+        return this.props.children;
+    }
+}
+
 export default function ThreeDee() {
     useEffect(() => {
         const width = window.innerWidth;
@@ -44,5 +66,5 @@ export default function ThreeDee() {
         };
     }, []); // Dipendenza vuota per assicurarsi che l'effetto venga eseguito solo una volta
 
-    return <div />;
+    return <ErrorBoundary><div /></ErrorBoundary>;
 }

@@ -12,6 +12,7 @@ import {MdAlternateEmail} from "react-icons/md";
 import Modal from 'react-modal';
 import React, {Suspense, useEffect, useState} from 'react';
 import {CiCircleQuestion} from "react-icons/ci";
+import axios from "axios";
 
 type MenuRoute = ViewRouteObject &
   Readonly<{
@@ -22,10 +23,30 @@ type MenuRoute = ViewRouteObject &
 export default function MenuOnLeftLayout() {
   const matches = useViewMatches();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isAPIOnline, setIsAPIOnline] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
   };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:4567');
+      setIsAPIOnline(response.status === 200);
+    } catch (error) {
+      setIsAPIOnline(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Esegui la chiamata iniziale al montaggio del componente
+
+    const pollingInterval = setInterval(async () => {
+      await fetchData(); // Esegui la chiamata periodicamente
+    }, 2000); // Ogni 5 secondi (puoi regolare l'intervallo secondo le tue esigenze)
+
+    // Pulisci l'intervallo quando il componente viene smontato
+    return () => clearInterval(pollingInterval);
+  }, []);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -68,42 +89,36 @@ export default function MenuOnLeftLayout() {
           <br/>
           <div style={{ display: 'flex', alignItems: 'left' }}>
           <a style={{fontWeight:"bold", marginLeft:"5%", color:'#154A57'}}>API Status:</a><a style={{marginLeft:"13%"}}><div>
-          {1 === 1 ? (
-              <div>
-              <span style={{fontWeight: "normal",color:'black'}}> Online <div
-                  className="online-dot"></div></span>
-              </div>
-          ) : (
-              <div>
-                {1 === 1 && (
-                    <div>
-                      <span
-                          style={{fontWeight: "normal",color:'black'}}>Offline<div
-                          className="offline-dot"></div></span>
-                    </div>
-                )}
-              </div>
-          )}
+              {isAPIOnline ? (
+                  <div>
+          <span style={{ fontWeight: 'normal', color: 'black' }}>
+            Online <div className="online-dot"></div>
+          </span>
+                  </div>
+              ) : (
+                  <div>
+          <span style={{ fontWeight: 'normal', color: 'black'}}>
+            Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
+          </span>
+                  </div>
+              )}
         </div></a><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the API Orchestrator for Domain Model Instances"}/>
           </div>
           <div style={{ display: 'flex', alignItems: 'left' }}>
           <a style={{fontWeight:"bold",marginLeft:"5%", color:'#154A57',marginRight:"9%"}}>BPM Status:</a><div>
-          {1 === 1 ? (
-              <div>
-              <span style={{fontWeight: "normal", color:'black'}}> Online <div
-                  className="online-dot"></div></span>
-              </div>
-          ) : (
-              <div>
-                {1 === 1 && (
-                    <div>
-                      <span
-                          style={{fontWeight: "normal",color:'black'}}>Offline<div
-                          className="offline-dot"></div></span>
-                    </div>
-                )}
-              </div>
-          )}
+            {isAPIOnline ? (
+                <div>
+          <span style={{ fontWeight: 'normal', color: 'black' }}>
+            Online <div className="online-dot"></div>
+          </span>
+                </div>
+            ) : (
+                <div>
+          <span style={{ fontWeight: 'normal', color: 'black'}}>
+            Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
+          </span>
+                </div>
+            )}
         </div><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the BPM Engine"}/>
           </div>
         </div>
