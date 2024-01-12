@@ -19,6 +19,7 @@ public class Application implements AppShellConfigurator {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         SpringApplication.run(Application.class, args);
+        openChromeWithParameters("http://localhost:8080");
 
         //Start the MERODE IoT Web App
         //merodeIoTApp();
@@ -26,6 +27,18 @@ public class Application implements AppShellConfigurator {
         //Start the Python Simulated Station
         simulatedStation();
 
+    }
+
+    private static void openChromeWithParameters(String url) throws IOException {
+        String chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+        String userDataDir = "C://Chrome dev session";
+        String disableWebSecurity = "--disable-web-security";
+
+        // Costruisci il comando per avviare Chrome con i parametri specificati e l'URL desiderato
+        String[] command = {chromePath, "--user-data-dir=" + userDataDir, disableWebSecurity, url};
+
+        // Esegui il comando per aprire Chrome
+        new ProcessBuilder(command).start();
     }
 
     private static void simulatedStation() {

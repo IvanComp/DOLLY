@@ -77,7 +77,7 @@ export default function MicroservicesView() {
     };
     const endPlatform = async (index: number) => {
         const platformId = dataArray[index].id;
-        const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
+        const confirmation = window.confirm(`Are you sure to end the Platform Instance with ID: ${platformId}?`);
 
         if (confirmation) {
             setIsLoading(true);
@@ -178,7 +178,7 @@ export default function MicroservicesView() {
     };
     const endFeature = async (index: number) => {
         const featureId = featureArray[index].id;
-        const confirmation = window.confirm(`Are you sure to delete the Feature with ID: ${featureId}?`);
+        const confirmation = window.confirm(`Are you sure to end the Feature of Interest Instance with ID: ${featureId}?`);
 
         if (confirmation) {
             setIsLoading(true);
@@ -203,7 +203,7 @@ export default function MicroservicesView() {
     };
     const deleteFeature = async (index: number) => {
         const featureId = featureArray[index].id;
-        const confirmation = window.confirm(`Are you sure to delete the Feature with ID: ${featureId}?`);
+        const confirmation = window.confirm(`Are you sure to delete the Feature of Interest with ID: ${featureId}?`);
 
         if (confirmation) {
             setIsLoading(true);
