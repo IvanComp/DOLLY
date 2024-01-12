@@ -11,6 +11,7 @@ import {HiAcademicCap} from "react-icons/hi";
 import {MdAlternateEmail} from "react-icons/md";
 import Modal from 'react-modal';
 import React, {Suspense, useEffect, useState} from 'react';
+import {CiCircleQuestion} from "react-icons/ci";
 
 type MenuRoute = ViewRouteObject &
   Readonly<{
@@ -20,6 +21,15 @@ type MenuRoute = ViewRouteObject &
 
 export default function MenuOnLeftLayout() {
   const matches = useViewMatches();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const currentTitle = matches[matches.length - 1]?.handle?.title ?? 'Unknown';
 
@@ -53,6 +63,50 @@ export default function MenuOnLeftLayout() {
             </NavLink>
           ))}
         </nav>
+        <div style={{marginLeft:'1%',position: 'absolute', top:"515px", height:"13%", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
+          <a style={{marginLeft:'3%',fontWeight:"bold", color:'#334F6D',top:"10px",bottom:'10px'}}>Settings </a>
+          <br/>
+          <div style={{ display: 'flex', alignItems: 'left' }}>
+          <a style={{fontWeight:"bold", marginLeft:"5%", color:'#154A57'}}>API Status:</a><a style={{marginLeft:"13%"}}><div>
+          {1 === 1 ? (
+              <div>
+              <span style={{fontWeight: "normal",color:'black'}}> Online <div
+                  className="online-dot"></div></span>
+              </div>
+          ) : (
+              <div>
+                {1 === 1 && (
+                    <div>
+                      <span
+                          style={{fontWeight: "normal",color:'black'}}>Offline<div
+                          className="offline-dot"></div></span>
+                    </div>
+                )}
+              </div>
+          )}
+        </div></a><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the API Orchestrator for Domain Model Instances"}/>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'left' }}>
+          <a style={{fontWeight:"bold",marginLeft:"5%", color:'#154A57',marginRight:"9%"}}>BPM Status:</a><div>
+          {1 === 1 ? (
+              <div>
+              <span style={{fontWeight: "normal", color:'black'}}> Online <div
+                  className="online-dot"></div></span>
+              </div>
+          ) : (
+              <div>
+                {1 === 1 && (
+                    <div>
+                      <span
+                          style={{fontWeight: "normal",color:'black'}}>Offline<div
+                          className="offline-dot"></div></span>
+                    </div>
+                )}
+              </div>
+          )}
+        </div><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the BPM Engine"}/>
+          </div>
+        </div>
 
         <div style={{position: 'absolute', bottom: '5px', left: '0', width: '100%', margin: '0 auto'}}>
           <hr style={{color: 'red', backgroundColor:'#5b5b65', border:'none', height: '1px', margin: '5px 5%', width: '90%'}} />
@@ -62,7 +116,7 @@ export default function MenuOnLeftLayout() {
               <HiAcademicCap style={{ marginBottom: '0.1cm', fontSize: '18px' }} />
               <a
                   style={{ marginLeft: '1%', fontSize: '14px', marginRight: '10%',  color: "#005fdb", cursor: "pointer"}}
-
+                  onClick={openModal}
               >
                 References
               </a>
@@ -72,9 +126,36 @@ export default function MenuOnLeftLayout() {
               </a>
             </p>
 
+            <Modal
+                style={{
+                  overlay: {
+                    backgroundColor: 'rgba(255, 255, 255, 0.67)', // Sfondo trasparente
+                    zIndex: 2 // Imposta un valore di z-index superiore rispetto al bottone
+                  },
+                  content: {
+                    width: '750px',
+                    height: '300px',
+                    margin: 'auto',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                    zIndex: 2 // Imposta un valore di z-index superiore rispetto al bottone
+                  }
+                }}
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+            >
+              <h2 style={{top:"10px"}}><HiAcademicCap style={{marginBottom: '0.13cm', marginRight:"2%"}}/>References</h2>
+
+              <p>Tool's paper:</p>
+
+              <ul>
+                <li>I. Compagnucci, M. Snoeck and E. S. Asensio, "Supporting Digital Twins Systems Integrating the MERODE Approach," 2023 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion (MODELS-C), Västerås, Sweden, 2023, pp. 449-458, doi: 10.1109/MODELS-C59198.2023.00079.</li>
+              </ul>
+              <button style={{color: 'white',backgroundColor:"rgb(51, 79, 109)", fontSize: '15px', padding: '10px 10px', cursor: 'pointer', marginTop: '0.42cm'}} onClick={closeModal}>Close</button>
+            </Modal>
+
           </div>
         </div>
-
       </Scroller>
       <footer slot="drawer" />
 
@@ -84,10 +165,12 @@ export default function MenuOnLeftLayout() {
       </h2>
 
 
-
       <Suspense fallback={<Placeholder />}>
         <Outlet />
       </Suspense>
     </AppLayout>
+
+
   );
+
 }

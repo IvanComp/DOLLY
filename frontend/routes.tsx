@@ -36,8 +36,8 @@ export const routes: readonly ViewRouteObject[] = [
     element: <MainLayout />,
     handle: { icon: 'null', title: 'Main' },
     children: [
-      { path: '/', element: <DashboardView />, handle: { icon: 'la la-tachometer', title: 'Dashboard' } },
-      { path: '/services', element: <ServicesView />, handle: { icon: 'la la-tachometer', title: 'Digital Twin Services' } },
+      { path: '/', element: <DashboardView />, handle: { icon: 'la la-tachometer', title: 'Digital Twin Dashboard' } },
+      { path: '/services', element: <ServicesView />, handle: { icon: 'la la-tachometer', title: 'Real-World Services' } },
       { path: '/about', element: <AboutView />, handle: { icon: 'la la-info', title: 'About' } },
     ],
   },
