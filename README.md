@@ -14,7 +14,7 @@ ADAPTIVE TWIN aims to improve and adapt IoT-Enhanced Business Processes continuo
 IoT-derived information is integrated into the process using an accurate and generalizable IoT domain model based on the MERODE model-driven approach. MERODE proves particularly valuable for modeling data-aware processes, offering comprehensive coverage of BALSA dimensions (Business Objects, Lifecycles, Services, Associations) within business processes. It enables the definition of life cycles for business objects, providing a solid foundation for modeling information systems consistently and comprehensively. This integration fosters a unified view of data and processes, enhancing coherence and alignment between operational activities and domain concepts. 
 
 <p align="center">
-<img src="frontend/img/readme-img/architecture.pdf" width="1000px" height="480px"/>
+<img src="frontend/img/readme-img/architecture.png" width="1000px" height="480px"/>
 </p>
 
 To represent the IoT system's components, we mapped two well-known and generally accepted ontologies, the Semantic Sensor Network (SNN) and Sensor, Observation, Sample, and Actuator (SOSA) into a MERODE Domain Model for IoT (A).  The domain model allows for the instantiation of IoT system entities by generating virtual replicas that synchronize with their physical counterparts' data, state, and characteristics at runtime. Once the virtual replicas of IoT system entities are instantiated (B), and it is possible to access their IoT-related information. Then, IoT data monitored in real-time from the virtual replicas can be considered in the modeling of business processes (C). In this step, some filtering and pre-processing operations can be applied to make data exploitable by the process. 
