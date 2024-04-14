@@ -23,9 +23,9 @@ public class Application implements AppShellConfigurator {
 
         //Start the MERODE IoT Web App
         //merodeIoTApp();
+
         //Start the Python Simulated Station
         simulatedStation();
-        //simulatedStationPort();
 
     }
 
@@ -48,7 +48,7 @@ public class Application implements AppShellConfigurator {
             int exitCode = process.waitFor();
 
             if (exitCode != 0) {
-                System.out.println("Errore durante la generazione della Simulated IoT Station.");
+                System.out.println("Errore durante la generazione della Simulated IoT Sttion.");
             } else {
                 System.out.println("Simulated IoT Station generata con successo!");
 
@@ -67,34 +67,6 @@ public class Application implements AppShellConfigurator {
             e.printStackTrace();
         }
     }
-
-    private static void simulatedStationPort() {
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder("py", "Simulated Python Station/port.py");
-            Process process = processBuilder.start();
-            int exitCode = process.waitFor();
-
-            if (exitCode != 0) {
-                System.out.println("Errore durante la generazione della Simulated IoT Port.");
-            } else {
-                System.out.println("Simulated IoT Port generata con successo!");
-
-                String url = "http://localhost:8082";
-                String chromePath = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"; // Inserisci il percorso corretto di Chrome
-
-                ProcessBuilder browserProcessBuilder = new ProcessBuilder(chromePath, url);
-
-                try {
-                    browserProcessBuilder.start();
-                } catch (IOException e) {
-                    System.err.println("Errore durante l'apertura di Google Chrome: " + e.getMessage());
-                }
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     private static void merodeIoTApp() {
         try {

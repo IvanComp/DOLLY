@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BimpApp } from 'bimp-ui'
 // @ts-ignore
 import BpmnModeler from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 import 'bpmn-js/dist/assets/diagram-js.css';
 import axios from 'axios';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
-import {FileDefinition} from "bimp-ui/src/types/index.js";
-import * as fs from "fs";
 
 
 export default function BpmnEditor() {
@@ -57,35 +54,6 @@ export default function BpmnEditor() {
             }
         }
     };
-    let initialFiles: Array<FileDefinition> = [
-        {
-            name: "Test.bpmn",
-            contents: fs.readFileSync('src/main/resources/bpmnModel/diagram1Original.bpmn', 'utf8')
-        }
-        // Puoi aggiungere altri oggetti FileDefinition se necessario
-    ];
-
-    var bimpConfig = {
-        // Protocol for Simulation Service
-        protocol: "http://",
-        // Hostname and port where RESTful Simulation Service is hosted
-        host: "www.qbp-simulator.com:8080", // or: window.location.hostname + ":8080"
-        // Path to the Simulation endpoint in the service
-        url: "/qbp-simulator/rest/Simulation",
-        // Credentials for basic auth, if applicable
-        basicAuth: {
-            username: "limited",
-            password: "limited"
-        },
-        // If Service supports token based auth and Bearer token, then provide it in the the jwtAuth key
-        //  jwtAuth: {
-        //    token: "JWT TOKEN TO BE PASSED TO THE SERVICE"
-        //  }
-
-        // Relative path prefix to BPMN and Heatmap viewer files (bpmnViewer.html and heatmapViewer.html) to be opened when requested.
-        linkPrefix: "",
-        errorStackApiKey: ""
-    };
 
     return (
         <div>
@@ -93,11 +61,6 @@ export default function BpmnEditor() {
             <button style={{margin:"15px"}} onClick={createNewDiagram}>Create New Diagram</button>
             <button style={{margin:"15px"}} onClick={deployDiagram}>Deploy Diagram</button>
             <button style={{margin:"15px"}} onClick={saveDiagram}>Save Diagram</button>
-
-            <BimpApp
-                config={bimpConfig}
-                initialFiles={initialFiles}
-            />
         </div>
     );
 }

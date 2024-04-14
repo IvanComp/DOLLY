@@ -27,7 +27,6 @@
     "@vaadin/vaadin-material-styles": "24.0.3",
     "@vaadin/vaadin-themable-mixin": "24.0.3",
     "axios": "^1.4.0",
-    "bimp-ui": "^4.0.3",
     "bpmn-js": "^13.0.4",
     "bpmn-js-properties-panel": "^1.22.1",
     "classnames": "^2.3.2",
@@ -108,8 +107,7 @@
     "cors": "$cors",
     "react-modal": "$react-modal",
     "three": "$three",
-    "react-toastify": "$react-toastify",
-    "bimp-ui": "$bimp-ui"
+    "react-toastify": "$react-toastify"
   },
   "vaadin": {
     "dependencies": {
@@ -154,6 +152,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "b0fd0501fbb4fb1c33fbae3e8c8bd6f7c996a4f1fed4d50a5cf7b473890a9003"
+    "hash": "8de5bd5c2408ab422e7ce8e71ea34b876b48413584754df2e74b5d2eefd68d3d"
   }
 }
