@@ -6,6 +6,7 @@ import ServicesView from "Frontend/views/microservice/ServicesView.js";
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import DashboardView from "Frontend/views/dashboard/DashboardView.js";
 import ThreeDee from "Frontend/views/3d/ThreeDee.js";
+import Simulation from "Frontend/views/simulation/Simulation.js";
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
@@ -38,8 +39,9 @@ export const routes: readonly ViewRouteObject[] = [
     element: <MainLayout />,
     handle: { icon: null, title: 'Main' },
     children: [
-      { path: '/', element: <DashboardView />, handle: { icon: <i className="la la-star"></i>, title: 'Digital Twin Dashboard' } },
-      { path: '/services', element: <ServicesView />, handle: { icon: <MdOutlineMiscellaneousServices />, title: 'Real-World Services' } },
+      { path: '/', element: <DashboardView />, handle: { icon: <i className="la la-star"></i>, title: 'Digital Shadow Dashboard' } },
+      { path: '/services', element: <ServicesView />, handle: { icon: <MdOutlineMiscellaneousServices />, title: 'BPMN Models' } },
+      { path: '/simulation', element: <Simulation />, handle: { icon: <i className="la la-globe"></i>, title: 'BPMN Simulation' } },
       { path: '/about', element: <AboutView />, handle: { icon: <i className="la la-globe"></i>, title: 'About' } },
       { path: '/3d', element: <ThreeDee /> },
     ],

@@ -1,8 +1,6 @@
 package com.example.application.controller;
 
-import com.example.application.model.Device;
 import com.example.application.model.Platform;
-import org.atmosphere.config.service.Delete;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

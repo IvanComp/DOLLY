@@ -25,7 +25,7 @@ public class Application implements AppShellConfigurator {
         //merodeIoTApp();
 
         //Start the Python Simulated Station
-        simulatedStation();
+        //simulatedStation();
 
     }
 
