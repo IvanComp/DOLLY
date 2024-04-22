@@ -1,7 +1,7 @@
 # ADAPTIVE-SHADOW
 
 <p align="center">
-<img src="frontend/readme/logo.png" width="200px" height="150px"/>
+<img src="frontend/img/logo.png" width="200px" height="150px"/>
 </p>
 
 <p align="center">
@@ -24,13 +24,26 @@
 
 # Domain Model
 
+MERODE is a model-driven engineering approach that -besides a focus on model quality- includes an incremental development strategy that ensures a well-structured and scalable system that represent an effective base for capturing domain-specific knowledge and establishing effective information systems. This approach relies on the concept of Model-Driven Engineering (MDE) placing a strong focus on ensuring the quality of the data produced and managed by a standard model mapped from the Semantic Sensor Network (SSN) and SOSA Ontology.
+
+<p align="center">
+<img src="frontend/readme/approach.png" width="400px" height="250px"/>
+</p>
+
+<p align="center">
+<img src="frontend/readme/model.png" width="600px" height="300px"/>
+</p>
+
+<p align="center">
+<img src="frontend/readme/tableSpec.png" width="400px" height="130px"/>
+</p>
 
 ## The Web Application
 
 The RESTful web application consists of a MAVEN project, offering a range of API services for each business event. The Domain Layer defines several business object types (EDG), each of which has a corresponding set of business event types specified in the Service Layer (OET). These business event types, which encompass actions such as creation, modification, termination, and more, can be performed through API services.
 
 <p align="center">
-<img src="img/readme/Simulation.png" width="600px" height="300px"/>
+<img src="frontend/readme/Simulation.png" width="600px" height="300px"/>
 </p>
 
 ## The Java Prototype
