@@ -1,7 +1,7 @@
 # ADAPTIVE-SHADOW
 
 <p align="center">
-<img src="frontend/img/logo.png" width="200px" height="150px"/>
+<img src="frontend/readme/logo.png" width="200px" height="150px"/>
 </p>
 
 <p align="center">
