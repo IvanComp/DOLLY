@@ -12,7 +12,7 @@
 </p>
 
 ADAPTIVE SHADOW is a web application that aims to model and optimize IoT-Enhanced Business Processes continuously. 
-The implementation of the framework consists of two parts: \textit{(i)} instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and \textit{(ii)} the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
+The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
 
 # Table of contents
 <!--ts-->
@@ -81,7 +81,7 @@ ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN
 
 The RESTful web application consists of a MAVEN project, offering a range of API services for each business event. The Domain Layer defines several business object types (EDG), each of which has a corresponding set of business event types specified in the Service Layer (OET). These business event types, which encompass actions such as creation, modification, termination, and more, can be performed through API services.
 
-ADAPTIVE SHADOW directly implements the APIs necessary to instantiate the Domain Model.
+ADAPTIVE SHADOW directly implements the APIs necessary to instantiate the Domain Model in the web application of this project.
 
 <p align="center">
 <img src="frontend/readme/Simulation.png" width="600px" height="300px"/>
