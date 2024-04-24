@@ -48,6 +48,10 @@ Once launched, the application will be available at [http://localhost:8080](http
 
 2. Import the project into an IDE and run the class "Application.java"
 
+```bash
+ ADAPTIVE-SHADOW\src\main\java\com\example\application\Application.java
+```
+
 # Domain Model
 
 To represent the IoT system's components, two well-known and generally accepted ontologies, the Semantic Sensor Network (SNN) and Sensor, Observation, Sample, and Actuator (SOSA) were mapped into a MERODE Domain Model for IoT. 
@@ -76,6 +80,10 @@ The Domain Model can be tested in the GUI offered by MERODE, by directly executi
 ```bash
 ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN 
 ```
+
+<p align="center">
+<img src="frontend/readme/merodeGUI.png" width="600px" height="300px"/>
+</p>
 
 ## The Web Application
 
