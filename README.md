@@ -74,13 +74,30 @@ The domain model allows for the instantiation of IoT system entities by generati
 
 MERODE is a model-driven engineering approach that -besides a focus on model quality- includes an incremental development strategy that ensures a well-structured and scalable system that represents an effective base for capturing domain-specific knowledge and establishing effective information systems. This approach relies on the concept of Model-Driven Engineering (MDE) placing a strong focus on ensuring the quality of the data produced and managed by a standard model mapped from the Semantic Sensor Network (SSN) and SOSA Ontology.
 
-<p align="center">
-<img src="frontend/readme/approach.png" width="400px" height="250px"/>
-</p>
+## Graphs
 
 <p align="center">
 <img src="frontend/readme/model.png" width="600px" height="300px"/>
 </p>
+
+## Attributes
+
+| UML Class | Attribute Name | Type | Description |
+| --- | --- | --- | --- |
+| **Platform** | Name | `STRING` | Name of the Platform |
+|  | Description | `LONG TEXT` | Description of the Platform |
+|  | hostedBy | `LONG TEXT` | Entity on which the Platform is hosted |
+| **FeatureOfInterest** | Name | `STRING` | Name of the Feature of Interest |
+|  | Description | `LONG TEXT` | Description of the Feature of Interest |
+| **Device** | Name | `STRING` | Name of the Feature of Interest |
+|  | Description | `LONG TEXT` | Description of the Feature of Interest |
+|  | Status | `BOOLEAN` | Value of the Device Status. 1 represent ON, while 0 OFF  |
+| **RegisteredDevice** |  | | |
+| **RegisteredPlatform** |  | | |
+| **Property** |  | | |
+| **Procedure** |  | | |
+| **DeviceUsage** |  | | |
+| **DeviceResult** |  | | |
 
 The MERODE Domain Model can be processed by the MERLIN Code Generator, which provides the option to generate two different types of code: a Java prototype of the application or a RESTful web application. Both solutions adhere to the logic defined in the domain model and are included in the project folder.
 
