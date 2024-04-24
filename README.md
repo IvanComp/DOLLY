@@ -28,7 +28,7 @@ ADAPTIVE SHADOW is made available through a RESTful web application that allows 
 # Functionalities
 
 <p align="center">
-<img src="frontend/readme/architecture.png" width="400px" height="250px"/>
+<img src="Domain Model/img/architecture.png" width="400px" height="250px"/>
 </p>
 
 ADAPTIVE SHADOW is a web application that aims to model and optimize IoT-Enhanced Business Processes continuously. 
@@ -36,19 +36,12 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 
 # (i) The Domain Model
 
-<p align="center">
-<img src="frontend/readme/approach.png" width="400px" height="250px"/>
-</p>
-
-<p align="center">
-<img src="frontend/readme/model.png" width="400px" height="250px"/>
-</p>
 
 # (ii) The Business Process Management Infrastructure
 
 
 <p align="center">
-<img src="frontend/readme/bpmprocess.png" width="400px" height="250px"/>
+<img src="Domain Model/img//bpmprocess.png"/>
 </p>
 
 # How to run
@@ -89,9 +82,7 @@ MERODE is a model-driven engineering approach that -besides a focus on model qua
 <img src="frontend/readme/model.png" width="600px" height="300px"/>
 </p>
 
-<p align="center">
-<img src="frontend/readme/tableSpec.png" width="400px" height="130px"/>
-</p>
+The MERODE Domain Model can be processed by the MERLIN Code Generator, which provides the option to generate two different types of code: a Java prototype of the application or a RESTful web application. Both solutions adhere to the logic defined in the domain model and are included in the project folder.
 
 ## The Java Prototype
 
@@ -104,14 +95,11 @@ ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN
 ```
 
 <p align="center">
-<img src="frontend/readme/merodeGUI.png" width="600px" height="300px"/>
+  <img src="Domain Model/img/merodeGUI.png" width="400px" height="300px"/>
+  <img src="Domain Model/img/instanceExample.png" width="400px" height="300px"/>
 </p>
 
-<p align="center">
-<img src="frontend/readme/instanceExample.png" width="600px" height="300px"/>
-</p>
-
-## The Web Application
+## The RESTful Web Application for using the Domain Model
 
 The RESTful web application consists of a MAVEN project, offering a range of API services for each business event. The Domain Layer defines several business object types (EDG), each of which has a corresponding set of business event types specified in the Service Layer (OET). These business event types, which encompass actions such as creation, modification, termination, and more, can be performed through API services.
 
