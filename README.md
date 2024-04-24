@@ -124,8 +124,8 @@ ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN
 ```
 
 <p align="center">
-  <img src="Domain Model/img/merodeGUI.png" width="400px" height="300px"/>
-  <img src="Domain Model/img/instanceExample.png" width="400px" height="300px"/>
+  <img src="Domain Model/img/merodeGUI.png" width="400px" height="280px"/>
+  <img src="Domain Model/img/instanceExample.png" width="400px" height="280px"/>
 </p>
 
 ## The RESTful Web Application for using the Domain Model
