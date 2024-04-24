@@ -23,11 +23,18 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 
 # Functionalities
 
+# The Domain Model
 
 <p align="center">
 <img src="frontend/readme/approach.png" width="400px" height="250px"/>
 </p>
 
+# The Business Process Management Infrastructure
+
+
+<p align="center">
+<img src="frontend/readme/approach.png" width="400px" height="250px"/>
+</p>
 
 # How to run
 
@@ -83,6 +90,10 @@ ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN
 
 <p align="center">
 <img src="frontend/readme/merodeGUI.png" width="600px" height="300px"/>
+</p>
+
+<p align="center">
+<img src="frontend/readme/Simulation.png" width="600px" height="300px"/>
 </p>
 
 ## The Web Application
