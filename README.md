@@ -11,25 +11,32 @@
   <img src="https://img.shields.io/badge/version-1.0-green" alt="Version">
 </p>
 
-ADAPTIVE SHADOW is a web application that aims to model and optimize IoT-Enhanced Business Processes continuously. 
-The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
+ADAPTIVE SHADOW is made available through a RESTful web application that allows users to:
+1 Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
+2 Model a BPMN scenario leveraging Digital Shadows for IoT components;
+3 Simulate the BPMN model and obtain feedback and insights for the process improvement.
 
 # Table of contents
 <!--ts-->
    * [Functionalities](#functionalities)
    * [How to run](#how-to-run)
    * [Domain Model](#domain-model)
+   * [References](#References)
+   * [License](#License)
 <!--te-->
 
 # Functionalities
 
-# The Domain Model
+ADAPTIVE SHADOW is a web application that aims to model and optimize IoT-Enhanced Business Processes continuously. 
+The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
+
+# (i) The Domain Model
 
 <p align="center">
 <img src="frontend/readme/approach.png" width="400px" height="250px"/>
 </p>
 
-# The Business Process Management Infrastructure
+# (ii) The Business Process Management Infrastructure
 
 
 <p align="center">
@@ -59,7 +66,7 @@ Once launched, the application will be available at [http://localhost:8080](http
  ADAPTIVE-SHADOW\src\main\java\com\example\application\Application.java
 ```
 
-# Domain Model
+# Domain Model Specification
 
 To represent the IoT system's components, two well-known and generally accepted ontologies, the Semantic Sensor Network (SNN) and Sensor, Observation, Sample, and Actuator (SOSA) were mapped into a MERODE Domain Model for IoT. 
 The domain model allows for the instantiation of IoT system entities by generating DSs that synchronize with their physical counterparts' data, state, and characteristics at runtime. 
@@ -106,5 +113,10 @@ ADAPTIVE SHADOW directly implements the APIs necessary to instantiate the Domain
 <img src="frontend/readme/Simulation.png" width="600px" height="300px"/>
 </p>
 
+# References
 
+- Compagnucci, I., Serral, E., Snoeck,M. (2023). Supporting Digital Twins Systems Integrating the MERODE Approach. International Conference on Model Driven Engineering Languages and Systems Companion (MODELS-C),  pp. 449-458. ACM/IEEE.
 
+# License
+
+ADAPTIVE SHADOW is under the [MIT](https://github.com/ADAPTIVE-SHADOW/blob/master/LICENSE) license.
