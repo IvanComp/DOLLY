@@ -11,7 +11,7 @@ import Simulation from "Frontend/views/simulation/Simulation.js";
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
 export type MenuProps = Readonly<{
-  icon?: React.ReactNode;  // Usiamo React.ReactNode invece di string per consentire l'utilizzo di componenti React come icone
+  icon?: string;  // Usiamo React.ReactNode invece di string per consentire l'utilizzo di componenti React come icone
   title?: string;
 }>;
 
@@ -37,12 +37,12 @@ export const useViewMatches = useMatches as () => readonly ViewRouteMatch[];
 export const routes: readonly ViewRouteObject[] = [
   {
     element: <MainLayout />,
-    handle: { icon: null, title: 'Main' },
+    handle: { icon: 'null', title: 'Main' },
     children: [
-      { path: '/', element: <DashboardView />, handle: { icon: <i className="la la-star"></i>, title: 'Digital Shadow Dashboard' } },
-      { path: '/services', element: <ServicesView />, handle: { icon: <MdOutlineMiscellaneousServices />, title: 'BPMN Models' } },
-      { path: '/simulation', element: <Simulation />, handle: { icon: <i className="la la-globe"></i>, title: 'BPMN Simulation' } },
-      { path: '/about', element: <AboutView />, handle: { icon: <i className="la la-globe"></i>, title: 'About' } },
+      { path: '/', element: <DashboardView />, handle: { icon: 'la la-globe', title: 'Digital Shadow Dashboard' } },
+      { path: '/services', element: <ServicesView />, handle: { icon: 'la la-globe', title: 'BPMN Models' } },
+      { path: '/simulation', element: <Simulation />, handle: { icon: 'la la-globe', title: 'BPMN Simulation' } },
+      { path: '/about', element: <AboutView />, handle: { icon: 'la la-globe', title: 'About' } },
       { path: '/3d', element: <ThreeDee /> },
     ],
   },
