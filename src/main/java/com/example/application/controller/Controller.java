@@ -7,13 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class Controller {
 
     private final List<Platform> platformInfo = new ArrayList<>();
-    private final Path baseFolderPath = Paths.get("src/main/resources/bpmnModel");
+
 
     @PostMapping("/platform/get")
     public List<Platform> getPlatforms() throws IOException, InterruptedException {
@@ -46,17 +48,5 @@ public class Controller {
         return platformInfo;
     }
 
-    // BPMN diagrams
-    @PostMapping("/save-diagram")
-    public String saveDiagram(@RequestBody String xml) throws IOException {
-        System.out.println("Saving diagram to: " + baseFolderPath);
 
-        if (!Files.exists(baseFolderPath)) {
-            Files.createDirectories(baseFolderPath);
-        }
-
-        Path filePath = baseFolderPath.resolve("myDiagram.bpmn");
-        Files.writeString(filePath, xml);  // Save the diagram XML
-        return "Diagram saved successfully at " + filePath;
-    }
 }
