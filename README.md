@@ -92,12 +92,24 @@ MERODE is a model-driven engineering approach that -besides a focus on model qua
 | **Device** | Name | `STRING` | Name of the Feature of Interest |
 |  | Description | `LONG TEXT` | Description of the Feature of Interest |
 |  | Status | `BOOLEAN` | Value of the Device Status. 1 represent ON, while 0 OFF  |
-| **RegisteredDevice** |  | | |
-| **RegisteredPlatform** |  | | |
-| **Property** |  | | |
-| **Procedure** |  | | |
-| **DeviceUsage** |  | | |
-| **DeviceResult** |  | | |
+| **RegisteredDevice** | deviceName | `STRING` | Name of the Device registered |
+|  | platformName | `LONG TEXT` | Name of the Platform registered  |
+|  | startTime | `DATE/TIME` | Device registration time stamp |
+| **RegisteredPlatform** | platformName | `STRING` | Name of the Platform registered |
+|  | featureofinterestName | `LONG TEXT` | Name of the Feature of Interest registered  |
+|  | startTime | `DATE/TIME` | Platform registration time stamp |
+| **Property** | featureofinterestName | `LONG TEXT` | Name of the Feature of Interest registered  |
+|  | description | `LONG TEXT` | Description of the Property to be measured from the Feature of Interest |
+| **Procedure** |  deviceName | `STRING` | Name of the Device registered |
+|  | description | `LONG TEXT` | Description of the device's Procedure to perform a measurement |
+| **DeviceUsage** | usageType | `STRING` | Name of the Platform |
+|  | startTime | `DATE/TIME` | Device usage time stamp start |
+|  | endTime | `DATE/TIME` | Device usage time stamp end |
+| **DeviceResult** | value | `FLOAT` | Measured value |
+| | unit | `STRING` | Measured value unit |
+| | producedBy | `STRING` | Device Reference |
+| | startTime | `DATE/TIME` | Measurement time stamp start |
+|  | endTime | `DATE/TIME` | Measurement time stamp end |
 
 The MERODE Domain Model can be processed by the MERLIN Code Generator, which provides the option to generate two different types of code: a Java prototype of the application or a RESTful web application. Both solutions adhere to the logic defined in the domain model and are included in the project folder.
 
