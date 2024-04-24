@@ -28,7 +28,7 @@ ADAPTIVE SHADOW is made available through a RESTful web application that allows 
 # Functionalities
 
 <p align="center">
-<img src="Domain Model/img/architecture.png" width="400px" height="250px"/>
+<img src="Domain Model/img/architecture.png" width="400px" height="200px"/>
 </p>
 
 ADAPTIVE SHADOW is a web application that aims to model and optimize IoT-Enhanced Business Processes continuously. 
