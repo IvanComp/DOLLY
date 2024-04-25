@@ -52,6 +52,11 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 - [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 19 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 19 of the Java JDK);
 - [Python](https://www.python.org/downloads/) 3.9.X or higher.
 
+Run the following command to install dependencies:
+```bash
+yarn install
+```
+
 There are several ways to run ADAPTIVE SHADOW:
 
 1. Clone this repository and run the tool locally by executing the following command:

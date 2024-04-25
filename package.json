@@ -27,6 +27,7 @@
     "@vaadin/vaadin-material-styles": "24.0.3",
     "@vaadin/vaadin-themable-mixin": "24.0.3",
     "axios": "^1.4.0",
+    "bimp-ui": "^4.0.3",
     "bpmn-js": "^13.0.4",
     "bpmn-js-properties-panel": "^1.22.1",
     "classnames": "^2.3.2",
@@ -58,6 +59,7 @@
     "glob": "7.2.3",
     "mkdirp": "1.0.4",
     "rollup-plugin-brotli": "3.1.0",
+    "sass": "^1.75.0",
     "strip-css-comments": "5.0.0",
     "transform-ast": "2.4.4",
     "typescript": "4.9.5",
@@ -107,7 +109,8 @@
     "cors": "$cors",
     "react-modal": "$react-modal",
     "three": "$three",
-    "react-toastify": "$react-toastify"
+    "react-toastify": "$react-toastify",
+    "bimp-ui": "$bimp-ui"
   },
   "vaadin": {
     "dependencies": {
@@ -152,6 +155,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "8de5bd5c2408ab422e7ce8e71ea34b876b48413584754df2e74b5d2eefd68d3d"
+    "hash": "9ce28cf3d8e1bc87807451c1e551f6fcf5bc53091a82569adce02bb796afcf51"
   }
 }
