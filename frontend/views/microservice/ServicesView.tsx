@@ -43,16 +43,16 @@ export default function BpmnEditor() {
     });
 
     useEffect(() => {
-        if (showModeler && !bpmnModeler) {
-            const modeler = new BpmnModeler({
-                container: '#bpmn-container',
-                keyboard: {
-                    bindTo: document
-                }
-            });
-            setBpmnModeler(modeler);
-        }
-    }, [showModeler, bpmnModeler]);
+        const modeler = new BpmnModeler({
+            container: '#bpmn-container',
+            keyboard: {
+                bindTo: document
+            }
+        });
+        setBpmnModeler(modeler);
+        modeler.createDiagram();
+        notyf.success('Starting the creation of the BPMN model...');
+    }, []);
 
     useEffect(() => {
         fetchDiagramList();
@@ -237,7 +237,7 @@ export default function BpmnEditor() {
                             display: "flex",
                             alignItems: "center",
                         }}>
-                            <BsDiagram2 /> {file}
+                            <BsDiagram2 style={{marginRight:"15px"}}/> {file}
                         </p>
                         <p className="file-info-item file-name">
                             <button style={{ alignItems: "center", margin: '15px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '17px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm' }} onClick={() => loadDiagram(file)}>Load</button>
