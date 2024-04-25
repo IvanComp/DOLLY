@@ -5618,10 +5618,10 @@ react-google-charts@^1.5.5:
   dependencies:
     loadjs "^3.3.1"
 
-react-icons@^4.9.0:
-  version "4.9.0"
-  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.9.0.tgz"
-  integrity sha512-ijUnFr//ycebOqujtqtV9PFS7JjhWg0QU6ykURVHuL4cbofvRCf3f6GMn9+fBktEFQOIVZnuAYLZdiyadRQRFg==
+react-icons@^4.12.0:
+  version "4.12.0"
+  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.12.0.tgz"
+  integrity sha512-IBaDuHiShdZqmfc/TwHu6+d6k2ltNCf3AszxNmjJc1KUfXdEeRJOKyNvLmAHaarhzGmTSVygNdyu8/opXv2gaw==
 
 react-is@^16.13.1, react-is@^16.7.0, "react-is@^16.8.0 || ^17.0.0":
   version "16.13.1"
@@ -6346,6 +6346,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+sweetalert2@^11.10.8:
+  version "11.10.8"
+  resolved "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.10.8.tgz"
+  integrity sha512-oAkYROBfXBY+4sVbQEIcN+ZxAx69lsmz5WEBwdEpyS4m59vOBNlRU5/fJpAI1MVfiDwFZiGwVzB/KBpOyfLNtg==
 
 tapable@^2.1.1, tapable@^2.2.0:
   version "2.2.1"
