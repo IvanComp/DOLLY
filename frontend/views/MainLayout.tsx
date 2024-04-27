@@ -127,7 +127,7 @@ export default function MenuOnLeftLayout() {
           <hr style={{color: 'red', backgroundColor:'#5b5b65', border:'none', height: '1px', margin: '5px 5%', width: '90%'}} />
           <div style={{textAlign: 'center'}}>
             <p style={{fontSize:"15px", color: '#eae9e9"', margin: '0'}}>Version: 1.0.0</p>
-            <p style={{ fontSize: '16px', marginBottom: '2%', marginTop: '0' }}>
+            <p style={{ fontSize: '16px', marginBottom: '2%', marginTop: '0'}}>
               <HiAcademicCap style={{ marginBottom: '0.1cm', fontSize: '18px' }} />
               <a
                   style={{ marginLeft: '1%', fontSize: '14px', marginRight: '10%',  color: "#005fdb", cursor: "pointer"}}

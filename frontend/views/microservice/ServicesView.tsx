@@ -254,28 +254,28 @@ export default function BpmnEditor() {
 
     return (
         <div>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
                 <div>
                     <h1 style={{ margin: '15px' }}>List of BPMN Models</h1>
                     {fileList.map((file, index) => (
                         <div className="file-info" key={index} style={{ display: 'flex' }}>
                             <div style={{ border: "2px solid rgba(0, 0, 0, 0.05)", margin: "15px", padding: "1px", borderRadius: "5px", marginBottom: "1px", fontSize: "15px", color: "black", display: "flex", width: "100%", alignItems: "center" }}>
                                 <BsDiagram2 style={{ marginRight: "2px" }} />
-                                <p className="file-info-item-name file-name" style={{ marginRight: "5px", fontSize: "18px", color: "black", display: "flex", alignItems: "center" }}>{file}</p>
+                                <p className="file-info-item-name file-name" style={{ fontSize: "18px", color: "black", display: "flex", alignItems: "center" }}>{file}</p>
                                 <p className="file-info-item file-name">
-                                    <button style={{ margin: '15px', marginRight: '5px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '17px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => loadDiagram(file)}>Load</button>
+                                    <button style={{ margin: '5px', marginLeft:'100px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '17px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => loadDiagram(file)}>Load</button>
                                 </p>
                                 <p className="file-info-item file-name">
-                                    <button style={{ margin: '15px', marginRight: '5px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '18px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => deleteDiagram(file)}>Delete</button>
+                                    <button style={{ margin: '5px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '18px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => deleteDiagram(file)}>Delete</button>
                                 </p>
                                 <p className="file-info-item file-name">
                                     <Link to="/monitoring">
-                                        <button style={{ margin: '15px', marginRight: '5px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => deployDiagram(file)}>Deploy</button>
+                                        <button style={{ margin: '5px',  fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => deployDiagram(file)}>Deploy</button>
                                     </Link>
                                 </p>
                                 <p className="file-info-item file-name">
                                     <Link to="/simulation">
-                                        <button style={{ margin: '15px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => simulateDiagram(file)}>Simulate</button>
+                                        <button style={{ margin: '5px', marginRight:'10px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => simulateDiagram(file)}>Simulate</button>
                                     </Link>
                                 </p>
                             </div>
@@ -284,7 +284,7 @@ export default function BpmnEditor() {
                     ))}
                 </div>
                 <div>
-                    <h1 style={{ marginLeft: '15px', marginTop: '15px' }}>Available Devices:</h1>
+                    <h1 style={{ marginLeft: '15px', marginTop: '15px' }}>Available Devices</h1>
                     {deviceArray.map(device => (
                         <div key={device.id} style={{ marginLeft: '15px' }}>{device.name}</div>
                     ))}
@@ -292,8 +292,8 @@ export default function BpmnEditor() {
             </div>
 
 
-            <button style={{margin: '15px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm'}} onClick={createNewDiagram}>Create New Diagram</button>
-            <button style={{margin: '15px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '10px 30px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm'}} onClick={saveDiagram}>Save Current Diagram</button>
+            <button style={{margin: '15px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '10px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm'}} onClick={createNewDiagram}>Create New Diagram</button>
+            <button style={{margin: '15px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '10px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm'}} onClick={saveDiagram}>Save Current Diagram</button>
 
             <div id="bpmn-container" style={{height: "600px", border: "solid 0.1px", margin: "15px"}}></div>
 

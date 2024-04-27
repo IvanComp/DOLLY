@@ -8,9 +8,7 @@
 .file-info-item {
     box-sizing: border-box;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-    flex-basis: 70px;
     flex-grow: 1;
 }
 
@@ -25,7 +23,6 @@
 .file-info-item-name {
     box-sizing: border-box;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
 
