@@ -369,305 +369,115 @@ export default function MicroservicesView() {
             console.error(error);
         }
     }
-        return (
-            <div className="flex flex-col items-start justify-start p-l text-center box-border">
-                <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Platforms:</h1>
+    return (
+        <div className="flex flex-col items-start justify-start p-l text-center box-border">
+            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Platforms:</h1>
 
-                {dataArray.length >= 0 && (
-                    <div className="library-container"
-                         style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
-                        {dataArray.map((item: Platform, index: number) => (
-                            <div key={index} className="platform-container">
-                                <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
-                                <div>
-                                    {item.state === 'exists' ? (
-                                        <div>
-                                            <span style={{fontWeight: "bold"}}> State:</span> <span
-                                            style={{fontWeight: "normal"}}>{item.state}</span>
-                                            <span style={{fontWeight: "bold"}}> Availability:</span> <span
-                                            style={{fontWeight: "normal"}}> Online <div
-                                            className="online-dot"></div></span>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            {item.state === 'ended' && (
-                                                <div>
-                                                    <span style={{fontWeight: "bold"}}> State:</span> <span
-                                                    style={{fontWeight: "normal"}}>{item.state}</span>
-                                                    <span style={{fontWeight: "bold"}}> Availability:</span> <span
-                                                    style={{fontWeight: "normal"}}> Offline<div
-                                                    className="offline-dot"></div></span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                                <div style={{display: 'flex', gap: '10px'}}>
-                                    <button
-                                        style={{
-                                            fontSize: "12px",
-                                            backgroundColor: '#da1540',
-                                            color: 'white',
-                                            fontWeight: "bold",
-                                            padding: '5px 13px',
-                                            border: '2px solid red',
-                                            borderRadius: '3px',
-                                            cursor: 'pointer',
-                                            position: 'relative',
-                                            bottom: '-5px'
-                                        }}
-                                        onClick={() => endPlatform(index)}
-                                    >
-                                        End Platform
-                                    </button>
-                                    <button
-                                        style={{
-                                            fontSize: "12px",
-                                            backgroundColor: '#da1540',
-                                            color: 'white',
-                                            fontWeight: "bold",
-                                            padding: '5px 13px',
-                                            border: '2px solid red',
-                                            borderRadius: '3px',
-                                            cursor: 'pointer',
-                                            position: 'relative',
-                                            bottom: '-5px'
-                                        }}
-                                        onClick={() => deletePlatform(index)}
-                                    >
-                                        Delete Platform
-                                    </button>
-                                </div>
-
-                                <div className="small-font">{item.id}</div>
+            {dataArray.length > 0 && (
+                <div className="library-container" style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+                    {dataArray.map((item: Platform, index: number) => (
+                        <div key={index} className="platform-container">
+                            <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
+                            <div>
+                                {item.state === 'exists' ? (
+                                    <div>
+                                        <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight: "normal"}}>{item.state}</span>
+                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight: "normal"}}> Online <div className="online-dot"></div></span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {item.state === 'ended' && (
+                                            <div>
+                                                <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight: "normal"}}>{item.state}</span>
+                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight: "normal"}}> Offline<div className="offline-dot"></div></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
-                        ))}
-
-                        <button className="platform-container" style={{
-                            background: 'white',
-                            color: '#10ad73',
-                            fontSize: '20px',
-                            padding: '10px 30px',
-                            borderRadius: '5px',
-                            border: '1px dashed green',
-                            cursor: 'pointer',
-                            marginTop: '2%',
-                            marginBottom: '0.42cm',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                        }} onClick={createPlatform}> + <br></br>Create Platform
-                        </button>
-
-                    </div>
-                )}
-
-                <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Features of Interest:</h1>
-                {featureArray.length >= 0 && (
-                    <div className="library-container"
-                         style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
-                        {featureArray.map((item: any, index: number) => (
-                            <div key={index} className="platform-feature">
-                                <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
-                                <div>
-                                    {item.state === 'exists' ? (
-                                        <div>
-                                            <span style={{fontWeight: "bold"}}> State:</span> <span
-                                            style={{fontWeight: "normal"}}>{item.state}</span>
-                                            <span style={{fontWeight: "bold"}}> Availability:</span> <span
-                                            style={{fontWeight: "normal"}}> Online <div
-                                            className="online-dot"></div></span>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            {item.state === 'ended' && (
-                                                <div>
-                                                    <span style={{fontWeight: "bold"}}> State:</span> <span
-                                                    style={{fontWeight: "normal"}}>{item.state}</span>
-                                                    <span style={{fontWeight: "bold"}}> Availability:</span> <span
-                                                    style={{fontWeight: "normal"}}> Offline<div
-                                                    className="offline-dot"></div></span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                                <div style={{display: 'flex', gap: '10px'}}>
-                                    <button
-                                        style={{
-                                            fontSize: "12px",
-                                            backgroundColor: '#da1540',
-                                            color: 'white',
-                                            fontWeight: "bold",
-                                            padding: '5px 13px',
-                                            border: '2px solid red',
-                                            borderRadius: '3px',
-                                            cursor: 'pointer',
-                                            position: 'relative',
-                                            bottom: '-5px'
-                                        }}
-                                        onClick={() => endFeature(index)}
-                                    >
-                                        End Feature of Interest
-                                    </button>
-                                    <button
-                                        style={{
-                                            fontSize: "12px",
-                                            backgroundColor: '#da1540',
-                                            color: 'white',
-                                            fontWeight: "bold",
-                                            padding: '5px 13px',
-                                            border: '2px solid red',
-                                            borderRadius: '3px',
-                                            cursor: 'pointer',
-                                            position: 'relative',
-                                            bottom: '-5px'
-                                        }}
-                                        onClick={() => deleteFeature(index)}
-                                    >
-                                        Delete Feature of Interest
-                                    </button>
-                                </div>
-
-                                <div style={{
-                                    fontSize: "70%",
-                                    fontWeight: "bold",
-                                    position: "relative",
-                                    color: "#343232",
-                                    bottom: "-12px"
-                                }}>{item.id}</div>
+                            <div className="flex gap-2">
+                                <button className="platform-btn" onClick={() => endPlatform(index)}>End Platform</button>
+                                <button className="platform-btn" onClick={() => deletePlatform(index)}>Delete Platform</button>
                             </div>
-                        ))}
+                            <div className="small-font">{item.id}</div>
+                        </div>
+                    ))}
 
-                        <button className="platform-feature" style={{
-                            background: 'white',
-                            color: '#9bbbd5',
-                            fontSize: '20px',
-                            padding: '10px 30px',
-                            borderRadius: '5px',
-                            border: '1px dashed #9BBBD5FF',
-                            cursor: 'pointer',
-                            marginTop: '2%',
-                            marginBottom: '0.42cm',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                        }} onClick={createFeature}> + <br></br>Create <br></br>Feature Of Interest
-                        </button>
+                    <button className="platform-container" style={{background: 'white', color: '#10ad73', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed green', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}} onClick={createPlatform}> + <br></br>Create Platform</button>
+                </div>
+            )}
 
-                    </div>
-                )}
-
-
-                <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Devices:</h1>
-                {deviceArray.length >= 0 && (
-                    <div className="library-container"
-                         style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
-                        {deviceArray.map((item: any, index: number) => (
-                            <div key={index} className="platform-device">
-                                <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
-                                <div>
-                                    {item.state === 'exists' ? (
-                                        <div>
-                                            <span style={{fontWeight: "bold"}}> State:</span> <span
-                                            style={{fontWeight: "normal"}}>{item.state}</span>
-                                            <span style={{fontWeight: "bold"}}> Availability:</span> <span
-                                            style={{fontWeight: "normal"}}> Online <div
-                                            className="online-dot"></div></span>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            {item.state === 'ended' && (
-                                                <div>
-                                                    <span style={{fontWeight: "bold"}}> State:</span> <span
-                                                    style={{fontWeight: "normal"}}>{item.state}</span>
-                                                    <span style={{fontWeight: "bold"}}> Availability:</span> <span
-                                                    style={{fontWeight: "normal"}}> Offline<div
-                                                    className="offline-dot"></div></span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                                <div style={{display: 'flex', gap: '10px'}}>
-                                    <button
-                                        style={{
-                                            fontSize: "12px",
-                                            backgroundColor: '#da1540',
-                                            color: 'white',
-                                            fontWeight: "bold",
-                                            padding: '5px 13px',
-                                            border: '2px solid red',
-                                            borderRadius: '3px',
-                                            cursor: 'pointer',
-                                            position: 'relative',
-                                            bottom: '-5px'
-                                        }}
-                                        onClick={() => endDevice(index)}
-                                    >
-                                        End Device
-                                    </button>
-                                    <button
-                                        style={{
-                                            fontSize: "12px",
-                                            backgroundColor: '#da1540',
-                                            color: 'white',
-                                            fontWeight: "bold",
-                                            padding: '5px 13px',
-                                            border: '2px solid red',
-                                            borderRadius: '3px',
-                                            cursor: 'pointer',
-                                            position: 'relative',
-                                            bottom: '-5px'
-                                        }}
-                                        onClick={() => deleteDevice(index)}
-                                    >
-                                        Delete Device
-                                    </button>
-                                </div>
-
-                                <div style={{
-                                    fontSize: "70%",
-                                    fontWeight: "bold",
-                                    position: "relative",
-                                    color: "#343232",
-                                    bottom: "-12px"
-                                }}>{item.id}</div>
+            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Features of Interest:</h1>
+            {featureArray.length > 0 && (
+                <div className="library-container" style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+                    {featureArray.map((item: any, index: number) => (
+                        <div key={index} className="platform-feature">
+                            <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
+                            <div>
+                                {item.state === 'exists' ? (
+                                    <div>
+                                        <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight: "normal"}}>{item.state}</span>
+                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight: "normal"}}> Online <div className="online-dot"></div></span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {item.state === 'ended' && (
+                                            <div>
+                                                <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight: "normal"}}>{item.state}</span>
+                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight: "normal"}}> Offline<div className="offline-dot"></div></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
-                        ))}
+                            <div className="flex gap-2">
+                                <button className="platform-btn" onClick={() => endFeature(index)}>End Feature of Interest</button>
+                                <button className="platform-btn" onClick={() => deleteFeature(index)}>Delete Feature of Interest</button>
+                            </div>
+                            <div className="small-font">{item.id}</div>
+                        </div>
+                    ))}
 
-                        <button className="platform-feature" style={{
-                            background: 'white',
-                            color: '#d5cb9b',
-                            fontSize: '20px',
-                            padding: '10px 30px',
-                            borderRadius: '5px',
-                            border: '1px dashed #D5CB9BFF',
-                            cursor: 'pointer',
-                            marginTop: '2%',
-                            marginBottom: '0.42cm',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                        }} onClick={createDevice}> + <br></br>Create <br></br>Device
-                        </button>
-                        <input style={{
-                            position: 'absolute',
-                            top: "8px",
-                            right: "42px",
-                            zIndex: '9',
-                            fontSize: "17px",
-                            backgroundColor: '#F3F5F7',
-                            color: '#334F6D',
-                            fontWeight: "bold",
-                            padding: '5px 13px',
-                            border: '2px solid #334F6D',
-                            borderRadius: '3px',
-                            cursor: 'pointer'
-                        }} onClick={open3D} type="submit" value="🔎 Open 3D View"/>
-                    </div>
-                )}
+                    <button className="platform-feature" style={{background: 'white', color: '#9bbbd5', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed #9BBBD5FF', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}} onClick={createFeature}> + <br></br>Create <br></br>Feature Of Interest</button>
+                </div>
+            )}
 
-            </div>
-        );
-    }
+            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Devices:</h1>
+            {deviceArray.length > 0 && (
+                <div className="library-container" style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+                    {deviceArray.map((item: any, index: number) => (
+                        <div key={index} className="platform-device">
+                            <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
+                            <div>
+                                {item.state === 'exists' ? (
+                                    <div>
+                                        <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight: "normal"}}>{item.state}</span>
+                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight: "normal"}}> Online <div className="online-dot"></div></span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {item.state === 'ended' && (
+                                            <div>
+                                                <span style={{fontWeight: "bold"}}> State:</span> <span style={{fontWeight: "normal"}}>{item.state}</span>
+                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span style={{fontWeight: "normal"}}> Offline<div className="offline-dot"></div></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex gap-2">
+                                <button className="platform-btn" onClick={() => endDevice(index)}>End Device</button>
+                                <button className="platform-btn" onClick={() => deleteDevice(index)}>Delete Device</button>
+                            </div>
+                            <div className="small-font">{item.id}</div>
+                        </div>
+                    ))}
+
+                    <button className="platform-feature" style={{background: 'white', color: '#d5cb9b', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed #D5CB9BFF', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}} onClick={createDevice}> + <br></br>Create <br></br>Device</button>
+                    <input style={{position: 'absolute', top: "8px", right: "42px", zIndex: '9', fontSize: "17px", backgroundColor: '#F3F5F7', color: '#334F6D', fontWeight: "bold", padding: '5px 13px', border: '2px solid #334F6D', borderRadius: '3px', cursor: 'pointer'}} onClick={open3D} type="submit" value="🔎 Open 3D View"/>
+                </div>
+            )}
+
+        </div>
+    );
+}

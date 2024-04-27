@@ -3,6 +3,7 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@bpmn-io/properties-panel": "^3.18.2",
     "@hilla/form": "2.0.5",
     "@hilla/frontend": "2.0.5",
     "@hilla/generator-typescript-cli": "2.0.5",
@@ -29,7 +30,8 @@
     "axios": "^1.4.0",
     "bimp-ui": "^4.0.3",
     "bpmn-js": "^13.0.4",
-    "bpmn-js-properties-panel": "^1.22.1",
+    "bpmn-js-create-append-anything": "^0.5.1",
+    "bpmn-js-properties-panel": "^1.26.0",
     "classnames": "^2.3.2",
     "construct-style-sheets-polyfill": "3.1.0",
     "cors": "^2.8.5",
@@ -114,7 +116,9 @@
     "react-toastify": "$react-toastify",
     "bimp-ui": "$bimp-ui",
     "notyf": "$notyf",
-    "sweetalert2": "$sweetalert2"
+    "sweetalert2": "$sweetalert2",
+    "@bpmn-io/properties-panel": "$@bpmn-io/properties-panel",
+    "bpmn-js-create-append-anything": "$bpmn-js-create-append-anything"
   },
   "vaadin": {
     "dependencies": {
@@ -159,6 +163,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "c12357500d5e6724aee03ee315155642c3797421ae7217cc10b127681d163717"
+    "hash": "70d20beb43342a53e8308661dc628a150dfb405d4ae462aa13ce835c13f4bc33"
   }
 }
