@@ -61,9 +61,15 @@ There are several ways to run ADAPTIVE SHADOW:
 
 1. Clone this repository and run the tool locally by executing the following command:
 
+Windows:
 ```bash
-\.mvnw
+.\mvnw
 ```
+macOS / Linux:
+```bash
+./mvnw
+```
+
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
 
 2. Import the project into an IDE and run the class "Application.java"
