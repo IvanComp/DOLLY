@@ -13,6 +13,7 @@ import Modal from 'react-modal';
 import React, {Suspense, useEffect, useState} from 'react';
 import {CiCircleQuestion} from "react-icons/ci";
 import axios from "axios";
+import {FaBug} from "react-icons/fa";
 
 type MenuRoute = ViewRouteObject &
   Readonly<{
@@ -129,19 +130,25 @@ export default function MenuOnLeftLayout() {
           <hr style={{color: 'red', backgroundColor:'#5b5b65', border:'none', height: '1px', margin: '5px 5%', width: '90%'}} />
           <div style={{textAlign: 'center'}}>
             <p style={{fontSize:"15px", color: '#eae9e9"', margin: '0'}}>Version: 1.0.0</p>
-            <p style={{ fontSize: '16px', marginBottom: '2%', marginTop: '0'}}>
-              <HiAcademicCap style={{ marginBottom: '0.1cm', fontSize: '18px' }} />
+            <p style={{ fontSize: '16px', marginBottom: '2%', marginTop: '0' }}>
+              <HiAcademicCap style={{ verticalAlign: 'middle', fontSize: '18px', marginBottom:"2px", marginRight:"3px"  }} />
               <a
                   style={{ marginLeft: '1%', fontSize: '14px', marginRight: '10%',  color: "#005fdb", cursor: "pointer"}}
                   onClick={openModal}
               >
                 References
               </a>
-              <MdAlternateEmail style={{ marginBottom: '0.1cm' }} />
+              <FaBug style={{ verticalAlign: 'middle',marginBottom:"1px", marginRight:"3px" }} />
+              <a style={{ marginLeft: '1%', fontSize: '14px',  }} href="mailto:ivan.compagnucci@unicam.it">
+                Report a Bug
+              </a>
+              <br/>
+              <MdAlternateEmail style={{ verticalAlign: 'middle', marginBottom:"2px", marginRight:"3px"  }} />
               <a style={{ marginLeft: '1%', fontSize: '14px' }} href="mailto:ivan.compagnucci@unicam.it">
                 Contact
               </a>
             </p>
+
 
             <Modal
                 style={{
@@ -161,14 +168,16 @@ export default function MenuOnLeftLayout() {
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
             >
-              <h2 style={{top:"10px"}}><HiAcademicCap style={{marginBottom: '0.13cm', marginRight:"2%"}}/>References</h2>
 
-              <p>Tool's paper:</p>
+                    <h2 style={{ display: "flex", alignItems: "center", margin: 0, top: "10px", position: "relative" }}>
+                      <HiAcademicCap style={{ marginBottom: '0.13cm', marginRight: "2%", flexShrink: 0 }}/>
+                      References
+                    </h2>
 
               <ul>
                 <li>I. Compagnucci, M. Snoeck and E. S. Asensio, "Supporting Digital Twins Systems Integrating the MERODE Approach," 2023 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion (MODELS-C), Västerås, Sweden, 2023, pp. 449-458, doi: 10.1109/MODELS-C59198.2023.00079.</li>
               </ul>
-              <button style={{color: 'white',backgroundColor:"rgb(51, 79, 109)", fontSize: '15px', padding: '10px 10px', cursor: 'pointer', marginTop: '0.42cm'}} onClick={closeModal}>Close</button>
+              <button style={{color: '#324e6c',backgroundColor:"#aad4de", fontSize: '15px', padding: '10px 10px', cursor: 'pointer', marginTop: '0.42cm'}} onClick={closeModal}>Close</button>
             </Modal>
 
           </div>
