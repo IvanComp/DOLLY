@@ -92,7 +92,9 @@ export default function MenuOnLeftLayout() {
               {isAPIOnline ? (
                   <div>
           <span style={{ fontWeight: 'normal', color: 'black' }}>
-            Online <div className="online-dot"></div>
+           <a href="http://localhost:4567" target="_blank">
+              Online <div className="online-dot"></div>
+           </a>
           </span>
                   </div>
               ) : (
@@ -105,7 +107,7 @@ export default function MenuOnLeftLayout() {
         </div></a><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the API Orchestrator for Domain Model Instances"}/>
           </div>
           <div style={{ display: 'flex', alignItems: 'left' }}>
-          <a style={{fontWeight:"bold",marginLeft:"5%", color:'#154A57',marginRight:"9%"}}>BPM Status:</a><div>
+          <a style={{fontWeight:"bold",marginLeft:"5%", color:'#154A57',marginRight:"9%"}}>BPM Engine:</a><div>
             {isAPIOnline ? (
                 <div>
           <span style={{ fontWeight: 'normal', color: 'black' }}>
