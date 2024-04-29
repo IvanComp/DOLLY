@@ -48,13 +48,10 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 
 ## Prerequisites
 
-- [Node](https://nodejs.org/en) 16.14 or later;
-- [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 19 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 19 of the Java JDK);
-- [Python](https://www.python.org/downloads/) 3.9.X or higher.
+- [Node](https://nodejs.org/en) 20.12.2 or later;
+- [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 17 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 17 of the Java JDK);
 
 There are several ways to run ADAPTIVE-SHADOW:
-
-
 
 ## Using cmd
 
