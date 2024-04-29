@@ -85,7 +85,7 @@ Once launched, the application will be available at [http://localhost:8080](http
 ```
 
 ## Using Docker
-1. Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/proslab/ADAPTIVE-SHADOW);
+1. Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/ivanpd/adaptive-shadow);
    
 - Generate the .jar file for building the image   
 ```bash
