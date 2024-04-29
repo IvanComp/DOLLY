@@ -18,7 +18,7 @@ ADAPTIVE SHADOW is made available through a RESTful web application that allows 
 
 # Table of contents
 <!--ts-->
-   * [Functionalities](#functionalities)
+   * [Functionalities](#Functionalities)
    * [How to run](#how-to-run)
    * [Domain Model](#domain-model)
    * [References](#References)
