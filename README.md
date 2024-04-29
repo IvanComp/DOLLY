@@ -52,20 +52,21 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 - [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 19 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 19 of the Java JDK);
 - [Python](https://www.python.org/downloads/) 3.9.X or higher.
 
-Run the following command to install dependencies:
+There are several ways to run ADAPTIVE-SHADOW:
+
+1 Clone this repository and run the following command to install dependencies:
+
 ```bash
 yarn install
 ```
 
-There are several ways to run ADAPTIVE SHADOW:
+1. Run the tool locally by executing the following command:
 
-1. Clone this repository and run the tool locally by executing the following command:
-
-Windows:
+for Windows:
 ```bash
 .\mvnw
 ```
-macOS / Linux:
+for macOS / Linux:
 ```bash
 ./mvnw
 ```
@@ -77,6 +78,23 @@ Once launched, the application will be available at [http://localhost:8080](http
 ```bash
  ADAPTIVE-SHADOW\src\main\java\com\example\application\Application.java
 ```
+
+3. Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/proslab/ADAPTIVE-SHADOW);
+- Generate the .jar file for building the image   
+```bash
+mvn clean package -Pproduction
+```
+- Creating the Docker image from the main folder of the project by executing the following comand:
+
+```bash
+docker build -t adaptive-shadow-image .
+```
+- Run the Docker container from the main folder of the project by executing the following comand:
+
+```bash
+docker run -p 8080:8080 adaptive-shadow
+```
+Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
 
 # Domain Model Specification
 
