@@ -54,13 +54,17 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 
 There are several ways to run ADAPTIVE-SHADOW:
 
-1 Clone this repository and run the following command to install dependencies:
+
+
+## Using cmd
+
+1. First of all, clone this repository and run the following command to install dependencies:
 
 ```bash
 yarn install
 ```
 
-1. Run the tool locally by executing the following command:
+1.1 Run the tool locally by executing the following command:
 
 for Windows:
 ```bash
@@ -73,13 +77,16 @@ for macOS / Linux:
 
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
 
-2. Import the project into an IDE and run the class "Application.java"
+## From IDE
+1. Import the project into an IDE and run the class "Application.java"
 
 ```bash
  ADAPTIVE-SHADOW\src\main\java\com\example\application\Application.java
 ```
 
-3. Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/proslab/ADAPTIVE-SHADOW);
+## Using Docker
+1. Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/proslab/ADAPTIVE-SHADOW);
+   
 - Generate the .jar file for building the image   
 ```bash
 mvn clean package -Pproduction
