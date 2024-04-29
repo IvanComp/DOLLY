@@ -50,6 +50,7 @@ The implementation of the framework consists of two parts: (i) instantiating Dig
 
 - [Node](https://nodejs.org/en) 20.12.2 or later;
 - [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 17 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 17 of the Java JDK);
+- [Maven](https://maven.apache.org/download.cgi) 3.9.5 or later;
 
 There are several ways to run ADAPTIVE-SHADOW:
 
