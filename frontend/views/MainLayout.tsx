@@ -15,6 +15,14 @@ import {CiCircleQuestion} from "react-icons/ci";
 import axios from "axios";
 import {FaBug} from "react-icons/fa";
 
+const handleButtonClick = () => {
+  fetch('http://localhost:8080/run-scripts')
+      .then(response => response.text())
+      .then(message => alert(message))
+      .catch(error => alert('Failed to execute scripts'));
+};
+
+
 type MenuRoute = ViewRouteObject &
   Readonly<{
     path: string;
@@ -89,7 +97,7 @@ export default function MenuOnLeftLayout() {
           <a style={{marginLeft:'3%',fontWeight:"bold", color:'#334F6D',top:"10px",bottom:'10px'}}>Settings </a>
           <br/>
           <div style={{ display: 'flex', alignItems: 'left' }}>
-          <a style={{fontWeight:"bold", marginLeft:"5%", color:'#154A57'}}>API Status:</a><a style={{marginLeft:"13%"}}><div>
+          <a style={{fontWeight:"bold", marginLeft:"5%", color:'#154A57'}}>API Status: <button onClick={handleButtonClick}></button> </a><a style={{marginLeft:"13%"}}><div>
               {isAPIOnline ? (
                   <div>
           <span style={{ fontWeight: 'normal', color: 'black' }}>
@@ -101,7 +109,7 @@ export default function MenuOnLeftLayout() {
               ) : (
                   <div>
           <span style={{ fontWeight: 'normal', color: 'black'}}>
-            Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
+           Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
           </span>
                   </div>
               )}
