@@ -174,4 +174,4 @@ ADAPTIVE SHADOW directly implements the APIs necessary to instantiate the Domain
 
 # License
 
-ADAPTIVE SHADOW is under the [MIT](https://github.com/ADAPTIVE-SHADOW/blob/master/LICENSE) license.
+ADAPTIVE SHADOW is under the [MIT](https://github.com/IvanComp/ADAPTIVE-SHADOW/blob/main/LICENSE) license.
