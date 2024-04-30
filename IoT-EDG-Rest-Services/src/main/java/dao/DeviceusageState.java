@@ -77,41 +77,39 @@ public abstract class DeviceusageState
     // a subclass for all appropriate methods.
     public void check_mecrdeviceusage() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceusageState.mecrdeviceusage...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 291 with name MEcrDeviceUsage for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 381 with name MEcrDeviceUsage for object type 226 named Deviceusage in state " + getStateId() + " called " + getStateName());
     }
     public void check_devicedeployment() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceusageState.devicedeployment...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 293 with name DeviceDeployment for object type 207 named Deviceusage in state " + getStateId()  + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 383 with name DeviceDeployment for object type 226 named Deviceusage in state " + getStateId()  + " called " + getStateName());
+    }
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.logln ("Checking DeviceusageState.mesetready...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 385 with name MEsetReady for object type 226 named Deviceusage in state " + getStateId()  + " called " + getStateName());
     }
     public void check_meenddeviceusage() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceusageState.meenddeviceusage...");
-        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 292 with name MEendDeviceUsage for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 382 with name MEendDeviceUsage for object type 226 named Deviceusage in state " + getStateId() + " called " + getStateName());
     }
     public void check_deviceundeployment() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceusageState.deviceundeployment...");
-        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 294 with name DeviceUndeployment for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 384 with name DeviceUndeployment for object type 226 named Deviceusage in state " + getStateId() + " called " + getStateName());
     }
     public void check_mecrdeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceusageState.mecrdeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 283 with name MEcrDeviceResult for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 373 with name MEcrDeviceResult for object type 226 named Deviceusage in state " + getStateId() + " called " + getStateName());
     }
     public void check_meenddeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceusageState.meenddeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 284 with name MEendDeviceResult for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking DeviceusageState.mecrpropertyoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 295 with name MEcrPropertyOutcome for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking DeviceusageState.meendpropertyoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 296 with name MEendPropertyOutcome for object type 207 named Deviceusage in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 374 with name MEendDeviceResult for object type 226 named Deviceusage in state " + getStateId() + " called " + getStateName());
     }
 
     // Put the object in the correct state.
     public void mecrdeviceusage (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
 	}
     public void devicedeployment (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
+	}
+    public void mesetready (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
 	}
     public void meenddeviceusage (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
     }
@@ -120,10 +118,6 @@ public abstract class DeviceusageState
     public void mecrdeviceresult (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
     }
     public void meenddeviceresult (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
-    }
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
-    }
-    public void meendpropertyoutcome (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException{
     }
 
 

@@ -28,11 +28,19 @@ public class DeviceresultImpl extends Deviceresult {
     // abstract in class Deviceresult ...
 
 	//--- o/c ---  
-    public void mecrdeviceresult( java.lang.String Time,
-		java.lang.String Value) {
+    public void mecrdeviceresult( java.lang.String Value,
+		 java.lang.String Unit,
+		 java.lang.String Producedby,
+		 java.lang.String Observedproperty,
+		 java.lang.String Starttime,
+		java.lang.String Endtime) {
         MerodeLogger.logln("Executing Deviceresult.mecrdeviceresult (O/C)");
-        setTime (Time);
         setValue (Value);
+        setUnit (Unit);
+        setProducedby (Producedby);
+        setObservedproperty (Observedproperty);
+        setStarttime (Starttime);
+        setEndtime (Endtime);
     }
 
 

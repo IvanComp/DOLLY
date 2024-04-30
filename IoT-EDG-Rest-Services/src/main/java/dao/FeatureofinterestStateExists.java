@@ -42,7 +42,7 @@ public class FeatureofinterestStateExists extends FeatureofinterestState {
     }
 
     protected java.lang.String getStateId() {
-    	return "106";
+    	return "102";
     }
 
     public boolean isInitialState() {
@@ -85,15 +85,15 @@ public class FeatureofinterestStateExists extends FeatureofinterestState {
     }
 
 		
-    public void check_mecrproperty() {
+    public void check_mecrplatformdeployment() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking FeatureofinterestState.mecrproperty...passed");
+        MerodeLogger.logln ("Checking FeatureofinterestState.mecrplatformdeployment...passed");
     }
 
 		
-    public void check_mecrpropertyoutcome() {
+    public void check_mecrproperty() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking FeatureofinterestState.mecrpropertyoutcome...passed");
+        MerodeLogger.logln ("Checking FeatureofinterestState.mecrproperty...passed");
     }
 
 		
@@ -109,92 +109,105 @@ public class FeatureofinterestStateExists extends FeatureofinterestState {
     }
 
 		
+    public void check_meendplatformdeployment() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking FeatureofinterestState.meendplatformdeployment...passed");
+    }
+
+		
     public void check_meendproperty() {
         // No exception is thrown anymore...
         MerodeLogger.logln ("Checking FeatureofinterestState.meendproperty...passed");
     }
 
 		
-    public void check_meendpropertyoutcome() {
+    public void check_mesetready() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking FeatureofinterestState.meendpropertyoutcome...passed");
+        MerodeLogger.logln ("Checking FeatureofinterestState.mesetready...passed");
     }
 
 	
 	
     public void meendfeatureofinterest (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateEnded state = FeatureofinterestStateEnded.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 113");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 109");
         object.setState(state);
     }
 
 	
     public void devicedeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 116");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 112");
         object.setState(state);
     }
 
 	
     public void deviceundeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 118");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 116");
         object.setState(state);
     }
 
 	
     public void mecrdeviceresult (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 120");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 120");
         object.setState(state);
     }
 
 	
     public void mecrdeviceusage (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 124");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 124");
+        object.setState(state);
+    }
+
+	
+    public void mecrplatformdeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
+        FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 128");
         object.setState(state);
     }
 
 	
     public void mecrproperty (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 126");
-        object.setState(state);
-    }
-
-	
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
-        FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 128");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 130");
         object.setState(state);
     }
 
 	
     public void meenddeviceresult (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 132");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 132");
         object.setState(state);
     }
 
 	
     public void meenddeviceusage (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 136");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 136");
+        object.setState(state);
+    }
+
+	
+    public void meendplatformdeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
+        FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 140");
         object.setState(state);
     }
 
 	
     public void meendproperty (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 138");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 142");
         object.setState(state);
     }
 
 	
-    public void meendpropertyoutcome (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
+    public void mesetready (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 140");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 144");
         object.setState(state);
     }
 

@@ -11,18 +11,18 @@ import java.time.*;
 
 /**
  * @hibernate.subclass
- *    discriminator-value="OutcomeStateAllocated"
+ *    discriminator-value="ProcedureStateAllocated"
  */
-public class OutcomeStateAllocated extends OutcomeState {
+public class ProcedureStateAllocated extends ProcedureState {
 
-    public static OutcomeStateAllocated getObject (org.hibernate.Session sess) throws org.hibernate.HibernateException {
-	    OutcomeStateAllocated state = null;
+    public static ProcedureStateAllocated getObject (org.hibernate.Session sess) throws org.hibernate.HibernateException {
+	    ProcedureStateAllocated state = null;
 	    // Search in database
 	    java.util.Collection states = findStateByName (sess, "allocated");
 	    if ( states != null && !states.isEmpty() )
-	        state = (OutcomeStateAllocated)states.iterator().next();
+	        state = (ProcedureStateAllocated)states.iterator().next();
 	    if ( state == null ) {
-	        state = new OutcomeStateAllocated();
+	        state = new ProcedureStateAllocated();
 	        // Save in database
 	        sess.save (state);
 	    }
@@ -32,7 +32,7 @@ public class OutcomeStateAllocated extends OutcomeState {
     private static java.util.Collection findStateByName (org.hibernate.Session sess, java.lang.String statename)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.OutcomeState as c where c.name = ?");
+        org.hibernate.Query q = sess.createQuery("from dao.ProcedureState as c where c.name = ?");
     	q.setString (0, statename);
         return q.list();
     }
@@ -42,7 +42,7 @@ public class OutcomeStateAllocated extends OutcomeState {
     }
 
     protected java.lang.String getStateId() {
-    	return "72";
+    	return "56";
     }
 
     public boolean isInitialState() {
@@ -55,16 +55,16 @@ public class OutcomeStateAllocated extends OutcomeState {
 
 
 		
-    public void check_mecroutcome() {
+    public void check_mecrprocedure() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking OutcomeState.mecroutcome...passed");
+        MerodeLogger.logln ("Checking ProcedureState.mecrprocedure...passed");
     }
 
 	
 	
-    public void mecroutcome (org.hibernate.Session sess, Outcome object) throws org.hibernate.HibernateException {
-        OutcomeStateExists state = OutcomeStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 70 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 77");
+    public void mecrprocedure (org.hibernate.Session sess, Procedure object) throws org.hibernate.HibernateException {
+        ProcedureStateExists state = ProcedureStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 52 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 61");
         object.setState(state);
     }
 

@@ -28,14 +28,32 @@ public class DeviceusageImpl extends Deviceusage {
     // abstract in class Deviceusage ...
 
 	//--- o/c ---  
-    public void mecrdeviceusage(java.lang.String Name) {
+    public void mecrdeviceusage( java.lang.String Usagetype,
+		 java.lang.String Starttime,
+		java.lang.String Endtime) {
         MerodeLogger.logln("Executing Deviceusage.mecrdeviceusage (O/C)");
-        setName (Name);
+        setUsagetype (Usagetype);
+        setStarttime (Starttime);
+        setEndtime (Endtime);
     }
 	//--- o/m --- 
-    public void devicedeployment(java.lang.String Name) {
+    public void devicedeployment( java.lang.String Usagetype,
+		 java.lang.String Starttime,
+		java.lang.String Endtime) {
         MerodeLogger.logln("Executing Deviceusage.devicedeployment (O/M)");
-        setName (Name);
+        setUsagetype (Usagetype);
+        setStarttime (Starttime);
+        setEndtime (Endtime);
+    }  
+    
+	//--- o/m --- 
+    public void mesetready( java.lang.String Usagetype,
+		 java.lang.String Starttime,
+		java.lang.String Endtime) {
+        MerodeLogger.logln("Executing Deviceusage.mesetready (O/M)");
+        setUsagetype (Usagetype);
+        setStarttime (Starttime);
+        setEndtime (Endtime);
     }  
     
 
@@ -59,16 +77,6 @@ public class DeviceusageImpl extends Deviceusage {
         MerodeLogger.logln("Executing Deviceusage.meenddeviceresult() (A/M)");
     }
 
-		//--- o/dpnd ---
-    public void mecrpropertyoutcome() {
-        MerodeLogger.logln("Executing Deviceusage.mecrpropertyoutcome() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void meendpropertyoutcome() {
-        MerodeLogger.logln("Executing Deviceusage.meendpropertyoutcome() (A/M)");
-    }
-
 	
 
     // ---------- precondition of business methods  -----------
@@ -81,6 +89,11 @@ public class DeviceusageImpl extends Deviceusage {
 		//--- o/m --- 
         public void check_devicedeployment() throws MerodeException {
         MerodeLogger.log("Checking Deviceusage.devicedeployment...");
+        MerodeLogger.logln("passed");
+    }
+		//--- o/m --- 
+        public void check_mesetready() throws MerodeException {
+        MerodeLogger.log("Checking Deviceusage.mesetready...");
         MerodeLogger.logln("passed");
     }
 
@@ -115,16 +128,6 @@ public class DeviceusageImpl extends Deviceusage {
         MerodeLogger.log("Checking Deviceusage.meenddeviceresult()...");
         MerodeLogger.logln("passed");
     }
-	//--- o/dpnds ---
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Deviceusage.mecrpropertyoutcome()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Deviceusage.meendpropertyoutcome()...");
-        MerodeLogger.logln("passed");
-    }
 
     
 
@@ -134,14 +137,14 @@ public class DeviceusageImpl extends Deviceusage {
     private boolean hasLivingDependents() {
     	Set <String> dependents = new HashSet();
 
-        java.util.Collection col_propertyoutcome = getPropertyoutcome();
-        if (col_propertyoutcome != null){
-        	if (!col_propertyoutcome.isEmpty()){
-		        java.util.Iterator i_propertyoutcome = col_propertyoutcome.iterator();
-		        while (i_propertyoutcome.hasNext()) {
-		            dao.Propertyoutcome obj_propertyoutcome = (dao.Propertyoutcome)i_propertyoutcome.next();
-		            if (!obj_propertyoutcome.getState().isFinalState()){
-		            	dependents.add("Propertyoutcome");
+        java.util.Collection col_deviceresult = getDeviceresult();
+        if (col_deviceresult != null){
+        	if (!col_deviceresult.isEmpty()){
+		        java.util.Iterator i_deviceresult = col_deviceresult.iterator();
+		        while (i_deviceresult.hasNext()) {
+		            dao.Deviceresult obj_deviceresult = (dao.Deviceresult)i_deviceresult.next();
+		            if (!obj_deviceresult.getState().isFinalState()){
+		            	dependents.add("Deviceresult");
 		            }
 		        }        	
         	}

@@ -55,11 +55,23 @@ public abstract class PropertyFactory {
      * Finds Property object(s) using a query.
      *
      */
-    public static java.util.Collection findByName (org.hibernate.Session sess, java.lang.String Name)
+    public static java.util.Collection findByFeatureofinterestname (org.hibernate.Session sess, java.lang.String Featureofinterestname)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.Property as c where c.Name = ?");
-    	q.setString (0, Name);
+        org.hibernate.Query q = sess.createQuery("from dao.Property as c where c.Featureofinterestname = ?");
+    	q.setString (0, Featureofinterestname);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Property object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByDescription (org.hibernate.Session sess, java.lang.String Description)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Property as c where c.Description = ?");
+    	q.setString (0, Description);
         return q.list();
     }
 }

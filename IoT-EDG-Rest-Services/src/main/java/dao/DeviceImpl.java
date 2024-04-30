@@ -28,9 +28,13 @@ public class DeviceImpl extends Device {
     // abstract in class Device ...
 
 	//--- o/c ---  
-    public void mecrdevice(java.lang.String Name) {
+    public void mecrdevice( java.lang.String Name,
+		 java.lang.String Description,
+		java.lang.String Status) {
         MerodeLogger.logln("Executing Device.mecrdevice (O/C)");
         setName (Name);
+        setDescription (Description);
+        setStatus (Status);
     }
 
 
@@ -50,23 +54,23 @@ public class DeviceImpl extends Device {
     }
 
 		//--- o/dpnd ---
-    public void mecroutcome() {
-        MerodeLogger.logln("Executing Device.mecroutcome() (A/M)");
+    public void mecrregistereddevice() {
+        MerodeLogger.logln("Executing Device.mecrregistereddevice() (A/M)");
     }
 
 		//--- o/dpnd ---
-    public void meendoutcome() {
-        MerodeLogger.logln("Executing Device.meendoutcome() (A/M)");
+    public void meendregistereddevice() {
+        MerodeLogger.logln("Executing Device.meendregistereddevice() (A/M)");
     }
 
 		//--- o/dpnd ---
-    public void mecrpropertyoutcome() {
-        MerodeLogger.logln("Executing Device.mecrpropertyoutcome() (A/M)");
+    public void mecrprocedure() {
+        MerodeLogger.logln("Executing Device.mecrprocedure() (A/M)");
     }
 
 		//--- o/dpnd ---
-    public void meendpropertyoutcome() {
-        MerodeLogger.logln("Executing Device.meendpropertyoutcome() (A/M)");
+    public void meendprocedure() {
+        MerodeLogger.logln("Executing Device.meendprocedure() (A/M)");
     }
 
 		//--- o/dpnd ---
@@ -87,6 +91,11 @@ public class DeviceImpl extends Device {
 		//--- o/dpnd ---
     public void devicedeployment() {
         MerodeLogger.logln("Executing Device.devicedeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void mesetready() {
+        MerodeLogger.logln("Executing Device.mesetready() (A/M)");
     }
 
 	
@@ -121,23 +130,23 @@ public class DeviceImpl extends Device {
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_mecroutcome() throws MerodeException {
-        MerodeLogger.log("Checking Device.mecroutcome()...");
+    public void check_mecrregistereddevice() throws MerodeException {
+        MerodeLogger.log("Checking Device.mecrregistereddevice()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_meendoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Device.meendoutcome()...");
+    public void check_meendregistereddevice() throws MerodeException {
+        MerodeLogger.log("Checking Device.meendregistereddevice()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Device.mecrpropertyoutcome()...");
+    public void check_mecrprocedure() throws MerodeException {
+        MerodeLogger.log("Checking Device.mecrprocedure()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Device.meendpropertyoutcome()...");
+    public void check_meendprocedure() throws MerodeException {
+        MerodeLogger.log("Checking Device.meendprocedure()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
@@ -160,6 +169,11 @@ public class DeviceImpl extends Device {
         MerodeLogger.log("Checking Device.devicedeployment()...");
         MerodeLogger.logln("passed");
     }
+	//--- o/dpnds ---
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.log("Checking Device.mesetready()...");
+        MerodeLogger.logln("passed");
+    }
 
     
 
@@ -169,28 +183,28 @@ public class DeviceImpl extends Device {
     private boolean hasLivingDependents() {
     	Set <String> dependents = new HashSet();
 
-        java.util.Collection col_outcome = getOutcome();
-        if (col_outcome != null){
-        	if (!col_outcome.isEmpty()){
-		        java.util.Iterator i_outcome = col_outcome.iterator();
-		        while (i_outcome.hasNext()) {
-		            dao.Outcome obj_outcome = (dao.Outcome)i_outcome.next();
-		            if (!obj_outcome.getState().isFinalState()){
-		            	dependents.add("Outcome");
+        java.util.Collection col_registereddevice = getRegistereddevice();
+        if (col_registereddevice != null){
+        	if (!col_registereddevice.isEmpty()){
+		        java.util.Iterator i_registereddevice = col_registereddevice.iterator();
+		        while (i_registereddevice.hasNext()) {
+		            dao.Registereddevice obj_registereddevice = (dao.Registereddevice)i_registereddevice.next();
+		            if (!obj_registereddevice.getState().isFinalState()){
+		            	dependents.add("Registereddevice");
 		            }
 		        }        	
         	}
         }
 
 
-        java.util.Collection col_deviceusage = getDeviceusage();
-        if (col_deviceusage != null){
-        	if (!col_deviceusage.isEmpty()){
-		        java.util.Iterator i_deviceusage = col_deviceusage.iterator();
-		        while (i_deviceusage.hasNext()) {
-		            dao.Deviceusage obj_deviceusage = (dao.Deviceusage)i_deviceusage.next();
-		            if (!obj_deviceusage.getState().isFinalState()){
-		            	dependents.add("Deviceusage");
+        java.util.Collection col_procedure = getProcedure();
+        if (col_procedure != null){
+        	if (!col_procedure.isEmpty()){
+		        java.util.Iterator i_procedure = col_procedure.iterator();
+		        while (i_procedure.hasNext()) {
+		            dao.Procedure obj_procedure = (dao.Procedure)i_procedure.next();
+		            if (!obj_procedure.getState().isFinalState()){
+		            	dependents.add("Procedure");
 		            }
 		        }        	
         	}

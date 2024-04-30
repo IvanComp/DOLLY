@@ -5,7 +5,7 @@
 package dao; //.gui;
 
 import javax.swing.JTextArea;
-//import tescav.SessionLogger;
+//import SessionLogger;
 
 public class MerodeLogger 
 {
@@ -32,7 +32,7 @@ public class MerodeLogger
 		//fill in the textArea
 		log.append(message + "\n");
 	    MerodeLogger.log.getCaret().setVisible(true);
-		//SessionLogger.getInstance().writeMsg(message+"\n");
+		SessionLogger.getInstance().writeMsg(message+"\n");
 	}
     
 	public static String flush () 

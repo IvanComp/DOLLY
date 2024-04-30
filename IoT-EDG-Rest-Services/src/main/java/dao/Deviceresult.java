@@ -45,25 +45,6 @@ public abstract class Deviceresult
     protected DeviceresultState state;
 
     // --------------- attributes ---------------------
-    private java.lang.String time;
-    /**
-     * 
-     *
-     * @hibernate.property
-     *     column="TIME"
-     *     type="java.lang.String"
-     *
-     * @hibernate.column
-     *     name="TIME"
-     *     sql-type="VARCHAR(256)"
-     */
-    public java.lang.String getTime(){
-        return this.time;
-    }
-
-    public void setTime(java.lang.String time){
-        this.time = time;
-    }
     private java.lang.String value;
     /**
      * 
@@ -82,6 +63,101 @@ public abstract class Deviceresult
 
     public void setValue(java.lang.String value){
         this.value = value;
+    }
+    private java.lang.String unit;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="UNIT"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="UNIT"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getUnit(){
+        return this.unit;
+    }
+
+    public void setUnit(java.lang.String unit){
+        this.unit = unit;
+    }
+    private java.lang.String producedby;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="PRODUCEDBY"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="PRODUCEDBY"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getProducedby(){
+        return this.producedby;
+    }
+
+    public void setProducedby(java.lang.String producedby){
+        this.producedby = producedby;
+    }
+    private java.lang.String observedproperty;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="OBSERVEDPROPERTY"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="OBSERVEDPROPERTY"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getObservedproperty(){
+        return this.observedproperty;
+    }
+
+    public void setObservedproperty(java.lang.String observedproperty){
+        this.observedproperty = observedproperty;
+    }
+    private java.lang.String starttime;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="STARTTIME"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="STARTTIME"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getStarttime(){
+        return this.starttime;
+    }
+
+    public void setStarttime(java.lang.String starttime){
+        this.starttime = starttime;
+    }
+    private java.lang.String endtime;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="ENDTIME"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="ENDTIME"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getEndtime(){
+        return this.endtime;
+    }
+
+    public void setEndtime(java.lang.String endtime){
+        this.endtime = endtime;
     }
     private java.lang.String id;
 
@@ -114,18 +190,18 @@ public abstract class Deviceresult
     * 
     *
     * @hibernate.many-to-one
-    *     column="PROPERTYOUTCOME_FK"
-    *     class="dao.Propertyoutcome"
+    *     column="DEVICEUSAGE_FK"
+    *     class="dao.Deviceusage"
     */
-    public dao.Propertyoutcome getPropertyoutcome() {
-        return this.propertyoutcome;
+    public dao.Deviceusage getDeviceusage() {
+        return this.deviceusage;
     }
     
-    public void setPropertyoutcome(dao.Propertyoutcome propertyoutcome){
-        this.propertyoutcome = propertyoutcome;
+    public void setDeviceusage(dao.Deviceusage deviceusage){
+        this.deviceusage = deviceusage;
     }
 
-    private dao.Propertyoutcome propertyoutcome;
+    private dao.Deviceusage deviceusage;
 	// ---------- precondition of business methods  -----------
 	// --- o/c ---
     public abstract void check_mecrdeviceresult() throws MerodeException;
@@ -138,8 +214,12 @@ public abstract class Deviceresult
 	/**
      *  --- o/c --- 
      */
-	public abstract void mecrdeviceresult( java.lang.String Time,
-		java.lang.String Value)
+	public abstract void mecrdeviceresult( java.lang.String Value,
+		 java.lang.String Unit,
+		 java.lang.String Producedby,
+		 java.lang.String Observedproperty,
+		 java.lang.String Starttime,
+		java.lang.String Endtime)
     	throws MerodeException;
 
 

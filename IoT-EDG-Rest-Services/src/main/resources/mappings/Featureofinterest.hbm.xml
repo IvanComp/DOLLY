@@ -37,6 +37,17 @@
             column="FEATUREOFINTEREST_STATE_FK"
         />
         <property
+            name="description" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="DESCRIPTION"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
             name="name" 
             type="java.lang.String"
             update="true"
@@ -47,6 +58,22 @@
                 sql-type="VARCHAR(256)"
             />
         </property>
+        <set
+            name="platformdeployment"
+            lazy="false"
+            inverse="true"
+            cascade="none"
+            sort="unsorted"
+        >
+
+              <key
+                  column="FEATUREOFINTEREST_FK"
+              />
+
+              <one-to-many
+                  class="dao.Platformdeployment"
+              />
+        </set>
         <set
             name="property"
             lazy="false"
@@ -61,22 +88,6 @@
 
               <one-to-many
                   class="dao.Property"
-              />
-        </set>
-        <set
-            name="deviceusage"
-            lazy="false"
-            inverse="true"
-            cascade="none"
-            sort="unsorted"
-        >
-
-              <key
-                  column="FEATUREOFINTEREST_FK"
-              />
-
-              <one-to-many
-                  class="dao.Deviceusage"
               />
         </set>
         <subclass

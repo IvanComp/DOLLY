@@ -45,24 +45,43 @@ public abstract class Property
     protected PropertyState state;
 
     // --------------- attributes ---------------------
-    private java.lang.String name;
+    private java.lang.String featureofinterestname;
     /**
      * 
      *
      * @hibernate.property
-     *     column="NAME"
+     *     column="FEATUREOFINTERESTNAME"
      *     type="java.lang.String"
      *
      * @hibernate.column
-     *     name="NAME"
+     *     name="FEATUREOFINTERESTNAME"
      *     sql-type="VARCHAR(256)"
      */
-    public java.lang.String getName(){
-        return this.name;
+    public java.lang.String getFeatureofinterestname(){
+        return this.featureofinterestname;
     }
 
-    public void setName(java.lang.String name){
-        this.name = name;
+    public void setFeatureofinterestname(java.lang.String featureofinterestname){
+        this.featureofinterestname = featureofinterestname;
+    }
+    private java.lang.String description;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="DESCRIPTION"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="DESCRIPTION"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(java.lang.String description){
+        this.description = description;
     }
     private java.lang.String id;
 
@@ -111,24 +130,24 @@ public abstract class Property
      * 
      *
      * @hibernate.set
-     *     role="propertyoutcome"
+     *     role="deviceusage"
      *     lazy="false"
      * @hibernate.collection-key
      *     column="PROPERTY_FK"
      * @hibernate.collection-one-to-many
-     *     class="dao.Propertyoutcome"
+     *     class="dao.Deviceusage"
      */
-    public java.util.Collection getPropertyoutcome(){
-        return this.propertyoutcome;
+    public java.util.Collection getDeviceusage(){
+        return this.deviceusage;
     }
 
-    protected void setPropertyoutcome(java.util.Collection propertyoutcome){
-        this.propertyoutcome = propertyoutcome;
+    protected void setDeviceusage(java.util.Collection deviceusage){
+        this.deviceusage = deviceusage;
     }
 
-    private java.util.Collection propertyoutcome;
-    public void attachPropertyoutcome (dao.Propertyoutcome object) {
-        this.propertyoutcome.add(object);
+    private java.util.Collection deviceusage;
+    public void attachDeviceusage (dao.Deviceusage object) {
+        this.deviceusage.add(object);
     }
 	// ---------- precondition of business methods  -----------
 	// --- o/c ---
@@ -140,9 +159,15 @@ public abstract class Property
 	// --- o/dpnds --- 
     public abstract void check_meenddeviceresult() throws MerodeException;
 	// --- o/dpnds --- 
-    public abstract void check_mecrpropertyoutcome() throws MerodeException;
+    public abstract void check_mecrdeviceusage() throws MerodeException;
 	// --- o/dpnds --- 
-    public abstract void check_meendpropertyoutcome() throws MerodeException;
+    public abstract void check_meenddeviceusage() throws MerodeException;
+	// --- o/dpnds --- 
+    public abstract void check_deviceundeployment() throws MerodeException;
+	// --- o/dpnds --- 
+    public abstract void check_devicedeployment() throws MerodeException;
+	// --- o/dpnds --- 
+    public abstract void check_mesetready() throws MerodeException;
 
     // ---------------- business methods  ----------------------
 
@@ -150,7 +175,8 @@ public abstract class Property
 	/**
      *  --- o/c --- 
      */
-	public abstract void mecrproperty(java.lang.String Name)
+	public abstract void mecrproperty( java.lang.String Featureofinterestname,
+		java.lang.String Description)
     	throws MerodeException;
 
 
@@ -179,14 +205,35 @@ public abstract class Property
    /**
     * --- o/dpnds ---
     */
-    public abstract void mecrpropertyoutcome()
+    public abstract void mecrdeviceusage()
         throws MerodeException;	
 
 		
    /**
     * --- o/dpnds ---
     */
-    public abstract void meendpropertyoutcome()
+    public abstract void meenddeviceusage()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
+    public abstract void deviceundeployment()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
+    public abstract void devicedeployment()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
+    public abstract void mesetready()
         throws MerodeException;	
 
 	

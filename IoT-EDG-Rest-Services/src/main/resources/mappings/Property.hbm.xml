@@ -37,13 +37,24 @@
             column="PROPERTY_STATE_FK"
         />
         <property
-            name="name" 
+            name="description" 
             type="java.lang.String"
             update="true"
             insert="true"
         >
             <column
-                name="NAME"
+                name="DESCRIPTION"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="featureofinterestname" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="FEATUREOFINTERESTNAME"
                 sql-type="VARCHAR(256)"
             />
         </property>
@@ -57,7 +68,7 @@
             column="FEATUREOFINTEREST_FK"
         />
         <set
-            name="propertyoutcome"
+            name="deviceusage"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -69,7 +80,7 @@
               />
 
               <one-to-many
-                  class="dao.Propertyoutcome"
+                  class="dao.Deviceusage"
               />
         </set>
         <subclass

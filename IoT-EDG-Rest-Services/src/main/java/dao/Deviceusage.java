@@ -45,24 +45,62 @@ public abstract class Deviceusage
     protected DeviceusageState state;
 
     // --------------- attributes ---------------------
-    private java.lang.String name;
+    private java.lang.String usagetype;
     /**
      * 
      *
      * @hibernate.property
-     *     column="NAME"
+     *     column="USAGETYPE"
      *     type="java.lang.String"
      *
      * @hibernate.column
-     *     name="NAME"
+     *     name="USAGETYPE"
      *     sql-type="VARCHAR(256)"
      */
-    public java.lang.String getName(){
-        return this.name;
+    public java.lang.String getUsagetype(){
+        return this.usagetype;
     }
 
-    public void setName(java.lang.String name){
-        this.name = name;
+    public void setUsagetype(java.lang.String usagetype){
+        this.usagetype = usagetype;
+    }
+    private java.lang.String starttime;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="STARTTIME"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="STARTTIME"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getStarttime(){
+        return this.starttime;
+    }
+
+    public void setStarttime(java.lang.String starttime){
+        this.starttime = starttime;
+    }
+    private java.lang.String endtime;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="ENDTIME"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="ENDTIME"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getEndtime(){
+        return this.endtime;
+    }
+
+    public void setEndtime(java.lang.String endtime){
+        this.endtime = endtime;
     }
     private java.lang.String id;
 
@@ -95,57 +133,91 @@ public abstract class Deviceusage
     * 
     *
     * @hibernate.many-to-one
-    *     column="FEATUREOFINTEREST_FK"
-    *     class="dao.Featureofinterest"
+    *     column="PLATFORMDEPLOYMENT_FK"
+    *     class="dao.Platformdeployment"
     */
-    public dao.Featureofinterest getFeatureofinterest() {
-        return this.featureofinterest;
+    public dao.Platformdeployment getPlatformdeployment() {
+        return this.platformdeployment;
     }
     
-    public void setFeatureofinterest(dao.Featureofinterest featureofinterest){
-        this.featureofinterest = featureofinterest;
+    public void setPlatformdeployment(dao.Platformdeployment platformdeployment){
+        this.platformdeployment = platformdeployment;
     }
 
-    private dao.Featureofinterest featureofinterest;
+    private dao.Platformdeployment platformdeployment;
 	  
    /**
     * 
     *
     * @hibernate.many-to-one
-    *     column="DEVICE_FK"
-    *     class="dao.Device"
+    *     column="REGISTEREDDEVICE_FK"
+    *     class="dao.Registereddevice"
     */
-    public dao.Device getDevice() {
-        return this.device;
+    public dao.Registereddevice getRegistereddevice() {
+        return this.registereddevice;
     }
     
-    public void setDevice(dao.Device device){
-        this.device = device;
+    public void setRegistereddevice(dao.Registereddevice registereddevice){
+        this.registereddevice = registereddevice;
     }
 
-    private dao.Device device;
+    private dao.Registereddevice registereddevice;
+	  
+   /**
+    * 
+    *
+    * @hibernate.many-to-one
+    *     column="PROCEDURE_FK"
+    *     class="dao.Procedure"
+    */
+    public dao.Procedure getProcedure() {
+        return this.procedure;
+    }
+    
+    public void setProcedure(dao.Procedure procedure){
+        this.procedure = procedure;
+    }
+
+    private dao.Procedure procedure;
+	  
+   /**
+    * 
+    *
+    * @hibernate.many-to-one
+    *     column="PROPERTY_FK"
+    *     class="dao.Property"
+    */
+    public dao.Property getProperty() {
+        return this.property;
+    }
+    
+    public void setProperty(dao.Property property){
+        this.property = property;
+    }
+
+    private dao.Property property;
 	/**
      * 
      *
      * @hibernate.set
-     *     role="propertyoutcome"
+     *     role="deviceresult"
      *     lazy="false"
      * @hibernate.collection-key
      *     column="DEVICEUSAGE_FK"
      * @hibernate.collection-one-to-many
-     *     class="dao.Propertyoutcome"
+     *     class="dao.Deviceresult"
      */
-    public java.util.Collection getPropertyoutcome(){
-        return this.propertyoutcome;
+    public java.util.Collection getDeviceresult(){
+        return this.deviceresult;
     }
 
-    protected void setPropertyoutcome(java.util.Collection propertyoutcome){
-        this.propertyoutcome = propertyoutcome;
+    protected void setDeviceresult(java.util.Collection deviceresult){
+        this.deviceresult = deviceresult;
     }
 
-    private java.util.Collection propertyoutcome;
-    public void attachPropertyoutcome (dao.Propertyoutcome object) {
-        this.propertyoutcome.add(object);
+    private java.util.Collection deviceresult;
+    public void attachDeviceresult (dao.Deviceresult object) {
+        this.deviceresult.add(object);
     }
 	// ---------- precondition of business methods  -----------
 	// --- o/c ---
@@ -153,6 +225,8 @@ public abstract class Deviceusage
 
 	// --- o/m --- 
     public abstract void check_devicedeployment() throws MerodeException;
+	// --- o/m --- 
+    public abstract void check_mesetready() throws MerodeException;
 	// --- o/e --- 
     public abstract void check_meenddeviceusage() throws MerodeException;
 	// --- o/e --- 
@@ -161,10 +235,6 @@ public abstract class Deviceusage
     public abstract void check_mecrdeviceresult() throws MerodeException;
 	// --- o/dpnds --- 
     public abstract void check_meenddeviceresult() throws MerodeException;
-	// --- o/dpnds --- 
-    public abstract void check_mecrpropertyoutcome() throws MerodeException;
-	// --- o/dpnds --- 
-    public abstract void check_meendpropertyoutcome() throws MerodeException;
 
     // ---------------- business methods  ----------------------
 
@@ -172,14 +242,26 @@ public abstract class Deviceusage
 	/**
      *  --- o/c --- 
      */
-	public abstract void mecrdeviceusage(java.lang.String Name)
+	public abstract void mecrdeviceusage( java.lang.String Usagetype,
+		 java.lang.String Starttime,
+		java.lang.String Endtime)
     	throws MerodeException;
 
 
 	/**
      *  --- o/m ---
      */
-	public abstract void devicedeployment(java.lang.String Name)
+	public abstract void devicedeployment( java.lang.String Usagetype,
+		 java.lang.String Starttime,
+		java.lang.String Endtime)
+    	throws MerodeException;
+
+	/**
+     *  --- o/m ---
+     */
+	public abstract void mesetready( java.lang.String Usagetype,
+		 java.lang.String Starttime,
+		java.lang.String Endtime)
     	throws MerodeException;
 
 	
@@ -207,20 +289,6 @@ public abstract class Deviceusage
     * --- o/dpnds ---
     */
     public abstract void meenddeviceresult()
-        throws MerodeException;	
-
-		
-   /**
-    * --- o/dpnds ---
-    */
-    public abstract void mecrpropertyoutcome()
-        throws MerodeException;	
-
-		
-   /**
-    * --- o/dpnds ---
-    */
-    public abstract void meendpropertyoutcome()
         throws MerodeException;	
 
 	

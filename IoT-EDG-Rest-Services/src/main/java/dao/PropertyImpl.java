@@ -28,9 +28,11 @@ public class PropertyImpl extends Property {
     // abstract in class Property ...
 
 	//--- o/c ---  
-    public void mecrproperty(java.lang.String Name) {
+    public void mecrproperty( java.lang.String Featureofinterestname,
+		java.lang.String Description) {
         MerodeLogger.logln("Executing Property.mecrproperty (O/C)");
-        setName (Name);
+        setFeatureofinterestname (Featureofinterestname);
+        setDescription (Description);
     }
 
 
@@ -50,13 +52,28 @@ public class PropertyImpl extends Property {
     }
 
 		//--- o/dpnd ---
-    public void mecrpropertyoutcome() {
-        MerodeLogger.logln("Executing Property.mecrpropertyoutcome() (A/M)");
+    public void mecrdeviceusage() {
+        MerodeLogger.logln("Executing Property.mecrdeviceusage() (A/M)");
     }
 
 		//--- o/dpnd ---
-    public void meendpropertyoutcome() {
-        MerodeLogger.logln("Executing Property.meendpropertyoutcome() (A/M)");
+    public void meenddeviceusage() {
+        MerodeLogger.logln("Executing Property.meenddeviceusage() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void deviceundeployment() {
+        MerodeLogger.logln("Executing Property.deviceundeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void devicedeployment() {
+        MerodeLogger.logln("Executing Property.devicedeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void mesetready() {
+        MerodeLogger.logln("Executing Property.mesetready() (A/M)");
     }
 
 	
@@ -91,13 +108,28 @@ public class PropertyImpl extends Property {
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Property.mecrpropertyoutcome()...");
+    public void check_mecrdeviceusage() throws MerodeException {
+        MerodeLogger.log("Checking Property.mecrdeviceusage()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Property.meendpropertyoutcome()...");
+    public void check_meenddeviceusage() throws MerodeException {
+        MerodeLogger.log("Checking Property.meenddeviceusage()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
+    public void check_deviceundeployment() throws MerodeException {
+        MerodeLogger.log("Checking Property.deviceundeployment()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
+    public void check_devicedeployment() throws MerodeException {
+        MerodeLogger.log("Checking Property.devicedeployment()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.log("Checking Property.mesetready()...");
         MerodeLogger.logln("passed");
     }
 
@@ -109,14 +141,14 @@ public class PropertyImpl extends Property {
     private boolean hasLivingDependents() {
     	Set <String> dependents = new HashSet();
 
-        java.util.Collection col_propertyoutcome = getPropertyoutcome();
-        if (col_propertyoutcome != null){
-        	if (!col_propertyoutcome.isEmpty()){
-		        java.util.Iterator i_propertyoutcome = col_propertyoutcome.iterator();
-		        while (i_propertyoutcome.hasNext()) {
-		            dao.Propertyoutcome obj_propertyoutcome = (dao.Propertyoutcome)i_propertyoutcome.next();
-		            if (!obj_propertyoutcome.getState().isFinalState()){
-		            	dependents.add("Propertyoutcome");
+        java.util.Collection col_deviceusage = getDeviceusage();
+        if (col_deviceusage != null){
+        	if (!col_deviceusage.isEmpty()){
+		        java.util.Iterator i_deviceusage = col_deviceusage.iterator();
+		        while (i_deviceusage.hasNext()) {
+		            dao.Deviceusage obj_deviceusage = (dao.Deviceusage)i_deviceusage.next();
+		            if (!obj_deviceusage.getState().isFinalState()){
+		            	dependents.add("Deviceusage");
 		            }
 		        }        	
         	}

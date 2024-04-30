@@ -62,4 +62,28 @@ public abstract class PlatformFactory {
     	q.setString (0, Name);
         return q.list();
     }
+    /**
+     *
+     * Finds Platform object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByDescription (org.hibernate.Session sess, java.lang.String Description)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Platform as c where c.Description = ?");
+    	q.setString (0, Description);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Platform object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByHostedby (org.hibernate.Session sess, java.lang.String Hostedby)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Platform as c where c.Hostedby = ?");
+    	q.setString (0, Hostedby);
+        return q.list();
+    }
 }

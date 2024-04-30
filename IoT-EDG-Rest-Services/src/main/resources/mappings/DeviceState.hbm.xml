@@ -45,24 +45,17 @@
         >
         </subclass>
         <subclass
-            name="dao.DeviceStateEnded"
-            dynamic-update="false"
-            dynamic-insert="false"
-            discriminator-value="DeviceStateEnded"
-        >
-        </subclass>
-        <subclass
-            name="dao.DeviceStateDeployed"
-            dynamic-update="false"
-            dynamic-insert="false"
-            discriminator-value="DeviceStateDeployed"
-        >
-        </subclass>
-        <subclass
             name="dao.DeviceStateExists"
             dynamic-update="false"
             dynamic-insert="false"
             discriminator-value="DeviceStateExists"
+        >
+        </subclass>
+        <subclass
+            name="dao.DeviceStateEnded"
+            dynamic-update="false"
+            dynamic-insert="false"
+            discriminator-value="DeviceStateEnded"
         >
         </subclass>
   

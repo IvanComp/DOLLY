@@ -42,7 +42,7 @@ public class PropertyStateExists extends PropertyState {
     }
 
     protected java.lang.String getStateId() {
-    	return "190";
+    	return "203";
     }
 
     public boolean isInitialState() {
@@ -61,15 +61,27 @@ public class PropertyStateExists extends PropertyState {
     }
 
 		
+    public void check_devicedeployment() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking PropertyState.devicedeployment...passed");
+    }
+
+		
+    public void check_deviceundeployment() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking PropertyState.deviceundeployment...passed");
+    }
+
+		
     public void check_mecrdeviceresult() {
         // No exception is thrown anymore...
         MerodeLogger.logln ("Checking PropertyState.mecrdeviceresult...passed");
     }
 
 		
-    public void check_mecrpropertyoutcome() {
+    public void check_mecrdeviceusage() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking PropertyState.mecrpropertyoutcome...passed");
+        MerodeLogger.logln ("Checking PropertyState.mecrdeviceusage...passed");
     }
 
 		
@@ -79,44 +91,71 @@ public class PropertyStateExists extends PropertyState {
     }
 
 		
-    public void check_meendpropertyoutcome() {
+    public void check_meenddeviceusage() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking PropertyState.meendpropertyoutcome...passed");
+        MerodeLogger.logln ("Checking PropertyState.meenddeviceusage...passed");
+    }
+
+		
+    public void check_mesetready() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking PropertyState.mesetready...passed");
     }
 
 	
 	
     public void meendproperty (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
         PropertyStateEnded state = PropertyStateEnded.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 187 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 197");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 210");
+        object.setState(state);
+    }
+
+	
+    public void devicedeployment (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
+        PropertyStateExists state = PropertyStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 213");
+        object.setState(state);
+    }
+
+	
+    public void deviceundeployment (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
+        PropertyStateExists state = PropertyStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 215");
         object.setState(state);
     }
 
 	
     public void mecrdeviceresult (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
         PropertyStateExists state = PropertyStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 187 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 200");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 217");
         object.setState(state);
     }
 
 	
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
+    public void mecrdeviceusage (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
         PropertyStateExists state = PropertyStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 187 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 202");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 219");
         object.setState(state);
     }
 
 	
     public void meenddeviceresult (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
         PropertyStateExists state = PropertyStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 187 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 204");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 221");
         object.setState(state);
     }
 
 	
-    public void meendpropertyoutcome (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
+    public void meenddeviceusage (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
         PropertyStateExists state = PropertyStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 187 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 206");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 223");
+        object.setState(state);
+    }
+
+	
+    public void mesetready (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
+        PropertyStateExists state = PropertyStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 225");
         object.setState(state);
     }
 

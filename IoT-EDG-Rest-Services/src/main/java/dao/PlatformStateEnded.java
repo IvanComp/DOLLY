@@ -42,7 +42,7 @@ public class PlatformStateEnded extends PlatformState {
     }
 
     protected java.lang.String getStateId() {
-    	return "147";
+    	return "154";
     }
 
     public boolean isInitialState() {

@@ -11,18 +11,18 @@ import java.time.*;
 
 /**
  * @hibernate.subclass
- *    discriminator-value="PropertyoutcomeStateEnded"
+ *    discriminator-value="RegistereddeviceStateEnded"
  */
-public class PropertyoutcomeStateEnded extends PropertyoutcomeState {
+public class RegistereddeviceStateEnded extends RegistereddeviceState {
 
-    public static PropertyoutcomeStateEnded getObject (org.hibernate.Session sess) throws org.hibernate.HibernateException {
-	    PropertyoutcomeStateEnded state = null;
+    public static RegistereddeviceStateEnded getObject (org.hibernate.Session sess) throws org.hibernate.HibernateException {
+	    RegistereddeviceStateEnded state = null;
 	    // Search in database
 	    java.util.Collection states = findStateByName (sess, "ended");
 	    if ( states != null && !states.isEmpty() )
-	        state = (PropertyoutcomeStateEnded)states.iterator().next();
+	        state = (RegistereddeviceStateEnded)states.iterator().next();
 	    if ( state == null ) {
-	        state = new PropertyoutcomeStateEnded();
+	        state = new RegistereddeviceStateEnded();
 	        // Save in database
 	        sess.save (state);
 	    }
@@ -32,7 +32,7 @@ public class PropertyoutcomeStateEnded extends PropertyoutcomeState {
     private static java.util.Collection findStateByName (org.hibernate.Session sess, java.lang.String statename)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.PropertyoutcomeState as c where c.name = ?");
+        org.hibernate.Query q = sess.createQuery("from dao.RegistereddeviceState as c where c.name = ?");
     	q.setString (0, statename);
         return q.list();
     }
@@ -42,7 +42,7 @@ public class PropertyoutcomeStateEnded extends PropertyoutcomeState {
     }
 
     protected java.lang.String getStateId() {
-    	return "267";
+    	return "32";
     }
 
     public boolean isInitialState() {

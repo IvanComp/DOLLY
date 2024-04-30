@@ -64,6 +64,44 @@ public abstract class Device
     public void setName(java.lang.String name){
         this.name = name;
     }
+    private java.lang.String description;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="DESCRIPTION"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="DESCRIPTION"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(java.lang.String description){
+        this.description = description;
+    }
+    private java.lang.String status;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="STATUS"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="STATUS"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getStatus(){
+        return this.status;
+    }
+
+    public void setStatus(java.lang.String status){
+        this.status = status;
+    }
     private java.lang.String id;
 
     /**
@@ -90,68 +128,51 @@ public abstract class Device
 
     // ------------- relations ------------------
 
-	  
-   /**
-    * 
-    *
-    * @hibernate.many-to-one
-    *     column="PLATFORM_FK"
-    *     class="dao.Platform"
-    */
-    public dao.Platform getPlatform() {
-        return this.platform;
-    }
-    
-    public void setPlatform(dao.Platform platform){
-        this.platform = platform;
-    }
-
-    private dao.Platform platform;
-	/**
+/**
      * 
      *
      * @hibernate.set
-     *     role="outcome"
+     *     role="registereddevice"
      *     lazy="false"
      * @hibernate.collection-key
      *     column="DEVICE_FK"
      * @hibernate.collection-one-to-many
-     *     class="dao.Outcome"
+     *     class="dao.Registereddevice"
      */
-    public java.util.Collection getOutcome(){
-        return this.outcome;
+    public java.util.Collection getRegistereddevice(){
+        return this.registereddevice;
     }
 
-    protected void setOutcome(java.util.Collection outcome){
-        this.outcome = outcome;
+    protected void setRegistereddevice(java.util.Collection registereddevice){
+        this.registereddevice = registereddevice;
     }
 
-    private java.util.Collection outcome;
-    public void attachOutcome (dao.Outcome object) {
-        this.outcome.add(object);
+    private java.util.Collection registereddevice;
+    public void attachRegistereddevice (dao.Registereddevice object) {
+        this.registereddevice.add(object);
     }
 	/**
      * 
      *
      * @hibernate.set
-     *     role="deviceusage"
+     *     role="procedure"
      *     lazy="false"
      * @hibernate.collection-key
      *     column="DEVICE_FK"
      * @hibernate.collection-one-to-many
-     *     class="dao.Deviceusage"
+     *     class="dao.Procedure"
      */
-    public java.util.Collection getDeviceusage(){
-        return this.deviceusage;
+    public java.util.Collection getProcedure(){
+        return this.procedure;
     }
 
-    protected void setDeviceusage(java.util.Collection deviceusage){
-        this.deviceusage = deviceusage;
+    protected void setProcedure(java.util.Collection procedure){
+        this.procedure = procedure;
     }
 
-    private java.util.Collection deviceusage;
-    public void attachDeviceusage (dao.Deviceusage object) {
-        this.deviceusage.add(object);
+    private java.util.Collection procedure;
+    public void attachProcedure (dao.Procedure object) {
+        this.procedure.add(object);
     }
 	// ---------- precondition of business methods  -----------
 	// --- o/c ---
@@ -163,13 +184,13 @@ public abstract class Device
 	// --- o/dpnds --- 
     public abstract void check_meenddeviceresult() throws MerodeException;
 	// --- o/dpnds --- 
-    public abstract void check_mecroutcome() throws MerodeException;
+    public abstract void check_mecrregistereddevice() throws MerodeException;
 	// --- o/dpnds --- 
-    public abstract void check_meendoutcome() throws MerodeException;
+    public abstract void check_meendregistereddevice() throws MerodeException;
 	// --- o/dpnds --- 
-    public abstract void check_mecrpropertyoutcome() throws MerodeException;
+    public abstract void check_mecrprocedure() throws MerodeException;
 	// --- o/dpnds --- 
-    public abstract void check_meendpropertyoutcome() throws MerodeException;
+    public abstract void check_meendprocedure() throws MerodeException;
 	// --- o/dpnds --- 
     public abstract void check_mecrdeviceusage() throws MerodeException;
 	// --- o/dpnds --- 
@@ -178,6 +199,8 @@ public abstract class Device
     public abstract void check_deviceundeployment() throws MerodeException;
 	// --- o/dpnds --- 
     public abstract void check_devicedeployment() throws MerodeException;
+	// --- o/dpnds --- 
+    public abstract void check_mesetready() throws MerodeException;
 
     // ---------------- business methods  ----------------------
 
@@ -185,7 +208,9 @@ public abstract class Device
 	/**
      *  --- o/c --- 
      */
-	public abstract void mecrdevice(java.lang.String Name)
+	public abstract void mecrdevice( java.lang.String Name,
+		 java.lang.String Description,
+		java.lang.String Status)
     	throws MerodeException;
 
 
@@ -214,28 +239,28 @@ public abstract class Device
    /**
     * --- o/dpnds ---
     */
-    public abstract void mecroutcome()
+    public abstract void mecrregistereddevice()
         throws MerodeException;	
 
 		
    /**
     * --- o/dpnds ---
     */
-    public abstract void meendoutcome()
+    public abstract void meendregistereddevice()
         throws MerodeException;	
 
 		
    /**
     * --- o/dpnds ---
     */
-    public abstract void mecrpropertyoutcome()
+    public abstract void mecrprocedure()
         throws MerodeException;	
 
 		
    /**
     * --- o/dpnds ---
     */
-    public abstract void meendpropertyoutcome()
+    public abstract void meendprocedure()
         throws MerodeException;	
 
 		
@@ -264,6 +289,13 @@ public abstract class Device
     * --- o/dpnds ---
     */
     public abstract void devicedeployment()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
+    public abstract void mesetready()
         throws MerodeException;	
 
 	

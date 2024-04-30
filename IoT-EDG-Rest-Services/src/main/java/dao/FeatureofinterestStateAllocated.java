@@ -42,7 +42,7 @@ public class FeatureofinterestStateAllocated extends FeatureofinterestState {
     }
 
     protected java.lang.String getStateId() {
-    	return "105";
+    	return "101";
     }
 
     public boolean isInitialState() {
@@ -64,7 +64,7 @@ public class FeatureofinterestStateAllocated extends FeatureofinterestState {
 	
     public void mecrfeatureofinterest (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException {
         FeatureofinterestStateExists state = FeatureofinterestStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 103 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 110");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 97 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 106");
         object.setState(state);
     }
 

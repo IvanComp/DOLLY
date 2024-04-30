@@ -28,9 +28,11 @@ public class FeatureofinterestImpl extends Featureofinterest {
     // abstract in class Featureofinterest ...
 
 	//--- o/c ---  
-    public void mecrfeatureofinterest(java.lang.String Name) {
+    public void mecrfeatureofinterest( java.lang.String Name,
+		java.lang.String Description) {
         MerodeLogger.logln("Executing Featureofinterest.mecrfeatureofinterest (O/C)");
         setName (Name);
+        setDescription (Description);
     }
 
 
@@ -40,6 +42,16 @@ public class FeatureofinterestImpl extends Featureofinterest {
     }
 	
 		//--- o/dpnd ---
+    public void mecrplatformdeployment() {
+        MerodeLogger.logln("Executing Featureofinterest.mecrplatformdeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void meendplatformdeployment() {
+        MerodeLogger.logln("Executing Featureofinterest.meendplatformdeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
     public void mecrdeviceresult() {
         MerodeLogger.logln("Executing Featureofinterest.mecrdeviceresult() (A/M)");
     }
@@ -47,16 +59,6 @@ public class FeatureofinterestImpl extends Featureofinterest {
 		//--- o/dpnd ---
     public void meenddeviceresult() {
         MerodeLogger.logln("Executing Featureofinterest.meenddeviceresult() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void mecrpropertyoutcome() {
-        MerodeLogger.logln("Executing Featureofinterest.mecrpropertyoutcome() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void meendpropertyoutcome() {
-        MerodeLogger.logln("Executing Featureofinterest.meendpropertyoutcome() (A/M)");
     }
 
 		//--- o/dpnd ---
@@ -89,6 +91,11 @@ public class FeatureofinterestImpl extends Featureofinterest {
         MerodeLogger.logln("Executing Featureofinterest.devicedeployment() (A/M)");
     }
 
+		//--- o/dpnd ---
+    public void mesetready() {
+        MerodeLogger.logln("Executing Featureofinterest.mesetready() (A/M)");
+    }
+
 	
 
     // ---------- precondition of business methods  -----------
@@ -111,6 +118,16 @@ public class FeatureofinterestImpl extends Featureofinterest {
    
 
 	//--- o/dpnds ---
+    public void check_mecrplatformdeployment() throws MerodeException {
+        MerodeLogger.log("Checking Featureofinterest.mecrplatformdeployment()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
+    public void check_meendplatformdeployment() throws MerodeException {
+        MerodeLogger.log("Checking Featureofinterest.meendplatformdeployment()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
     public void check_mecrdeviceresult() throws MerodeException {
         MerodeLogger.log("Checking Featureofinterest.mecrdeviceresult()...");
         MerodeLogger.logln("passed");
@@ -118,16 +135,6 @@ public class FeatureofinterestImpl extends Featureofinterest {
 	//--- o/dpnds ---
     public void check_meenddeviceresult() throws MerodeException {
         MerodeLogger.log("Checking Featureofinterest.meenddeviceresult()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Featureofinterest.mecrpropertyoutcome()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Featureofinterest.meendpropertyoutcome()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
@@ -160,6 +167,11 @@ public class FeatureofinterestImpl extends Featureofinterest {
         MerodeLogger.log("Checking Featureofinterest.devicedeployment()...");
         MerodeLogger.logln("passed");
     }
+	//--- o/dpnds ---
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.log("Checking Featureofinterest.mesetready()...");
+        MerodeLogger.logln("passed");
+    }
 
     
 
@@ -169,6 +181,20 @@ public class FeatureofinterestImpl extends Featureofinterest {
     private boolean hasLivingDependents() {
     	Set <String> dependents = new HashSet();
 
+        java.util.Collection col_platformdeployment = getPlatformdeployment();
+        if (col_platformdeployment != null){
+        	if (!col_platformdeployment.isEmpty()){
+		        java.util.Iterator i_platformdeployment = col_platformdeployment.iterator();
+		        while (i_platformdeployment.hasNext()) {
+		            dao.Platformdeployment obj_platformdeployment = (dao.Platformdeployment)i_platformdeployment.next();
+		            if (!obj_platformdeployment.getState().isFinalState()){
+		            	dependents.add("Platformdeployment");
+		            }
+		        }        	
+        	}
+        }
+
+
         java.util.Collection col_property = getProperty();
         if (col_property != null){
         	if (!col_property.isEmpty()){
@@ -177,20 +203,6 @@ public class FeatureofinterestImpl extends Featureofinterest {
 		            dao.Property obj_property = (dao.Property)i_property.next();
 		            if (!obj_property.getState().isFinalState()){
 		            	dependents.add("Property");
-		            }
-		        }        	
-        	}
-        }
-
-
-        java.util.Collection col_deviceusage = getDeviceusage();
-        if (col_deviceusage != null){
-        	if (!col_deviceusage.isEmpty()){
-		        java.util.Iterator i_deviceusage = col_deviceusage.iterator();
-		        while (i_deviceusage.hasNext()) {
-		            dao.Deviceusage obj_deviceusage = (dao.Deviceusage)i_deviceusage.next();
-		            if (!obj_deviceusage.getState().isFinalState()){
-		            	dependents.add("Deviceusage");
 		            }
 		        }        	
         	}

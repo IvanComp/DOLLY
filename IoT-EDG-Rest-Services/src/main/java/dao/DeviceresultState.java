@@ -77,11 +77,11 @@ public abstract class DeviceresultState
     // a subclass for all appropriate methods.
     public void check_mecrdeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceresultState.mecrdeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 283 with name MEcrDeviceResult for object type 90 named Deviceresult in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 373 with name MEcrDeviceResult for object type 80 named Deviceresult in state " + getStateId() + " called " + getStateName());
     }
     public void check_meenddeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking DeviceresultState.meenddeviceresult...");
-        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 284 with name MEendDeviceResult for object type 90 named Deviceresult in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 374 with name MEendDeviceResult for object type 80 named Deviceresult in state " + getStateId() + " called " + getStateName());
     }
 
     // Put the object in the correct state.

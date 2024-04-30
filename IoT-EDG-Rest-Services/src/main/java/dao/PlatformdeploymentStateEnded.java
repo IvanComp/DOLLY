@@ -11,18 +11,18 @@ import java.time.*;
 
 /**
  * @hibernate.subclass
- *    discriminator-value="OutcomeStateEnded"
+ *    discriminator-value="PlatformdeploymentStateEnded"
  */
-public class OutcomeStateEnded extends OutcomeState {
+public class PlatformdeploymentStateEnded extends PlatformdeploymentState {
 
-    public static OutcomeStateEnded getObject (org.hibernate.Session sess) throws org.hibernate.HibernateException {
-	    OutcomeStateEnded state = null;
+    public static PlatformdeploymentStateEnded getObject (org.hibernate.Session sess) throws org.hibernate.HibernateException {
+	    PlatformdeploymentStateEnded state = null;
 	    // Search in database
 	    java.util.Collection states = findStateByName (sess, "ended");
 	    if ( states != null && !states.isEmpty() )
-	        state = (OutcomeStateEnded)states.iterator().next();
+	        state = (PlatformdeploymentStateEnded)states.iterator().next();
 	    if ( state == null ) {
-	        state = new OutcomeStateEnded();
+	        state = new PlatformdeploymentStateEnded();
 	        // Save in database
 	        sess.save (state);
 	    }
@@ -32,7 +32,7 @@ public class OutcomeStateEnded extends OutcomeState {
     private static java.util.Collection findStateByName (org.hibernate.Session sess, java.lang.String statename)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.OutcomeState as c where c.name = ?");
+        org.hibernate.Query q = sess.createQuery("from dao.PlatformdeploymentState as c where c.name = ?");
     	q.setString (0, statename);
         return q.list();
     }
@@ -42,7 +42,7 @@ public class OutcomeStateEnded extends OutcomeState {
     }
 
     protected java.lang.String getStateId() {
-    	return "74";
+    	return "296";
     }
 
     public boolean isInitialState() {

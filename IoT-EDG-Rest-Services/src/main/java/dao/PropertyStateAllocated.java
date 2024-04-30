@@ -42,7 +42,7 @@ public class PropertyStateAllocated extends PropertyState {
     }
 
     protected java.lang.String getStateId() {
-    	return "189";
+    	return "202";
     }
 
     public boolean isInitialState() {
@@ -64,7 +64,7 @@ public class PropertyStateAllocated extends PropertyState {
 	
     public void mecrproperty (org.hibernate.Session sess, Property object) throws org.hibernate.HibernateException {
         PropertyStateExists state = PropertyStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 187 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 194");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 198 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 207");
         object.setState(state);
     }
 

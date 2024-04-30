@@ -62,4 +62,28 @@ public abstract class DeviceFactory {
     	q.setString (0, Name);
         return q.list();
     }
+    /**
+     *
+     * Finds Device object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByDescription (org.hibernate.Session sess, java.lang.String Description)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Device as c where c.Description = ?");
+    	q.setString (0, Description);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Device object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByStatus (org.hibernate.Session sess, java.lang.String Status)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Device as c where c.Status = ?");
+    	q.setString (0, Status);
+        return q.list();
+    }
 }

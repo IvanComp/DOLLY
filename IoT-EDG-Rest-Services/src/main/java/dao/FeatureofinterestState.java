@@ -77,51 +77,55 @@ public abstract class FeatureofinterestState
     // a subclass for all appropriate methods.
     public void check_mecrfeatureofinterest() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.mecrfeatureofinterest...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 285 with name MEcrFeatureOfInterest for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 375 with name MEcrFeatureOfInterest for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_meendfeatureofinterest() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.meendfeatureofinterest...");
-        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 286 with name MEendFeatureOfInterest for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 376 with name MEendFeatureOfInterest for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+    }
+    public void check_mecrplatformdeployment() throws MerodeException {
+        MerodeLogger.logln ("Checking FeatureofinterestState.mecrplatformdeployment...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 386 with name MEcrPlatformDeployment for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+    }
+    public void check_meendplatformdeployment() throws MerodeException {
+        MerodeLogger.logln ("Checking FeatureofinterestState.meendplatformdeployment...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 387 with name MEendPlatformDeployment for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_mecrdeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.mecrdeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 283 with name MEcrDeviceResult for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 373 with name MEcrDeviceResult for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_meenddeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.meenddeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 284 with name MEendDeviceResult for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking FeatureofinterestState.mecrpropertyoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 295 with name MEcrPropertyOutcome for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking FeatureofinterestState.meendpropertyoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 296 with name MEendPropertyOutcome for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 374 with name MEendDeviceResult for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_mecrproperty() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.mecrproperty...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 289 with name MEcrProperty for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 379 with name MEcrProperty for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_meendproperty() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.meendproperty...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 290 with name MEendProperty for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 380 with name MEendProperty for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_mecrdeviceusage() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.mecrdeviceusage...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 291 with name MEcrDeviceUsage for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 381 with name MEcrDeviceUsage for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_meenddeviceusage() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.meenddeviceusage...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 292 with name MEendDeviceUsage for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 382 with name MEendDeviceUsage for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_deviceundeployment() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.deviceundeployment...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 294 with name DeviceUndeployment for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 384 with name DeviceUndeployment for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
     public void check_devicedeployment() throws MerodeException {
         MerodeLogger.logln ("Checking FeatureofinterestState.devicedeployment...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 293 with name DeviceDeployment for object type 103 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 383 with name DeviceDeployment for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
+    }
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.logln ("Checking FeatureofinterestState.mesetready...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 385 with name MEsetReady for object type 97 named Featureofinterest in state " + getStateId() + " called " + getStateName());
     }
 
     // Put the object in the correct state.
@@ -129,13 +133,13 @@ public abstract class FeatureofinterestState
 	}
     public void meendfeatureofinterest (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
     }
+    public void mecrplatformdeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
+    }
+    public void meendplatformdeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
+    }
     public void mecrdeviceresult (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
     }
     public void meenddeviceresult (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
-    }
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
-    }
-    public void meendpropertyoutcome (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
     }
     public void mecrproperty (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
     }
@@ -148,6 +152,8 @@ public abstract class FeatureofinterestState
     public void deviceundeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
     }
     public void devicedeployment (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
+    }
+    public void mesetready (org.hibernate.Session sess, Featureofinterest object) throws org.hibernate.HibernateException{
     }
 
 

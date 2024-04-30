@@ -42,7 +42,7 @@ public class DeviceusageStateStarted extends DeviceusageState {
     }
 
     protected java.lang.String getStateId() {
-    	return "235";
+    	return "274";
     }
 
     public boolean isInitialState() {
@@ -76,21 +76,21 @@ public class DeviceusageStateStarted extends DeviceusageState {
 	
     public void deviceundeployment (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
         DeviceusageStateEnded state = DeviceusageStateEnded.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 217");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 226 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 258");
         object.setState(state);
     }
 
 	
     public void mecrdeviceresult (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
         DeviceusageStateStarted state = DeviceusageStateStarted.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 224");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 226 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 267");
         object.setState(state);
     }
 
 	
     public void meenddeviceresult (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
         DeviceusageStateStarted state = DeviceusageStateStarted.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 228");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 226 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 269");
         object.setState(state);
     }
 

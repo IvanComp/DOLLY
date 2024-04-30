@@ -37,6 +37,28 @@
             column="PLATFORM_STATE_FK"
         />
         <property
+            name="description" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="DESCRIPTION"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="hostedby" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="HOSTEDBY"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
             name="name" 
             type="java.lang.String"
             update="true"
@@ -48,7 +70,7 @@
             />
         </property>
         <set
-            name="device"
+            name="platformdeployment"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -60,7 +82,23 @@
               />
 
               <one-to-many
-                  class="dao.Device"
+                  class="dao.Platformdeployment"
+              />
+        </set>
+        <set
+            name="registereddevice"
+            lazy="false"
+            inverse="true"
+            cascade="none"
+            sort="unsorted"
+        >
+
+              <key
+                  column="PLATFORM_FK"
+              />
+
+              <one-to-many
+                  class="dao.Registereddevice"
               />
         </set>
         <subclass

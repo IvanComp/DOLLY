@@ -64,6 +64,25 @@ public abstract class Featureofinterest
     public void setName(java.lang.String name){
         this.name = name;
     }
+    private java.lang.String description;
+    /**
+     * 
+     *
+     * @hibernate.property
+     *     column="DESCRIPTION"
+     *     type="java.lang.String"
+     *
+     * @hibernate.column
+     *     name="DESCRIPTION"
+     *     sql-type="VARCHAR(256)"
+     */
+    public java.lang.String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(java.lang.String description){
+        this.description = description;
+    }
     private java.lang.String id;
 
     /**
@@ -94,6 +113,29 @@ public abstract class Featureofinterest
      * 
      *
      * @hibernate.set
+     *     role="platformdeployment"
+     *     lazy="false"
+     * @hibernate.collection-key
+     *     column="FEATUREOFINTEREST_FK"
+     * @hibernate.collection-one-to-many
+     *     class="dao.Platformdeployment"
+     */
+    public java.util.Collection getPlatformdeployment(){
+        return this.platformdeployment;
+    }
+
+    protected void setPlatformdeployment(java.util.Collection platformdeployment){
+        this.platformdeployment = platformdeployment;
+    }
+
+    private java.util.Collection platformdeployment;
+    public void attachPlatformdeployment (dao.Platformdeployment object) {
+        this.platformdeployment.add(object);
+    }
+	/**
+     * 
+     *
+     * @hibernate.set
      *     role="property"
      *     lazy="false"
      * @hibernate.collection-key
@@ -113,42 +155,19 @@ public abstract class Featureofinterest
     public void attachProperty (dao.Property object) {
         this.property.add(object);
     }
-	/**
-     * 
-     *
-     * @hibernate.set
-     *     role="deviceusage"
-     *     lazy="false"
-     * @hibernate.collection-key
-     *     column="FEATUREOFINTEREST_FK"
-     * @hibernate.collection-one-to-many
-     *     class="dao.Deviceusage"
-     */
-    public java.util.Collection getDeviceusage(){
-        return this.deviceusage;
-    }
-
-    protected void setDeviceusage(java.util.Collection deviceusage){
-        this.deviceusage = deviceusage;
-    }
-
-    private java.util.Collection deviceusage;
-    public void attachDeviceusage (dao.Deviceusage object) {
-        this.deviceusage.add(object);
-    }
 	// ---------- precondition of business methods  -----------
 	// --- o/c ---
     public abstract void check_mecrfeatureofinterest() throws MerodeException;
 	// --- o/e --- 
     public abstract void check_meendfeatureofinterest() throws MerodeException;
 	// --- o/dpnds --- 
+    public abstract void check_mecrplatformdeployment() throws MerodeException;
+	// --- o/dpnds --- 
+    public abstract void check_meendplatformdeployment() throws MerodeException;
+	// --- o/dpnds --- 
     public abstract void check_mecrdeviceresult() throws MerodeException;
 	// --- o/dpnds --- 
     public abstract void check_meenddeviceresult() throws MerodeException;
-	// --- o/dpnds --- 
-    public abstract void check_mecrpropertyoutcome() throws MerodeException;
-	// --- o/dpnds --- 
-    public abstract void check_meendpropertyoutcome() throws MerodeException;
 	// --- o/dpnds --- 
     public abstract void check_mecrproperty() throws MerodeException;
 	// --- o/dpnds --- 
@@ -161,6 +180,8 @@ public abstract class Featureofinterest
     public abstract void check_deviceundeployment() throws MerodeException;
 	// --- o/dpnds --- 
     public abstract void check_devicedeployment() throws MerodeException;
+	// --- o/dpnds --- 
+    public abstract void check_mesetready() throws MerodeException;
 
     // ---------------- business methods  ----------------------
 
@@ -168,7 +189,8 @@ public abstract class Featureofinterest
 	/**
      *  --- o/c --- 
      */
-	public abstract void mecrfeatureofinterest(java.lang.String Name)
+	public abstract void mecrfeatureofinterest( java.lang.String Name,
+		java.lang.String Description)
     	throws MerodeException;
 
 
@@ -183,6 +205,20 @@ public abstract class Featureofinterest
    /**
     * --- o/dpnds ---
     */
+    public abstract void mecrplatformdeployment()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
+    public abstract void meendplatformdeployment()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
     public abstract void mecrdeviceresult()
         throws MerodeException;	
 
@@ -191,20 +227,6 @@ public abstract class Featureofinterest
     * --- o/dpnds ---
     */
     public abstract void meenddeviceresult()
-        throws MerodeException;	
-
-		
-   /**
-    * --- o/dpnds ---
-    */
-    public abstract void mecrpropertyoutcome()
-        throws MerodeException;	
-
-		
-   /**
-    * --- o/dpnds ---
-    */
-    public abstract void meendpropertyoutcome()
         throws MerodeException;	
 
 		
@@ -247,6 +269,13 @@ public abstract class Featureofinterest
     * --- o/dpnds ---
     */
     public abstract void devicedeployment()
+        throws MerodeException;	
+
+		
+   /**
+    * --- o/dpnds ---
+    */
+    public abstract void mesetready()
         throws MerodeException;	
 
 	

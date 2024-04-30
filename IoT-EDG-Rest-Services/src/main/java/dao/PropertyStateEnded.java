@@ -42,7 +42,7 @@ public class PropertyStateEnded extends PropertyState {
     }
 
     protected java.lang.String getStateId() {
-    	return "191";
+    	return "204";
     }
 
     public boolean isInitialState() {

@@ -6,11 +6,11 @@
 
 <hibernate-mapping default-lazy="false">
     <class
-        name="dao.Outcome"
-        table="HIB_OUTCOME"
+        name="dao.Platformdeployment"
+        table="HIB_PLATFORMDEPLOYMENT"
         dynamic-update="false"
         dynamic-insert="false"
-        discriminator-value="OutcomeImpl"
+        discriminator-value="PlatformdeploymentImpl"
     >
 
         <id
@@ -29,35 +29,66 @@
 
         <many-to-one
             name="state"
-            class="dao.OutcomeState"
+            class="dao.PlatformdeploymentState"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="OUTCOME_STATE_FK"
+            column="PLATFORMDEPLOYMENT_STATE_FK"
         />
         <property
-            name="name" 
+            name="platformname" 
             type="java.lang.String"
             update="true"
             insert="true"
         >
             <column
-                name="NAME"
+                name="PLATFORMNAME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="featureofinterestname" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="FEATUREOFINTERESTNAME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="starttime" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="STARTTIME"
                 sql-type="VARCHAR(256)"
             />
         </property>
 			 		<many-to-one
-            name="device"
-            class="dao.Device"
+            name="platform"
+            class="dao.Platform"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="DEVICE_FK"
+            column="PLATFORM_FK"
+        />
+			 		<many-to-one
+            name="featureofinterest"
+            class="dao.Featureofinterest"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="FEATUREOFINTEREST_FK"
         />
         <set
-            name="propertyoutcome"
+            name="deviceusage"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -65,18 +96,18 @@
         >
 
               <key
-                  column="OUTCOME_FK"
+                  column="PLATFORMDEPLOYMENT_FK"
               />
 
               <one-to-many
-                  class="dao.Propertyoutcome"
+                  class="dao.Deviceusage"
               />
         </set>
         <subclass
-            name="dao.OutcomeImpl"
+            name="dao.PlatformdeploymentImpl"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="OutcomeImpl"
+            discriminator-value="PlatformdeploymentImpl"
         >
         </subclass>
 

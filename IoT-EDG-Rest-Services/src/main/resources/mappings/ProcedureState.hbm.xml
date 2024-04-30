@@ -6,8 +6,8 @@
 
 	<hibernate-mapping default-lazy="false">
     <class
-        name="dao.PropertyoutcomeState"
-        table="HIB_PROPERTYOUTCOME_STATE"
+        name="dao.ProcedureState"
+        table="HIB_PROCEDURE_STATE"
         dynamic-update="false"
         dynamic-insert="false"
     >
@@ -38,24 +38,24 @@
             />
         </property>
         <subclass
-            name="dao.PropertyoutcomeStateAllocated"
+            name="dao.ProcedureStateAllocated"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="PropertyoutcomeStateAllocated"
+            discriminator-value="ProcedureStateAllocated"
         >
         </subclass>
         <subclass
-            name="dao.PropertyoutcomeStateExists"
+            name="dao.ProcedureStateExists"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="PropertyoutcomeStateExists"
+            discriminator-value="ProcedureStateExists"
         >
         </subclass>
         <subclass
-            name="dao.PropertyoutcomeStateEnded"
+            name="dao.ProcedureStateEnded"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="PropertyoutcomeStateEnded"
+            discriminator-value="ProcedureStateEnded"
         >
         </subclass>
   

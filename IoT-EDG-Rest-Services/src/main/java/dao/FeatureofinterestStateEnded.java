@@ -42,7 +42,7 @@ public class FeatureofinterestStateEnded extends FeatureofinterestState {
     }
 
     protected java.lang.String getStateId() {
-    	return "107";
+    	return "103";
     }
 
     public boolean isInitialState() {

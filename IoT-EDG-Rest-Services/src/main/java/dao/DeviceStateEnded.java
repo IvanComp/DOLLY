@@ -42,7 +42,7 @@ public class DeviceStateEnded extends DeviceState {
     }
 
     protected java.lang.String getStateId() {
-    	return "43";
+    	return "325";
     }
 
     public boolean isInitialState() {

@@ -42,7 +42,7 @@ public class DeviceusageStateAllocated extends DeviceusageState {
     }
 
     protected java.lang.String getStateId() {
-    	return "232";
+    	return "271";
     }
 
     public boolean isInitialState() {
@@ -64,7 +64,7 @@ public class DeviceusageStateAllocated extends DeviceusageState {
 	
     public void mecrdeviceusage (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
         DeviceusageStatePlanned state = DeviceusageStatePlanned.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 214");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 226 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 255");
         object.setState(state);
     }
 

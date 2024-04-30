@@ -37,6 +37,28 @@
             column="DEVICE_STATE_FK"
         />
         <property
+            name="status" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="STATUS"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="description" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="DESCRIPTION"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
             name="name" 
             type="java.lang.String"
             update="true"
@@ -47,17 +69,8 @@
                 sql-type="VARCHAR(256)"
             />
         </property>
-			 		<many-to-one
-            name="platform"
-            class="dao.Platform"
-            cascade="none"
-            outer-join="auto"
-            update="true"
-            insert="true"
-            column="PLATFORM_FK"
-        />
         <set
-            name="outcome"
+            name="registereddevice"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -69,11 +82,11 @@
               />
 
               <one-to-many
-                  class="dao.Outcome"
+                  class="dao.Registereddevice"
               />
         </set>
         <set
-            name="deviceusage"
+            name="procedure"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -85,7 +98,7 @@
               />
 
               <one-to-many
-                  class="dao.Deviceusage"
+                  class="dao.Procedure"
               />
         </set>
         <subclass

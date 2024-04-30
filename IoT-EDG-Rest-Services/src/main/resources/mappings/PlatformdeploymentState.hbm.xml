@@ -6,8 +6,8 @@
 
 	<hibernate-mapping default-lazy="false">
     <class
-        name="dao.OutcomeState"
-        table="HIB_OUTCOME_STATE"
+        name="dao.PlatformdeploymentState"
+        table="HIB_PLATFORMDEPLOYMENT_STATE"
         dynamic-update="false"
         dynamic-insert="false"
     >
@@ -38,24 +38,24 @@
             />
         </property>
         <subclass
-            name="dao.OutcomeStateAllocated"
+            name="dao.PlatformdeploymentStateAllocated"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="OutcomeStateAllocated"
+            discriminator-value="PlatformdeploymentStateAllocated"
         >
         </subclass>
         <subclass
-            name="dao.OutcomeStateExists"
+            name="dao.PlatformdeploymentStateExists"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="OutcomeStateExists"
+            discriminator-value="PlatformdeploymentStateExists"
         >
         </subclass>
         <subclass
-            name="dao.OutcomeStateEnded"
+            name="dao.PlatformdeploymentStateEnded"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="OutcomeStateEnded"
+            discriminator-value="PlatformdeploymentStateEnded"
         >
         </subclass>
   

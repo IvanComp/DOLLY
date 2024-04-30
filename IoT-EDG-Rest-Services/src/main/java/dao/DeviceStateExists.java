@@ -42,7 +42,7 @@ public class DeviceStateExists extends DeviceState {
     }
 
     protected java.lang.String getStateId() {
-    	return "45";
+    	return "324";
     }
 
     public boolean isInitialState() {
@@ -61,21 +61,45 @@ public class DeviceStateExists extends DeviceState {
     }
 
 		
+    public void check_devicedeployment() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking DeviceState.devicedeployment...passed");
+    }
+
+		
+    public void check_deviceundeployment() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking DeviceState.deviceundeployment...passed");
+    }
+
+		
+    public void check_mecrdeviceresult() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking DeviceState.mecrdeviceresult...passed");
+    }
+
+		
     public void check_mecrdeviceusage() {
         // No exception is thrown anymore...
         MerodeLogger.logln ("Checking DeviceState.mecrdeviceusage...passed");
     }
 
 		
-    public void check_mecroutcome() {
+    public void check_mecrprocedure() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceState.mecroutcome...passed");
+        MerodeLogger.logln ("Checking DeviceState.mecrprocedure...passed");
     }
 
 		
-    public void check_meendoutcome() {
+    public void check_mecrregistereddevice() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceState.meendoutcome...passed");
+        MerodeLogger.logln ("Checking DeviceState.mecrregistereddevice...passed");
+    }
+
+		
+    public void check_meenddeviceresult() {
+        // No exception is thrown anymore...
+        MerodeLogger.logln ("Checking DeviceState.meenddeviceresult...passed");
     }
 
 		
@@ -85,77 +109,105 @@ public class DeviceStateExists extends DeviceState {
     }
 
 		
-    public void check_mecrpropertyoutcome() {
+    public void check_meendprocedure() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceState.mecrpropertyoutcome...passed");
+        MerodeLogger.logln ("Checking DeviceState.meendprocedure...passed");
     }
 
 		
-    public void check_meendpropertyoutcome() {
+    public void check_meendregistereddevice() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceState.meendpropertyoutcome...passed");
+        MerodeLogger.logln ("Checking DeviceState.meendregistereddevice...passed");
     }
 
 		
-    public void check_devicedeployment() {
+    public void check_mesetready() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceState.devicedeployment...passed");
+        MerodeLogger.logln ("Checking DeviceState.mesetready...passed");
     }
 
 	
 	
     public void meenddevice (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateEnded state = DeviceStateEnded.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 11");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 331");
+        object.setState(state);
+    }
+
+	
+    public void devicedeployment (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+        DeviceStateExists state = DeviceStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 334");
+        object.setState(state);
+    }
+
+	
+    public void deviceundeployment (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+        DeviceStateExists state = DeviceStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 338");
+        object.setState(state);
+    }
+
+	
+    public void mecrdeviceresult (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+        DeviceStateExists state = DeviceStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 342");
         object.setState(state);
     }
 
 	
     public void mecrdeviceusage (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 22");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 346");
         object.setState(state);
     }
 
 	
-    public void mecroutcome (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+    public void mecrprocedure (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 24");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 350");
         object.setState(state);
     }
 
 	
-    public void meendoutcome (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+    public void mecrregistereddevice (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 36");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 352");
+        object.setState(state);
+    }
+
+	
+    public void meenddeviceresult (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+        DeviceStateExists state = DeviceStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 354");
         object.setState(state);
     }
 
 	
     public void meenddeviceusage (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 34");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 358");
         object.setState(state);
     }
 
 	
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+    public void meendprocedure (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 28");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 362");
         object.setState(state);
     }
 
 	
-    public void meendpropertyoutcome (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+    public void meendregistereddevice (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 40");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 364");
         object.setState(state);
     }
 
 	
-    public void devicedeployment (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
-        DeviceStateDeployed state = DeviceStateDeployed.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 14");
+    public void mesetready (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
+        DeviceStateExists state = DeviceStateExists.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 366");
         object.setState(state);
     }
 

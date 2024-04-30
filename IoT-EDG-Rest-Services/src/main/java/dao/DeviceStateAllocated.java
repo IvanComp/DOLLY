@@ -42,7 +42,7 @@ public class DeviceStateAllocated extends DeviceState {
     }
 
     protected java.lang.String getStateId() {
-    	return "42";
+    	return "323";
     }
 
     public boolean isInitialState() {
@@ -64,7 +64,7 @@ public class DeviceStateAllocated extends DeviceState {
 	
     public void mecrdevice (org.hibernate.Session sess, Device object) throws org.hibernate.HibernateException {
         DeviceStateExists state = DeviceStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 1 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 8");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 318 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 328");
         object.setState(state);
     }
 

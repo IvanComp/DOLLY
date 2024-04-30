@@ -65,6 +65,13 @@
             discriminator-value="DeviceusageStateStarted"
         >
         </subclass>
+        <subclass
+            name="dao.DeviceusageStateReady"
+            dynamic-update="false"
+            dynamic-insert="false"
+            discriminator-value="DeviceusageStateReady"
+        >
+        </subclass>
   
     </class>
 

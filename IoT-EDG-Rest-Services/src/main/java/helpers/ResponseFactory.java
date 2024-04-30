@@ -8,10 +8,10 @@ package helpers;
  * @author Nick Scheynen
  */
  
-import dao.Device;
-import dao.DeviceImpl;
-import dao.Outcome;
-import dao.OutcomeImpl;
+import dao.Registereddevice;
+import dao.RegistereddeviceImpl;
+import dao.Procedure;
+import dao.ProcedureImpl;
 import dao.Deviceresult;
 import dao.DeviceresultImpl;
 import dao.Featureofinterest;
@@ -22,62 +22,56 @@ import dao.Property;
 import dao.PropertyImpl;
 import dao.Deviceusage;
 import dao.DeviceusageImpl;
-import dao.Propertyoutcome;
-import dao.PropertyoutcomeImpl;
+import dao.Platformdeployment;
+import dao.PlatformdeploymentImpl;
+import dao.Device;
+import dao.DeviceImpl;
 import java.util.*;
 
 public abstract class ResponseFactory {
 
 	
-	// Device Responses
-	public static Collection makeAllDevice(Collection data) {
+	// Registereddevice Responses
+	public static Collection makeAllRegistereddevice(Collection data) {
 		Collection result = new ArrayList<HashMap>();
-		for( Iterator<DeviceImpl> i = data.iterator(); i.hasNext(); ) {
-			HashMap item = makeDevice(i.next());
+		for( Iterator<RegistereddeviceImpl> i = data.iterator(); i.hasNext(); ) {
+			HashMap item = makeRegistereddevice(i.next());
 			result.add(item);
 		}
 		return result;
 	}
 	
-	public static HashMap makeDevice(Device device) {
+	public static HashMap makeRegistereddevice(Registereddevice registereddevice) {
 		LinkedHashMap result = new LinkedHashMap();
 			
 		// Fill in attributes
-		result.put("id", device.getId());
-		result.put("name", device.getName());
-		result.put("state", device.getState().getName());
+		result.put("id", registereddevice.getId());
+		result.put("devicename", registereddevice.getDevicename());
+		result.put("platformname", registereddevice.getPlatformname());
+		result.put("starttime", registereddevice.getStarttime());
+		result.put("state", registereddevice.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
-		dependents.put("outcome", makeDeviceDepOutcome(device.getOutcome()));
-		dependents.put("deviceusage", makeDeviceDepDeviceusage(device.getDeviceusage()));
+		dependents.put("deviceusage", makeRegistereddeviceDepDeviceusage(registereddevice.getDeviceusage()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
 		// Add masters
 		HashMap masters = new HashMap();
-		masters.put("platform", makeDeviceMasPlatform(device.getPlatform()));
+		masters.put("platform", makeRegistereddeviceMasPlatform(registereddevice.getPlatform()));
+		masters.put("device", makeRegistereddeviceMasDevice(registereddevice.getDevice()));
 		// Add masters to result
 		result.put("masters", masters);
 
 		// Add events
-		result.put("events", makeDeviceEvents(device));
+		result.put("events", makeRegistereddeviceEvents(registereddevice));
 		
 		return result;
 	}
 
-	// Device Helpers
-	private static Collection makeDeviceDepOutcome(Collection outcomes) {
-		ArrayList result = new ArrayList();
-		for(Iterator<OutcomeImpl> i = outcomes.iterator(); i.hasNext();) {
-			OutcomeImpl outcome = i.next();
-			HashMap item = new HashMap<String, String>();
-			item.put("url", "/outcome/"+outcome.getId());
-			result.add(item);
-		}
-		return result;
-	}
-	private static Collection makeDeviceDepDeviceusage(Collection deviceusages) {
+	// Registereddevice Helpers
+	private static Collection makeRegistereddeviceDepDeviceusage(Collection deviceusages) {
 		ArrayList result = new ArrayList();
 		for(Iterator<DeviceusageImpl> i = deviceusages.iterator(); i.hasNext();) {
 			DeviceusageImpl deviceusage = i.next();
@@ -88,17 +82,24 @@ public abstract class ResponseFactory {
 		return result;
 	}
 
-	private static HashMap makeDeviceMasPlatform(Platform platform) {
+	private static HashMap makeRegistereddeviceMasPlatform(Platform platform) {
 		HashMap item = new HashMap<String, String>();
 		if(platform != null) {
 			item.put("url", "/platform/" + platform.getId()); 
 		}
 		return item;
 	}
+	private static HashMap makeRegistereddeviceMasDevice(Device device) {
+		HashMap item = new HashMap<String, String>();
+		if(device != null) {
+			item.put("url", "/device/" + device.getId()); 
+		}
+		return item;
+	}
 
-	private static Collection makeDeviceEvents(Device device) {
+	private static Collection makeRegistereddeviceEvents(Registereddevice registereddevice) {
 		ArrayList events = new ArrayList();
-		switch (device.getState().getName()) {
+		switch (registereddevice.getState().getName()) {
 			case "allocated":
 				break;
 			case "ended":
@@ -111,55 +112,56 @@ public abstract class ResponseFactory {
 		return events;
 	}	
 	
-	// Outcome Responses
-	public static Collection makeAllOutcome(Collection data) {
+	// Procedure Responses
+	public static Collection makeAllProcedure(Collection data) {
 		Collection result = new ArrayList<HashMap>();
-		for( Iterator<OutcomeImpl> i = data.iterator(); i.hasNext(); ) {
-			HashMap item = makeOutcome(i.next());
+		for( Iterator<ProcedureImpl> i = data.iterator(); i.hasNext(); ) {
+			HashMap item = makeProcedure(i.next());
 			result.add(item);
 		}
 		return result;
 	}
 	
-	public static HashMap makeOutcome(Outcome outcome) {
+	public static HashMap makeProcedure(Procedure procedure) {
 		LinkedHashMap result = new LinkedHashMap();
 			
 		// Fill in attributes
-		result.put("id", outcome.getId());
-		result.put("name", outcome.getName());
-		result.put("state", outcome.getState().getName());
+		result.put("id", procedure.getId());
+		result.put("devicename", procedure.getDevicename());
+		result.put("description", procedure.getDescription());
+		result.put("state", procedure.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
-		dependents.put("propertyoutcome", makeOutcomeDepPropertyoutcome(outcome.getPropertyoutcome()));
+		dependents.put("deviceusage", makeProcedureDepDeviceusage(procedure.getDeviceusage()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
 		// Add masters
 		HashMap masters = new HashMap();
-		masters.put("device", makeOutcomeMasDevice(outcome.getDevice()));
+		masters.put("device", makeProcedureMasDevice(procedure.getDevice()));
 		// Add masters to result
 		result.put("masters", masters);
 
 		// Add events
-		result.put("events", makeOutcomeEvents(outcome));
+		result.put("events", makeProcedureEvents(procedure));
 		
 		return result;
 	}
 
-	// Outcome Helpers
-	private static Collection makeOutcomeDepPropertyoutcome(Collection propertyoutcomes) {
+	// Procedure Helpers
+	private static Collection makeProcedureDepDeviceusage(Collection deviceusages) {
 		ArrayList result = new ArrayList();
-		for(Iterator<PropertyoutcomeImpl> i = propertyoutcomes.iterator(); i.hasNext();) {
-			PropertyoutcomeImpl propertyoutcome = i.next();
+		for(Iterator<DeviceusageImpl> i = deviceusages.iterator(); i.hasNext();) {
+			DeviceusageImpl deviceusage = i.next();
 			HashMap item = new HashMap<String, String>();
-			item.put("url", "/propertyoutcome/"+propertyoutcome.getId());
+			item.put("url", "/deviceusage/"+deviceusage.getId());
 			result.add(item);
 		}
 		return result;
 	}
 
-	private static HashMap makeOutcomeMasDevice(Device device) {
+	private static HashMap makeProcedureMasDevice(Device device) {
 		HashMap item = new HashMap<String, String>();
 		if(device != null) {
 			item.put("url", "/device/" + device.getId()); 
@@ -167,9 +169,9 @@ public abstract class ResponseFactory {
 		return item;
 	}
 
-	private static Collection makeOutcomeEvents(Outcome outcome) {
+	private static Collection makeProcedureEvents(Procedure procedure) {
 		ArrayList events = new ArrayList();
-		switch (outcome.getState().getName()) {
+		switch (procedure.getState().getName()) {
 			case "allocated":
 				break;
 			case "exists":
@@ -195,14 +197,18 @@ public abstract class ResponseFactory {
 			
 		// Fill in attributes
 		result.put("id", deviceresult.getId());
-		result.put("time", deviceresult.getTime());
 		result.put("value", deviceresult.getValue());
+		result.put("unit", deviceresult.getUnit());
+		result.put("producedby", deviceresult.getProducedby());
+		result.put("observedproperty", deviceresult.getObservedproperty());
+		result.put("starttime", deviceresult.getStarttime());
+		result.put("endtime", deviceresult.getEndtime());
 		result.put("state", deviceresult.getState().getName());
 
 
 		// Add masters
 		HashMap masters = new HashMap();
-		masters.put("propertyoutcome", makeDeviceresultMasPropertyoutcome(deviceresult.getPropertyoutcome()));
+		masters.put("deviceusage", makeDeviceresultMasDeviceusage(deviceresult.getDeviceusage()));
 		// Add masters to result
 		result.put("masters", masters);
 
@@ -214,10 +220,10 @@ public abstract class ResponseFactory {
 
 	// Deviceresult Helpers
 
-	private static HashMap makeDeviceresultMasPropertyoutcome(Propertyoutcome propertyoutcome) {
+	private static HashMap makeDeviceresultMasDeviceusage(Deviceusage deviceusage) {
 		HashMap item = new HashMap<String, String>();
-		if(propertyoutcome != null) {
-			item.put("url", "/propertyoutcome/" + propertyoutcome.getId()); 
+		if(deviceusage != null) {
+			item.put("url", "/deviceusage/" + deviceusage.getId()); 
 		}
 		return item;
 	}
@@ -251,12 +257,13 @@ public abstract class ResponseFactory {
 		// Fill in attributes
 		result.put("id", featureofinterest.getId());
 		result.put("name", featureofinterest.getName());
+		result.put("description", featureofinterest.getDescription());
 		result.put("state", featureofinterest.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
 		dependents.put("property", makeFeatureofinterestDepProperty(featureofinterest.getProperty()));
-		dependents.put("deviceusage", makeFeatureofinterestDepDeviceusage(featureofinterest.getDeviceusage()));
+		dependents.put("platformdeployment", makeFeatureofinterestDepPlatformdeployment(featureofinterest.getPlatformdeployment()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
@@ -268,22 +275,22 @@ public abstract class ResponseFactory {
 	}
 
 	// Featureofinterest Helpers
+	private static Collection makeFeatureofinterestDepPlatformdeployment(Collection platformdeployments) {
+		ArrayList result = new ArrayList();
+		for(Iterator<PlatformdeploymentImpl> i = platformdeployments.iterator(); i.hasNext();) {
+			PlatformdeploymentImpl platformdeployment = i.next();
+			HashMap item = new HashMap<String, String>();
+			item.put("url", "/platformdeployment/"+platformdeployment.getId());
+			result.add(item);
+		}
+		return result;
+	}
 	private static Collection makeFeatureofinterestDepProperty(Collection propertys) {
 		ArrayList result = new ArrayList();
 		for(Iterator<PropertyImpl> i = propertys.iterator(); i.hasNext();) {
 			PropertyImpl property = i.next();
 			HashMap item = new HashMap<String, String>();
 			item.put("url", "/property/"+property.getId());
-			result.add(item);
-		}
-		return result;
-	}
-	private static Collection makeFeatureofinterestDepDeviceusage(Collection deviceusages) {
-		ArrayList result = new ArrayList();
-		for(Iterator<DeviceusageImpl> i = deviceusages.iterator(); i.hasNext();) {
-			DeviceusageImpl deviceusage = i.next();
-			HashMap item = new HashMap<String, String>();
-			item.put("url", "/deviceusage/"+deviceusage.getId());
 			result.add(item);
 		}
 		return result;
@@ -319,11 +326,14 @@ public abstract class ResponseFactory {
 		// Fill in attributes
 		result.put("id", platform.getId());
 		result.put("name", platform.getName());
+		result.put("description", platform.getDescription());
+		result.put("hostedby", platform.getHostedby());
 		result.put("state", platform.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
-		dependents.put("device", makePlatformDepDevice(platform.getDevice()));
+		dependents.put("registereddevice", makePlatformDepRegistereddevice(platform.getRegistereddevice()));
+		dependents.put("platformdeployment", makePlatformDepPlatformdeployment(platform.getPlatformdeployment()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
@@ -335,12 +345,22 @@ public abstract class ResponseFactory {
 	}
 
 	// Platform Helpers
-	private static Collection makePlatformDepDevice(Collection devices) {
+	private static Collection makePlatformDepPlatformdeployment(Collection platformdeployments) {
 		ArrayList result = new ArrayList();
-		for(Iterator<DeviceImpl> i = devices.iterator(); i.hasNext();) {
-			DeviceImpl device = i.next();
+		for(Iterator<PlatformdeploymentImpl> i = platformdeployments.iterator(); i.hasNext();) {
+			PlatformdeploymentImpl platformdeployment = i.next();
 			HashMap item = new HashMap<String, String>();
-			item.put("url", "/device/"+device.getId());
+			item.put("url", "/platformdeployment/"+platformdeployment.getId());
+			result.add(item);
+		}
+		return result;
+	}
+	private static Collection makePlatformDepRegistereddevice(Collection registereddevices) {
+		ArrayList result = new ArrayList();
+		for(Iterator<RegistereddeviceImpl> i = registereddevices.iterator(); i.hasNext();) {
+			RegistereddeviceImpl registereddevice = i.next();
+			HashMap item = new HashMap<String, String>();
+			item.put("url", "/registereddevice/"+registereddevice.getId());
 			result.add(item);
 		}
 		return result;
@@ -375,12 +395,13 @@ public abstract class ResponseFactory {
 			
 		// Fill in attributes
 		result.put("id", property.getId());
-		result.put("name", property.getName());
+		result.put("featureofinterestname", property.getFeatureofinterestname());
+		result.put("description", property.getDescription());
 		result.put("state", property.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
-		dependents.put("propertyoutcome", makePropertyDepPropertyoutcome(property.getPropertyoutcome()));
+		dependents.put("deviceusage", makePropertyDepDeviceusage(property.getDeviceusage()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
@@ -397,12 +418,12 @@ public abstract class ResponseFactory {
 	}
 
 	// Property Helpers
-	private static Collection makePropertyDepPropertyoutcome(Collection propertyoutcomes) {
+	private static Collection makePropertyDepDeviceusage(Collection deviceusages) {
 		ArrayList result = new ArrayList();
-		for(Iterator<PropertyoutcomeImpl> i = propertyoutcomes.iterator(); i.hasNext();) {
-			PropertyoutcomeImpl propertyoutcome = i.next();
+		for(Iterator<DeviceusageImpl> i = deviceusages.iterator(); i.hasNext();) {
+			DeviceusageImpl deviceusage = i.next();
 			HashMap item = new HashMap<String, String>();
-			item.put("url", "/propertyoutcome/"+propertyoutcome.getId());
+			item.put("url", "/deviceusage/"+deviceusage.getId());
 			result.add(item);
 		}
 		return result;
@@ -444,19 +465,23 @@ public abstract class ResponseFactory {
 			
 		// Fill in attributes
 		result.put("id", deviceusage.getId());
-		result.put("name", deviceusage.getName());
+		result.put("usagetype", deviceusage.getUsagetype());
+		result.put("starttime", deviceusage.getStarttime());
+		result.put("endtime", deviceusage.getEndtime());
 		result.put("state", deviceusage.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
-		dependents.put("propertyoutcome", makeDeviceusageDepPropertyoutcome(deviceusage.getPropertyoutcome()));
+		dependents.put("deviceresult", makeDeviceusageDepDeviceresult(deviceusage.getDeviceresult()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
 		// Add masters
 		HashMap masters = new HashMap();
-		masters.put("featureofinterest", makeDeviceusageMasFeatureofinterest(deviceusage.getFeatureofinterest()));
-		masters.put("device", makeDeviceusageMasDevice(deviceusage.getDevice()));
+		masters.put("platformdeployment", makeDeviceusageMasPlatformdeployment(deviceusage.getPlatformdeployment()));
+		masters.put("registereddevice", makeDeviceusageMasRegistereddevice(deviceusage.getRegistereddevice()));
+		masters.put("procedure", makeDeviceusageMasProcedure(deviceusage.getProcedure()));
+		masters.put("property", makeDeviceusageMasProperty(deviceusage.getProperty()));
 		// Add masters to result
 		result.put("masters", masters);
 
@@ -467,28 +492,42 @@ public abstract class ResponseFactory {
 	}
 
 	// Deviceusage Helpers
-	private static Collection makeDeviceusageDepPropertyoutcome(Collection propertyoutcomes) {
+	private static Collection makeDeviceusageDepDeviceresult(Collection deviceresults) {
 		ArrayList result = new ArrayList();
-		for(Iterator<PropertyoutcomeImpl> i = propertyoutcomes.iterator(); i.hasNext();) {
-			PropertyoutcomeImpl propertyoutcome = i.next();
+		for(Iterator<DeviceresultImpl> i = deviceresults.iterator(); i.hasNext();) {
+			DeviceresultImpl deviceresult = i.next();
 			HashMap item = new HashMap<String, String>();
-			item.put("url", "/propertyoutcome/"+propertyoutcome.getId());
+			item.put("url", "/deviceresult/"+deviceresult.getId());
 			result.add(item);
 		}
 		return result;
 	}
 
-	private static HashMap makeDeviceusageMasFeatureofinterest(Featureofinterest featureofinterest) {
+	private static HashMap makeDeviceusageMasPlatformdeployment(Platformdeployment platformdeployment) {
 		HashMap item = new HashMap<String, String>();
-		if(featureofinterest != null) {
-			item.put("url", "/featureofinterest/" + featureofinterest.getId()); 
+		if(platformdeployment != null) {
+			item.put("url", "/platformdeployment/" + platformdeployment.getId()); 
 		}
 		return item;
 	}
-	private static HashMap makeDeviceusageMasDevice(Device device) {
+	private static HashMap makeDeviceusageMasRegistereddevice(Registereddevice registereddevice) {
 		HashMap item = new HashMap<String, String>();
-		if(device != null) {
-			item.put("url", "/device/" + device.getId()); 
+		if(registereddevice != null) {
+			item.put("url", "/registereddevice/" + registereddevice.getId()); 
+		}
+		return item;
+	}
+	private static HashMap makeDeviceusageMasProcedure(Procedure procedure) {
+		HashMap item = new HashMap<String, String>();
+		if(procedure != null) {
+			item.put("url", "/procedure/" + procedure.getId()); 
+		}
+		return item;
+	}
+	private static HashMap makeDeviceusageMasProperty(Property property) {
+		HashMap item = new HashMap<String, String>();
+		if(property != null) {
+			item.put("url", "/property/" + property.getId()); 
 		}
 		return item;
 	}
@@ -504,85 +543,151 @@ public abstract class ResponseFactory {
 				break;
 			case "started":
 				break;
+			case "ready":
+				break;
 		}
 		return events;
 	}	
 	
-	// Propertyoutcome Responses
-	public static Collection makeAllPropertyoutcome(Collection data) {
+	// Platformdeployment Responses
+	public static Collection makeAllPlatformdeployment(Collection data) {
 		Collection result = new ArrayList<HashMap>();
-		for( Iterator<PropertyoutcomeImpl> i = data.iterator(); i.hasNext(); ) {
-			HashMap item = makePropertyoutcome(i.next());
+		for( Iterator<PlatformdeploymentImpl> i = data.iterator(); i.hasNext(); ) {
+			HashMap item = makePlatformdeployment(i.next());
 			result.add(item);
 		}
 		return result;
 	}
 	
-	public static HashMap makePropertyoutcome(Propertyoutcome propertyoutcome) {
+	public static HashMap makePlatformdeployment(Platformdeployment platformdeployment) {
 		LinkedHashMap result = new LinkedHashMap();
 			
 		// Fill in attributes
-		result.put("id", propertyoutcome.getId());
-		result.put("name", propertyoutcome.getName());
-		result.put("state", propertyoutcome.getState().getName());
+		result.put("id", platformdeployment.getId());
+		result.put("platformname", platformdeployment.getPlatformname());
+		result.put("featureofinterestname", platformdeployment.getFeatureofinterestname());
+		result.put("starttime", platformdeployment.getStarttime());
+		result.put("state", platformdeployment.getState().getName());
 
 		// Add dependents
 		HashMap dependents = new HashMap();
-		dependents.put("deviceresult", makePropertyoutcomeDepDeviceresult(propertyoutcome.getDeviceresult()));
+		dependents.put("deviceusage", makePlatformdeploymentDepDeviceusage(platformdeployment.getDeviceusage()));
 		// Add dependents to result
 		result.put("dependents", dependents);
 
 		// Add masters
 		HashMap masters = new HashMap();
-		masters.put("outcome", makePropertyoutcomeMasOutcome(propertyoutcome.getOutcome()));
-		masters.put("property", makePropertyoutcomeMasProperty(propertyoutcome.getProperty()));
-		masters.put("deviceusage", makePropertyoutcomeMasDeviceusage(propertyoutcome.getDeviceusage()));
+		masters.put("platform", makePlatformdeploymentMasPlatform(platformdeployment.getPlatform()));
+		masters.put("featureofinterest", makePlatformdeploymentMasFeatureofinterest(platformdeployment.getFeatureofinterest()));
 		// Add masters to result
 		result.put("masters", masters);
 
 		// Add events
-		result.put("events", makePropertyoutcomeEvents(propertyoutcome));
+		result.put("events", makePlatformdeploymentEvents(platformdeployment));
 		
 		return result;
 	}
 
-	// Propertyoutcome Helpers
-	private static Collection makePropertyoutcomeDepDeviceresult(Collection deviceresults) {
+	// Platformdeployment Helpers
+	private static Collection makePlatformdeploymentDepDeviceusage(Collection deviceusages) {
 		ArrayList result = new ArrayList();
-		for(Iterator<DeviceresultImpl> i = deviceresults.iterator(); i.hasNext();) {
-			DeviceresultImpl deviceresult = i.next();
+		for(Iterator<DeviceusageImpl> i = deviceusages.iterator(); i.hasNext();) {
+			DeviceusageImpl deviceusage = i.next();
 			HashMap item = new HashMap<String, String>();
-			item.put("url", "/deviceresult/"+deviceresult.getId());
+			item.put("url", "/deviceusage/"+deviceusage.getId());
 			result.add(item);
 		}
 		return result;
 	}
 
-	private static HashMap makePropertyoutcomeMasOutcome(Outcome outcome) {
+	private static HashMap makePlatformdeploymentMasPlatform(Platform platform) {
 		HashMap item = new HashMap<String, String>();
-		if(outcome != null) {
-			item.put("url", "/outcome/" + outcome.getId()); 
+		if(platform != null) {
+			item.put("url", "/platform/" + platform.getId()); 
 		}
 		return item;
 	}
-	private static HashMap makePropertyoutcomeMasProperty(Property property) {
+	private static HashMap makePlatformdeploymentMasFeatureofinterest(Featureofinterest featureofinterest) {
 		HashMap item = new HashMap<String, String>();
-		if(property != null) {
-			item.put("url", "/property/" + property.getId()); 
-		}
-		return item;
-	}
-	private static HashMap makePropertyoutcomeMasDeviceusage(Deviceusage deviceusage) {
-		HashMap item = new HashMap<String, String>();
-		if(deviceusage != null) {
-			item.put("url", "/deviceusage/" + deviceusage.getId()); 
+		if(featureofinterest != null) {
+			item.put("url", "/featureofinterest/" + featureofinterest.getId()); 
 		}
 		return item;
 	}
 
-	private static Collection makePropertyoutcomeEvents(Propertyoutcome propertyoutcome) {
+	private static Collection makePlatformdeploymentEvents(Platformdeployment platformdeployment) {
 		ArrayList events = new ArrayList();
-		switch (propertyoutcome.getState().getName()) {
+		switch (platformdeployment.getState().getName()) {
+			case "allocated":
+				break;
+			case "exists":
+				break;
+			case "ended":
+				break;
+		}
+		return events;
+	}	
+	
+	// Device Responses
+	public static Collection makeAllDevice(Collection data) {
+		Collection result = new ArrayList<HashMap>();
+		for( Iterator<DeviceImpl> i = data.iterator(); i.hasNext(); ) {
+			HashMap item = makeDevice(i.next());
+			result.add(item);
+		}
+		return result;
+	}
+	
+	public static HashMap makeDevice(Device device) {
+		LinkedHashMap result = new LinkedHashMap();
+			
+		// Fill in attributes
+		result.put("id", device.getId());
+		result.put("name", device.getName());
+		result.put("description", device.getDescription());
+		result.put("status", device.getStatus());
+		result.put("state", device.getState().getName());
+
+		// Add dependents
+		HashMap dependents = new HashMap();
+		dependents.put("registereddevice", makeDeviceDepRegistereddevice(device.getRegistereddevice()));
+		dependents.put("procedure", makeDeviceDepProcedure(device.getProcedure()));
+		// Add dependents to result
+		result.put("dependents", dependents);
+
+
+		// Add events
+		result.put("events", makeDeviceEvents(device));
+		
+		return result;
+	}
+
+	// Device Helpers
+	private static Collection makeDeviceDepRegistereddevice(Collection registereddevices) {
+		ArrayList result = new ArrayList();
+		for(Iterator<RegistereddeviceImpl> i = registereddevices.iterator(); i.hasNext();) {
+			RegistereddeviceImpl registereddevice = i.next();
+			HashMap item = new HashMap<String, String>();
+			item.put("url", "/registereddevice/"+registereddevice.getId());
+			result.add(item);
+		}
+		return result;
+	}
+	private static Collection makeDeviceDepProcedure(Collection procedures) {
+		ArrayList result = new ArrayList();
+		for(Iterator<ProcedureImpl> i = procedures.iterator(); i.hasNext();) {
+			ProcedureImpl procedure = i.next();
+			HashMap item = new HashMap<String, String>();
+			item.put("url", "/procedure/"+procedure.getId());
+			result.add(item);
+		}
+		return result;
+	}
+
+
+	private static Collection makeDeviceEvents(Device device) {
+		ArrayList events = new ArrayList();
+		switch (device.getState().getName()) {
 			case "allocated":
 				break;
 			case "exists":

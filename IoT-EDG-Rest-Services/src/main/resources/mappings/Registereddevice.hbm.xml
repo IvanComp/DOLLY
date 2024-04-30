@@ -6,11 +6,11 @@
 
 <hibernate-mapping default-lazy="false">
     <class
-        name="dao.Propertyoutcome"
-        table="HIB_PROPERTYOUTCOME"
+        name="dao.Registereddevice"
+        table="HIB_REGISTEREDDEVICE"
         dynamic-update="false"
         dynamic-insert="false"
-        discriminator-value="PropertyoutcomeImpl"
+        discriminator-value="RegistereddeviceImpl"
     >
 
         <id
@@ -29,53 +29,66 @@
 
         <many-to-one
             name="state"
-            class="dao.PropertyoutcomeState"
+            class="dao.RegistereddeviceState"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="PROPERTYOUTCOME_STATE_FK"
+            column="REGISTEREDDEVICE_STATE_FK"
         />
         <property
-            name="name" 
+            name="platformname" 
             type="java.lang.String"
             update="true"
             insert="true"
         >
             <column
-                name="NAME"
+                name="PLATFORMNAME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="starttime" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="STARTTIME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="devicename" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="DEVICENAME"
                 sql-type="VARCHAR(256)"
             />
         </property>
 			 		<many-to-one
-            name="outcome"
-            class="dao.Outcome"
+            name="platform"
+            class="dao.Platform"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="OUTCOME_FK"
+            column="PLATFORM_FK"
         />
 			 		<many-to-one
-            name="property"
-            class="dao.Property"
+            name="device"
+            class="dao.Device"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="PROPERTY_FK"
-        />
-			 		<many-to-one
-            name="deviceusage"
-            class="dao.Deviceusage"
-            cascade="none"
-            outer-join="auto"
-            update="true"
-            insert="true"
-            column="DEVICEUSAGE_FK"
+            column="DEVICE_FK"
         />
         <set
-            name="deviceresult"
+            name="deviceusage"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -83,18 +96,18 @@
         >
 
               <key
-                  column="PROPERTYOUTCOME_FK"
+                  column="REGISTEREDDEVICE_FK"
               />
 
               <one-to-many
-                  class="dao.Deviceresult"
+                  class="dao.Deviceusage"
               />
         </set>
         <subclass
-            name="dao.PropertyoutcomeImpl"
+            name="dao.RegistereddeviceImpl"
             dynamic-update="false"
             dynamic-insert="false"
-            discriminator-value="PropertyoutcomeImpl"
+            discriminator-value="RegistereddeviceImpl"
         >
         </subclass>
 

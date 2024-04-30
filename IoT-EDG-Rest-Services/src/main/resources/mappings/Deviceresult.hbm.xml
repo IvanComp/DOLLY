@@ -37,6 +37,28 @@
             column="DEVICERESULT_STATE_FK"
         />
         <property
+            name="endtime" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="ENDTIME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="observedproperty" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="OBSERVEDPROPERTY"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
             name="value" 
             type="java.lang.String"
             update="true"
@@ -48,24 +70,46 @@
             />
         </property>
         <property
-            name="time" 
+            name="starttime" 
             type="java.lang.String"
             update="true"
             insert="true"
         >
             <column
-                name="TIME"
+                name="STARTTIME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="unit" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="UNIT"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="producedby" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="PRODUCEDBY"
                 sql-type="VARCHAR(256)"
             />
         </property>
 			 		<many-to-one
-            name="propertyoutcome"
-            class="dao.Propertyoutcome"
+            name="deviceusage"
+            class="dao.Deviceusage"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="PROPERTYOUTCOME_FK"
+            column="DEVICEUSAGE_FK"
         />
         <subclass
             name="dao.DeviceresultImpl"

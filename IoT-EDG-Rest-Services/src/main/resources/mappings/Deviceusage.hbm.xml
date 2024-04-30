@@ -37,36 +37,76 @@
             column="DEVICEUSAGE_STATE_FK"
         />
         <property
-            name="name" 
+            name="endtime" 
             type="java.lang.String"
             update="true"
             insert="true"
         >
             <column
-                name="NAME"
+                name="ENDTIME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="starttime" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="STARTTIME"
+                sql-type="VARCHAR(256)"
+            />
+        </property>
+        <property
+            name="usagetype" 
+            type="java.lang.String"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="USAGETYPE"
                 sql-type="VARCHAR(256)"
             />
         </property>
 			 		<many-to-one
-            name="featureofinterest"
-            class="dao.Featureofinterest"
+            name="platformdeployment"
+            class="dao.Platformdeployment"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="FEATUREOFINTEREST_FK"
+            column="PLATFORMDEPLOYMENT_FK"
         />
 			 		<many-to-one
-            name="device"
-            class="dao.Device"
+            name="registereddevice"
+            class="dao.Registereddevice"
             cascade="none"
             outer-join="auto"
             update="true"
             insert="true"
-            column="DEVICE_FK"
+            column="REGISTEREDDEVICE_FK"
+        />
+			 		<many-to-one
+            name="procedure"
+            class="dao.Procedure"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="PROCEDURE_FK"
+        />
+			 		<many-to-one
+            name="property"
+            class="dao.Property"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="PROPERTY_FK"
         />
         <set
-            name="propertyoutcome"
+            name="deviceresult"
             lazy="false"
             inverse="true"
             cascade="none"
@@ -78,7 +118,7 @@
               />
 
               <one-to-many
-                  class="dao.Propertyoutcome"
+                  class="dao.Deviceresult"
               />
         </set>
         <subclass

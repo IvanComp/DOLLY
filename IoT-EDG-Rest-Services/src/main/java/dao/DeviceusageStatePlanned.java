@@ -42,7 +42,7 @@ public class DeviceusageStatePlanned extends DeviceusageState {
     }
 
     protected java.lang.String getStateId() {
-    	return "233";
+    	return "272";
     }
 
     public boolean isInitialState() {
@@ -61,49 +61,23 @@ public class DeviceusageStatePlanned extends DeviceusageState {
     }
 
 		
-    public void check_mecrpropertyoutcome() {
+    public void check_mesetready() {
         // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceusageState.mecrpropertyoutcome...passed");
-    }
-
-		
-    public void check_meendpropertyoutcome() {
-        // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceusageState.meendpropertyoutcome...passed");
-    }
-
-		
-    public void check_devicedeployment() {
-        // No exception is thrown anymore...
-        MerodeLogger.logln ("Checking DeviceusageState.devicedeployment...passed");
+        MerodeLogger.logln ("Checking DeviceusageState.mesetready...passed");
     }
 
 	
 	
     public void meenddeviceusage (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
         DeviceusageStateEnded state = DeviceusageStateEnded.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 219");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 226 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 260");
         object.setState(state);
     }
 
 	
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
-        DeviceusageStatePlanned state = DeviceusageStatePlanned.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 226");
-        object.setState(state);
-    }
-
-	
-    public void meendpropertyoutcome (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
-        DeviceusageStatePlanned state = DeviceusageStatePlanned.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 230");
-        object.setState(state);
-    }
-
-	
-    public void devicedeployment (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
-        DeviceusageStateStarted state = DeviceusageStateStarted.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 207 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 222");
+    public void mesetready (org.hibernate.Session sess, Deviceusage object) throws org.hibernate.HibernateException {
+        DeviceusageStateReady state = DeviceusageStateReady.getObject(sess);
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 226 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 265");
         object.setState(state);
     }
 

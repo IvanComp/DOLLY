@@ -55,11 +55,35 @@ public abstract class DeviceusageFactory {
      * Finds Deviceusage object(s) using a query.
      *
      */
-    public static java.util.Collection findByName (org.hibernate.Session sess, java.lang.String Name)
+    public static java.util.Collection findByUsagetype (org.hibernate.Session sess, java.lang.String Usagetype)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.Deviceusage as c where c.Name = ?");
-    	q.setString (0, Name);
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceusage as c where c.Usagetype = ?");
+    	q.setString (0, Usagetype);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Deviceusage object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByStarttime (org.hibernate.Session sess, java.lang.String Starttime)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceusage as c where c.Starttime = ?");
+    	q.setString (0, Starttime);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Deviceusage object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByEndtime (org.hibernate.Session sess, java.lang.String Endtime)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceusage as c where c.Endtime = ?");
+    	q.setString (0, Endtime);
         return q.list();
     }
 }

@@ -32,10 +32,10 @@
         <property name="hsqldb.lock_file">false</property>
 
         <!-- Mapping files -->
-		<mapping resource="mappings/Device.hbm.xml"/>
-		<mapping resource="mappings/DeviceState.hbm.xml"/>
-		<mapping resource="mappings/Outcome.hbm.xml"/>
-		<mapping resource="mappings/OutcomeState.hbm.xml"/>
+		<mapping resource="mappings/Registereddevice.hbm.xml"/>
+		<mapping resource="mappings/RegistereddeviceState.hbm.xml"/>
+		<mapping resource="mappings/Procedure.hbm.xml"/>
+		<mapping resource="mappings/ProcedureState.hbm.xml"/>
 		<mapping resource="mappings/Deviceresult.hbm.xml"/>
 		<mapping resource="mappings/DeviceresultState.hbm.xml"/>
 		<mapping resource="mappings/Featureofinterest.hbm.xml"/>
@@ -46,7 +46,9 @@
 		<mapping resource="mappings/PropertyState.hbm.xml"/>
 		<mapping resource="mappings/Deviceusage.hbm.xml"/>
 		<mapping resource="mappings/DeviceusageState.hbm.xml"/>
-		<mapping resource="mappings/Propertyoutcome.hbm.xml"/>
-		<mapping resource="mappings/PropertyoutcomeState.hbm.xml"/>
+		<mapping resource="mappings/Platformdeployment.hbm.xml"/>
+		<mapping resource="mappings/PlatformdeploymentState.hbm.xml"/>
+		<mapping resource="mappings/Device.hbm.xml"/>
+		<mapping resource="mappings/DeviceState.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

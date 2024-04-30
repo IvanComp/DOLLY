@@ -42,7 +42,7 @@ public class PlatformStateAllocated extends PlatformState {
     }
 
     protected java.lang.String getStateId() {
-    	return "145";
+    	return "152";
     }
 
     public boolean isInitialState() {
@@ -64,7 +64,7 @@ public class PlatformStateAllocated extends PlatformState {
 	
     public void mecrplatform (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException {
         PlatformStateExists state = PlatformStateExists.getObject(sess);
-        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 143 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 150");
+        MerodeLogger.logln ("[" + Instant.now() + "]" + " Object " + object.getId() + " of object type 147 changed from state " + getStateId() + " to state " + state.getStateId() + " using method 157");
         object.setState(state);
     }
 

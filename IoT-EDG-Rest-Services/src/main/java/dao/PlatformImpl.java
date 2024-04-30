@@ -28,9 +28,13 @@ public class PlatformImpl extends Platform {
     // abstract in class Platform ...
 
 	//--- o/c ---  
-    public void mecrplatform(java.lang.String Name) {
+    public void mecrplatform( java.lang.String Name,
+		 java.lang.String Description,
+		java.lang.String Hostedby) {
         MerodeLogger.logln("Executing Platform.mecrplatform (O/C)");
         setName (Name);
+        setDescription (Description);
+        setHostedby (Hostedby);
     }
 
 
@@ -39,6 +43,16 @@ public class PlatformImpl extends Platform {
         MerodeLogger.logln("Executing Platform.meendplatform() (O/E)");
     }
 	
+		//--- o/dpnd ---
+    public void mecrplatformdeployment() {
+        MerodeLogger.logln("Executing Platform.mecrplatformdeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void meendplatformdeployment() {
+        MerodeLogger.logln("Executing Platform.meendplatformdeployment() (A/M)");
+    }
+
 		//--- o/dpnd ---
     public void mecrdeviceresult() {
         MerodeLogger.logln("Executing Platform.mecrdeviceresult() (A/M)");
@@ -50,33 +64,13 @@ public class PlatformImpl extends Platform {
     }
 
 		//--- o/dpnd ---
-    public void mecrdevice() {
-        MerodeLogger.logln("Executing Platform.mecrdevice() (A/M)");
+    public void mecrregistereddevice() {
+        MerodeLogger.logln("Executing Platform.mecrregistereddevice() (A/M)");
     }
 
 		//--- o/dpnd ---
-    public void meenddevice() {
-        MerodeLogger.logln("Executing Platform.meenddevice() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void mecroutcome() {
-        MerodeLogger.logln("Executing Platform.mecroutcome() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void meendoutcome() {
-        MerodeLogger.logln("Executing Platform.meendoutcome() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void mecrpropertyoutcome() {
-        MerodeLogger.logln("Executing Platform.mecrpropertyoutcome() (A/M)");
-    }
-
-		//--- o/dpnd ---
-    public void meendpropertyoutcome() {
-        MerodeLogger.logln("Executing Platform.meendpropertyoutcome() (A/M)");
+    public void meendregistereddevice() {
+        MerodeLogger.logln("Executing Platform.meendregistereddevice() (A/M)");
     }
 
 		//--- o/dpnd ---
@@ -97,6 +91,11 @@ public class PlatformImpl extends Platform {
 		//--- o/dpnd ---
     public void devicedeployment() {
         MerodeLogger.logln("Executing Platform.devicedeployment() (A/M)");
+    }
+
+		//--- o/dpnd ---
+    public void mesetready() {
+        MerodeLogger.logln("Executing Platform.mesetready() (A/M)");
     }
 
 	
@@ -121,6 +120,16 @@ public class PlatformImpl extends Platform {
    
 
 	//--- o/dpnds ---
+    public void check_mecrplatformdeployment() throws MerodeException {
+        MerodeLogger.log("Checking Platform.mecrplatformdeployment()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
+    public void check_meendplatformdeployment() throws MerodeException {
+        MerodeLogger.log("Checking Platform.meendplatformdeployment()...");
+        MerodeLogger.logln("passed");
+    }
+	//--- o/dpnds ---
     public void check_mecrdeviceresult() throws MerodeException {
         MerodeLogger.log("Checking Platform.mecrdeviceresult()...");
         MerodeLogger.logln("passed");
@@ -131,33 +140,13 @@ public class PlatformImpl extends Platform {
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_mecrdevice() throws MerodeException {
-        MerodeLogger.log("Checking Platform.mecrdevice()...");
+    public void check_mecrregistereddevice() throws MerodeException {
+        MerodeLogger.log("Checking Platform.mecrregistereddevice()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
-    public void check_meenddevice() throws MerodeException {
-        MerodeLogger.log("Checking Platform.meenddevice()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_mecroutcome() throws MerodeException {
-        MerodeLogger.log("Checking Platform.mecroutcome()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_meendoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Platform.meendoutcome()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Platform.mecrpropertyoutcome()...");
-        MerodeLogger.logln("passed");
-    }
-	//--- o/dpnds ---
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.log("Checking Platform.meendpropertyoutcome()...");
+    public void check_meendregistereddevice() throws MerodeException {
+        MerodeLogger.log("Checking Platform.meendregistereddevice()...");
         MerodeLogger.logln("passed");
     }
 	//--- o/dpnds ---
@@ -180,6 +169,11 @@ public class PlatformImpl extends Platform {
         MerodeLogger.log("Checking Platform.devicedeployment()...");
         MerodeLogger.logln("passed");
     }
+	//--- o/dpnds ---
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.log("Checking Platform.mesetready()...");
+        MerodeLogger.logln("passed");
+    }
 
     
 
@@ -189,14 +183,28 @@ public class PlatformImpl extends Platform {
     private boolean hasLivingDependents() {
     	Set <String> dependents = new HashSet();
 
-        java.util.Collection col_device = getDevice();
-        if (col_device != null){
-        	if (!col_device.isEmpty()){
-		        java.util.Iterator i_device = col_device.iterator();
-		        while (i_device.hasNext()) {
-		            dao.Device obj_device = (dao.Device)i_device.next();
-		            if (!obj_device.getState().isFinalState()){
-		            	dependents.add("Device");
+        java.util.Collection col_platformdeployment = getPlatformdeployment();
+        if (col_platformdeployment != null){
+        	if (!col_platformdeployment.isEmpty()){
+		        java.util.Iterator i_platformdeployment = col_platformdeployment.iterator();
+		        while (i_platformdeployment.hasNext()) {
+		            dao.Platformdeployment obj_platformdeployment = (dao.Platformdeployment)i_platformdeployment.next();
+		            if (!obj_platformdeployment.getState().isFinalState()){
+		            	dependents.add("Platformdeployment");
+		            }
+		        }        	
+        	}
+        }
+
+
+        java.util.Collection col_registereddevice = getRegistereddevice();
+        if (col_registereddevice != null){
+        	if (!col_registereddevice.isEmpty()){
+		        java.util.Iterator i_registereddevice = col_registereddevice.iterator();
+		        while (i_registereddevice.hasNext()) {
+		            dao.Registereddevice obj_registereddevice = (dao.Registereddevice)i_registereddevice.next();
+		            if (!obj_registereddevice.getState().isFinalState()){
+		            	dependents.add("Registereddevice");
 		            }
 		        }        	
         	}

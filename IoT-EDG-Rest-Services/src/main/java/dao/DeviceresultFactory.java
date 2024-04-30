@@ -55,11 +55,11 @@ public abstract class DeviceresultFactory {
      * Finds Deviceresult object(s) using a query.
      *
      */
-    public static java.util.Collection findByTime (org.hibernate.Session sess, java.lang.String Time)
+    public static java.util.Collection findByValue (org.hibernate.Session sess, java.lang.String Value)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Time = ?");
-    	q.setString (0, Time);
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Value = ?");
+    	q.setString (0, Value);
         return q.list();
     }
     /**
@@ -67,11 +67,59 @@ public abstract class DeviceresultFactory {
      * Finds Deviceresult object(s) using a query.
      *
      */
-    public static java.util.Collection findByValue (org.hibernate.Session sess, java.lang.String Value)
+    public static java.util.Collection findByUnit (org.hibernate.Session sess, java.lang.String Unit)
         throws org.hibernate.HibernateException {
     
-        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Value = ?");
-    	q.setString (0, Value);
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Unit = ?");
+    	q.setString (0, Unit);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Deviceresult object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByProducedby (org.hibernate.Session sess, java.lang.String Producedby)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Producedby = ?");
+    	q.setString (0, Producedby);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Deviceresult object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByObservedproperty (org.hibernate.Session sess, java.lang.String Observedproperty)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Observedproperty = ?");
+    	q.setString (0, Observedproperty);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Deviceresult object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByStarttime (org.hibernate.Session sess, java.lang.String Starttime)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Starttime = ?");
+    	q.setString (0, Starttime);
+        return q.list();
+    }
+    /**
+     *
+     * Finds Deviceresult object(s) using a query.
+     *
+     */
+    public static java.util.Collection findByEndtime (org.hibernate.Session sess, java.lang.String Endtime)
+        throws org.hibernate.HibernateException {
+    
+        org.hibernate.Query q = sess.createQuery("from dao.Deviceresult as c where c.Endtime = ?");
+    	q.setString (0, Endtime);
         return q.list();
     }
 }

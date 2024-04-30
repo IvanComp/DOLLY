@@ -77,59 +77,55 @@ public abstract class PlatformState
     // a subclass for all appropriate methods.
     public void check_mecrplatform() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.mecrplatform...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 287 with name MEcrPlatform for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 377 with name MEcrPlatform for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_meendplatform() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.meendplatform...");
-        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 288 with name MEendPlatform for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException ("[" + Instant.now() + "]" + " Can't execute event 378 with name MEendPlatform for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
+    }
+    public void check_mecrplatformdeployment() throws MerodeException {
+        MerodeLogger.logln ("Checking PlatformState.mecrplatformdeployment...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 386 with name MEcrPlatformDeployment for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
+    }
+    public void check_meendplatformdeployment() throws MerodeException {
+        MerodeLogger.logln ("Checking PlatformState.meendplatformdeployment...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 387 with name MEendPlatformDeployment for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_mecrdeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.mecrdeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 283 with name MEcrDeviceResult for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 373 with name MEcrDeviceResult for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_meenddeviceresult() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.meenddeviceresult...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 284 with name MEendDeviceResult for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 374 with name MEendDeviceResult for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
-    public void check_mecrdevice() throws MerodeException {
-        MerodeLogger.logln ("Checking PlatformState.mecrdevice...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 279 with name MEcrDevice for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+    public void check_mecrregistereddevice() throws MerodeException {
+        MerodeLogger.logln ("Checking PlatformState.mecrregistereddevice...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 369 with name MEcrRegisteredDevice for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
-    public void check_meenddevice() throws MerodeException {
-        MerodeLogger.logln ("Checking PlatformState.meenddevice...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 280 with name MEendDevice for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_mecroutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking PlatformState.mecroutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 281 with name MEcrOutcome for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_meendoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking PlatformState.meendoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 282 with name MEendOutcome for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_mecrpropertyoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking PlatformState.mecrpropertyoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 295 with name MEcrPropertyOutcome for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
-    }
-    public void check_meendpropertyoutcome() throws MerodeException {
-        MerodeLogger.logln ("Checking PlatformState.meendpropertyoutcome...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 296 with name MEendPropertyOutcome for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+    public void check_meendregistereddevice() throws MerodeException {
+        MerodeLogger.logln ("Checking PlatformState.meendregistereddevice...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 370 with name MEendRegisteredDevice for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_mecrdeviceusage() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.mecrdeviceusage...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 291 with name MEcrDeviceUsage for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 381 with name MEcrDeviceUsage for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_meenddeviceusage() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.meenddeviceusage...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 292 with name MEendDeviceUsage for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 382 with name MEendDeviceUsage for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_deviceundeployment() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.deviceundeployment...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 294 with name DeviceUndeployment for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 384 with name DeviceUndeployment for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
     public void check_devicedeployment() throws MerodeException {
         MerodeLogger.logln ("Checking PlatformState.devicedeployment...");
-        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 293 with name DeviceDeployment for object type 143 named Platform in state " + getStateId() + " called " + getStateName());
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 383 with name DeviceDeployment for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
+    }
+    public void check_mesetready() throws MerodeException {
+        MerodeLogger.logln ("Checking PlatformState.mesetready...");
+        throw new MerodeException("[" + Instant.now() + "]" + " Can't execute event 385 with name MEsetReady for object type 147 named Platform in state " + getStateId() + " called " + getStateName());
     }
 
     // Put the object in the correct state.
@@ -137,21 +133,17 @@ public abstract class PlatformState
 	}
     public void meendplatform (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
+    public void mecrplatformdeployment (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
+    }
+    public void meendplatformdeployment (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
+    }
     public void mecrdeviceresult (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
     public void meenddeviceresult (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
-    public void mecrdevice (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
+    public void mecrregistereddevice (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
-    public void meenddevice (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
-    }
-    public void mecroutcome (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
-    }
-    public void meendoutcome (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
-    }
-    public void mecrpropertyoutcome (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
-    }
-    public void meendpropertyoutcome (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
+    public void meendregistereddevice (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
     public void mecrdeviceusage (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
@@ -160,6 +152,8 @@ public abstract class PlatformState
     public void deviceundeployment (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
     public void devicedeployment (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
+    }
+    public void mesetready (org.hibernate.Session sess, Platform object) throws org.hibernate.HibernateException{
     }
 
 
