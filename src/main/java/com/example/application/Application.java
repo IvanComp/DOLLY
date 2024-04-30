@@ -19,7 +19,6 @@ public class Application implements AppShellConfigurator {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         SpringApplication.run(Application.class, args);
-        openChromeWithParameters("http://localhost:8080");
 
         //Start the MERODE IoT Web App
         //merodeIoTApp();

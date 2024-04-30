@@ -93,11 +93,11 @@ export default function MenuOnLeftLayout() {
             </NavLink>
           ))}
         </nav>
-        <div style={{marginLeft:'1%',position: 'absolute', top:"515px", height:"13%", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
+        <div style={{marginLeft:'3px',position: 'absolute', top:"500px", height:"13%", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
           <a style={{marginLeft:'3%',fontWeight:"bold", color:'#334F6D',top:"10px",bottom:'10px'}}>Settings </a>
           <br/>
           <div style={{ display: 'flex', alignItems: 'left' }}>
-          <a style={{fontWeight:"bold", marginLeft:"5%", color:'#154A57'}}>API Status: </a><a style={{marginLeft:"13%"}}><div>
+          <a style={{fontWeight:"bold", marginLeft:"7%", color:'#154A57'}}>API Status: </a><a style={{marginLeft:"13%"}}><div>
               {isAPIOnline ? (
                   <div>
           <span style={{ fontWeight: 'normal', color: 'black' }}>
@@ -116,11 +116,11 @@ export default function MenuOnLeftLayout() {
         </div></a><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the API Orchestrator for Domain Model Instances"}/>
           </div>
           <div style={{ display: 'flex', alignItems: 'left' }}>
-          <a style={{fontWeight:"bold",marginLeft:"5%", color:'#154A57',marginRight:"9%"}}>BPM Engine:</a><div>
+          <a style={{fontWeight:"bold",marginLeft:"7%", color:'#154A57',marginRight:"9%"}}>BPM Engine:</a><div>
             {isAPIOnline ? (
                 <div>
-          <span style={{ fontWeight: 'normal', color: 'black' }}>
-            Online <div className="online-dot"></div>
+          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"-5px" }}>
+           Online <div className="online-dot" ></div>
           </span>
                 </div>
             ) : (
