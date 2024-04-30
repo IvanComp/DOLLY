@@ -285,9 +285,47 @@ export default function BpmnEditor() {
                 </div>
                 <div>
                     <h1 style={{ marginLeft: '15px', marginTop: '15px' }}>Available Devices</h1>
-                    {deviceArray.map(device => (
-                        <div key={device.id} style={{ marginLeft: '15px' }}>{device.name}</div>
-                    ))}
+                    {deviceArray.length >= 0 && (
+                        <div className="library-container"
+                             style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+                            {deviceArray.map((item: any, index: number) => (
+                                <div key={index} className="platform-device">
+                                    <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
+                                    <div>
+                                        {item.state === 'exists' ? (
+                                            <div>
+                                                <span style={{fontWeight: "bold"}}> State:</span> <span
+                                                style={{fontWeight: "normal"}}>{item.state}</span>
+                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span
+                                                style={{fontWeight: "normal"}}> Online <div
+                                                className="online-dot"></div></span>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                {item.state === 'ended' && (
+                                                    <div>
+                                                        <span style={{fontWeight: "bold"}}> State:</span> <span
+                                                        style={{fontWeight: "normal"}}>{item.state}</span>
+                                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span
+                                                        style={{fontWeight: "normal"}}> Offline<div
+                                                        className="offline-dot"></div></span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div style={{
+                                        fontSize: "70%",
+                                        fontWeight: "bold",
+                                        position: "relative",
+                                        color: "#343232",
+                                        bottom: "-12px"
+                                    }}>{item.id}</div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

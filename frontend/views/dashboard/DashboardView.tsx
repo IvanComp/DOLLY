@@ -15,10 +15,13 @@ interface Device {
     name: any;
     state: any;
 }
+
+
+
 export default function MicroservicesView() {
     const [dataArray, setDataArray] = useState<Platform[]>([]);
     const [featureArray, setFeatureArray] = useState<any[]>([]);
-    const [deviceArray, setDeviceArray] = useState<any[]>([]);
+    const [deviceArray, setDeviceArray] = useState<Device[]>([]);
     const [selectedFeature, setSelectedFeature] = useState<any | null>(null);
     const [selectedDevice, setSelectedDevice] = useState<any | null>(null);
 
@@ -36,6 +39,9 @@ export default function MicroservicesView() {
             const featureResponse = await getFeature();
             setFeatureArray(featureResponse);
 
+            const deviceResponse = await getDevice();
+            setDeviceArray(deviceResponse);
+
         } catch (error) {
             console.error('Errore durante il recupero dei dati:', error);
         }
@@ -43,7 +49,6 @@ export default function MicroservicesView() {
 
     const createPlatform = async () => {
         try {
-
             const { value: platformName } = await Swal.fire({
                 title: 'Enter Platform Name',
                 input: 'text',
@@ -54,27 +59,48 @@ export default function MicroservicesView() {
                 // @ts-ignore
                 inputValidator: (value) => {
                     if (!value) {
-                        return "Platform name is required."
+                        return "Platform name is required.";
                     }
                 }
             });
 
             if (platformName) {
-                const data = { name: platformName };
-                const response = await axios.post('http://localhost:4567/platform/mecrplatform', data, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                const { value: formValues } = await Swal.fire({
+                    title: 'Enter Additional Details',
+                    html:
+                        '<input id="swal-input1" class="swal2-input" placeholder="Description">' +
+                        '<input id="swal-input2" class="swal2-input" placeholder="hostedBy">',
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    preConfirm: () => {
+                        const input1 = document.getElementById('swal-input1') as HTMLInputElement;
+                        const input2 = document.getElementById('swal-input2') as HTMLInputElement;
+                        return [
+                            input1 ? input1.value : '', // Ensure input1 is treated as HTMLInputElement
+                            input2 ? input2.value : '' // Ensure input2 is treated as HTMLInputElement
+                        ];
+                    }
                 });
 
-                console.log(JSON.stringify(response.data));
-                await fetchData();
-                console.log('Platform created successfully!');
+                if (formValues) {
+                    const [description, hostedby] = formValues;
+                    const data = { name: platformName, description, hostedby };
+                    const response = await axios.post('http://localhost:4567/platform/mecrplatform', data, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    console.log(JSON.stringify(response.data));
+                    await fetchData(); // Make sure fetchData() is defined or handled appropriately
+                    console.log('Platform created successfully!');
+                }
             }
         } catch (error) {
             console.error('Error during platform creation:', error);
         }
     };
+
     const endPlatform = async (index: number) => {
         const platformId = dataArray[index].id;
         const confirmation = window.confirm(`Are you sure to end the Platform Instance with ID: ${platformId}?`);
@@ -141,6 +167,85 @@ export default function MicroservicesView() {
             throw error;
         }
     };
+
+    const getDevice = async (): Promise<Platform[]> => {
+        try {
+            const response = await axios.get('http://localhost:4567/device', {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+            });
+
+            console.log(JSON.stringify(response.data));
+            return response.data; // Ritorna direttamente i dati piuttosto che inserirli in un array
+        } catch (error) {
+            console.error('Errore durante il recupero dei dati:', error);
+            throw error;
+        }
+    };
+
+    function deleteDevice(index: number) {
+
+    }
+
+    const createDevice = async () => {
+
+        try {
+            const { value: deviceName } = await Swal.fire({
+                title: 'Enter Device Name',
+                input: 'text',
+                inputPlaceholder: 'Device Name',
+                showCancelButton: true,
+                confirmButtonText: 'Create Device',
+                cancelButtonText: 'Cancel',
+                // @ts-ignore
+                inputValidator: (value) => {
+                    if (!value) {
+                        return "Device name is required.";
+                    }
+                }
+            });
+
+            if (deviceName) {
+                const { value: formValues } = await Swal.fire({
+                    title: 'Enter Additional Details',
+                    html:
+                        '<input id="swal-input1" class="swal2-input" placeholder="Description">' +
+                        '<input id="swal-input2" class="swal2-input" placeholder="Status">',
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    preConfirm: () => {
+                        const input1 = document.getElementById('swal-input1') as HTMLInputElement;
+                        const input2 = document.getElementById('swal-input2') as HTMLInputElement;
+                        return [
+                            input1 ? input1.value : '', // Ensure input1 is treated as HTMLInputElement
+                            input2 ? input2.value : '', // Ensure input2 is treated as HTMLInputElement
+                        ];
+                    }
+                });
+
+                if (formValues) {
+                    const [description, status] = formValues;
+                    const data = { name: deviceName, description, status };
+                    const response = await axios.post('http://localhost:4567/device/mecrdevice', data, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    console.log(JSON.stringify(response.data));
+                    await fetchData(); // Make sure fetchData() is defined or handled appropriately
+                    console.log('Device created successfully!');
+                }
+            }
+        } catch (error) {
+            console.error('Error during device creation:', error);
+        }
+    }
+
+    function endDevice(index: number) {
+
+    }
 
     const createFeature = async () => {
 
@@ -240,17 +345,15 @@ export default function MicroservicesView() {
 
 
     async function open3D() {
-        try {
-            const url = '3d';
-            window.open(url, '_blank');
-            toast.success('All files deleted successfully!', {position: "bottom-right", autoClose: 1000, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "colored",});
-        } catch (error) {
-            console.error(error);
-        }
+        try {const url = '3d';window.open(url, '_blank');toast.success('All files deleted successfully!', {position: "bottom-right", autoClose: 1000, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "colored",});
+        } catch (error) {console.error(error);}
     }
+
+
+
     return (
         <div className="flex flex-col items-start justify-start p-l text-center box-border">
-            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Platforms:</h1>
+            <h1 style={{marginLeft: '5px'}}>Available Platforms:</h1>
 
             {dataArray.length >= 0 && (
                 <div className="library-container"
@@ -331,6 +434,114 @@ export default function MicroservicesView() {
 
                     <button className="platform-feature" style={{background: 'white', color: '#9bbbd5', fontSize: '20px', padding: '10px 30px', borderRadius: '5px', border: '1px dashed #9BBBD5FF', cursor: 'pointer', marginTop: '2%', marginBottom: '0.42cm', justifyContent: 'center', alignItems: 'center', textAlign: 'center',}} onClick={createFeature}> + <br></br>Create <br></br>Feature Of Interest</button>
 
+                </div>
+            )}
+            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Devices:</h1>
+            {deviceArray.length >= 0 && (
+                <div className="library-container"
+                     style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+                    {deviceArray.map((item: any, index: number) => (
+                        <div key={index} className="platform-device">
+                            <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
+                            <div>
+                                {item.state === 'exists' ? (
+                                    <div>
+                                        <span style={{fontWeight: "bold"}}> State:</span> <span
+                                        style={{fontWeight: "normal"}}>{item.state}</span>
+                                        <span style={{fontWeight: "bold"}}> Availability:</span> <span
+                                        style={{fontWeight: "normal"}}> Online <div
+                                        className="online-dot"></div></span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {item.state === 'ended' && (
+                                            <div>
+                                                <span style={{fontWeight: "bold"}}> State:</span> <span
+                                                style={{fontWeight: "normal"}}>{item.state}</span>
+                                                <span style={{fontWeight: "bold"}}> Availability:</span> <span
+                                                style={{fontWeight: "normal"}}> Offline<div
+                                                className="offline-dot"></div></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <div style={{display: 'flex', gap: '10px'}}>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => endDevice(index)}
+                                >
+                                    End Device
+                                </button>
+                                <button
+                                    style={{
+                                        fontSize: "12px",
+                                        backgroundColor: '#da1540',
+                                        color: 'white',
+                                        fontWeight: "bold",
+                                        padding: '5px 13px',
+                                        border: '2px solid red',
+                                        borderRadius: '3px',
+                                        cursor: 'pointer',
+                                        position: 'relative',
+                                        bottom: '-5px'
+                                    }}
+                                    onClick={() => deleteDevice(index)}
+                                >
+                                    Delete Device
+                                </button>
+                            </div>
+
+                            <div style={{
+                                fontSize: "70%",
+                                fontWeight: "bold",
+                                position: "relative",
+                                color: "#343232",
+                                bottom: "-12px"
+                            }}>{item.id}</div>
+                        </div>
+                    ))}
+
+                    <button className="platform-feature" style={{
+                        background: 'white',
+                        color: '#d5cb9b',
+                        fontSize: '20px',
+                        padding: '10px 30px',
+                        borderRadius: '5px',
+                        border: '1px dashed #D5CB9BFF',
+                        cursor: 'pointer',
+                        marginTop: '2%',
+                        marginBottom: '0.42cm',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                    }} onClick={createDevice}> + <br></br>Create <br></br>Device
+                    </button>
+                    <input style={{
+                        position: 'absolute',
+                        top: "8px",
+                        right: "42px",
+                        zIndex: '9',
+                        fontSize: "17px",
+                        backgroundColor: '#F3F5F7',
+                        color: '#334F6D',
+                        fontWeight: "bold",
+                        padding: '5px 13px',
+                        border: '2px solid #334F6D',
+                        borderRadius: '3px',
+                        cursor: 'pointer'
+                    }} onClick={open3D} type="submit" value="🔎 Open 3D View"/>
                 </div>
             )}
 
