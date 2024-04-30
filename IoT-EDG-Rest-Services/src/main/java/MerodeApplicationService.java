@@ -1,11 +1,11 @@
-/** 
- * This class was automatically generated  
+/**
+ * This class was automatically generated
  * using a Merode XML model and Apache Velocity
- * 
+ *
  * Merode Code Generator 2.0
  * @author Nick Scheynen
  */
- 
+
 import handlers.MerodeMainEventHandler;
 import dao.Registereddevice;
 import dao.RegistereddeviceFactory;
@@ -32,19 +32,37 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
-
 import static spark.Spark.*;
 
 public class MerodeApplicationService {
 
 	public static void main(String[] args) {
-	
+
 		// Make EventHandler
 		MerodeMainEventHandler eh = new MerodeMainEventHandler();
-		
-		get("/", (request, response) -> {					
-			HashMap result = new HashMap<String, ArrayList>();	
-			
+
+		before((request, response) -> {
+			response.header("Access-Control-Allow-Origin", "*");
+			response.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+			response.header("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+			response.header("Access-Control-Allow-Credentials", "true");
+		});
+
+		options("/*", (request, response) -> {
+			String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+			if (accessControlRequestHeaders != null) {
+				response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+			}
+			String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+			if (accessControlRequestMethod != null) {
+				response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+			}
+			return "OK";
+		});
+
+		get("/", (request, response) -> {
+			HashMap result = new HashMap<String, ArrayList>();
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap registereddevice = new HashMap<String, String>();
@@ -95,24 +113,24 @@ public class MerodeApplicationService {
 		get("registereddevice", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllRegistereddevice();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllRegistereddevice(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("registereddevice", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrregistereddevice = new HashMap<String, String>();
@@ -124,23 +142,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("registereddevice/mecrregistereddevice", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String registereddeviceId = "";
 			try {
@@ -158,47 +176,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("registereddevice/:id", (request, response) -> {
 			// Get Registereddevice ID
 			String registereddeviceId = request.params("id");
-			
+
 			// Search Registereddevice
-			Registereddevice registereddevice = null; 
+			Registereddevice registereddevice = null;
 			try {
 				registereddevice = eh.searchRegistereddeviceById(registereddeviceId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeRegistereddevice(registereddevice);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("registereddevice/:id/meendregistereddevice", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Registereddevice ID
 			String registereddeviceId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meendregistereddevice(registereddeviceId);
@@ -207,26 +225,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("registereddevice/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Registereddevice ID
 			String registereddeviceId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendregistereddevice = new HashMap<String, String>();
 			meendregistereddevice.put("method", "DELETE");
@@ -237,36 +255,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("procedure", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllProcedure();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllProcedure(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("procedure", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrprocedure = new HashMap<String, String>();
@@ -278,23 +296,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("procedure/mecrprocedure", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String procedureId = "";
 			try {
@@ -311,47 +329,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("procedure/:id", (request, response) -> {
 			// Get Procedure ID
 			String procedureId = request.params("id");
-			
+
 			// Search Procedure
-			Procedure procedure = null; 
+			Procedure procedure = null;
 			try {
 				procedure = eh.searchProcedureById(procedureId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeProcedure(procedure);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("procedure/:id/meendprocedure", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Procedure ID
 			String procedureId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meendprocedure(procedureId);
@@ -360,26 +378,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("procedure/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Procedure ID
 			String procedureId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendprocedure = new HashMap<String, String>();
 			meendprocedure.put("method", "DELETE");
@@ -390,36 +408,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("deviceresult", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllDeviceresult();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllDeviceresult(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("deviceresult", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrdeviceresult = new HashMap<String, String>();
@@ -431,23 +449,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("deviceresult/mecrdeviceresult", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String deviceresultId = "";
 			try {
@@ -464,47 +482,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("deviceresult/:id", (request, response) -> {
 			// Get Deviceresult ID
 			String deviceresultId = request.params("id");
-			
+
 			// Search Deviceresult
-			Deviceresult deviceresult = null; 
+			Deviceresult deviceresult = null;
 			try {
 				deviceresult = eh.searchDeviceresultById(deviceresultId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeDeviceresult(deviceresult);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("deviceresult/:id/meenddeviceresult", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Deviceresult ID
 			String deviceresultId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meenddeviceresult(deviceresultId);
@@ -513,26 +531,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("deviceresult/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Deviceresult ID
 			String deviceresultId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meenddeviceresult = new HashMap<String, String>();
 			meenddeviceresult.put("method", "DELETE");
@@ -543,36 +561,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("featureofinterest", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllFeatureofinterest();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllFeatureofinterest(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("featureofinterest", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrfeatureofinterest = new HashMap<String, String>();
@@ -584,23 +602,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("featureofinterest/mecrfeatureofinterest", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String featureofinterestId = "";
 			try {
@@ -616,47 +634,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("featureofinterest/:id", (request, response) -> {
 			// Get Featureofinterest ID
 			String featureofinterestId = request.params("id");
-			
+
 			// Search Featureofinterest
-			Featureofinterest featureofinterest = null; 
+			Featureofinterest featureofinterest = null;
 			try {
 				featureofinterest = eh.searchFeatureofinterestById(featureofinterestId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeFeatureofinterest(featureofinterest);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("featureofinterest/:id/meendfeatureofinterest", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Featureofinterest ID
 			String featureofinterestId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meendfeatureofinterest(featureofinterestId);
@@ -665,26 +683,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("featureofinterest/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Featureofinterest ID
 			String featureofinterestId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendfeatureofinterest = new HashMap<String, String>();
 			meendfeatureofinterest.put("method", "DELETE");
@@ -695,36 +713,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("platform", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllPlatform();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllPlatform(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("platform", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrplatform = new HashMap<String, String>();
@@ -736,23 +754,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("platform/mecrplatform", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String platformId = "";
 			try {
@@ -768,47 +786,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("platform/:id", (request, response) -> {
 			// Get Platform ID
 			String platformId = request.params("id");
-			
+
 			// Search Platform
-			Platform platform = null; 
+			Platform platform = null;
 			try {
 				platform = eh.searchPlatformById(platformId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makePlatform(platform);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("platform/:id/meendplatform", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Platform ID
 			String platformId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meendplatform(platformId);
@@ -817,26 +835,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("platform/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Platform ID
 			String platformId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendplatform = new HashMap<String, String>();
 			meendplatform.put("method", "DELETE");
@@ -847,36 +865,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("property", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllProperty();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllProperty(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("property", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrproperty = new HashMap<String, String>();
@@ -888,23 +906,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("property/mecrproperty", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String propertyId = "";
 			try {
@@ -921,47 +939,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("property/:id", (request, response) -> {
 			// Get Property ID
 			String propertyId = request.params("id");
-			
+
 			// Search Property
-			Property property = null; 
+			Property property = null;
 			try {
 				property = eh.searchPropertyById(propertyId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeProperty(property);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("property/:id/meendproperty", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Property ID
 			String propertyId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meendproperty(propertyId);
@@ -970,26 +988,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("property/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Property ID
 			String propertyId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendproperty = new HashMap<String, String>();
 			meendproperty.put("method", "DELETE");
@@ -1000,36 +1018,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("deviceusage", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllDeviceusage();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllDeviceusage(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("deviceusage", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrdeviceusage = new HashMap<String, String>();
@@ -1041,23 +1059,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("deviceusage/mecrdeviceusage", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String deviceusageId = "";
 			try {
@@ -1077,47 +1095,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("deviceusage/:id", (request, response) -> {
 			// Get Deviceusage ID
 			String deviceusageId = request.params("id");
-			
+
 			// Search Deviceusage
-			Deviceusage deviceusage = null; 
+			Deviceusage deviceusage = null;
 			try {
 				deviceusage = eh.searchDeviceusageById(deviceusageId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeDeviceusage(deviceusage);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("deviceusage/:id/meenddeviceusage", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Deviceusage ID
 			String deviceusageId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meenddeviceusage(deviceusageId);
@@ -1126,22 +1144,22 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
-		
+
 		delete("deviceusage/:id/deviceundeployment", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Deviceusage ID
 			String deviceusageId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.deviceundeployment(deviceusageId);
@@ -1150,26 +1168,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("deviceusage/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Deviceusage ID
 			String deviceusageId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meenddeviceusage = new HashMap<String, String>();
 			meenddeviceusage.put("method", "DELETE");
@@ -1184,34 +1202,34 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-		
+
+
 		patch("deviceusage/:id/devicedeployment", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Deviceusage ID
 			String deviceusageId = request.params("id");
 			Deviceusage deviceusage = eh.searchDeviceusageById(deviceusageId);
-			
+
 			// Get data from request in HashMap
 			Gson gson = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson.fromJson(request.body(), parmap.getClass());
-			
+
 			if(!parmap.containsKey("usagetype"))
 				parmap.put("usagetype", deviceusage.getUsagetype());
 			if(!parmap.containsKey("starttime"))
 				parmap.put("starttime", deviceusage.getStarttime());
 			if(!parmap.containsKey("endtime"))
 				parmap.put("endtime", deviceusage.getEndtime());
-			
+
 			// Call EventHandler with request parameters
 			try {
 				eh.devicedeployment(deviceusageId, parmap.get("usagetype"), parmap.get("starttime"), parmap.get("endtime"));
@@ -1220,37 +1238,37 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
-			
-			
+
+
 		});
-		
+
 		patch("deviceusage/:id/mesetready", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Deviceusage ID
 			String deviceusageId = request.params("id");
 			Deviceusage deviceusage = eh.searchDeviceusageById(deviceusageId);
-			
+
 			// Get data from request in HashMap
 			Gson gson = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson.fromJson(request.body(), parmap.getClass());
-			
+
 			if(!parmap.containsKey("usagetype"))
 				parmap.put("usagetype", deviceusage.getUsagetype());
 			if(!parmap.containsKey("starttime"))
 				parmap.put("starttime", deviceusage.getStarttime());
 			if(!parmap.containsKey("endtime"))
 				parmap.put("endtime", deviceusage.getEndtime());
-			
+
 			// Call EventHandler with request parameters
 			try {
 				eh.mesetready(deviceusageId, parmap.get("usagetype"), parmap.get("starttime"), parmap.get("endtime"));
@@ -1259,39 +1277,39 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
-			
-			
+
+
 		});
-	
-		
+
+
 		get("platformdeployment", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllPlatformdeployment();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllPlatformdeployment(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("platformdeployment", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrplatformdeployment = new HashMap<String, String>();
@@ -1303,23 +1321,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("platformdeployment/mecrplatformdeployment", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String platformdeploymentId = "";
 			try {
@@ -1337,47 +1355,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("platformdeployment/:id", (request, response) -> {
 			// Get Platformdeployment ID
 			String platformdeploymentId = request.params("id");
-			
+
 			// Search Platformdeployment
-			Platformdeployment platformdeployment = null; 
+			Platformdeployment platformdeployment = null;
 			try {
 				platformdeployment = eh.searchPlatformdeploymentById(platformdeploymentId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makePlatformdeployment(platformdeployment);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("platformdeployment/:id/meendplatformdeployment", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Platformdeployment ID
 			String platformdeploymentId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meendplatformdeployment(platformdeploymentId);
@@ -1386,26 +1404,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("platformdeployment/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Platformdeployment ID
 			String platformdeploymentId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meendplatformdeployment = new HashMap<String, String>();
 			meendplatformdeployment.put("method", "DELETE");
@@ -1416,36 +1434,36 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
+
+
+
 		get("device", (request, response) -> {
 			// Get data
 			Collection resultSet = eh.getAllDevice();
-			
+
 			// Make Response
 			resultSet = ResponseFactory.makeAllDevice(resultSet);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 
 		post("device", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-						
+
 			// Resources
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap mecrdevice = new HashMap<String, String>();
@@ -1457,23 +1475,23 @@ public class MerodeApplicationService {
 			result.put("create_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
-			
-		
+
+
 		});
-			
+
 		post("device/mecrdevice", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-			
+
 			// Call EventHandler with request parameters
 			String deviceId = "";
 			try {
@@ -1489,47 +1507,47 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-		
+
 			response.type("application/json");
 			return responseContent;
-		});		
+		});
 
 		get("device/:id", (request, response) -> {
 			// Get Device ID
 			String deviceId = request.params("id");
-			
+
 			// Search Device
-			Device device = null; 
+			Device device = null;
 			try {
 				device = eh.searchDeviceById(deviceId);
 			} catch(Exception exc) {
 				return ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Make Response
 			HashMap resultSet = ResponseFactory.makeDevice(device);
-			
+
 			// Format data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(resultSet);
-			
+
 			// Make Response
 			response.type("application/json");
 			return responseContent;
 		});
-		
-		
+
+
 		delete("device/:id/meenddevice", (request, response) -> {
 			// Result
 			HashMap result = null;
-			
+
 			// Get Device ID
 			String deviceId = request.params("id");
-			
+
 			// Execute event
 			try {
 				eh.meenddevice(deviceId);
@@ -1538,26 +1556,26 @@ public class MerodeApplicationService {
 				response.status(403);
 				result = ResponseFactory.makeFail(exc.getMessage());
 			}
-			
+
 			// Format Data
 			Gson gson = new Gson();
 			String responseContent = gson.toJson(result);
-			
+
 			response.type("application/json");
 			return responseContent;
 		});
 
 		delete("device/:id", (request, response) -> {
 			HashMap result = new HashMap<String, ArrayList>();
-		
+
 			// Get Device ID
 			String deviceId = request.params("id");
-			
+
 			// Get data from request in HashMap
 			Gson gson1 = new Gson();
 			Map<String, String> parmap = new HashMap<String, String>();
 			parmap = (Map<String, String>) gson1.fromJson(request.body(), parmap.getClass());
-						
+
 			ArrayList resources = new ArrayList<HashMap>();
 			HashMap meenddevice = new HashMap<String, String>();
 			meenddevice.put("method", "DELETE");
@@ -1568,15 +1586,15 @@ public class MerodeApplicationService {
 			result.put("end_events", resources);
 			Gson gson2 = new Gson();
 			String responseContent = gson2.toJson(result);
-			
+
 			response.status(300);
 			response.type("application/json");
 			return responseContent;
 		});
 
-   
-	
-		
-	
+
+
+
+
 	}
 }
