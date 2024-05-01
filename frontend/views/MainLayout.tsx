@@ -24,10 +24,7 @@ const handleButtonClick = () => {
 
 
 type MenuRoute = ViewRouteObject &
-  Readonly<{
-    path: string;
-    handle: Required<MenuProps>;
-  }>;
+  Readonly<{ path: string; handle: Required<MenuProps>; }>;
 
 export default function MenuOnLeftLayout() {
   const matches = useViewMatches();
@@ -125,8 +122,8 @@ export default function MenuOnLeftLayout() {
                 </div>
             ) : (
                 <div>
-          <span style={{ fontWeight: 'normal', color: 'black'}}>
-            Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
+          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"-5px"}}>
+            Offline <div className="offline-dot"></div>
           </span>
                 </div>
             )}
