@@ -13,7 +13,7 @@
 
 ADAPTIVE SHADOW is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
 
-ADAPTIVE SHADOW is made available through a RESTful web application that allows users to:
+The framework is made available through a RESTful web application that allows users to:
 1 Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
 2 Model a BPMN scenario leveraging Digital Shadows for IoT components;
 3 Simulate the BPMN model and obtain feedback and insights for the process improvement.
@@ -32,7 +32,7 @@ ADAPTIVE SHADOW is made available through a RESTful web application that allows 
 The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
 
 <p align="center">
-<img src="Domain Model/img/architecture.png" width="400px" height="200px"/>
+<img src="frontend/readme/architecture.png" width="400px" height="200px"/>
 </p>
 
 To represent the IoT system's components, we mapped two well-known and generally accepted ontologies, the Semantic Sensor Network (SNN) and Sensor, Observation, Sample, and Actuator (SOSA) into a MERODE Domain Model for IoT (A). 
@@ -49,7 +49,7 @@ However, implementing the optimized version of the process in a real-world setti
 
 
 <p align="center">
-<img src="Domain Model/img//bpmprocess.png"/>
+<img src="frontend/readme//bpmprocess.png"/>
 </p>
 
 # How to run
