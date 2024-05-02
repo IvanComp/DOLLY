@@ -11,6 +11,8 @@
   <img src="https://img.shields.io/badge/version-1.0-green" alt="Version">
 </p>
 
+ADAPTIVE SHADOW is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
+
 ADAPTIVE SHADOW is made available through a RESTful web application that allows users to:
 1 Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
 2 Model a BPMN scenario leveraging Digital Shadows for IoT components;
@@ -27,17 +29,23 @@ ADAPTIVE SHADOW is made available through a RESTful web application that allows 
 
 # Functionalities
 
+The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
+
 <p align="center">
 <img src="Domain Model/img/architecture.png" width="400px" height="200px"/>
 </p>
 
-ADAPTIVE SHADOW is a web application that aims to model and optimize IoT-Enhanced Business Processes continuously. 
-The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
-
-# (i) The Domain Model
-
-
-# (ii) The Business Process Management Infrastructure
+To represent the IoT system's components, we mapped two well-known and generally accepted ontologies, the Semantic Sensor Network (SNN) and Sensor, Observation, Sample, and Actuator (SOSA) into a MERODE Domain Model for IoT (A). 
+The domain model allows for the instantiation of IoT system entities by generating Digital Shadows that synchronize with their physical counterparts' data, state, and characteristics at runtime. 
+Once the virtual replicas of IoT system entities are instantiated (B), IoT data can be monitored in real-time from the virtual replicas and can be considered in the modeling of business processes (C). In this step, some filtering and pre-processing operations can be applied to make data exploitable by the process. 
+At this point, to assess the performance of the actual IoT-Enhanced Business Process (P1) in a real-world business setting, we leverage KPIs derived from the existing information systems that implement the process. 
+If KPI values indicate suboptimal performance of the actual process (P1), a process adaptation is initiated manually (D). 
+Next, the user defines a set of simulation parameters (E) to run the simulation and obtain output KPIs for evaluating the performance of the adapted process (P1').
+During the process adaptation (D) and simulation (E) phases, it is possible to compare different process versions (e.g., by changing the resources involved or by implementing structural changes) against the obtained KPIs to achieve better process improvements. The adaptation and simulation steps may require multiple iterations until desired KPIs values are achieved.
+Finally, after obtaining an optimal version of the process, it is possible to proceed to its manual actuation (F). 
+In line with the Digital Business Process Shadow concept, the optimized version P1' represents a shadow of the actual process P1. 
+The process P1' suggests and drives the real-world implementation of the improvements resulting from the analyses performed through the simulations.
+However, implementing the optimized version of the process in a real-world setting can require direct human oversight if the optimization process requires acting on tasks related to IoT device operations. To provide an example, changes in IoT device configuration and setups often require manual intervention such as sensor repositioning or infrastructure modifications that automated systems cannot fully manage independently. As such, while the process simulations and enhancements derived from them can be automated to a large extent, reflecting these changes in the real world demands hands-on management. Finally, worth noticing, that the new process P1' actuated during the (F) phase can be optimized by restarting from phase (C) thus starting a continuous feedback loop.
 
 
 <p align="center">
