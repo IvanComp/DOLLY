@@ -32,7 +32,7 @@ The framework is made available through a RESTful web application that allows us
 The implementation of the framework consists of two parts: (i) instantiating Digital Shadows for digitizing IoT entities using the IoT MERODE Domain Model, and (ii) the BPM infrastructure for the optimization of IoT-Enhanced Business Processes which integrate Digital Shadows of IoT entities. 
 
 <p align="center">
-<img src="frontend/readme/architecture.png" width="400px" height="200px"/>
+<img src="frontend/readme/architecture.png" width="700px" height="350px"/>
 </p>
 
 To represent the IoT system's components, we mapped two well-known and generally accepted ontologies, the Semantic Sensor Network (SNN) and Sensor, Observation, Sample, and Actuator (SOSA) into a MERODE Domain Model for IoT (A). 
