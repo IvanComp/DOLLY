@@ -4,40 +4,19 @@ import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.awt.Desktop;
 import java.io.*;
-import java.net.URI;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import static java.awt.SystemColor.desktop;
 
 @SpringBootApplication
-@Theme(value = "merodemicroservicesbuilderforiot")
+@Theme(value = "ADAPTIVE-SHADOW")
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
         SpringApplication.run(Application.class, args);
 
-        //Start the MERODE IoT Web App
-        //merodeIoTApp();
-
         //Start the Python Simulated Station
         //simulatedStation();
 
-    }
-
-    private static void openChromeWithParameters(String url) throws IOException {
-        String chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-        String userDataDir = "C://Chrome dev session";
-        String disableWebSecurity = "--disable-web-security";
-
-        // Costruisci il comando per avviare Chrome con i parametri specificati e l'URL desiderato
-        String[] command = {chromePath, "--user-data-dir=" + userDataDir, disableWebSecurity, url};
-
-        // Esegui il comando per aprire Chrome
-        new ProcessBuilder(command).start();
     }
 
     private static void simulatedStation() {
@@ -64,50 +43,6 @@ public class Application implements AppShellConfigurator {
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static void merodeIoTApp() {
-        try {
-            // Percorsi dei file batch
-            String initDB = "IoT-EDG-Rest-Services\\extras\\init-db.bat";
-            String startDBServer = "IoT-EDG-Rest-Services\\extras\\start-server.bat";
-            String startService = "IoT-EDG-Rest-Services\\extras\\start-service.bat";
-
-            // Esegui i file batch in sequenza
-            runBatchFile(initDB);
-            runBatchFile(startDBServer);
-            runBatchFile(startService);
-
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void runBatchFile(String filePath) throws IOException, InterruptedException {
-        System.out.println("Esecuzione del file batch: " + filePath);
-
-        ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", filePath);
-        processBuilder.redirectErrorStream(true); // Unisce l'output standard e l'output di errore
-
-        Process process = processBuilder.start();
-        int exitCode = process.waitFor();
-
-        // Cattura l'output del processo
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            String line;
-            System.out.println("Output del processo:");
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        }
-
-        System.out.println("Codice di uscita del processo: " + exitCode);
-
-        if (exitCode != 0) {
-            System.out.println("Errore durante l'esecuzione del file batch: " + filePath);
-        } else {
-            System.out.println("File batch eseguito con successo: " + filePath);
         }
     }
 

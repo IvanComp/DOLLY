@@ -90,10 +90,10 @@ export default function MenuOnLeftLayout() {
             </NavLink>
           ))}
         </nav>
-        <div style={{marginLeft:'3px',position: 'absolute', top:"500px", height:"13%", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
+        <div style={{marginLeft:'5px',position: 'absolute', top:"500px", height:"13%", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
           <a style={{marginLeft:'3%',fontWeight:"bold", color:'#334F6D',top:"10px",bottom:'10px'}}>Settings </a>
           <br/>
-          <div style={{ display: 'flex', alignItems: 'left' }}>
+          <div style={{ display: 'flex', alignItems: 'left', }}>
           <a style={{fontWeight:"bold", marginLeft:"7%", color:'#154A57'}}>API Status: </a><a style={{marginLeft:"13%"}}><div>
               {isAPIOnline ? (
                   <div>

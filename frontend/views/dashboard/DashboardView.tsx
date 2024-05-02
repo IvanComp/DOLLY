@@ -541,7 +541,7 @@ export default function MicroservicesView() {
                         border: '2px solid #334F6D',
                         borderRadius: '3px',
                         cursor: 'pointer'
-                    }} onClick={open3D} type="submit" value="🔎 Open 3D View"/>
+                    }} onClick={open3D} disabled={true} type="submit" value="🔎 Open 3D View"/>
                 </div>
             )}
 

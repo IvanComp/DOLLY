@@ -1,6 +1,13 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
+import {BsDiagram2} from "react-icons/bs";
+import {Link} from "react-router-dom";
+import axios from "axios";
+import {Notyf} from "notyf";
 //import * as Bimp from 'bimp-ui';
 //import 'bimp-ui/bimp-ui.sass';
+
+const [fileList, setFileList] = useState([]);
+
 
 export default function Simulation() {
     const bimpConfig = {
@@ -15,6 +22,40 @@ export default function Simulation() {
         errorStackApiKey: ""
     };
 
+    const notyf = new Notyf({
+        duration: 3000,
+        ripple: false,
+        position: {
+            x: 'right',
+            y: 'top',
+        },
+        types: [
+            {
+                type: 'warning',
+                background: 'orange',
+                icon: {
+                    className: 'material-icons',
+                    tagName: 'i',
+                    text: 'warning'
+                }
+            },
+            {
+                type: 'error',
+                background: 'indianred',
+                duration: 2000,
+                dismissible: false
+            }
+        ]
+    });
+    const fetchDiagramList = async () => {
+        try {
+            const response = await axios.get('/list-diagrams');
+            setFileList(response.data);
+        } catch (error) {
+            console.error('Failed to fetch diagrams:', error);
+            notyf.error('Failed to load diagram list!');
+        }
+    };
     const initialFiles = [
         {
             name: 'file1.bpmn',
@@ -74,9 +115,31 @@ export default function Simulation() {
         };
     }, []); // L'array vuoto assicura che l'effetto venga eseguito solo una volta dopo il primo rendering
 
+    function simulateDiagram(file: any) {
+        console.log("simulo");
+
+    }
+
     return (
         <div className="flex flex-col h-full items-center justify-center p-l text-center box-border">
             <div id='root-container'></div>
+            <div>
+                <h1 style={{ margin: '15px' }}>List of BPMN Models</h1>
+                {fileList.map((file, index) => (
+                    <div className="file-info" key={index} style={{ display: 'flex' }}>
+                        <div style={{ border: "2px solid rgba(0, 0, 0, 0.05)", margin: "15px", padding: "1px", borderRadius: "5px", marginBottom: "1px", fontSize: "15px", color: "black", display: "flex", width: "100%", alignItems: "center" }}>
+                            <BsDiagram2 style={{ marginRight: "2px" }} />
+                            <p className="file-info-item-name file-name" style={{ fontSize: "18px", color: "black", display: "flex", alignItems: "center" }}>{file}</p>
+                            <p className="file-info-item file-name">
+                                <Link to="/simulation">
+                                    <button style={{ margin: '5px', marginRight:'10px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => simulateDiagram(file)}>Simulate</button>
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
+
+                ))}
+            </div>
         </div>
     );
 }
