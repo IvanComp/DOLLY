@@ -138,7 +138,12 @@ NOTE: After starting the application you need to run 3 batch files in the follow
 - ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\init-db.bat
 - ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-service.bat
 
-This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows
+This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows.
+If everything is set up correctly, the API orchestrator will appear "online" as depicted in the following figure:
+
+<p align="center">
+<img src="frontend/readme//api.png"/>
+</p>
 
 # Domain Model Specification
 
