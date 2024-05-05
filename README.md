@@ -87,7 +87,7 @@ Once launched, the application will be available at [http://localhost:8080](http
 </details>
 
 <details>
-<summary>2 Import the project in an IDE</summary>
+<summary>2 Import the project into an IDE</summary>
 <br>
   
 2.1 First of all, clone this repository and run the following command to install dependencies:
