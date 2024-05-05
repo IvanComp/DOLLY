@@ -6,10 +6,15 @@ import {Notyf} from "notyf";
 //import * as Bimp from 'bimp-ui';
 //import 'bimp-ui/bimp-ui.sass';
 
-const [fileList, setFileList] = useState([]);
-
-
 export default function Simulation() {
+
+    const [fileList, setFileList] = useState([]);
+
+
+    useEffect(() => {
+        fetchDiagramList();
+    }, []);
+
     const bimpConfig = {
         protocol: "http://",
         host: "www.qbp-simulator.com:8080",
@@ -121,25 +126,25 @@ export default function Simulation() {
     }
 
     return (
-        <div className="flex flex-col h-full items-center justify-center p-l text-center box-border">
+        <div>
             <div id='root-container'></div>
-            <div>
+
                 <h1 style={{ margin: '15px' }}>List of BPMN Models</h1>
                 {fileList.map((file, index) => (
-                    <div className="file-info" key={index} style={{ display: 'flex' }}>
-                        <div style={{ border: "2px solid rgba(0, 0, 0, 0.05)", margin: "15px", padding: "1px", borderRadius: "5px", marginBottom: "1px", fontSize: "15px", color: "black", display: "flex", width: "100%", alignItems: "center" }}>
+                    <div className="file-info" key={index}>
+                        <div style={{ border: "2px solid rgba(0, 0, 0, 0.05)", margin: "15px", padding: "1px", borderRadius: "5px", marginBottom: "1px", fontSize: "15px", color: "black", display: "flex", width: "auto", alignItems: "center" }}>
                             <BsDiagram2 style={{ marginRight: "2px" }} />
-                            <p className="file-info-item-name file-name" style={{ fontSize: "18px", color: "black", display: "flex", alignItems: "center" }}>{file}</p>
+                            <p className="file-info-item-name file-name" style={{ fontSize: "15px", color: "black", display: "flex", alignItems: "center" }}>{file}</p>
                             <p className="file-info-item file-name">
                                 <Link to="/simulation">
-                                    <button style={{ margin: '5px', marginRight:'10px', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '15px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => simulateDiagram(file)}>Simulate</button>
+                                    <button style={{ margin: '5px', marginLeft:'20%', fontWeight: "bold", background: '#aad4de', color: '#324e6c', fontSize: '13px', padding: '5px 10px', borderRadius: '5px', border: '2px solid #324e6c', cursor: 'pointer' }} onClick={() => simulateDiagram(file)}>Simulate</button>
                                 </Link>
                             </p>
                         </div>
                     </div>
 
                 ))}
-            </div>
+
         </div>
     );
 }

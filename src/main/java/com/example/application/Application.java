@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.*;
 
 @SpringBootApplication
-@Theme(value = "ADAPTIVE-SHADOW")
+@Theme(value = "merodemicroservicesbuilderforiot")
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) throws IOException, InterruptedException {

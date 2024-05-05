@@ -1594,19 +1594,21 @@ public class MerodeApplicationService {
 			meenddevice.put("href", "/device/"+deviceId+"/meenddevice");
 			resources.add(meenddevice);
 
-			// Format Data
-			result.put("end_events", resources);
-			Gson gson2 = new Gson();
-			String responseContent = gson2.toJson(result);
+			try {
+				eh.deleteDevice(deviceId);
+				result = ResponseFactory.makeSuccess("deleteDevice");
+			} catch(Exception exc) {
+				response.status(403);
+				result = ResponseFactory.makeFail(exc.getMessage());
+			}
 
-			response.status(300);
+			// Format Data
+			Gson gson = new Gson();
+			String responseContent = gson.toJson(result);
+
 			response.type("application/json");
 			return responseContent;
 		});
-
-
-
-
 
 	}
 }

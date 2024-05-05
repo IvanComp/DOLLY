@@ -32,7 +32,7 @@
     "bpmn-js": "^13.0.4",
     "bpmn-js-create-append-anything": "^0.5.1",
     "bpmn-js-properties-panel": "^1.26.0",
-    "bpmn-js-token-simulation": "^0.34.0",
+    "bpmn-js-token-simulation": "^0.34.1",
     "classnames": "^2.3.2",
     "construct-style-sheets-polyfill": "3.1.0",
     "cors": "^2.8.5",
@@ -119,7 +119,8 @@
     "notyf": "$notyf",
     "sweetalert2": "$sweetalert2",
     "@bpmn-io/properties-panel": "$@bpmn-io/properties-panel",
-    "bpmn-js-create-append-anything": "$bpmn-js-create-append-anything"
+    "bpmn-js-create-append-anything": "$bpmn-js-create-append-anything",
+    "bpmn-js-token-simulation": "$bpmn-js-token-simulation"
   },
   "vaadin": {
     "dependencies": {
@@ -164,6 +165,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "70d20beb43342a53e8308661dc628a150dfb405d4ae462aa13ce835c13f4bc33"
+    "hash": "3664d3b41fc3bfe6be463b80f270c28bb02e87b151520199278658e80af3c5c2"
   }
 }

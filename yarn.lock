@@ -2871,10 +2871,10 @@ bpmn-js-properties-panel@^1.26.0:
     semver-compare "^1.0.0"
     uuid "^9.0.0"
 
-bpmn-js-token-simulation@^0.34.0:
-  version "0.34.0"
-  resolved "https://registry.npmjs.org/bpmn-js-token-simulation/-/bpmn-js-token-simulation-0.34.0.tgz"
-  integrity sha512-uQaIdnJYxgt5nu6vhv3ZpD/n0iKtfMBHv72dmQY5DKlyGBtnmx2CHsmFUVrvL7qAkhgA/DVGi8ycZ2VFaz+cfQ==
+bpmn-js-token-simulation@^0.34.1:
+  version "0.34.1"
+  resolved "https://registry.npmjs.org/bpmn-js-token-simulation/-/bpmn-js-token-simulation-0.34.1.tgz"
+  integrity sha512-81rDnpRsW3IkUYQLi98ZT9MwXkEHl+p6OyqUFYlZAUWfHqrYjLx40pI13UpJlkPRnRyPvGSTCBUrP+yXL5haqg==
   dependencies:
     inherits-browser "^0.1.0"
     min-dash "^4.0.0"

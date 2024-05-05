@@ -18,6 +18,11 @@ declare module '*.module.styl' {
   declare const classes: Record<string, string>;
   export default classes;
 }
+declare module 'bpmn-js-token-simulation' {
+  const bpmnJsTokenSimulation: any;
+  export default bpmnJsTokenSimulation;
+}
+
 
 /* CSS FILES */
 declare module '*.css';

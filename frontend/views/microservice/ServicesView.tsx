@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 // @ts-ignore
 import {BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import { useNavigate } from 'react-router-dom';
+import TokenSimulationModule from 'bpmn-js-token-simulation';
 
 export default function BpmnEditor() {
     const [bpmnModeler, setBpmnModeler] = useState<BpmnModeler | null>(null);
@@ -37,8 +38,6 @@ export default function BpmnEditor() {
 
         fetchDevice();
     }, []);
-
-
 
     const notyf = new Notyf({
         duration: 3000,
@@ -74,7 +73,8 @@ export default function BpmnEditor() {
             },
             additionalModules: [
                 BpmnPropertiesPanelModule,
-                BpmnPropertiesProviderModule
+                BpmnPropertiesProviderModule,
+                TokenSimulationModule
             ]
         });
         setBpmnModeler(modeler);

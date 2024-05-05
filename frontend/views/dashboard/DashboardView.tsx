@@ -29,7 +29,6 @@ export default function MicroservicesView() {
         fetchData();
     }, []); // Chiamata una sola volta al caricamento del componente
 
-
     const fetchData = async () => {
         try {
 
@@ -100,13 +99,10 @@ export default function MicroservicesView() {
             console.error('Error during platform creation:', error);
         }
     };
-
     const endPlatform = async (index: number) => {
         const platformId = dataArray[index].id;
-        const confirmation = window.confirm(`Are you sure to end the Platform Instance with ID: ${platformId}?`);
-
+        const { value: confirmation } = await Swal.fire({title: 'Confirm Termination', text: `Are you sure you want to end the Platform Instance with ID: ${platformId}?`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, end it!', cancelButtonText: 'Cancel'});
         if (confirmation) {
-
             try {
                 const url = `http://localhost:4567/platform/${platformId}/meendplatform`;
 
@@ -117,23 +113,23 @@ export default function MicroservicesView() {
                 });
 
                 console.log(JSON.stringify(response.data));
-                await fetchData();
+                await fetchData(); // Make sure fetchData() is defined or handled appropriately
             } catch (error) {
                 console.error('Error during deleting the Platform:', error);
-            } finally {
             }
         }
     };
     const deletePlatform = async (index: number) => {
         const platformId = dataArray[index].id;
-        const confirmation = window.confirm(`Are you sure to delete the Platform with ID: ${platformId}?`);
+
+        const { value: confirmation } = await Swal.fire({title: 'Confirm Deletion', text: `Are you sure to delete the Platform with ID: ${platformId}?`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', // Red color to signify a delete actioncancelButtonColor: '#aaa',confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        });
 
         if (confirmation) {
-
             try {
                 const url = `http://localhost:4567/platform/${platformId}`;
 
-                // Chiamata DELETE all'API
                 const response = await axios.delete(url, {
                     headers: {
                         'Content-Type': 'text/plain',
@@ -142,13 +138,12 @@ export default function MicroservicesView() {
 
                 console.log(JSON.stringify(response.data));
 
-                // Rimuovi l'elemento corrispondente da dataArray
+                // Remove the corresponding element from dataArray
                 const updatedDataArray = dataArray.filter(item => item.id !== platformId);
-                setDataArray(updatedDataArray);
+                setDataArray(updatedDataArray);  // Ensure setDataArray is defined or handled appropriately
 
             } catch (error) {
                 console.error('Error during deleting the Platform:', error);
-            } finally {
             }
         }
     };
@@ -168,29 +163,9 @@ export default function MicroservicesView() {
         }
     };
 
-    const getDevice = async (): Promise<Platform[]> => {
-        try {
-            const response = await axios.get('http://localhost:4567/device', {
-                headers: {
-                    'Content-Type': 'text/plain'
-                },
-            });
-
-            console.log(JSON.stringify(response.data));
-            return response.data; // Ritorna direttamente i dati piuttosto che inserirli in un array
-        } catch (error) {
-            console.error('Errore durante il recupero dei dati:', error);
-            throw error;
-        }
-    };
-
-    function deleteDevice(index: number) {
-
-    }
-
     const createDevice = async () => {
-
         try {
+
             const { value: deviceName } = await Swal.fire({
                 title: 'Enter Device Name',
                 input: 'text',
@@ -211,22 +186,26 @@ export default function MicroservicesView() {
                     title: 'Enter Additional Details',
                     html:
                         '<input id="swal-input1" class="swal2-input" placeholder="Description">' +
-                        '<input id="swal-input2" class="swal2-input" placeholder="Status">',
+                        '<label for="swal-input2" style="display:block; margin-top:20px; margin-bottom:10px;">Device Status</label>' +
+                        '<select id="swal-input2" class="swal2-input">' +
+                        '<option value="true">ON</option>' +
+                        '<option value="false">OFF</option>' +
+                        '</select>',
                     focusConfirm: false,
                     showCancelButton: true,
                     preConfirm: () => {
                         const input1 = document.getElementById('swal-input1') as HTMLInputElement;
-                        const input2 = document.getElementById('swal-input2') as HTMLInputElement;
+                        const input2 = document.getElementById('swal-input2') as HTMLSelectElement;
                         return [
-                            input1 ? input1.value : '', // Ensure input1 is treated as HTMLInputElement
-                            input2 ? input2.value : '', // Ensure input2 is treated as HTMLInputElement
+                            input1 ? input1.value : '',
+                            input2 ? input2.value : '' // Convert the string to boolean
                         ];
                     }
                 });
 
                 if (formValues) {
                     const [description, status] = formValues;
-                    const data = { name: deviceName, description, status };
+                    const data = { name: deviceName, description, status }; // status is already a boolean here
                     const response = await axios.post('http://localhost:4567/device/mecrdevice', data, {
                         headers: {
                             'Content-Type': 'application/json',
@@ -234,7 +213,7 @@ export default function MicroservicesView() {
                     });
 
                     console.log(JSON.stringify(response.data));
-                    await fetchData(); // Make sure fetchData() is defined or handled appropriately
+                    await fetchData();
                     console.log('Device created successfully!');
                 }
             }
@@ -243,18 +222,102 @@ export default function MicroservicesView() {
         }
     }
 
-    function endDevice(index: number) {
+    const endDevice = async (index: number) => {
+        const deviceId = deviceArray[index].id;
 
+        const { value: confirmation } = await Swal.fire({
+            title: 'Confirm Termination',
+            text: `Are you sure to end the Device Instance with ID: ${deviceId}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, end it!',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (confirmation) {
+            try {
+                const url = `http://localhost:4567/device/${deviceId}/meenddevice`;
+
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+                await fetchData();  // Ensure fetchData() is defined or handled appropriately
+            } catch (error) {
+                console.error('Error during ending the Device:', error);
+            }
+        }
+    };
+    const deleteDevice = async (index: number) => {
+        const deviceId = deviceArray[index].id;
+        const confirmation = window.confirm(`Are you sure to delete the Device with ID: ${deviceId}?`);
+
+        if (confirmation) {
+
+            try {
+                const url = `http://localhost:4567/device/${deviceId}`;
+
+                // Chiamata DELETE all'API
+                const response = await axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                });
+
+                console.log(JSON.stringify(response.data));
+
+                // Rimuovi l'elemento corrispondente da dataArray
+                const updatedDataArray = dataArray.filter(item => item.id !== deviceId);
+                setDataArray(updatedDataArray);
+
+            } catch (error) {
+                console.error('Error during deleting the Device:', error);
+            } finally {
+            }
+        }
     }
+    const getDevice = async (): Promise<Device[]> => {
+        try {
+            const response = await axios.get('http://localhost:4567/device', {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+            });
+
+            console.log(JSON.stringify(response.data));
+            return response.data; // Ritorna direttamente i dati piuttosto che inserirli in un array
+        } catch (error) {
+            console.error('Errore durante il recupero dei dati:', error);
+            throw error;
+        }
+    };
 
     const createFeature = async () => {
-
         try {
-            // Chiedi all'utente di inserire il nome della feature
-            const featureName = window.prompt('Enter the name for the feature:', 'DefaultFeature');
+            // SweetAlert2 dialog to ask the user to enter the name of the feature
 
-            // Verifica se l'utente ha inserito un nome
-            if (featureName !== null) {
+            const { value: featureName } = await Swal.fire({
+                title: 'Enter the name for the feature',
+                input: 'text',
+                inputPlaceholder: 'DefaultFeature',
+                // @ts-ignore
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to write something!';
+                    }
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Create Feature',
+                cancelButtonText: 'Cancel'
+            });
+
+            // Check if the user has entered a name
+            if (featureName) {
                 const data = {
                     name: featureName,
                 };
@@ -266,21 +329,29 @@ export default function MicroservicesView() {
                 });
 
                 console.log(JSON.stringify(response.data));
-                await fetchData();
+                await fetchData();  // Make sure fetchData() is defined or handled appropriately
             } else {
                 console.log('User canceled feature creation.');
             }
         } catch (error) {
-            console.error('Errore durante la creazione della feature:', error);
-        } finally {
+            console.error('Error during the creation of the feature:', error);
         }
     };
     const endFeature = async (index: number) => {
         const featureId = featureArray[index].id;
-        const confirmation = window.confirm(`Are you sure to end the Feature of Interest Instance with ID: ${featureId}?`);
+
+        const { value: confirmation } = await Swal.fire({
+            title: 'Confirm Termination',
+            text: `Are you sure you want to end the Feature of Interest Instance with ID: ${featureId}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, end it!',
+            cancelButtonText: 'Cancel'
+        });
 
         if (confirmation) {
-
             try {
                 const url = `http://localhost:4567/featureofinterest/${featureId}/meendfeatureofinterest`;
 
@@ -291,23 +362,30 @@ export default function MicroservicesView() {
                 });
 
                 console.log(JSON.stringify(response.data));
-                await fetchData();
+                await fetchData(); // Ensure fetchData() is properly defined or handled in your application
             } catch (error) {
-                console.error('Error during deleting the Feature:', error);
-            } finally {
+                console.error('Error during ending the Feature:', error);
             }
         }
     };
     const deleteFeature = async (index: number) => {
         const featureId = featureArray[index].id;
-        const confirmation = window.confirm(`Are you sure to delete the Feature of Interest with ID: ${featureId}?`);
+
+        const { value: confirmation } = await Swal.fire({
+            title: 'Confirm Deletion',
+            text: `Are you sure to delete the Feature of Interest with ID: ${featureId}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',  // Red color to emphasize deletion
+            cancelButtonColor: '#aaa',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        });
 
         if (confirmation) {
-
             try {
                 const url = `http://localhost:4567/featureofinterest/${featureId}`;
 
-                // Chiamata DELETE all'API
                 const response = await axios.delete(url, {
                     headers: {
                         'Content-Type': 'text/plain',
@@ -316,14 +394,12 @@ export default function MicroservicesView() {
 
                 console.log(JSON.stringify(response.data));
 
-                // Rimuovi l'elemento corrispondente da featureArray
+                // Remove the corresponding element from featureArray
                 const updatedFeatureArray = featureArray.filter(item => item.id !== featureId);
-                setFeatureArray(updatedFeatureArray);
+                setFeatureArray(updatedFeatureArray); // Ensure setFeatureArray is defined or handled appropriately
 
             } catch (error) {
                 console.error('Error during deleting the Feature:', error);
-            } finally {
-
             }
         }
     };
@@ -342,7 +418,6 @@ export default function MicroservicesView() {
             throw error;
         }
     };
-
 
     async function open3D() {
         try {const url = '3d';window.open(url, '_blank');toast.success('All files deleted successfully!', {position: "bottom-right", autoClose: 1000, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "colored",});
@@ -440,7 +515,7 @@ export default function MicroservicesView() {
             {deviceArray.length >= 0 && (
                 <div className="library-container"
                      style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
-                    {deviceArray.map((item: any, index: number) => (
+                    {deviceArray.map((item: Device, index: number) => (
                         <div key={index} className="platform-device">
                             <div style={{fontSize: "35px", fontWeight: "bold"}}>{item.name}</div>
                             <div>
