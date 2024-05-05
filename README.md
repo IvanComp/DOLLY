@@ -14,9 +14,9 @@
 ADAPTIVE SHADOW is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
 
 The framework is made available through a RESTful web application that allows users to:
-1 Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
-2 Model a BPMN scenario leveraging Digital Shadows for IoT components;
-3 Simulate the BPMN model and obtain feedback and insights for the process improvement.
+- Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
+- Model a BPMN scenario leveraging Digital Shadows for IoT components;
+- Simulate the BPMN model and obtain feedback and insights for the process improvement.
 
 # Table of contents
 <!--ts-->
@@ -134,9 +134,9 @@ Once launched, the application will be available at [http://localhost:8080](http
 
 NOTE: After starting the application you need to run 3 batch files in the following order:
 
-1 ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-db-server.bat
-2 ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\init-db.bat
-3 ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-service.bat
+- ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-db-server.bat
+- ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\init-db.bat
+- ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-service.bat
 
 This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows
 
