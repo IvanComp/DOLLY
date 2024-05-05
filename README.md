@@ -62,8 +62,9 @@ However, implementing the optimized version of the process in a real-world setti
 
 There are several ways to run ADAPTIVE-SHADOW:
 
-## Using cmd
-
+<details>
+<summary>1 Using cmd</summary>
+<br>
 1. First of all, clone this repository and run the following command to install dependencies:
 
 ```bash
@@ -82,16 +83,35 @@ for macOS / Linux:
 ```
 
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
+<br><br>
+</details>
 
-## From IDE
-1. Import the project into an IDE and run the class "Application.java"
+<details>
+<summary>2 Import the project in an IDE</summary>
+<br>
+  
+2.1 First of all, clone this repository and run the following command to install dependencies:
+
+```bash
+yarn install
+```
+
+2.2 Run the Application.java class using Spring:
 
 ```bash
  ADAPTIVE-SHADOW\src\main\java\com\example\application\Application.java
 ```
 
-## Using Docker
-1. Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/ivanpd/adaptive-shadow);
+Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
+<br><br>
+</details>
+
+
+<details>
+<summary>3 Using Docker (Recommended!)</summary>
+<br>
+  
+3.1 Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/ivanpd/adaptive-shadow);
    
 - Generate the .jar file for building the image   
 ```bash
@@ -108,6 +128,10 @@ docker build -t adaptive-shadow-image .
 docker run -p 8080:8080 adaptive-shadow
 ```
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
+
+<br><br>
+</details>
+
 
 # Domain Model Specification
 
