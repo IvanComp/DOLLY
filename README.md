@@ -141,8 +141,8 @@ NOTE: After starting the application you need to run 3 batch files in the follow
 This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows.
 If everything is set up correctly, the API orchestrator will appear "online" as depicted in the following figure:
 
-<p align="center">
-<img src="frontend/readme//api.png"/>
+<p align="center" width="10px" height="10px">
+<img src="frontend/readme/api.png"/>
 </p>
 
 # Domain Model Specification
