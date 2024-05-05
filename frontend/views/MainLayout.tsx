@@ -123,7 +123,7 @@ export default function MenuOnLeftLayout() {
             ) : (
                 <div>
           <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"-4px"}}>
-            Offline <div className="offline-dot"></div>
+            Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
           </span>
                 </div>
             )}
