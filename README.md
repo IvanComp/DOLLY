@@ -142,6 +142,8 @@ MERODE is a model-driven engineering approach that -besides a focus on model qua
 
 ## Graphs
 
+Detailed information about the Domain Model can be found in: [1]
+
 <p align="center">
 <img src="frontend/readme/model.png" width="600px" height="300px"/>
 </p>
