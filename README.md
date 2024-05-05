@@ -132,6 +132,13 @@ Once launched, the application will be available at [http://localhost:8080](http
 <br><br>
 </details>
 
+NOTE: After starting the application you need to run 3 batch files in the following order:
+
+1 ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-db-server.bat
+2 ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\init-db.bat
+3 ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-service.bat
+
+This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows
 
 # Domain Model Specification
 

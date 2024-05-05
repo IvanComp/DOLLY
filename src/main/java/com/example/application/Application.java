@@ -26,15 +26,7 @@ public class Application implements AppShellConfigurator {
         String projectPath = "IoT-EDG-Rest-Services";
 
         try {
-            // Esegui 'mvn package'
-            if (runCommand(new String[]{"cmd.exe", "/c", "mvn package"}, projectPath)) {
-                // Se 'mvn package' ha successo, esegui gli script bash in sequenza
-                if (runCommand(new String[]{"cmd.exe", "/c", "extras\\start-db-server.bat"}, projectPath)) {
-                    if (runCommand(new String[]{"cmd.exe", "/c", "extras\\init-db.bat"}, projectPath)) {
-                        runCommand(new String[]{"cmd.exe", "/c", "extras\\start-service.bat"}, projectPath);
-                    }
-                }
-            }
+            runCommand(new String[]{"cmd.exe", "/c", "mvn package"}, projectPath);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -44,29 +36,16 @@ public class Application implements AppShellConfigurator {
         ProcessBuilder processBuilder = new ProcessBuilder(commands);
         processBuilder.directory(new java.io.File(directory));
         processBuilder.redirectErrorStream(true);
-
-        System.out.println("Esecuzione comando: " + String.join(" ", commands));
         Process process = processBuilder.start();
-
-        // Leggi l'output dal processo
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        }
 
         // Controlla il codice di uscita del processo
         int exitCode = process.waitFor();
         if (exitCode != 0) {
-            System.out.println("Il comando non è riuscito ad eseguirsi correttamente, codice di errore: " + exitCode);
             return false;
         } else {
-            System.out.println("Comando eseguito con successo.");
             return true;
         }
     }
-
     private static void simulatedStation() {
         try {
             ProcessBuilder processBuilder = new ProcessBuilder("py", "Simulated Python Station/main.py");
