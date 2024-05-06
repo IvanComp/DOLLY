@@ -163,6 +163,7 @@ export default function MicroservicesView() {
         }
     };
 
+
     const createDevice = async () => {
         try {
 
@@ -221,7 +222,6 @@ export default function MicroservicesView() {
             console.error('Error during device creation:', error);
         }
     }
-
     const endDevice = async (index: number) => {
         const deviceId = deviceArray[index].id;
 
@@ -428,7 +428,7 @@ export default function MicroservicesView() {
 
     return (
         <div className="flex flex-col items-start justify-start p-l text-center box-border">
-            <h1 style={{marginLeft: '5px'}}>Available Platforms:</h1>
+            <h3 style={{marginLeft: '5px'}}>Available Platforms:</h3>
 
             {dataArray.length >= 0 && (
                 <div className="library-container"
@@ -474,7 +474,7 @@ export default function MicroservicesView() {
                 </div>
             )}
 
-            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Features of Interest:</h1>
+            <h3 style={{marginLeft: '5px', marginTop: '5px'}}>Available Features of Interest:</h3>
             {featureArray.length >= 0 && (
                 <div className="library-container"
                      style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
@@ -511,7 +511,7 @@ export default function MicroservicesView() {
 
                 </div>
             )}
-            <h1 style={{marginLeft: '5px', marginTop: '5px'}}>Available Devices:</h1>
+            <h3 style={{marginLeft: '5px', marginTop: '5px'}}>Available Devices:</h3>
             {deviceArray.length >= 0 && (
                 <div className="library-container"
                      style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>

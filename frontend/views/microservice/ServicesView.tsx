@@ -15,13 +15,21 @@ import {BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-
 import { useNavigate } from 'react-router-dom';
 import TokenSimulationModule from 'bpmn-js-token-simulation';
 
+interface Device {
+    id: any;
+    name: any;
+    state: any;
+}
+
 export default function BpmnEditor() {
     const [bpmnModeler, setBpmnModeler] = useState<BpmnModeler | null>(null);
     const [fileList, setFileList] = useState([]);
     const [showModeler, setShowModeler] = useState(false); // New state to manage visibility
-    const [deviceArray, setDeviceArray] = useState<any[]>([]);
+    const [deviceArray, setDeviceArray] = useState<Device[]>([]);
 
     useEffect(() => {
+        fetchData();
+        fetchDiagramList();
         const fetchDevice = async () => {
             try {
                 const response = await axios.get('http://localhost:4567/platform', {
@@ -35,13 +43,36 @@ export default function BpmnEditor() {
                 console.error('Errore durante il recupero dei dati del Device:', error);
             }
         };
-
         fetchDevice();
-    }, []);
+    }, []); // Chiamata una sola volta al caricamento del componente
 
-    const notyf = new Notyf({
-        duration: 3000,
-        ripple: false,
+    const fetchData = async () => {
+        try {
+            const deviceResponse = await getDevice();
+            setDeviceArray(deviceResponse);
+
+        } catch (error) {
+            console.error('Errore durante il recupero dei dati:', error);
+        }
+    };
+
+    const getDevice = async (): Promise<Device[]> => {
+        try {
+            const response = await axios.get('http://localhost:4567/device', {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+            });
+
+            console.log(JSON.stringify(response.data));
+            return response.data; // Ritorna direttamente i dati piuttosto che inserirli in un array
+        } catch (error) {
+            console.error('Errore durante il recupero dei dati:', error);
+            throw error;
+        }
+    };
+
+    const notyf = new Notyf({duration: 3000, ripple: false,
         position: {
             x: 'right',
             y: 'top',
@@ -82,10 +113,6 @@ export default function BpmnEditor() {
         notyf.success('Starting the creation of the BPMN model...');
     }, []);
 
-    useEffect(() => {
-        fetchDiagramList();
-    }, []);
-
     const fetchDiagramList = async () => {
         try {
             const response = await axios.get('/list-diagrams');
@@ -103,7 +130,6 @@ export default function BpmnEditor() {
             notyf.success('Starting the creation of the BPMN model...');
         }
     };
-
     const saveDiagram = async () => {
         const result = await bpmnModeler?.saveXML({format: true});
         if (result && result.xml) {
@@ -146,7 +172,6 @@ export default function BpmnEditor() {
             });
         }
     };
-
     const deleteDiagram = async (filename: any) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -172,7 +197,6 @@ export default function BpmnEditor() {
             }
         });
     };
-
     const loadDiagram = async (filename: any) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -201,8 +225,6 @@ export default function BpmnEditor() {
             }
         });
     };
-
-
     const simulateDiagram = async (filename: any) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -226,7 +248,6 @@ export default function BpmnEditor() {
             }
         });
     };
-
     const deployDiagram = async (filename: any) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -251,12 +272,11 @@ export default function BpmnEditor() {
         });
     };
 
-
     return (
         <div>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left'}}>
                 <div>
-                    <h1 style={{ margin: '15px' }}>List of BPMN Models</h1>
+                    <h3 style={{ margin: '15px' }}>List of BPMN Models</h3>
                     {fileList.map((file, index) => (
                         <div className="file-info" key={index} style={{ display: 'flex' }}>
                             <div style={{ border: "2px solid rgba(0, 0, 0, 0.05)", margin: "15px", padding: "1px", borderRadius: "5px", marginBottom: "1px", fontSize: "15px", color: "black", display: "flex", width: "100%", alignItems: "center" }}>
@@ -284,7 +304,7 @@ export default function BpmnEditor() {
                     ))}
                 </div>
                 <div>
-                    <h1 style={{ marginLeft: '15px', marginTop: '15px' }}>Available Devices</h1>
+                    <h3 style={{ marginLeft: '15px', marginTop: '15px' }}>Available Devices</h3>
                     {deviceArray.length >= 0 && (
                         <div className="library-container"
                              style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
