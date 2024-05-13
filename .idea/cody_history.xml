@@ -243,6 +243,26 @@
                   </llm>
                 </llm>
               </chat>
+              <chat>
+                <internalId value="a700c6d3-04ab-4d1b-bce8-e5671729d45f" />
+                <llm>
+                  <llm>
+                    <model value="anthropic/claude-3-sonnet-20240229" />
+                    <provider value="Anthropic" />
+                    <title value="Claude 3 Sonnet" />
+                  </llm>
+                </llm>
+              </chat>
+              <chat>
+                <internalId value="b5cb5d4d-a3a9-48e0-9422-07e78c6044be" />
+                <llm>
+                  <llm>
+                    <model value="anthropic/claude-3-sonnet-20240229" />
+                    <provider value="Anthropic" />
+                    <title value="Claude 3 Sonnet" />
+                  </llm>
+                </llm>
+              </chat>
             </list>
           </chats>
           <defaultLlm>

@@ -24,9 +24,12 @@ public class Application implements AppShellConfigurator {
     public void init() {
         // Specifica il percorso della directory del progetto
         String projectPath = "IoT-EDG-Rest-Services";
+        String extrasPath = projectPath + "//extras";
 
         try {
             runCommand(new String[]{"cmd.exe", "/c", "mvn package"}, projectPath);
+            //runCommand(new String[]{"cmd.exe", "/c", "start-db-server.bat"}, extrasPath);
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

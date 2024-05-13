@@ -127,7 +127,7 @@ export default function Simulation() {
 
     return (
         <div>
-            <div id='root-container'></div>
+
 
                 <h1 style={{ margin: '15px' }}>List of BPMN Models</h1>
                 {fileList.map((file, index) => (
@@ -142,8 +142,14 @@ export default function Simulation() {
                             </p>
                         </div>
                     </div>
-
                 ))}
+
+            <h1 style={{ margin: '15px' }}>BIMP BPMN Model Simulator</h1>
+
+
+
+            <div id='root-container'></div>
+
 
         </div>
     );
