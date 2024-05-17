@@ -129,7 +129,17 @@ export default function MenuOnLeftLayout() {
             )}
         </div><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the BPM Engine"}/>
           </div>
-        </div>
+
+          <div className="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+
+          </div>
 
         <div style={{position: 'absolute', bottom: '5px', left: '0', width: '100%', margin: '0 auto'}}>
           <hr style={{color: 'red', backgroundColor:'#5b5b65', border:'none', height: '1px', margin: '5px 5%', width: '90%'}} />

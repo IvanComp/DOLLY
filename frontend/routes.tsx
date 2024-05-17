@@ -8,11 +8,17 @@ import Monitoring from "Frontend/views/monitoring/Monitoring.js";
 import { TbDeviceHeartMonitorFilled } from "react-icons/tb";
 import { FaGithub, FaGlobe } from "react-icons/fa";  // Importing icons from react-icons
 import Simulation from "Frontend/views/simulation/Simulation.js";
+import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
+import {HiAcademicCap} from "react-icons/hi";
+import {MdAlternateEmail} from "react-icons/md";
+import Readme from "Frontend/views/readme/Readme.js";
+// @ts-ignore
+import Home from "Frontend/views/home/Home.js";
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
 export type MenuProps = Readonly<{
-    icon?: React.ReactNode;
+    icon?: string;
     title?: string;
 }>;
 
@@ -40,12 +46,15 @@ export const routes: readonly ViewRouteObject[] = [
         element: <MainLayout />,
         handle: { icon: null, title: 'Main' },
         children: [
-            { path: '/services', element: <ServicesView />, handle: { icon: <TbDeviceHeartMonitorFilled />, title: 'BPMN Models' } },
-            { path: '/simulation', element: <Simulation />, handle: { icon: <FaGlobe />, title: 'BPMN Simulation' } },
-            { path: '/', element: <DashboardView />, handle: { icon: <FaGlobe />, title: 'IoT System' } },
-            { path: '/about', element: <AboutView />, handle: { icon: <FaGithub />, title: 'About' } },
+            { path: '/', element: <Home />, handle: { title: 'Home Page'}},
+            { path: '/services', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'BPMN Models'}},
+            { path: '/iot', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'IoT System'}},
+            { path: '/simulation', element: <Simulation />, handle: { icon: 'chart-line-solid', title: 'BPMN Simulation'}},
+            { path: '/monitoring', element: <Monitoring />, handle: { icon: 'chalkboard-solid', title: 'BPMN Monitoring'} },
+            { path: '/readme', element: <Readme />, handle: { icon: 'readme', title: 'Readme'}},
+            { path: '/about', element: <AboutView />, handle: { icon: 'github', title: 'About'}},
             { path: '/3d', element: <ThreeDee /> },
-            { path: '/monitoring', element: <Monitoring /> },
+
         ],
     },
 ];
