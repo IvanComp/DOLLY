@@ -5,16 +5,16 @@ import ServicesView from "Frontend/views/microservice/ServicesView.js";
 import DashboardView from "Frontend/views/dashboard/DashboardView.js";
 import ThreeDee from "Frontend/views/3d/ThreeDee.js";
 import Monitoring from "Frontend/views/monitoring/Monitoring.js";
-import { TbDeviceHeartMonitorFilled } from "react-icons/tb"
+import { TbDeviceHeartMonitorFilled } from "react-icons/tb";
+import { FaGithub, FaGlobe } from "react-icons/fa";  // Importing icons from react-icons
 import Simulation from "Frontend/views/simulation/Simulation.js";
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
 export type MenuProps = Readonly<{
-  icon?: React.ReactNode;  // Qui usiamo React.ReactNode per permettere qualsiasi componente React
-  title?: string;
+    icon?: React.ReactNode;
+    title?: string;
 }>;
-
 
 export type ViewMeta = Readonly<{ handle?: MenuProps }>;
 
@@ -24,7 +24,7 @@ export type IndexViewRouteObject = Override<IndexRouteObject, ViewMeta>;
 export type NonIndexViewRouteObject = Override<
     Override<NonIndexRouteObject, ViewMeta>,
     {
-      children?: ViewRouteObject[];
+        children?: ViewRouteObject[];
     }
 >;
 export type ViewRouteObject = IndexViewRouteObject | NonIndexViewRouteObject;
@@ -36,18 +36,18 @@ export type ViewRouteMatch = Readonly<Override<RouteMatch, ViewMeta>>;
 export const useViewMatches = useMatches as () => readonly ViewRouteMatch[];
 
 export const routes: readonly ViewRouteObject[] = [
-  {
-    element: <MainLayout />,
-    handle: { icon: 'null', title: 'Main' },
-    children: [
-      { path: '/services', element: <ServicesView />, handle: { icon: <TbDeviceHeartMonitorFilled />, title: 'BPMN Models' } },
-      { path: '/simulation', element: <Simulation />, handle: { icon: 'la la-globe', title: 'BPMN Simulation' } },
-      { path: '/', element: <DashboardView />, handle: { icon: 'la la-globe', title: 'IoT System' } },
-      { path: '/about', element: <AboutView />, handle: { icon: 'la la-github', title: 'About' } },
-      { path: '/3d', element: <ThreeDee /> },
-      { path: '/monitoring', element: <Monitoring /> },
-    ],
-  },
+    {
+        element: <MainLayout />,
+        handle: { icon: null, title: 'Main' },
+        children: [
+            { path: '/services', element: <ServicesView />, handle: { icon: <TbDeviceHeartMonitorFilled />, title: 'BPMN Models' } },
+            { path: '/simulation', element: <Simulation />, handle: { icon: <FaGlobe />, title: 'BPMN Simulation' } },
+            { path: '/', element: <DashboardView />, handle: { icon: <FaGlobe />, title: 'IoT System' } },
+            { path: '/about', element: <AboutView />, handle: { icon: <FaGithub />, title: 'About' } },
+            { path: '/3d', element: <ThreeDee /> },
+            { path: '/monitoring', element: <Monitoring /> },
+        ],
+    },
 ];
 
 const router = createBrowserRouter([...routes]);

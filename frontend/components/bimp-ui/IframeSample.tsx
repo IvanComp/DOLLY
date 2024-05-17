@@ -10,6 +10,9 @@ const bimpConfig = {
     },
 };
 
+
+interface IframeSampleProps { }
+
 interface IframeSampleState {
     uploadedData?: {
         fileName: string;
@@ -17,8 +20,8 @@ interface IframeSampleState {
     };
 }
 
-export class IframeSample extends React.Component<{}, IframeSampleState> {
-    constructor(props: {}) {
+export class IframeSample extends React.Component<IframeSampleProps, IframeSampleState> {
+    constructor(props: IframeSampleProps) {
         super(props);
         this.state = {
             uploadedData: undefined,
@@ -27,11 +30,13 @@ export class IframeSample extends React.Component<{}, IframeSampleState> {
 
     handleFileChosen = (file: File) => {
         const fileReader = new FileReader();
+        console.log(file);
+
         fileReader.onloadend = () => {
             const content = fileReader.result;
             this.setState({
                 uploadedData: {
-                    fileName: "sample.bpmn",
+                    fileName: file.name,
                     fileContent: content ? btoa(content.toString()) : null,
                 },
             }, this.loadBimpWithFile);
@@ -39,15 +44,34 @@ export class IframeSample extends React.Component<{}, IframeSampleState> {
         fileReader.readAsText(file);
     };
 
+    loadBimpWithFile = (uploadedData = this.state.uploadedData) => {
+        const POST_MESSAGE_TO = BIMP_BASE_URL.substr(
+            0,
+            BIMP_BASE_URL.indexOf("/", 8)
+        );
+        const message = { ...uploadedData, type: "INIT" };
+        const { contentWindow } = document.getElementById(BIMP_CONTAINER_ID) as HTMLIFrameElement;
+        contentWindow?.postMessage(JSON.stringify(message), POST_MESSAGE_TO);
+    }
+
+    handleIframeLoaded = () => {
+        // Implement your iframe load handling logic here, if any
+    }
+
+    getIframeUrl() {
+        const queryParams = [];
+        const configStr = JSON.stringify(bimpConfig);
+        queryParams.push(`bimpConfig=${encodeURIComponent(configStr)}`);
+        queryParams.push(`post-init=true`);
+
+        const queryStr = queryParams.join("&");
+        return BIMP_BASE_URL + (queryStr ? "?" : "") + queryStr;
+    }
+
+
     render() {
         return (
-            <div className="bimp-wrapper">
-                <input
-                    type="file"
-                    id="file-iframe"
-                    accept=".bpmn"
-                    onChange={(e) => this.handleFileChosen(e.target.files![0])}
-                />
+            <div className="bimp-wrapper" >
                 <iframe
                     id={BIMP_CONTAINER_ID}
                     src={this.getIframeUrl()}
@@ -63,29 +87,5 @@ export class IframeSample extends React.Component<{}, IframeSampleState> {
                 />
             </div>
         );
-    }
-
-    getIframeUrl() {
-        const queryParams = [];
-        const configStr = JSON.stringify(bimpConfig);
-        queryParams.push(`bimpConfig=${encodeURIComponent(configStr)}`);
-        queryParams.push(`post-init=true`);
-
-        const queryStr = queryParams.join("&");
-        return BIMP_BASE_URL + (queryStr ? "?" : "") + queryStr;
-    }
-
-    loadBimpWithFile = () => {
-        const POST_MESSAGE_TO = BIMP_BASE_URL.substr(
-            0,
-            BIMP_BASE_URL.indexOf("/", 8)
-        );
-        const message = { ...this.state.uploadedData, type: "INIT" };
-        const { contentWindow } = document.getElementById(BIMP_CONTAINER_ID) as HTMLIFrameElement;
-        contentWindow?.postMessage(JSON.stringify(message), POST_MESSAGE_TO);
-    }
-
-    handleIframeLoaded = () => {
-        // Implement your iframe load handling logic here, if any
     }
 }
