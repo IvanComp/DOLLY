@@ -47,7 +47,7 @@ export const routes: readonly ViewRouteObject[] = [
         handle: { icon: null, title: 'Main' },
         children: [
             { path: '/', element: <Home />, handle: { title: 'Home Page'}},
-            { path: '/services', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'BPMN Models'}},
+            { path: '/bpmn', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'BPMN Models'}},
             { path: '/iot', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'IoT System'}},
             { path: '/simulation', element: <Simulation />, handle: { icon: 'chart-line-solid', title: 'BPMN Simulation'}},
             { path: '/monitoring', element: <Monitoring />, handle: { icon: 'chalkboard-solid', title: 'BPMN Monitoring'} },

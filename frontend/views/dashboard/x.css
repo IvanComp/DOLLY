@@ -71,6 +71,7 @@ h1.available-platforms {
     vertical-align: middle;
     margin-right: 5px;
     border: 1px solid black;
+    animation: blink 2s infinite;
 }
 
 /* Stile per lo status "Offline" */
@@ -83,4 +84,11 @@ h1.available-platforms {
     vertical-align: middle;
     margin-left: 5px;
     border: 1px solid black;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }

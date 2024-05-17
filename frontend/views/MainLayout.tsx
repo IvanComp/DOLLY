@@ -106,14 +106,14 @@ export default function MenuOnLeftLayout() {
               ) : (
                   <div>
           <span style={{ fontWeight: 'normal', color: 'black'}}>
-           Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
+           Offline <div className="offline-dot" style={{marginLeft:"1px"}}></div>
           </span>
                   </div>
               )}
         </div></a><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the API Orchestrator for Domain Model Instances"}/>
           </div>
           <div style={{ display: 'flex', alignItems: 'left' }}>
-          <a style={{fontWeight:"bold",marginLeft:"7%", color:'#154A57',marginRight:"9%"}}>BPM Engine:</a><div>
+          <a style={{fontWeight:"bold",marginLeft:"7%", color:'#154A57',marginRight:"9%"}}>BP Engine:</a><div>
             {isAPIOnline ? (
                 <div>
           <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"-5px" }}>
@@ -122,8 +122,8 @@ export default function MenuOnLeftLayout() {
                 </div>
             ) : (
                 <div>
-          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"-4px"}}>
-            Offline <div className="offline-dot" style={{marginLeft:"0px"}}></div>
+          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"11px"}}>
+            Offline <div className="offline-dot" style={{marginLeft:"1px"}}></div>
           </span>
                 </div>
             )}
