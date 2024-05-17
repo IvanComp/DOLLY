@@ -4,10 +4,9 @@ import { createBrowserRouter, IndexRouteObject, NonIndexRouteObject, useMatches 
 import ServicesView from "Frontend/views/microservice/ServicesView.js";
 import DashboardView from "Frontend/views/dashboard/DashboardView.js";
 import ThreeDee from "Frontend/views/3d/ThreeDee.js";
-import Simulation from "Frontend/views/simulation/Simulation.js";
-// @ts-ignore
 import Monitoring from "Frontend/views/monitoring/Monitoring.js";
 import { TbDeviceHeartMonitorFilled } from "react-icons/tb"
+import Simulation from "Frontend/views/simulation/Simulation.js";
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 

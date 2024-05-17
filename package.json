@@ -27,8 +27,9 @@
     "@vaadin/vaadin-lumo-styles": "24.0.3",
     "@vaadin/vaadin-material-styles": "24.0.3",
     "@vaadin/vaadin-themable-mixin": "24.0.3",
-    "axios": "^1.4.0",
+    "axios": "^1.6.8",
     "bimp-ui": "^4.0.3",
+    "bootstrap": "^5.3.3",
     "bpmn-js": "^13.0.4",
     "bpmn-js-create-append-anything": "^0.5.1",
     "bpmn-js-properties-panel": "^1.26.0",
@@ -39,6 +40,7 @@
     "line-awesome": "^1.3.0",
     "lit": "2.6.1",
     "notyf": "^3.10.0",
+    "parcel": "^2.12.0",
     "react": "^18.2.0",
     "react-aws-icons": "^1.2.1",
     "react-dom": "^18.2.0",
@@ -51,6 +53,7 @@
     "toastify": "^2.0.1"
   },
   "devDependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@lit-labs/react": "^1.1.0",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/pluginutils": "5.0.2",
@@ -61,8 +64,28 @@
     "@types/three": "^0.160.0",
     "@vitejs/plugin-react": "~3.0.1",
     "async": "3.2.2",
+    "axios": "^1.6.8",
+    "bpmn-js": "^13.0.4",
+    "bulma": "^0.9.0",
+    "date-fns": "^2.14.0",
+    "diagram-js": "^14.5.4",
+    "dom-serialize": "^2.2.1",
+    "fast-xml-parser": "^4.3.6",
+    "file-saver": "^1.3.3",
     "glob": "7.2.3",
+    "jsonix": "^2.4.1",
+    "jsonwebtoken": "^9.0.2",
     "mkdirp": "1.0.4",
+    "parcel-bundler": "^1.12.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-google-charts": "^1.5.5",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^6.4.2",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^6.1.2",
+    "reselect": "^4.0.0",
     "rollup-plugin-brotli": "3.1.0",
     "sass": "^1.75.0",
     "strip-css-comments": "5.0.0",
@@ -72,7 +95,8 @@
     "vite-plugin-checker": "0.5.5",
     "workbox-build": "6.5.4",
     "workbox-core": "6.5.4",
-    "workbox-precaching": "6.5.4"
+    "workbox-precaching": "6.5.4",
+    "xml-beautifier": "^0.3.0"
   },
   "overrides": {
     "@vaadin/router": "$@vaadin/router",
@@ -120,7 +144,9 @@
     "sweetalert2": "$sweetalert2",
     "@bpmn-io/properties-panel": "$@bpmn-io/properties-panel",
     "bpmn-js-create-append-anything": "$bpmn-js-create-append-anything",
-    "bpmn-js-token-simulation": "$bpmn-js-token-simulation"
+    "bpmn-js-token-simulation": "$bpmn-js-token-simulation",
+    "bootstrap": "$bootstrap",
+    "parcel": "$parcel"
   },
   "vaadin": {
     "dependencies": {
@@ -135,7 +161,15 @@
       "@hilla/generator-typescript-plugin-push": "2.0.5",
       "@hilla/generator-typescript-utils": "2.0.5",
       "@hilla/react-components": "2.0.3",
+      "@parcel/transformer-sass": "^2.12.0",
       "@polymer/polymer": "3.5.1",
+      "@types/axios": "^0.14.0",
+      "@types/node": "^14.0.11",
+      "@types/react": "^16.9.35",
+      "@types/react-dom": "^16.9.8",
+      "@types/redux-promise-middleware": "0.0.6",
+      "@typescript-eslint/eslint-plugin": "^2.30.0",
+      "@typescript-eslint/parser": "^2.30.0",
       "@vaadin/bundles": "24.0.3",
       "@vaadin/common-frontend": "0.0.18",
       "@vaadin/icon": "24.0.3",
@@ -146,8 +180,17 @@
       "@vaadin/vaadin-lumo-styles": "24.0.3",
       "@vaadin/vaadin-material-styles": "24.0.3",
       "@vaadin/vaadin-themable-mixin": "24.0.3",
+      "buffer": "^6.0.3",
       "construct-style-sheets-polyfill": "3.1.0",
-      "lit": "2.6.1"
+      "cssnano": "^7.0.1",
+      "eslint": "^5.16.0",
+      "eslint-config-prettier": "^6.11.0",
+      "eslint-plugin-prettier": "^3.1.3",
+      "lit": "2.6.1",
+      "prettier": "^2.0.5",
+      "react-hot-loader": "^4.12.21",
+      "sass": "^1.26.8",
+      "typescript": "^3.4.5"
     },
     "devDependencies": {
       "@rollup/plugin-replace": "5.0.2",
@@ -165,6 +208,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "3664d3b41fc3bfe6be463b80f270c28bb02e87b151520199278658e80af3c5c2"
+    "hash": "141c7d86dba29169dc0f82af44be26f891a720095442a7e7717431b92f02498c"
   }
 }
