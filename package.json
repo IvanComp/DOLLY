@@ -27,6 +27,7 @@
     "@vaadin/vaadin-lumo-styles": "24.0.3",
     "@vaadin/vaadin-material-styles": "24.0.3",
     "@vaadin/vaadin-themable-mixin": "24.0.3",
+    "aos": "^2.3.4",
     "axios": "^1.6.8",
     "bimp-ui": "^4.0.3",
     "bootstrap": "^5.3.3",
@@ -146,7 +147,8 @@
     "bpmn-js-create-append-anything": "$bpmn-js-create-append-anything",
     "bpmn-js-token-simulation": "$bpmn-js-token-simulation",
     "bootstrap": "$bootstrap",
-    "parcel": "$parcel"
+    "parcel": "$parcel",
+    "aos": "$aos"
   },
   "vaadin": {
     "dependencies": {
@@ -208,6 +210,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "141c7d86dba29169dc0f82af44be26f891a720095442a7e7717431b92f02498c"
+    "hash": "154f2cd0d6fb0955568805c7f933f4612a9ac7868c54bcfa7a6e8accc7249c03"
   }
 }
