@@ -1,61 +1,37 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-    overflow-x: hidden;
-}
-
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h1 {
-    text-align: center;
-    margin: 50px 0;
-    color: #333;
+    margin-top: 15px; /* Ensure 15px distance from top element */
+    margin-left: 3px;
+    width: 99%;
+    border-radius: 10px;
+    text-align: left;
+    margin: auto;
 }
 
 .steps {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 20px;
 }
 
 .step-row {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px; /* Ridotto lo spazio */
+    margin-bottom: 20px;
 }
 
 .step {
-    background: #fff;
-    margin: 20px;
+    width: 45%;
     padding: 20px;
-    width: 48%; /* Più larghi */
-    min-height: 200px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.hidden {
-    display: none;
-}
-
-.show {
-    display: flex; /* Mostra gli step */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
 .arrow {
-    font-size: 2rem;
-    margin: 20px 0; /* Ridotto lo spazio */
+    text-align: center;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.bounce {
     animation: bounce 2s infinite;
 }
 
@@ -64,22 +40,33 @@ h1 {
         transform: translateY(0);
     }
     40% {
-        transform: translateY(-10px);
+        transform: translateY(-30px);
     }
     60% {
-        transform: translateY(-5px);
+        transform: translateY(-15px);
     }
 }
 
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
+    justify-content: space-between;
+}
+
 .get-started-button {
-    display: block;
-    margin: 50px auto;
-    font-weight: bold;
-    background: #aad4de;
-    color: #324e6c;
-    font-size: 15px;
     padding: 10px 20px;
+    background-color: #334F6D;
+    color: white;
+    border: none;
     border-radius: 5px;
-    border: 2px solid #324e6c;
     cursor: pointer;
+    margin-left: auto;
+    text-decoration: none;
+}
+
+.get-started-button:hover {
+    background-color: #154A57;
 }

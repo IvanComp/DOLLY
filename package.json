@@ -58,6 +58,7 @@
     "@lit-labs/react": "^1.1.0",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/pluginutils": "5.0.2",
+    "@types/aos": "^3.0.7",
     "@types/classnames": "^2.3.1",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
@@ -83,6 +84,7 @@
     "react-google-charts": "^1.5.5",
     "react-redux": "^7.2.0",
     "react-router-dom": "^6.4.2",
+    "react-scroll-direction": "^1.0.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.2",
@@ -148,7 +150,8 @@
     "bpmn-js-token-simulation": "$bpmn-js-token-simulation",
     "bootstrap": "$bootstrap",
     "parcel": "$parcel",
-    "aos": "$aos"
+    "aos": "$aos",
+    "react-scroll-direction": "$react-scroll-direction"
   },
   "vaadin": {
     "dependencies": {
@@ -210,6 +213,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "154f2cd0d6fb0955568805c7f933f4612a9ac7868c54bcfa7a6e8accc7249c03"
+    "hash": "25864b1ff96e2d746bb094c5209a2023ca2fb77bcdc3d3f0c3a792c6709c903e"
   }
 }
