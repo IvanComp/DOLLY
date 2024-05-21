@@ -115,7 +115,7 @@ Once launched, the application will be available at [http://localhost:8080](http
    
 - Generate the .jar file for building the image   
 ```bash
-mvn clean package
+mvn clean package -Pproduction
 ```
 - Creating the Docker image from the main folder of the project by executing the following comand:
 
