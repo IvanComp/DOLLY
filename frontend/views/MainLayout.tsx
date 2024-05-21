@@ -90,7 +90,7 @@ export default function MenuOnLeftLayout() {
             </NavLink>
           ))}
         </nav>
-        <div style={{marginTop: '15px', marginLeft:'3px', top:"500px", height:"100px", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
+        <div style={{position: "relative",top:"10px", marginLeft:'3px', height:"100px", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
           <a style={{marginLeft:'3%',fontWeight:"bold", color:'#334F6D',top:"10px",bottom:'10px'}}>Settings </a>
           <br/>
           <div style={{ display: 'flex', alignItems: 'left', }}>
@@ -122,7 +122,7 @@ export default function MenuOnLeftLayout() {
                 </div>
             ) : (
                 <div>
-          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"11px"}}>
+          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"10px"}}>
             Offline <div className="offline-dot" style={{marginLeft:"1px"}}></div>
           </span>
                 </div>

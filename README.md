@@ -115,7 +115,7 @@ Once launched, the application will be available at [http://localhost:8080](http
    
 - Generate the .jar file for building the image   
 ```bash
-mvn clean package -Pproduction
+mvn clean package
 ```
 - Creating the Docker image from the main folder of the project by executing the following comand:
 
@@ -125,7 +125,7 @@ docker build -t adaptive-shadow-image .
 - Run the Docker container from the main folder of the project by executing the following comand:
 
 ```bash
-docker run -p 8080:8080 adaptive-shadow
+docker run -p 8080:8080 adaptive-shadow-image
 ```
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
 
