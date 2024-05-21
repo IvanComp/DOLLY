@@ -1,0 +1,17 @@
+{
+  "productionMode": true,
+  "eagerServerLoad": false,
+  "chunks": {
+    "fallback": {
+      "jsModules": [
+        "@vaadin/icons/vaadin-iconset.js",
+        "@vaadin/icon/vaadin-icon.js",
+        "@vaadin/tooltip/src/vaadin-tooltip.js",
+        "./tooltip.ts"
+      ],
+      "cssImports": [
+        
+      ]
+    }
+  }
+}
