@@ -1,4 +1,4 @@
-# ADAPTIVE-SHADOW
+# ADAPTIVE-TWIN
 
 <p align="center">
 <img src="frontend/readme/logo.png" width="350px" height="250px"/>
