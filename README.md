@@ -11,12 +11,12 @@
   <img src="https://img.shields.io/badge/version-1.0-green" alt="Version">
 </p>
 
-ADAPTIVE SHADOW is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
+ADAPTIVE TWIN is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
 
 The framework is made available through a RESTful web application that allows users to:
 - Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
 - Model a BPMN scenario leveraging Digital Shadows for IoT components;
-- Simulate the BPMN model and obtain feedback and insights for the process improvement.
+- Simulate the BPMN model replica's and obtain feedback and insights for the process improvement.
 
 # Table of contents
 <!--ts-->
@@ -43,7 +43,7 @@ If KPI values indicate suboptimal performance of the actual process (P1), a proc
 Next, the user defines a set of simulation parameters (E) to run the simulation and obtain output KPIs for evaluating the performance of the adapted process (P1').
 During the process adaptation (D) and simulation (E) phases, it is possible to compare different process versions (e.g., by changing the resources involved or by implementing structural changes) against the obtained KPIs to achieve better process improvements. The adaptation and simulation steps may require multiple iterations until desired KPIs values are achieved.
 Finally, after obtaining an optimal version of the process, it is possible to proceed to its manual actuation (F). 
-In line with the Digital Business Process Shadow concept, the optimized version P1' represents a shadow of the actual process P1. 
+In line with the Digital Business Process Twin concept, the optimized version P1' represents a shadow of the actual process P1. 
 The process P1' suggests and drives the real-world implementation of the improvements resulting from the analyses performed through the simulations.
 However, implementing the optimized version of the process in a real-world setting can require direct human oversight if the optimization process requires acting on tasks related to IoT device operations. To provide an example, changes in IoT device configuration and setups often require manual intervention such as sensor repositioning or infrastructure modifications that automated systems cannot fully manage independently. As such, while the process simulations and enhancements derived from them can be automated to a large extent, reflecting these changes in the real world demands hands-on management. Finally, worth noticing, that the new process P1' actuated during the (F) phase can be optimized by restarting from phase (C) thus starting a continuous feedback loop.
 
@@ -60,7 +60,7 @@ However, implementing the optimized version of the process in a real-world setti
 - [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 17 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 17 of the Java JDK);
 - [Maven](https://maven.apache.org/download.cgi) 3.9.5 or later;
 
-There are several ways to run ADAPTIVE-SHADOW:
+  There are several ways to run ADAPTIVE-TWIN:
 
 <details>
 <summary>1 Using cmd</summary>
@@ -99,7 +99,7 @@ yarn install
 2.2 Run the Application.java class using Spring:
 
 ```bash
- ADAPTIVE-SHADOW\src\main\java\com\example\application\Application.java
+ ADAPTIVE-TWIN\src\main\java\com\example\application\Application.java
 ```
 
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
@@ -120,12 +120,12 @@ mvn clean package -Pproduction
 - Creating the Docker image from the main folder of the project by executing the following comand:
 
 ```bash
-docker build -t adaptive-shadow-image .
+docker build -t adaptive-twin-image .
 ```
 - Run the Docker container from the main folder of the project by executing the following comand:
 
 ```bash
-docker run -p 8080:8080 adaptive-shadow-image
+docker run -p 8080:8080 adaptive-twin-image
 ```
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
 
@@ -134,9 +134,9 @@ Once launched, the application will be available at [http://localhost:8080](http
 
 NOTE: After starting the application you need to run 3 batch files in the following order:
 
-- ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-db-server.bat
-- ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\init-db.bat
-- ADAPTIVE-SHADOW\IoT-EDG-Rest-Services\extras\start-service.bat
+- ADAPTIVE-TWIN\IoT-EDG-Rest-Services\extras\start-db-server.bat
+- ADAPTIVE-TWIN\IoT-EDG-Rest-Services\extras\init-db.bat
+- ADAPTIVE-TWIN\IoT-EDG-Rest-Services\extras\start-service.bat
 
 This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows.
 If everything is set up correctly, the API orchestrator will appear "online" as depicted in the following figure:
@@ -200,7 +200,7 @@ The Java prototype encompasses a straightforward Graphical User Interface (GUI) 
 The Domain Model can be tested in the GUI offered by MERODE, by directly executing the RUN file at the following path of the project:
 
 ```bash
-ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN 
+ADAPTIVE-TWIN\Domain Model\DS_GUI_Prototype\RUN 
 ```
 
 <p align="center">
@@ -212,7 +212,7 @@ ADAPTIVE-SHADOW\Domain Model\DS_GUI_Prototype\RUN
 
 The RESTful web application consists of a MAVEN project, offering a range of API services for each business event. The Domain Layer defines several business object types (EDG), each of which has a corresponding set of business event types specified in the Service Layer (OET). These business event types, which encompass actions such as creation, modification, termination, and more, can be performed through API services.
 
-ADAPTIVE SHADOW directly implements the APIs necessary to instantiate the Domain Model in the web application of this project.
+ADAPTIVE TWIN directly implements the APIs necessary to instantiate the Domain Model in the web application of this project.
 
 # References
 
