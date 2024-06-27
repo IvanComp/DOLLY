@@ -26,16 +26,6 @@ public class Application implements AppShellConfigurator {
         String projectPath = "IoT-EDG-Rest-Services";
         String extrasPath = projectPath + "//extras";
 
-        /*
-        try {
-            runCommand(new String[]{"cmd.exe", "/c", "mvn package"}, projectPath);
-            //runCommand(new String[]{"cmd.exe", "/c", "start-db-server.bat"}, extrasPath);
-
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
-
     }
 
     private boolean runCommand(String[] commands, String directory) throws IOException, InterruptedException {
