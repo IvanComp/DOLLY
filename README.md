@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/version-1.0-green" alt="Version">
 </p>
 
-ADAPTIVE TWIN is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
+DOLLY is a web application that aims to model and continuously optimize IoT-Enhanced Business Processes using the BPMN 2.0 language.
 
 The framework is made available through a RESTful web application that allows users to:
 - Instantiate a Domain Model for IoT thus generating Digital Shadows of IoT components;
@@ -212,7 +212,7 @@ DOLLY\Domain Model\DS_GUI_Prototype\RUN
 
 The RESTful web application consists of a MAVEN project, offering a range of API services for each business event. The Domain Layer defines several business object types (EDG), each of which has a corresponding set of business event types specified in the Service Layer (OET). These business event types, which encompass actions such as creation, modification, termination, and more, can be performed through API services.
 
-ADAPTIVE TWIN directly implements the APIs necessary to instantiate the Domain Model in the web application of this project.
+DOLLY directly implements the APIs necessary to instantiate the Domain Model in the web application of this project.
 
 # References
 
