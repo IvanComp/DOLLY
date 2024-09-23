@@ -1,4 +1,4 @@
-# ADAPTIVE-TWIN
+# DOLLY
 
 <p align="center">
 <img src="frontend/readme/logo.png" width="350px" height="250px"/>
@@ -60,7 +60,7 @@ However, implementing the optimized version of the process in a real-world setti
 - [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 17 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 17 of the Java JDK);
 - [Maven](https://maven.apache.org/download.cgi) 3.9.5 or later;
 
-  There are several ways to run ADAPTIVE-TWIN:
+  There are several ways to run DOLLY:
 
 <details>
 <summary>1 Using cmd</summary>
@@ -99,7 +99,7 @@ yarn install
 2.2 Run the Application.java class using Spring:
 
 ```bash
- ADAPTIVE-TWIN\src\main\java\com\example\application\Application.java
+ DOLLY\src\main\java\com\example\application\Application.java
 ```
 
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
@@ -120,12 +120,12 @@ mvn clean package -Pproduction
 - Creating the Docker image from the main folder of the project by executing the following comand:
 
 ```bash
-docker build -t adaptive-twin-image .
+docker build -t DOLLY-image .
 ```
 - Run the Docker container from the main folder of the project by executing the following comand:
 
 ```bash
-docker run -p 8080:8080 adaptive-twin-image
+docker run -p 8080:8080 DOLLY-image
 ```
 Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
 
@@ -134,9 +134,9 @@ Once launched, the application will be available at [http://localhost:8080](http
 
 NOTE: After starting the application you need to run 3 batch files in the following order:
 
-- ADAPTIVE-TWIN\IoT-EDG-Rest-Services\extras\start-db-server.bat
-- ADAPTIVE-TWIN\IoT-EDG-Rest-Services\extras\init-db.bat
-- ADAPTIVE-TWIN\IoT-EDG-Rest-Services\extras\start-service.bat
+- DOLLY\IoT-EDG-Rest-Services\extras\start-db-server.bat
+- DOLLY\IoT-EDG-Rest-Services\extras\init-db.bat
+- DOLLY\IoT-EDG-Rest-Services\extras\start-service.bat
 
 This allows you to start the Domain Model API orchestrator allowing you to instantiate the Digital Shadows.
 If everything is set up correctly, the API orchestrator will appear "online" as depicted in the following figure:
@@ -200,7 +200,7 @@ The Java prototype encompasses a straightforward Graphical User Interface (GUI) 
 The Domain Model can be tested in the GUI offered by MERODE, by directly executing the RUN file at the following path of the project:
 
 ```bash
-ADAPTIVE-TWIN\Domain Model\DS_GUI_Prototype\RUN 
+DOLLY\Domain Model\DS_GUI_Prototype\RUN 
 ```
 
 <p align="center">
