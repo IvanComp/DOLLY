@@ -1,22 +1,24 @@
-# Usa un'immagine di base con supporto per il runtime necessario (es: openjdk)
+# Usa un'immagine di base con supporto per il runtime Java
 FROM openjdk:17-jdk-slim
 
-# Crea una directory per gli script
+# Installa Maven
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+
+# Imposta la directory di lavoro
 WORKDIR /app
 
-# Copia tutti gli script nel container
-COPY domaindataAPI/ app/
+# Copia tutto il contenuto di domaindataAPI nella directory /app del container
+COPY domaindataAPI/ /app/
 
-RUN ls -R /app
+# Esegui 'mvn package' all'interno della directory specifica
+RUN cd /app && mvn package
 
-# Rendi eseguibili tutti gli script nella cartella extras
-RUN chmod +x /app/extras/*
+# Rendi eseguibili tutti gli script .sh nella cartella extras
+RUN chmod +x /app/extras/*.sh
 
 # Esegui gli script in sequenza all'avvio del container
-CMD /bin/bash -c "/app/extras/build-application && \
-                  sleep 15 && \
-                  /app/extras/init-db && \
-                  sleep 5 && \
-                  /app/extras/start-db-server && \
-                  sleep 5 && \
-                  /app/extras/start-service"
+CMD ["/bin/bash", "-c", "/app/extras/init-db.sh && \
+                        sleep 5 && \
+                        /app/extras/start-db-server.sh && \
+                        sleep 5 && \
+                        /app/extras/start-service.sh"]

@@ -47,10 +47,9 @@ export const routes: readonly ViewRouteObject[] = [
         handle: { icon: null, title: 'Main' },
         children: [
             { path: '/', element: <Home />, handle: { title: 'Home Page' }},
+            { path: '/domaindata', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'Domain Data Modeling' }},
             { path: '/bpmn', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'Process Modeling' }},
-            { path: '/iot', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'Domain Data Modeling' }},
             { path: '/simulation', element: <Simulation />, handle: { icon: 'chalkboard-solid', title: 'BPMN Simulation' }},
-            { path: '/readme', element: <Readme />, handle: { icon: 'readme', title: 'Readme' }},
             { path: '/about', element: <AboutView />, handle: { icon: 'github', title: 'About' }},
             { path: '/3d', element: <ThreeDee /> },
         ],

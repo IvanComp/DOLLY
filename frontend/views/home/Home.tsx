@@ -29,16 +29,16 @@ const Home: React.FC = () => {
             <section className="steps">
                 <div className="step-row" data-aos="fade-up">
                     <div className="step" data-aos="fade-right">
-                        <h2>Step 1: IoT Domain Modeling</h2>
-                        <p>Define a set of Digital Shadows for mirroring IoT entities.</p>
+                        <h2>Step 1: Domain Data Modeling</h2>
+                        <p>Define the Domain Data Model.</p>
                        
-                        <Link to="/iot">
+                        <Link to="/domaindata">
                             <button className="get-started-button">Get Started</button>
                         </Link>
                     </div>
                     <div className="step" data-aos="fade-left">
                         <h2>Step 2: Process Modeling</h2>
-                        <p>Model, save and edit Business Processes using the Standard BPMN 2.0.</p>
+                        <p>Model, save and edit the Business Process using the Standard BPMN 2.0.</p>
 
                         <Link to="/bpmn">
                             <button className="get-started-button">Get Started</button>
@@ -46,13 +46,8 @@ const Home: React.FC = () => {
                     </div>
                 </div>
                 <div className="step-row" data-aos="fade-up">
-                    <div className="step" data-aos="fade-right">
-                        <h2>Step 3: Process Simulation</h2>
-                        <p>Learn how to use the main features of the app effectively.</p>
-
-                    </div>
                     <div className="step" data-aos="fade-left">
-                        <h2>Step 4: Process Monitoring</h2>
+                        <h2>Step 3: Process Simulation and Monitoring</h2>
                         <p>Track your progress and analyze data with our built-in tools.</p>
                         <img style={{margin: "10px", position:"relative"}}  src={monitoring} width="80%" height="180"/>
                     </div>
