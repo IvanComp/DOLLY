@@ -1,0 +1,22 @@
+# Usa un'immagine di base con supporto per il runtime necessario (es: openjdk)
+FROM openjdk:17-jdk-slim
+
+# Crea una directory per gli script
+WORKDIR /app
+
+# Copia tutti gli script nel container
+COPY domaindataAPI/ app/
+
+RUN ls -R /app
+
+# Rendi eseguibili tutti gli script nella cartella extras
+RUN chmod +x /app/extras/*
+
+# Esegui gli script in sequenza all'avvio del container
+CMD /bin/bash -c "/app/extras/build-application && \
+                  sleep 15 && \
+                  /app/extras/init-db && \
+                  sleep 5 && \
+                  /app/extras/start-db-server && \
+                  sleep 5 && \
+                  /app/extras/start-service"

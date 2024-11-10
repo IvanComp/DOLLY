@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile.application
+    container_name: application
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./domaindataAPI:/app/domaindataAPI
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock 
+    environment:
+      DOCKER_HOST_IP: host.docker.internal
+
+  domaindata:
+    build:
+      context: .
+      dockerfile: Dockerfile.domaindata
+    container_name: domaindata
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./domaindataAPI:/app/domaindataAPI
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock 
+    environment:
+      DOCKER_HOST_IP: host.docker.internal
+    depends_on:
+      - application      
+
+  simulatedstation:
+    build:
+      context: .
+      dockerfile: Dockerfile.simulatedstation
+    container_name: simulatedstation
+    ports:
+      - "8080:8081"
+    volumes:
+      - ./data:/app/data
+      - ./domaindataAPI:/app/domaindataAPI
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock 
+    environment:
+      DOCKER_HOST_IP: host.docker.internal
+    depends_on:
+      - application            
