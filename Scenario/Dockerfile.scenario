@@ -1,0 +1,15 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Installa tkinter per Python
+RUN apt-get update && apt-get install -y python3-tk && rm -rf /var/lib/apt/lists/*
+
+COPY home.py /app/
+COPY img /app/img/
+
+RUN pip install --no-cache-dir Flask Flask-Cors requests Pillow
+
+EXPOSE 8081
+
+CMD ["python3", "home.py"]

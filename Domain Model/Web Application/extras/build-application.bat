@@ -1,3 +1,0 @@
-dir
-cd ../
-mvn package
