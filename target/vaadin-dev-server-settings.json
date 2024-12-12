@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "/Users/ivan/Desktop/cartella senza nome/frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "/Users/ivan/Desktop/cartella senza nome/frontend/generated/jar-resources",
+  "staticOutput": "/Users/ivan/Desktop/cartella senza nome/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "/Users/ivan/Desktop/cartella senza nome/target/classes/META-INF/VAADIN/config",
+  "frontendBundleOutput": "/Users/ivan/Desktop/cartella senza nome/target/classes/META-INF/VAADIN/webapp",
+  "devBundleOutput": "/Users/ivan/Desktop/cartella senza nome/target/dev-bundle/webapp",
+  "devBundleStatsOutput": "/Users/ivan/Desktop/cartella senza nome/target/dev-bundle/config",
+  "jarResourcesFolder": "/Users/ivan/Desktop/cartella senza nome/frontend/generated/jar-resources",
+  "themeName": "merodemicroservicesbuilderforiot",
+  "clientServiceWorkerSource": "/Users/ivan/Desktop/cartella senza nome/target/sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
