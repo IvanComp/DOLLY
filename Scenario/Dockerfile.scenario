@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y python3-tk && rm -rf /var/lib/apt/lists
 COPY home.py /app/
 COPY img /app/img/
 
-RUN pip install --no-cache-dir Flask Flask-Cors requests Pillow
+RUN python3 install --no-cache-dir Flask Flask-Cors requests Pillow
 
 EXPOSE 8081
 

@@ -30,19 +30,27 @@ export default function MenuOnLeftLayout() {
   const matches = useViewMatches();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAPIOnline, setIsAPIOnline] = useState(false);
+  const [isBPMOnline, setIsBPMOnline] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
   };
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:4567');
-      setIsAPIOnline(response.status === 200);
+      const responseAPI = await axios.get('https://httpbin.org/get');
+      setIsAPIOnline(responseAPI.status === 200);
     } catch (error) {
       setIsAPIOnline(false);
     }
+  
+    try {
+      const responseBPM = await axios.get('http://localhost:26250');
+      setIsBPMOnline(responseBPM.status === 200);
+    } catch (error) {
+      setIsBPMOnline(false);
+    }
   };
-
+  
   useEffect(() => {
     fetchData(); // Esegui la chiamata iniziale al montaggio del componente
 
@@ -90,47 +98,84 @@ export default function MenuOnLeftLayout() {
             </NavLink>
           ))}
         </nav>
-        <div style={{position: "relative",top:"10px", marginLeft:'3px', height:"100px", width: "90%", backgroundColor: "#EAF6FF", border: "2px solid black", borderRadius: "10px", textAlign: "left", margin: "auto" }}>
-          <a style={{marginLeft:'3%',fontWeight:"bold", color:'#334F6D',top:"10px",bottom:'10px'}}>Settings </a>
-          <br/>
-          <div style={{ display: 'flex', alignItems: 'left', }}>
-          <a style={{fontWeight:"bold", marginLeft:"7%", color:'#154A57'}}>API Status: </a><a style={{marginLeft:"13%"}}><div>
-              {isAPIOnline ? (
-                  <div>
-          <span style={{ fontWeight: 'normal', color: 'black' }}>
-           <a href="http://localhost:4567" target="_blank">
-              Online <div className="online-dot"></div>
-           </a>
-          </span>
-                  </div>
-              ) : (
-                  <div>
-          <span style={{ fontWeight: 'normal', color: 'black'}}>
-           Offline <div className="offline-dot" style={{marginLeft:"1px"}}></div>
-          </span>
-                  </div>
-              )}
-        </div></a><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the API Orchestrator for Domain Model Instances"}/>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'left' }}>
-          <a style={{fontWeight:"bold",marginLeft:"7%", color:'#154A57',marginRight:"9%"}}>BP Engine:</a><div>
-            {isAPIOnline ? (
-                <div>
-          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"-5px" }}>
-           Online <div className="online-dot" ></div>
-          </span>
-                </div>
-            ) : (
-                <div>
-          <span style={{ fontWeight: 'normal', color: 'black', marginLeft:"10px"}}>
-            Offline <div className="offline-dot" style={{marginLeft:"1px"}}></div>
-          </span>
-                </div>
-            )}
-        </div><CiCircleQuestion style={{fontSize:'18px',marginBottom:"3%",cursor:"help"}} title={"This is the status of the BPM Engine"}/>
-          </div>
 
-          </div>
+        <div
+  style={{
+    position: "relative",
+    margin: "15px auto",
+    padding: "5px",
+    height: "auto",
+    width: "80%",
+    backgroundColor: "#EAF6FF",
+    border: "2px solid black",
+    borderRadius: "10px",
+    textAlign: "left",
+  }}
+>
+  <h3 style={{ fontWeight: "bold", color: "#334F6D", marginBottom: "5px" }}>
+    Settings
+  </h3>
+
+  {/* API Status */}
+  <div style={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
+    <span style={{ fontWeight: "bold", color: "#154A57", flex: "0 0 60%",fontSize: "14px" }}>
+      Data Model:
+    </span>
+    <span style={{ flex: "1 0 auto" }}>
+      {isAPIOnline ? (
+        <a
+          href="http://localhost:4567"
+          target="_blank"
+          style={{
+            textDecoration: "none",
+            color: "green",
+            fontWeight: "bold",
+          }}
+        >
+          Online <div className="online-dot" style={{fontSize: "14px" }}></div>
+        </a>
+      ) : (
+        <span style={{ color: "red", fontWeight: "bold" }}>
+          Offline <div className="offline-dot" style={{fontSize: "14px" }}></div>
+        </span>
+      )}
+    </span>
+    <CiCircleQuestion
+      style={{
+        fontSize: "18px",
+        cursor: "help",
+        marginLeft: "10px",
+      }}
+      title="This is the status of the API Orchestrator for Domain Model Instances"
+    />
+  </div>
+
+  {/* BPM Engine Status */}
+  <div style={{ display: "flex", alignItems: "center" }}>
+    <span style={{ fontWeight: "bold", color: "#154A57", flex: "0 0 60%", fontSize: "14px" }}>
+      BPM Engine:
+    </span>
+    <span style={{ flex: "1 0 auto" }}>
+      {isBPMOnline ? (
+        <span style={{ color: "green", fontWeight: "bold" }}>
+          Online <div className="online-dot" style={{ display: "inline-block" }}></div>
+        </span>
+      ) : (
+        <span style={{ color: "red", fontWeight: "bold" }}>
+          Offline <div className="offline-dot" style={{ display: "inline-block" }}></div>
+        </span>
+      )}
+    </span>
+    <CiCircleQuestion
+      style={{
+        fontSize: "18px",
+        cursor: "help",
+        marginLeft: "10px",
+      }}
+      title="This is the status of the BPM Engine"
+    />
+  </div>
+</div>
 
         <div style={{position: 'absolute', bottom: '5px', left: '0', width: '100%', margin: '0 auto'}}>
           <hr style={{color: 'red', backgroundColor:'#5b5b65', border:'none', height: '1px', margin: '5px 5%', width: '90%'}} />
@@ -145,12 +190,12 @@ export default function MenuOnLeftLayout() {
                 References
               </a>
               <FaBug style={{ verticalAlign: 'middle',marginBottom:"1px", marginRight:"3px" }} />
-              <a style={{ marginLeft: '1%', fontSize: '14px',  }} href="mailto:ivan.compagnucci@unicam.it">
+              <a style={{ marginLeft: '1%', fontSize: '14px',  }} href="mailto:ivan.compagnucci@gmail.com">
                 Report a Bug
               </a>
               <br/>
               <MdAlternateEmail style={{ verticalAlign: 'middle', marginBottom:"2px", marginRight:"3px"  }} />
-              <a style={{ marginLeft: '1%', fontSize: '14px' }} href="mailto:ivan.compagnucci@unicam.it">
+              <a style={{ marginLeft: '1%', fontSize: '14px' }} href="mailto:ivan.compagnucci@gmail.com">
                 Contact
               </a>
             </p>

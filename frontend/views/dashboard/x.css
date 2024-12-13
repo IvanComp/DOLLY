@@ -63,28 +63,27 @@ h1.available-platforms {
 
 /* Stile per lo status "Online" */
 .online-dot {
-    width: 12px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #30ff02;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-    border: 1px solid black;
-    animation: blink 2s infinite;
+    width: 12px;                /* Dimensione del cerchio */
+    height: 12px;               /* Altezza uniforme con la larghezza */
+    border-radius: 50%;         /* Forma circolare */
+    background-color: #30ff02;  /* Verde brillante */
+    display: inline-block;      /* Mantiene il layout in linea */
+    vertical-align: middle;     /* Allineamento verticale centrale */
+    margin: 0 0 0 3px;          /* Margine destro per uniformità */
+    border: 1px solid black;    /* Bordo nero per definizione */
+    animation: blink 2s infinite; /* Aggiunge animazione di lampeggio */
 }
 
 /* Stile per lo status "Offline" */
 .offline-dot {
-    width: 12px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    border: 1px solid black;
-    animation: blink 2s infinite;
+    width: 12px;                /* Dimensione del cerchio */
+    height: 12px;               /* Altezza uniforme con la larghezza */
+    border-radius: 50%;         /* Forma circolare */
+    background-color: #ff4d4d;  /* Rosso brillante */
+    display: inline-block;      /* Mantiene il layout in linea */
+    vertical-align: middle;     /* Allineamento verticale centrale */      
+    border: 1px solid black;    /* Bordo nero per definizione */
+    animation: blink 2s infinite; /* Aggiunge animazione di lampeggio */
 }
 
 @keyframes blink {
@@ -92,3 +91,7 @@ h1.available-platforms {
     50% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+.v-button {
+    cursor: pointer;
+    }

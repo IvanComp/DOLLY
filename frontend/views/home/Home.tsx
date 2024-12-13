@@ -29,27 +29,72 @@ const Home: React.FC = () => {
             <section className="steps">
                 <div className="step-row" data-aos="fade-up">
                     <div className="step" data-aos="fade-right">
-                        <h2>Step 1: Domain Data Modeling</h2>
-                        <p>Define the Domain Data Model.</p>
-                       
+                        <h2>Step 1: Data Modeling</h2>
+                        <p>
+                            Define the Data Model following the{" "}
+                            <a
+                                href="https://merode.econ.kuleuven.be/MERODE.html"
+                                target="_blank"
+                            >
+                                MERODE Approach
+                            </a>
+                            .
+                        </p>
                         <Link to="/domaindata">
-                            <button className="get-started-button">Get Started</button>
+                            <button className="get-started-button">
+                                Get Started
+                            </button>
                         </Link>
                     </div>
                     <div className="step" data-aos="fade-left">
                         <h2>Step 2: Process Modeling</h2>
-                        <p>Model, save and edit the Business Process using the Standard BPMN 2.0.</p>
-
+                        <p>
+                            Model, save and edit the Business Process using the
+                            standard BPMN 2.0.
+                        </p>
                         <Link to="/bpmn">
-                            <button className="get-started-button">Get Started</button>
+                            <button className="get-started-button">
+                                Get Started
+                            </button>
                         </Link>
                     </div>
                 </div>
-                <div className="step-row" data-aos="fade-up">
-                    <div className="step" data-aos="fade-left">
+
+                <div
+                    className="step-row"
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        margin: "0 auto", // Center-align the row
+                    }}
+                    data-aos="fade-up"
+                >
+                    <div
+                        className="step"
+                        style={{
+                            width: "100%", // Make it as wide as the two above
+                            maxWidth: "1200px", // Optional: constrain max width
+                            textAlign: "center", // Center-align the text
+                        }}
+                    >
                         <h2>Step 3: Process Simulation and Monitoring</h2>
-                        <p>Track your progress and analyze data with our built-in tools.</p>
-                        <img style={{margin: "10px", position:"relative"}}  src={monitoring} width="80%" height="180"/>
+                        <p>
+                            Track your progress and analyze data with our
+                            built-in tools.
+                        </p>
+                        <img
+                            style={{
+                                margin: "20px auto",
+                                display: "block",
+                                width: "100%",
+                                maxWidth: "400px", // Reduced image size
+                                height: "auto",
+                            }}
+                            src={monitoring}
+                            alt="Monitoring Simulation"
+                        />
                     </div>
                 </div>
             </section>

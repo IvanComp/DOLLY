@@ -56,78 +56,37 @@ However, implementing the optimized version of the process in a real-world setti
 
 ## Prerequisites
 
-- [Node](https://nodejs.org/en) 20.12.2 or later;
-- [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) 17 or later (Be sure that you have set the JAVA_HOME environment variable pointing to version 17 of the Java JDK);
-- [Maven](https://maven.apache.org/download.cgi) 3.9.5 or later;
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose (version v2.29.2 or higher)](https://docs.docker.com/compose/install/)
 
-  There are several ways to run DOLLY:
+Make sure to have Docker and Docker Compose installed on your system to run this project.
 
-<details>
-<summary>1 Using cmd</summary>
-<br>
-1. First of all, clone this repository and run the following command to install dependencies:
+- **Docker**: Required to create and run containers.
+- **Docker Compose**: Enables running multi-container applications with Docker using the `docker-compose.yml` file.
 
+You can verify the installation with the following commands:
 ```bash
-yarn install
+docker --version
+docker compose version
 ```
 
-1.1 Run the tool locally by executing the following command:
+## Run DOLLY
 
-for Windows:
-```bash
-.\mvnw
-```
-for macOS / Linux:
-```bash
-./mvnw
-```
-
-Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
-<br><br>
-</details>
-
-<details>
-<summary>2 Import the project into an IDE</summary>
-<br>
-  
-2.1 First of all, clone this repository and run the following command to install dependencies:
-
-```bash
-yarn install
-```
-
-2.2 Run the Application.java class using Spring:
-
-```bash
- DOLLY\src\main\java\com\example\application\Application.java
-```
-
-Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
-<br><br>
-</details>
-
-
-<details>
-<summary>3 Using Docker (Recommended!)</summary>
-<br>
-  
-3.1 Use the docker image "Dockerfile" present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/ivanpd/adaptive-shadow);
+Use Docker Compose present in the folder of the project or available online at [DockerHub](https://hub.docker.com/r/ivanpd/adaptive-shadow);
    
-- Generate the .jar file for building the image   
+- 1. Generate the .jar file of the application
 ```bash
 mvn clean package -Pproduction
 ```
-- Creating the Docker image from the main folder of the project by executing the following comand:
+
+- 2. Creating the Docker image from the main folder of the project by executing the following comand:
 
 ```bash
-docker build -t DOLLY-image .
+docker compose up 
 ```
 - Run the Docker container from the main folder of the project by executing the following comand:
 
-```bash
-docker run -p 8080:8080 DOLLY-image
-```
-Once launched, the application will be available at [http://localhost:8080](http://localhost:8080).
+Once launched, the frontend of DOLLY will be available at [http://localhost:8888](http://localhost:8888).
 
 <br><br>
 </details>

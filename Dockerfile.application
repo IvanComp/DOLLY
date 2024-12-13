@@ -1,8 +1,24 @@
 FROM eclipse-temurin:21-jre
 
+# Aggiorna il sistema e installa Python, pip e tkinter
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-tk \
+    && rm -rf /var/lib/apt/lists/*
+
+# Imposta il flag per bypassare la gestione esterna dei pacchetti Python
+RUN pip3 install --break-system-packages --no-cache-dir Flask Flask-Cors requests Pillow
+
+# Imposta la directory di lavoro per Java
 WORKDIR /app
+
+# Copia i file necessari per l'app
 COPY target/*.jar /app/app.jar
 COPY . .
+
+# Espone la porta su cui l'app Java è in ascolto
 EXPOSE 8080
 
+# Comando per avviare l'app Java
 ENTRYPOINT ["java", "-jar", "./app.jar"]

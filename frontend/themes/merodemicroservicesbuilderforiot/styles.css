@@ -1,0 +1,9 @@
+/* frontend/themes/<your-theme>/styles.css */
+vaadin-button {
+    cursor: pointer;
+}
+
+/* Se i pulsanti hanno una classe specifica, ad esempio "menu-button": */
+.menu-button {
+    cursor: pointer;
+}

@@ -16,8 +16,6 @@ interface Device {
     state: any;
 }
 
-
-
 export default function MicroservicesView() {
     const [dataArray, setDataArray] = useState<Platform[]>([]);
     const [featureArray, setFeatureArray] = useState<any[]>([]);
@@ -44,6 +42,26 @@ export default function MicroservicesView() {
         } catch (error) {
             console.error('Errore durante il recupero dei dati:', error);
         }
+    };
+    
+    const executePythonScript = () => {
+        const { exec } = window.require('child_process');
+    
+        // Specifica il comando per eseguire il file Python
+        exec('python3 scenario/home.py', (error: { message: any; }, stdout: any, stderr: any) => {
+            if (error) {
+                console.error(`Error: ${error.message}`);
+                alert(`Errore durante l'esecuzione: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.warn(`Stderr: ${stderr}`);
+                alert(`Warning: ${stderr}`);
+                return;
+            }
+            console.log(`Output: ${stdout}`);
+            alert(`Script eseguito con successo:\n${stdout}`);
+        });
     };
 
     const createPlatform = async () => {
@@ -603,7 +621,8 @@ export default function MicroservicesView() {
                         textAlign: 'center',
                     }} onClick={createDevice}> + <br></br>Create <br></br>Device
                     </button>
-                    <input style={{
+                    <input
+                    style={{
                         position: 'absolute',
                         top: "8px",
                         right: "42px",
@@ -616,7 +635,11 @@ export default function MicroservicesView() {
                         border: '2px solid #334F6D',
                         borderRadius: '3px',
                         cursor: 'pointer'
-                    }} onClick={open3D} disabled={true} type="submit" value="🔎 Open 3D View"/>
+                    }}
+                    onClick={executePythonScript}
+                    type="submit"
+                    value="📊 Dynamic View of Data Model"
+                />
                 </div>
             )}
 

@@ -44,12 +44,13 @@ export const useViewMatches = useMatches as () => readonly ViewRouteMatch[];
 export const routes: readonly ViewRouteObject[] = [
     {
         element: <MainLayout />,
-        handle: { icon: undefined, title: 'Main' },
+        handle: { icon: undefined, title: 'Main',},
         children: [
             { path: '/', element: <Home />, handle: { title: 'Home Page' }},
-            { path: '/domaindata', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'Domain Data Modeling' }},
-            { path: '/bpmn', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'Process Modeling' }},
-            { path: '/simulation', element: <Simulation />, handle: { icon: 'chalkboard-solid', title: 'BPMN Simulation' }},
+            { path: '/domaindata', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'Data Modeling' }},
+            { path: '/bpmn', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'Process Modeling'}},
+            { path: '/monitoring', element: <Monitoring />, handle: { icon: 'chalkboard-solid', title: 'BPMN Monitoring' }},
+            { path: '/simulation', element: <Simulation />, handle: { icon: 'chart-line-solid', title: 'BPMN Simulation' }},
             { path: '/about', element: <AboutView />, handle: { icon: 'github', title: 'About' }},
             { path: '/3d', element: <ThreeDee /> },
         ],
