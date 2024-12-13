@@ -982,7 +982,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     --lumo-box-shadow-xl: 0 4px 24px -3px var(--lumo-shade-20pct), 0 18px 64px -8px var(--lumo-shade-40pct);
 
     /* Clickable element cursor */
-    --lumo-clickable-cursor: default;
+    --lumo-clickable-cursor: pointer;
   }
 `;li`
   html {

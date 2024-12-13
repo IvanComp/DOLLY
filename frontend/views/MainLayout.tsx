@@ -37,7 +37,7 @@ export default function MenuOnLeftLayout() {
 
   const fetchData = async () => {
     try {
-      const responseAPI = await axios.get('https://httpbin.org/get');
+      const responseAPI = await axios.get('http://localhost:4567/platform');
       setIsAPIOnline(responseAPI.status === 200);
     } catch (error) {
       setIsAPIOnline(false);

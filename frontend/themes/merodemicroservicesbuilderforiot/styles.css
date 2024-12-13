@@ -1,0 +1,12 @@
+/* In your global CSS file */
+:root {
+    --lumo-clickable-cursor: pointer;
+  }
+  
+  button {
+    cursor: var(--lumo-clickable-cursor);
+  }
+  
+  a {
+    cursor: var(--lumo-clickable-cursor);
+  }

@@ -127,7 +127,7 @@ export default function Simulation() {
                             }}
                             onClick={() => simulateDiagram(file)}
                         >
-                           <MdAutoGraph style={{ marginRight: '5px' }} /> Prepare Business Process Simulation
+                           <MdAutoGraph style={{ marginRight: '5px' }} /> Simulate Business Process 
                         </button>
                     </div>
                 </div>

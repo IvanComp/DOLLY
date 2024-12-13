@@ -8,7 +8,9 @@ import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
 import { BsDiagram2 } from "react-icons/bs";
 import { MdOutlineSearch } from "react-icons/md";
 import { MdFileUpload } from "react-icons/md";
+import { MdOutlineBrokenImage } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
+import { MdChecklist } from "react-icons/md";
 import { MdPlayCircleOutline } from "react-icons/md";
 import { MdAutoGraph } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -432,7 +434,7 @@ export default function BpmnEditor() {
                                                     }}
                                                     onClick={() => simulateDiagram(file)}
                                                 >
-                                                    <MdAutoGraph style={{ marginRight: '5px' }} /> Simulate
+                                                    <MdOutlineBrokenImage style={{ marginRight: '5px' }} /> Simulate
                                                 </button>
                                             </div>
                                         </div>
