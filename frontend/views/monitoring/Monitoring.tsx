@@ -176,25 +176,32 @@ export default function Monitoring() {
 
     {/* Pulsanti di controllo */}
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center", padding: "10px", flex: "1", gap: "10px", height: "100%" }}>
-      {/* Pulsante Deploy */}
-      <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={deployDiagram}>
-        <MdPlayCircleOutline style={{ marginRight: "5px" }} /> Deploy
-      </button>
+        {/* Pulsante Deploy */}
+        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={deployDiagram}>
+            <MdPlayCircleOutline style={{ marginRight: "5px" }} /> Deploy
+        </button>
 
-      {/* Pulsante Task List */}
-      <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={taskList}>
-        <MdChecklist style={{ marginRight: "5px" }} /> Task List
-      </button>
+        {/* Pulsante Task List */}
+        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={taskList}>
+            <MdChecklist style={{ marginRight: "5px" }} /> Task List
+        </button>
 
-      {/* Pulsante Monitor */}
-      <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={analyzeDiagram}>
-        <MdMonitorHeart style={{ marginRight: "5px" }} /> Monitor
-      </button>
+        {/* Pulsante Monitor */}
+        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={analyzeDiagram}>
+            <MdMonitorHeart style={{ marginRight: "5px" }} /> Monitor
+        </button>
 
-      {/* Pulsante Optimize */}
-      <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
-        <MdAutoGraph style={{ marginRight: "5px" }} /> Optimize
-      </button>
+        {/* Pulsante Optimize */}
+        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
+            <MdAutoGraph style={{ marginRight: "5px" }} /> Optimize
+        </button>
+
+        {/* Titolo e Sottotitolo */}
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <h3 style={{ margin: "0", color: "#324e6c" }}>Process Variables</h3>
+            <p style={{ margin: "5px", fontSize: "14px", color: "#777" }}>Test 1</p>
+            <p style={{ margin: "5px", fontSize: "14px", color: "#777" }}>Test 2</p>
+        </div>
     </div>
   </div>
 )}
