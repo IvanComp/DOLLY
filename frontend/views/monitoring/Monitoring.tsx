@@ -50,24 +50,8 @@ export default function Monitoring() {
         }
     };
 
-    const simulateDiagram = async (file: string) => {
-        try {
-            const response = await axios.get(`/get-diagram/${file}`, { responseType: 'text' });
-            const fileContent = response.data;
-            const encodedContent = btoa(fileContent);
+    const deployDiagram = async (file: string) => {
 
-            console.log(response.data);
-
-            if (iframeSampleRef.current) {
-                iframeSampleRef.current.loadBimpWithFile({
-                    fileName: file,
-                    fileContent: encodedContent,
-                });
-            }
-        } catch (error) {
-            console.error('Failed to simulate diagram:', error);
-            notyf.error('Failed to simulate diagram!');
-        }
     };
 
     return (
@@ -90,7 +74,7 @@ export default function Monitoring() {
                             alignItems: 'center',
                         }}
                     >
-                        <BsDiagram2 style={{ padding: '10px', fontSize: '22px' }} />
+                        <BsDiagram2 style={{ padding: '10px', fontSize: '22px'}} />
                         <div
                             className="file-info-item-name file-name"
                             style={{
@@ -122,7 +106,7 @@ export default function Monitoring() {
                                 fontWeight: 'bold',
                                 alignItems: 'center',
                             }}
-                            onClick={() => simulateDiagram(file)}
+                            onClick={() => deployDiagram(file)}
                         >
                            <MdAutoGraph style={{ marginRight: '5px' }} /> Deploy Business Process 
                         </button>

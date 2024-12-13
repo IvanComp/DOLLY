@@ -44,7 +44,7 @@ export default function MenuOnLeftLayout() {
     }
   
     try {
-      const responseBPM = await axios.get('http://localhost:26250');
+      const responseBPM = await axios.get('http://localhost:8888/engine-rest/engine');
       setIsBPMOnline(responseBPM.status === 200);
     } catch (error) {
       setIsBPMOnline(false);

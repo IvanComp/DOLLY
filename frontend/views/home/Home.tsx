@@ -61,42 +61,51 @@ const Home: React.FC = () => {
                 </div>
 
                 <div
-                    className="step-row"
+                    className="step"
                     style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "100%",
-                        margin: "0 auto", // Center-align the row
+                        width: "100%", // Full width
+                        textAlign: "center", // Center-align text horizontally
+                        marginBottom: "20px", // Optional space below the text
                     }}
                     data-aos="fade-up"
                 >
+                    <h2>Step 3: Process Monitoring, Analysis and Simulation</h2>
+                    <p>
+                        Track and analyze your process with this built-in tools.
+                    </p>
+
                     <div
-                        className="step"
                         style={{
-                            width: "100%", // Make it as wide as the two above
-                            maxWidth: "1200px", // Optional: constrain max width
-                            textAlign: "center", // Center-align the text
+                            display: "flex", // Use flexbox to create two columns
+                            justifyContent: "space-between", // Space out images evenly
+                            gap: "20px", // Add space between images
+                            width: "100%", // Ensure the container takes full width
                         }}
+                        data-aos="fade-up"
                     >
-                        <h2>Step 3: Process Simulation and Monitoring</h2>
-                        <p>
-                            Track your progress and analyze data with our
-                            built-in tools.
-                        </p>
-                        <img
-                            style={{
-                                margin: "20px auto",
-                                display: "block",
-                                width: "100%",
-                                maxWidth: "400px", // Reduced image size
-                                height: "auto",
-                            }}
-                            src={monitoring}
-                            alt="Monitoring Simulation"
-                        />
-                    </div>
+
+                    <div
+                                style={{
+                                    width: "60%", // Adjust width for the text block
+                                    height: "auto", // Let text take necessary height
+                                    textAlign: "center", // Align text to the left
+                                }}
+                            >
+                                <p>Nam sit amet arcu pellentesque, maximus lorem at, condimentum erat. Donec non sollicitudin leo, in suscipit neque. Fusce sapien tortor, tempor eu elementum id, lacinia non lectus. Cras at laoreet metus, eu tincidunt lorem. Vivamus nec dolor id felis volutpat gravida in eget leo. Proin faucibus scelerisque ante, at maximus ex sollicitudin ac. Sed dictum ornare tortor, id bibendum tortor efficitur id. Aliquam venenatis nisl at dui congue, non luctus turpis vulputate. Phasellus tincidunt ligula et mauris rhoncus blandit. Donec elementum lorem id quam blandit, pellentesque suscipit nunc malesuada. Curabitur convallis lacus id egestas porta. Quisque sit amet ornare enim. Quisque ac est sodales, elementum ex eu, gravida sapien. Sed mattis, nisl nec semper iaculis, justo odio fermentum mi, vel mattis massa elit quis erat.</p>
+                            </div>
+
+                    <img
+                        style={{
+                            width: "40%", // Adjust the width of the first image
+                            height: "40%",
+                            maxWidth: "100%", // Constrain image width
+                        }}
+                        src={monitoring}
+                        alt="Monitoring Simulation"
+                    />
+                    
                 </div>
+                </div>               
             </section>
         </div>
     );
