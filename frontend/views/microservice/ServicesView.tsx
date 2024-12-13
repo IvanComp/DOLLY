@@ -6,6 +6,7 @@ import './fileList.css';
 import axios from 'axios';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
 import { BsDiagram2 } from "react-icons/bs";
+import { MdOutlineSearch } from "react-icons/md";
 import { MdFileUpload } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { MdPlayCircleOutline } from "react-icons/md";
@@ -120,7 +121,9 @@ export default function BpmnEditor() {
     const fetchDiagramList = async () => {
         try {
             const response = await axios.get('/list-diagrams');
-            setFileList(response.data);
+            if (JSON.stringify(response.data) !== JSON.stringify(fileList)) {
+                setFileList(response.data); 
+            }
         } catch (error) {
             console.error('Failed to fetch diagrams:', error);
             notyf.error('Failed to load diagram list!');
@@ -136,33 +139,33 @@ export default function BpmnEditor() {
     };
 
     const importNewDiagram = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault();
+        event.preventDefault(); // Previene il comportamento predefinito
+        event.stopPropagation();
         const file = event.target.files?.[0];
         if (!file) {
             notyf.error('No file selected!');
             return;
         }
     
-        if (!file.name.endsWith('.bpmn')) { // Controlla l'estensione
+        if (!file.name.endsWith('.bpmn')) {
             notyf.error('Invalid file format! Only .bpmn files are allowed.');
             return;
         }
     
         try {
-            const fileContent = await file.text(); // Leggi il contenuto del file
+            const fileContent = await file.text();
             const fileName = file.name;
     
-            // Simula un salvataggio nel backend
-            await axios.post('/save-diagram', { 
+            await axios.post('/save-diagram', {
                 xml: fileContent,
-                filename: fileName
+                filename: fileName,
             }, {
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             });
     
-            setFileList((prev) => [...prev, fileName]); // Aggiorna la lista dei file
+            setFileList((prev) => [...prev, fileName]);
             notyf.success('Diagram imported successfully!');
         } catch (error) {
             console.error('Error importing diagram:', error);
@@ -213,34 +216,34 @@ export default function BpmnEditor() {
         }
     };
     const deleteDiagram = async (filename: any) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to delete this BPMN model?",
-            icon: 'warning',
-            showDenyButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            denyButtonText: 'No, cancel!',
-            cancelButtonText: 'Cancel',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete(`/delete-diagram/${filename}`).then(() => {
+        try {
+            await Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this BPMN model?",
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                denyButtonText: 'No, cancel!',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await axios.delete(`/delete-diagram/${filename}`);
                     console.log('Diagram deleted successfully.');
                     notyf.success('Diagram deleted successfully!');
-                    fetchDiagramList();
-                }).catch((error) => {
-                    console.error('Failed to delete diagram:', error);
-                    notyf.error('Failed to delete diagram!');
-                });
-            } else if (result.isDenied) {
-                console.log('Deletion cancelled.');
-                notyf.error('Deletion cancelled!');
-            }
-        });
+                    fetchDiagramList(); // Aggiorna solo la lista senza ricaricare la pagina
+                } else {
+                    console.log('Deletion cancelled.');
+                    notyf.error('Deletion cancelled!');
+                }
+            });
+        } catch (error) {
+            console.error('Failed to delete diagram:', error);
+            notyf.error('Failed to delete diagram!');
+        }
     };
     const loadDiagram = async (filename: any) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: `Do you want to load the BPMN model named "${filename}"?`,
+            text: `Do you want to load the BPMN model: "${filename}"?`,
             icon: 'question',
             showDenyButton: true,
             confirmButtonText: 'Yes, load it!',
@@ -280,8 +283,9 @@ export default function BpmnEditor() {
                     type: 'warning',
                     message: 'Starting the Simulation of the BPMN model...'
                 });
-                // Add any logic here to actually perform the simulation
-                // For example, you might call a function to simulate or display the model dynamically
+    
+                // Usa window.location.href per il redirect
+                window.location.href = '/simulation';
             } else if (result.isDismissed) {
                 console.log('Simulation cancelled.');
                 notyf.error('Simulation cancelled!');
@@ -291,7 +295,7 @@ export default function BpmnEditor() {
     const deployDiagram = async (filename: any) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: `Do you want to start the deployment for the BPMN model named "${filename}"?`,
+            text: `Do you want to start the deployment for the BPMN model: "${filename}"?`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Yes, start deployment',
@@ -303,28 +307,28 @@ export default function BpmnEditor() {
                     type: 'warning',
                     message: 'Starting the Deployment of the BPMN model...'
                 });
-                // Here, you would add any logic needed to actually deploy the model
-                // For example, an API call to a server that handles the deployment
+    
+                // Esegui il redirect alla pagina /monitoring
+                window.location.href = '/monitoring';
             } else if (result.isDismissed) {
                 console.log('Deployment cancelled.');
                 notyf.error('Deployment cancelled!');
             }
         });
     };
-
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
                 {fileList.length === 0 && deviceArray.length === 0 ? (
                     <div style={{ margin: '20px', fontSize: '28px', color: '#555', textAlign: 'center', width: '100%' }}>
-                        Create or Import a new .bpmn diagram to start
+                        Create or Import a new .bpmn diagram to start.
                     </div>
                 ) : (
                     <>
                         <div>
                             {fileList.length > 0 && (
                                 <>
-                                    <h3 style={{ margin: '10px' }}>BPMN Models</h3>
+                                    <h3 style={{ margin: '10px' }}>Process Models</h3>
                                     {fileList.map((file, index) => (
                                         <div className="file-info" key={index} style={{ display: 'flex' }}>
                                             <div
@@ -374,7 +378,7 @@ export default function BpmnEditor() {
                                                     }}
                                                     onClick={() => loadDiagram(file)}
                                                 >
-                                                    <MdFileUpload style={{ marginRight: '5px' }} /> Load
+                                                    <MdOutlineSearch style={{ marginRight: '5px' }} /> Visualize
                                                 </button>
     
                                                 <button
@@ -439,7 +443,7 @@ export default function BpmnEditor() {
                         <div>
                             {deviceArray.length > 0 && (
                                 <>
-                                    <h3 style={{ marginLeft: '15px', marginTop: '15px' }}>Available Devices</h3>
+                                    <h3 style={{ marginLeft: '15px', marginTop: '15px' }}>Data Models</h3>
                                     <div
                                         className="library-container"
                                         style={{ display: 'flex', flexDirection: 'row', marginTop: '10px' }}

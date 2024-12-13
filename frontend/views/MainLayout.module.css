@@ -75,3 +75,13 @@ vaadin-scroller[slot="drawer"] {
   -webkit-mask-repeat: var(--mask-repeat);
   -webkit-mask-position: var(--mask-position);
 }
+
+/* frontend/themes/<your-theme>/styles.css */
+vaadin-button {
+  cursor: pointer;
+}
+
+/* Se i pulsanti hanno una classe specifica, ad esempio "menu-button": */
+.menu-button {
+  cursor: pointer;
+}

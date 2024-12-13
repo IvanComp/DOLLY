@@ -65,14 +65,19 @@ public class controllerBPMN {
     public String saveDiagram(@RequestBody Map<String, String> diagramInfo) throws IOException {
         String xml = diagramInfo.get("xml");
         String filename = diagramInfo.get("filename");
-
+    
         if (!Files.exists(baseFolderPath)) {
             Files.createDirectories(baseFolderPath);
         }
-
-        Path filePath = baseFolderPath.resolve(filename + ".bpmn");
+    
+        // Verifica se il nome contiene già .bpmn
+        if (!filename.endsWith(".bpmn")) {
+            filename += ".bpmn";
+        }
+    
+        Path filePath = baseFolderPath.resolve(filename);
         filePath = ensureUniqueFilename(filePath);
-
+    
         Files.writeString(filePath, xml);
         return "Diagram saved successfully at " + filePath;
     }
