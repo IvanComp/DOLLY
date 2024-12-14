@@ -7,13 +7,18 @@ import "./MonitCSS.css"
 // @ts-ignore
 import BpmnJS from "bpmn-js";
 import "../microservice/fileList.css";
+// @ts-ignore
+import { IframeSample } from "../../components/bimp-ui/IframeSample";
 
 export default function Monitoring() {
   const [fileList, setFileList] = useState<string[]>([]);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const bpmnContainerRef = useRef<HTMLDivElement | null>(null);
-  const [isDeployed, setIsDeployed] = useState(0);  // Traccia lo stato di deployment
+  const [isDeployed, setIsDeployed] = useState(0);  
+  const [isValid, setisValid] = useState(1);  
+  const iframeSampleRef = useRef<IframeSample>(null);
+  const [showIframe, setShowIframe] = useState(true);
 
   useEffect(() => {
     fetchDiagramList();
@@ -88,13 +93,13 @@ export default function Monitoring() {
     }
   };
 
-  const analyzeDiagram = () => {
-    const monitoringUrl = `http://localhost:8081/operate`;
+  const monitorDiagram = () => {
+    const monitoringUrl = `http://localhost:8080/camunda/app/cockpit`;
     window.open(monitoringUrl, "_blank");
   };
 
   const taskList = () => {
-    const taskListUrl = `http://localhost:8082/tasklist`;
+    const taskListUrl = `http://localhost:8080/camunda/app/tasklist`;
     window.open(taskListUrl, "_blank");
   };
 
@@ -139,17 +144,47 @@ export default function Monitoring() {
     }
   };
 
+  const simulateDiagram = async (file: string) => {
+    try {
+      const response = await axios.get(`/get-diagram/${file}`, {
+        responseType: "text",
+      });
+      const fileContent = response.data;
+      const encodedContent = btoa(fileContent);
+
+      if (iframeSampleRef.current) {
+        iframeSampleRef.current.loadBimpWithFile({
+          fileName: file,
+          fileContent: encodedContent,
+        });
+      }
+
+      setShowIframe(true); // Mostra l'iFrame
+    } catch (error) {
+      console.error("Failed to simulate diagram:", error);
+      notyf.error("Failed to simulate diagram!");
+    }
+  };
+
   return (
     <div style={{ margin: "15px" }}>
-      <h2 style={{ marginLeft: "0px", marginTop: "20px" }}>BPMN Models</h2>
+      <h2 style={{ marginBottom: "10px"}}>BPMN Models</h2>
+      
+      <thead>
+        <tr className="headerStyle">
+          <th className="cellStyle">File Name</th>
+          <th className="cellStyle">Status</th>
+          <th className="cellStyle">Validation</th>
+        </tr>
+      </thead>
 
       {fileList.map((file, index) => (
         <div
           key={index}
           style={{
             border: isExpanded && selectedFile === file ? "none" : "1px solid rgba(0, 0, 0, 0.05)",
-            margin: "10px",
-            padding: "10px",
+            padding: "1px 10px",
+            marginBottom:"3px",
             borderRadius: "5px",
             fontSize: "15px",
             color: "black",
@@ -184,13 +219,26 @@ export default function Monitoring() {
           Not Deployed
         </span>
       )}
-            </div>
+
+      {isValid === 1 ? (
+        <span className="badge deployed" style={{ marginLeft: "10px" }}>
+          <MdCheckCircle style={{ marginRight: "5px" }} />
+          Valid
+        </span>
+      ) : (
+        <span className="badge not-deployed" style={{ marginLeft: "10px" }}>
+          <MdCancel style={{ marginRight: "5px" }} />
+          Invalid
+        </span>
+      )}
+
+    </div>
             {isExpanded && selectedFile === file ? (
               <MdExpandLess style={{ fontSize: "22px" }} />
             ) : (
               <MdExpandMore style={{ fontSize: "22px" }} />
             )}
-          </div>
+  </div>
           {isExpanded && selectedFile === file && (
             <div style={{ display: "flex", flexDirection: "row", marginTop: "15px", backgroundColor: "#e6f7ff", padding: "10px", borderRadius: "8px" }}>
         {/* Container del diagramma BPMN */}
@@ -207,7 +255,7 @@ export default function Monitoring() {
         </button>
 
         {/* Pulsante Monitor */}
-        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={analyzeDiagram}>
+        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={monitorDiagram}>
             <MdMonitorHeart style={{ marginRight: "5px" }} /> Monitor
         </button>
 
@@ -217,7 +265,7 @@ export default function Monitoring() {
         </button>
 
         {/* Pulsante Simulate */}
-        <button disabled style={{width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
+        <button style={{width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={() => simulateDiagram(file)}>
             <MdOutlineInsertChartOutlined style={{ marginRight: "5px" }} /> Simulate
         </button>
 
@@ -231,12 +279,22 @@ export default function Monitoring() {
             <h3 style={{ margin: "0", color: "#324e6c" }}>Process Variables</h3>
             <p style={{ margin: "5px", fontSize: "14px", color: "#777" }}>Test 1</p>
             <p style={{ margin: "5px", fontSize: "14px", color: "#777" }}>Test 2</p>
-        </div>
+        </div>       
+
     </div>
   </div>
+  
 )}
+
         </div>
+        
       ))}
+    {showIframe && (
+                <div style={{ marginTop: "15px" }}>
+                  <h3>Business Process Simulation</h3>
+                  <IframeSample ref={iframeSampleRef} />
+                </div>
+              )} 
     </div>
   );
 }

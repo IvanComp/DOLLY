@@ -36,7 +36,7 @@ export default function MenuOnLeftLayout() {
     }
   
     try {
-      const responseBPM = await axios.get('http://localhost:8888/engine-rest/engine');
+      const responseBPM = await axios.get('http://localhost:8080/engine-rest/engine');
       setIsBPMOnline(responseBPM.status === 200);
     } catch (error) {
       setIsBPMOnline(false);
@@ -104,13 +104,13 @@ export default function MenuOnLeftLayout() {
     textAlign: "left",
   }}
 >
-  <h3 style={{ fontWeight: "bold", color: "#334F6D", marginBottom: "5px" }}>
+  <h3 style={{ fontWeight: "bold", fontSize: "18px", color: "#334F6D", marginBottom: "5px" }}>
     Settings
   </h3>
 
   {/* API Status */}
   <div style={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
-    <span style={{ marginLeft:"5px", fontWeight: "bold", color: "#154A57", flex: "0 0 60%",fontSize: "18px" }}>
+    <span style={{ marginLeft:"5px", fontWeight: "bold", color: "#334F6D", flex: "0 0 60%",fontSize: "15px" }}>
       Data Model:
     </span>
     <span style={{ flex: "1 0 auto" }}>
@@ -136,7 +136,7 @@ export default function MenuOnLeftLayout() {
 
   {/* BPM Engine Status */}
   <div style={{ display: "flex", alignItems: "center" }}>
-    <span style={{ marginLeft:"5px", fontWeight: "bold", color: "#154A57", flex: "0 0 60%", fontSize: "18px" }}>
+    <span style={{ marginLeft:"5px", fontWeight: "bold", color: "#334F6D", flex: "0 0 60%", fontSize: "15px" }}>
       BPM Engine:
     </span>
     <span style={{ flex: "1 0 auto" }}>

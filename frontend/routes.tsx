@@ -4,7 +4,7 @@ import { createBrowserRouter, IndexRouteObject, NonIndexRouteObject, useMatches 
 import ServicesView from "Frontend/views/microservice/ServicesView.js";
 import DashboardView from "Frontend/views/dashboard/DashboardView.js";
 import ThreeDee from "Frontend/views/3d/ThreeDee.js";
-import Monitoring from "Frontend/views/monitoring/Monitoring.js";
+import Management from "Frontend/views/monitoring/Management.js";
 import { TbDeviceHeartMonitorFilled } from "react-icons/tb";
 import { FaGithub, FaGlobe } from "react-icons/fa";  // Importing icons from react-icons
 import Simulation from "Frontend/views/simulation/Simulation.js";
@@ -49,8 +49,7 @@ export const routes: readonly ViewRouteObject[] = [
             { path: '/', element: <Home />, handle: { title: 'Home Page' }},
             { path: '/domaindata', element: <DashboardView />, handle: { icon: 'broadcast-tower-solid', title: 'Data Modeling' }},
             { path: '/bpmn', element: <ServicesView />, handle: { icon: 'sitemap-solid', title: 'Process Modeling'}},
-            { path: '/monitoring', element: <Monitoring />, handle: { icon: 'chalkboard-solid', title: 'BPMN Monitoring' }},
-            { path: '/simulation', element: <Simulation />, handle: { icon: 'chart-line-solid', title: 'BPMN Simulation' }},
+            { path: '/management', element: <Management />, handle: { icon: 'chalkboard-solid', title: 'Process Management' }},
             { path: '/about', element: <AboutView />, handle: { icon: 'github', title: 'About' }},
             { path: '/3d', element: <ThreeDee /> },
         ],

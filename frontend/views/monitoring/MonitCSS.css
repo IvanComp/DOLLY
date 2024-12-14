@@ -22,6 +22,13 @@
     font-weight: 600;
   }
   
+  .button:disabled,
+  .button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
   .deployed {
     background-color: var(--lumo-success-color-10pct);
     color: var(--lumo-success-text-color);
@@ -36,3 +43,23 @@
   .badge svg {
     margin-right: 5px;
   }
+
+  .headerStyle {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+/* Stile per le righe della tabella */
+.rowStyle {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+/* Stile per le celle della tabella */
+.cellStyle {
+    padding: 10px;
+    text-align: left;
+}
