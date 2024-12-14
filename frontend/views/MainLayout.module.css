@@ -85,3 +85,101 @@ vaadin-button {
 .menu-button {
   cursor: pointer;
 }
+
+/* styles.css */
+h1.available-platforms {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.platform-container {
+  background-color: #9bd59b;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 140px;
+  width: 280px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.platform-feature {
+  background-color: #9bbbd5;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 140px;
+  width: 280px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.platform-device {
+  background-color: #d5cb9b;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 140px;
+  width: 280px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.small-font {
+  font-size: 70%;
+  font-weight: bold;
+  position: relative;
+  color: #343232;
+  bottom: -19px;
+}
+
+/* Stile generale per il contenitore */
+.library-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Stile per lo stato (grassetto) */
+.platform-container span {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+/* Stile per lo status "Online" */
+.online-dot {
+  width: 12px;                /* Dimensione del cerchio */
+  height: 12px;               /* Altezza uniforme con la larghezza */
+  border-radius: 50%;         /* Forma circolare */
+  background-color: #30ff02;  /* Verde brillante */
+  display: inline-block;      /* Mantiene il layout in linea */
+  vertical-align: middle;     /* Allineamento verticale centrale */
+  margin: 0 0 0 3px;          /* Margine destro per uniformità */
+  border: 1px solid black;    /* Bordo nero per definizione */
+  animation: blink 2s infinite; /* Aggiunge animazione di lampeggio */
+}
+
+/* Stile per lo status "Offline" */
+.offline-dot {
+  width: 12px;                /* Dimensione del cerchio */
+  height: 12px;               /* Altezza uniforme con la larghezza */
+  border-radius: 50%;         /* Forma circolare */
+  background-color: #ff4d4d;  /* Rosso brillante */
+  display: inline-block;      /* Mantiene il layout in linea */
+  vertical-align: middle;     /* Allineamento verticale centrale */      
+  border: 1px solid black;    /* Bordo nero per definizione */
+  animation: blink 2s infinite; /* Aggiunge animazione di lampeggio */
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.v-button {
+  cursor: pointer;
+  }

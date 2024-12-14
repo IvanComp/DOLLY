@@ -1,0 +1,205 @@
+networks:
+  camunda-cloud: {}
+  camunda-platform: {}
+  
+services:
+  c7-client:
+    container_name: c7-client
+    depends_on:
+    - camunda-7
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1000M
+        reservations:
+          memory: 1000M
+    environment:
+      CAMUNDA_API: http://camunda-7:8080/engine-rest/message
+      CAMUNDA_REST_BASE: http://camunda-7:8080/engine-rest
+      DATA_API_URI: http://data-api:9000/api
+      MAIL_HOST: smtp
+      MAIL_PORT: 2500
+      PORT: 8080
+      PROFILES: client,cors,prod,email,user-data
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://camunda-7:8080/engine-rest/engine
+      timeout: 10s
+    image: ghcr.io/camunda-consulting/camunda-demo-c7-client:latest
+    networks:
+    - camunda-platform
+    ports:
+    - 9012:8080
+    restart: always
+    volumes:
+    - ./certs:/opt/certs
+  camunda-7:
+    container_name: camunda-7
+    depends_on:
+    - postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1000M
+        reservations:
+          memory: 1000M
+    environment:
+      DB_DRIVER: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/camunda?user=camunda&password=camunda&characterEncoding=UTF-8&reWriteBatchedInserts=true
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://camunda-7:8080/engine-rest/engine
+      timeout: 10s
+    image: camunda/camunda-bpm-platform:run-latest
+    networks:
+    - camunda-platform
+    ports:
+    - 8080:8080
+    restart: always
+    volumes:
+    - ./certs:/opt/certs
+  data-api:
+    container_name: data-api
+    depends_on:
+    - postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1000M
+        reservations:
+          memory: 1000M
+    environment:
+      DATABASE_DRIVER: org.postgresql.Driver
+      DATABASE_URL: jdbc:postgresql://postgres:5432/camunda?user=camunda&password=camunda&characterEncoding=UTF-8&reWriteBatchedInserts=true
+      MAX_POOL_SIZE: 3
+      PORT: 9000
+      PROFILES: data,user,case,cors,prod
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:9000/api
+      timeout: 10s
+    image: ghcr.io/camunda-consulting/camunda-demo-data:latest
+    networks:
+    - camunda-platform
+    ports:
+    - 9000:9000
+    restart: always
+    volumes:
+    - ./certs:/opt/certs
+  postgres:
+    container_name: postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '3'
+          memory: 5000M
+        reservations:
+          memory: 2000M
+    environment:
+      POSTGRESQL_DATABASE: camunda
+      POSTGRESQL_ENABLE_TLS: 'yes'
+      POSTGRESQL_PASSWORD: camunda
+      POSTGRESQL_TLS_CERT_FILE: /opt/bitnami/postgresql/certs/postgres.crt
+      POSTGRESQL_TLS_KEY_FILE: /opt/bitnami/postgresql/certs/postgres.key
+      POSTGRESQL_USER: camunda
+    image: bitnami/postgresql:11.14.0
+    networks:
+    - camunda-platform
+    ports:
+    - 5432:5432
+    restart: always
+    volumes:
+    - ./certs:/opt/bitnami/postgresql/certs
+  reactjs:
+    container_name: reactjs
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1000M
+        reservations:
+          memory: 1000M
+    environment:
+      SERVER_PORT: 8080
+    image: ghcr.io/camunda-consulting/camunda-demo-ui:latest
+    networks:
+    - camunda-platform
+    ports:
+    - 3000:8080
+  smtp:
+    container_name: smpt-mailslurper
+    image: datydock/mailslurper
+    networks:
+    - camunda-platform
+    ports:
+    - 2500:2500
+    - 9999:8080
+    - 8085:8085
+    volumes:
+    - ./mailslurper-config.json:/opt/mailslurper/config.json
+  optimize:
+    container_name: optimize
+    depends_on:
+      - elasticsearch
+    environment:
+      OPTIMIZE_ELASTICSEARCH_HOST: elasticsearch
+      OPTIMIZE_ELASTICSEARCH_HTTP_PORT: '9200'
+      CAMUNDA_OPTIMIZE_ENGINE_REST_URL: http://camunda-7:8080/engine-rest
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost:8083/api/readyz || exit 1
+      timeout: 5s
+    image: camunda/optimize:3.12.12
+    networks:
+      - camunda-platform
+    ports:
+      - 8083:8090
+    volumes:
+      - ./.optimize/environment-config.yaml:/optimize/config/environment-config.yaml
+  elasticsearch: # https://hub.docker.com/_/elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cat/health | grep -q green" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+    networks:
+      - camunda-platform
+version: '3.8'
+volumes:
+  certs: null
+  elastic: null

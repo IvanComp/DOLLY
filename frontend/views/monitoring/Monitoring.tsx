@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BsDiagram2 } from "react-icons/bs";
 import axios from "axios";
-import { MdChecklist, MdCancel, MdCheckCircle, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
+import { MdOutlineInsertChartOutlined, MdChecklist, MdCancel, MdCheckCircle, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { Notyf } from "notyf";
 import "./MonitCSS.css"
 // @ts-ignore
@@ -112,7 +112,7 @@ export default function Monitoring() {
   
       // Effettua la chiamata al server per fare il deploy
       const response = await axios.post(
-        "http://localhost:8080/engine-rest/deployment/create",
+        "http://localhost:26500",
         formData,
         {
           headers: {
@@ -206,18 +206,23 @@ export default function Monitoring() {
             <MdPlayCircleOutline style={{ marginRight: "5px" }} /> Deploy
         </button>
 
-        {/* Pulsante Task List */}
-        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={taskList}>
-            <MdChecklist style={{ marginRight: "5px" }} /> Task List
-        </button>
-
         {/* Pulsante Monitor */}
         <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={analyzeDiagram}>
             <MdMonitorHeart style={{ marginRight: "5px" }} /> Monitor
         </button>
 
+        {/* Pulsante Task List */}
+        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={taskList}>
+            <MdChecklist style={{ marginRight: "5px" }} /> Task List
+        </button>
+
+        {/* Pulsante Simulate */}
+        <button disabled style={{width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
+            <MdOutlineInsertChartOutlined style={{ marginRight: "5px" }} /> Simulate
+        </button>
+
         {/* Pulsante Optimize */}
-        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
+        <button disabled style={{width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
             <MdAutoGraph style={{ marginRight: "5px" }} /> Optimize
         </button>
 

@@ -15,14 +15,6 @@ import {CiCircleQuestion} from "react-icons/ci";
 import axios from "axios";
 import {FaBug} from "react-icons/fa";
 
-const handleButtonClick = () => {
-  fetch('http://localhost:8080/run-scripts')
-      .then(response => response.text())
-      .then(message => alert(message))
-      .catch(error => alert('Failed to execute scripts'));
-};
-
-
 type MenuRoute = ViewRouteObject &
   Readonly<{ path: string; handle: Required<MenuProps>; }>;
 
@@ -118,7 +110,7 @@ export default function MenuOnLeftLayout() {
 
   {/* API Status */}
   <div style={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
-    <span style={{ fontWeight: "bold", color: "#154A57", flex: "0 0 60%",fontSize: "14px" }}>
+    <span style={{ marginLeft:"5px", fontWeight: "bold", color: "#154A57", flex: "0 0 60%",fontSize: "18px" }}>
       Data Model:
     </span>
     <span style={{ flex: "1 0 auto" }}>
@@ -132,48 +124,32 @@ export default function MenuOnLeftLayout() {
             fontWeight: "bold",
           }}
         >
-          Online <div className="online-dot" style={{fontSize: "14px" }}></div>
+          Online
         </a>
       ) : (
         <span style={{ color: "red", fontWeight: "bold" }}>
-          Offline <div className="offline-dot" style={{fontSize: "14px" }}></div>
+          Offline 
         </span>
       )}
     </span>
-    <CiCircleQuestion
-      style={{
-        fontSize: "18px",
-        cursor: "help",
-        marginLeft: "10px",
-      }}
-      title="This is the status of the API Orchestrator for Domain Model Instances"
-    />
   </div>
 
   {/* BPM Engine Status */}
   <div style={{ display: "flex", alignItems: "center" }}>
-    <span style={{ fontWeight: "bold", color: "#154A57", flex: "0 0 60%", fontSize: "14px" }}>
+    <span style={{ marginLeft:"5px", fontWeight: "bold", color: "#154A57", flex: "0 0 60%", fontSize: "18px" }}>
       BPM Engine:
     </span>
     <span style={{ flex: "1 0 auto" }}>
       {isBPMOnline ? (
         <span style={{ color: "green", fontWeight: "bold" }}>
-          Online <div className="online-dot" style={{ display: "inline-block" }}></div>
+          Online 
         </span>
       ) : (
         <span style={{ color: "red", fontWeight: "bold" }}>
-          Offline <div className="offline-dot" style={{ display: "inline-block" }}></div>
+          Offline 
         </span>
       )}
     </span>
-    <CiCircleQuestion
-      style={{
-        fontSize: "18px",
-        cursor: "help",
-        marginLeft: "10px",
-      }}
-      title="This is the status of the BPM Engine"
-    />
   </div>
 </div>
 
