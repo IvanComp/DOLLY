@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BsDiagram2 } from "react-icons/bs";
 import axios from "axios";
-import { MdChecklist, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
+import { MdChecklist, MdCancel, MdCheckCircle, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { Notyf } from "notyf";
+import "./MonitCSS.css"
 // @ts-ignore
 import BpmnJS from "bpmn-js";
 import "../microservice/fileList.css";
@@ -12,6 +13,7 @@ export default function Monitoring() {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const bpmnContainerRef = useRef<HTMLDivElement | null>(null);
+  const [isDeployed, setIsDeployed] = useState(0);  // Traccia lo stato di deployment
 
   useEffect(() => {
     fetchDiagramList();
@@ -103,10 +105,12 @@ export default function Monitoring() {
 
   const deployDiagram = async () => {
     if (!selectedFile) return;
+  
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
-
+  
+      // Effettua la chiamata al server per fare il deploy
       const response = await axios.post(
         "http://localhost:8080/engine-rest/deployment/create",
         formData,
@@ -116,11 +120,21 @@ export default function Monitoring() {
           },
         }
       );
-
-      notyf.success(`Deployment of ${selectedFile} successful!`);
-      console.log("Deploy Response:", response.data);
+  
+      // Verifica se il deploy è riuscito controllando la risposta
+      if (response.status === 200 || response.status === 201) {
+        setIsDeployed(1);  // Imposta il deploy come riuscito
+        notyf.success(`Deployment of ${selectedFile} successful!`);
+        console.log("Deploy Response:", response.data);
+      } else {
+        // Gestione del fallimento del deploy
+        setIsDeployed(0);  // In caso di errore
+        notyf.error(`Failed to deploy ${selectedFile}`);
+      }
     } catch (error) {
+      // Gestione di eventuali errori
       console.error("Deployment failed:", error);
+      setIsDeployed(0);  // Imposta come non deployato
       notyf.error(`Failed to deploy ${selectedFile}`);
     }
   };
@@ -159,6 +173,17 @@ export default function Monitoring() {
               title={file}
             >
               {file}
+              {isDeployed === 1 ? (
+        <span className="badge deployed" style={{ marginLeft: "10px" }}>
+          <MdCheckCircle style={{ marginRight: "5px" }} />
+          Deployed
+        </span>
+      ) : (
+        <span className="badge not-deployed" style={{ marginLeft: "10px" }}>
+          <MdCancel style={{ marginRight: "5px" }} />
+          Not Deployed
+        </span>
+      )}
             </div>
             {isExpanded && selectedFile === file ? (
               <MdExpandLess style={{ fontSize: "22px" }} />
@@ -167,12 +192,12 @@ export default function Monitoring() {
             )}
           </div>
           {isExpanded && selectedFile === file && (
-  <div style={{ display: "flex", flexDirection: "row", marginTop: "15px", backgroundColor: "#e6f7ff", padding: "10px", borderRadius: "8px" }}>
-    {/* Container del diagramma BPMN */}
-    <div style={{ border: "1px solid #ddd", padding: "10px", flex: "3", height: "500px", overflow: "auto", background: "#fff", borderRadius: "8px" }}>
-      <h3 style={{ margin: "0", marginBottom: "10px" }}>BPMN Model</h3>
-      <div ref={bpmnContainerRef} style={{ border: "1px solid #ddd", height: "650px", backgroundColor: "#f9f9f9" }}></div>
-    </div>
+            <div style={{ display: "flex", flexDirection: "row", marginTop: "15px", backgroundColor: "#e6f7ff", padding: "10px", borderRadius: "8px" }}>
+        {/* Container del diagramma BPMN */}
+        <div style={{ border: "1px solid #ddd", padding: "10px", flex: "3", height: "auto", overflow: "auto", background: "#fff", borderRadius: "8px" }}>
+            <h3 style={{ margin: "0", marginBottom: "10px" }}>BPMN Model</h3>
+            <div ref={bpmnContainerRef} style={{ border: "1px solid #ddd", height: "650px", width: "2000px", overflowX: "auto", overflowY: "auto", backgroundColor: "#f9f9f9" }}></div>
+        </div>
 
     {/* Pulsanti di controllo */}
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center", padding: "10px", flex: "1", gap: "10px", height: "100%" }}>

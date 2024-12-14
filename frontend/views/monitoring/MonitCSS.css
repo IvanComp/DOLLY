@@ -1,0 +1,38 @@
+@keyframes blink {
+    0% {
+      background-color: var(--lumo-success-color-10pct);
+      opacity: 1;
+    }
+    50% {
+      background-color: var(--lumo-success-color-20pct); /* Cambia leggermente il colore per l'effetto lampeggiante */
+      opacity: 0.7; /* Cambia l'opacità per l'effetto lampeggiante */
+    }
+    100% {
+      background-color: var(--lumo-success-color-10pct);
+      opacity: 1;
+    }
+  }
+  
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .deployed {
+    background-color: var(--lumo-success-color-10pct);
+    color: var(--lumo-success-text-color);
+    animation: blink 1.5s infinite; /* Aggiungi l'animazione al badge "deployed" */
+  }
+  
+  .not-deployed {
+    background-color: var(--lumo-error-color-10pct);
+    color: var(--lumo-error-text-color);
+  }
+  
+  .badge svg {
+    margin-right: 5px;
+  }
