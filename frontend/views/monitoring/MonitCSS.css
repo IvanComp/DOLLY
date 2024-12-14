@@ -61,5 +61,6 @@
 /* Stile per le celle della tabella */
 .cellStyle {
     padding: 10px;
+    margin-left: 300px;
     text-align: left;
 }

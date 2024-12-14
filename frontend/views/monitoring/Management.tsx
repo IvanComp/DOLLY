@@ -170,63 +170,72 @@ export default function Monitoring() {
     <div style={{ margin: "15px" }}>
       <h2 style={{ marginBottom: "10px"}}>BPMN Models</h2>
       
-      <thead>
-        <tr className="headerStyle">
-          <th className="cellStyle">File Name</th>
-          <th className="cellStyle">Status</th>
-          <th className="cellStyle">Validation</th>
-        </tr>
-      </thead>
+      <div
+        className="header-bar"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 2fr 2fr", // 3:2:2 per File Name, Status, Validation
+          alignItems: "center",
+          padding: "10px",
+          borderBottom: "1px solid #ccc",
+          background: "#f8f9fa",
+          fontWeight: "bold",
+          fontSize: "16px",
+          textAlign: "center",
+        }}
+      >
+        <p style={{ margin: 0, marginLeft:"0px" }}>File Name</p>
+        <p style={{ margin: 0 }}>Status</p>
+        <p style={{ margin: 0 }}>Validation</p>
+      </div>
 
       {fileList.map((file, index) => (
-        <div
-          key={index}
+        <div key={index}
           style={{
             border: isExpanded && selectedFile === file ? "none" : "1px solid rgba(0, 0, 0, 0.05)",
-            padding: "1px 10px",
+            padding: "1px 1px",
             marginBottom:"3px",
             borderRadius: "5px",
             fontSize: "15px",
             color: "black",
+            justifyContent: "space-evenly",
             background: isExpanded && selectedFile === file ? "#f0fcff" : "#ffffff",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={() => toggleExpand(file)}>
-            <BsDiagram2 style={{ padding: "10px", fontSize: "22px" }} />
+            <BsDiagram2 style={{ padding: "2px", fontSize: "22px" }} />
             <div
               className="file-info-item-name file-name"
               style={{
                 fontSize: "14px",
                 padding: "5px",
                 color: "black",
-                marginRight: "auto",
-                whiteSpace: "nowrap",
                 overflow: "hidden",
-                textOverflow: "ellipsis",
                 maxWidth: "80%",
               }}
               title={file}
             >
               {file}
-              {isDeployed === 1 ? (
-        <span className="badge deployed" style={{ marginLeft: "10px" }}>
+
+      {isDeployed === 1 ? (
+        <span className="badge deployed" style={{ marginLeft: "30px" }}>
           <MdCheckCircle style={{ marginRight: "5px" }} />
           Deployed
         </span>
       ) : (
-        <span className="badge not-deployed" style={{ marginLeft: "10px" }}>
+        <span className="badge not-deployed" style={{ marginLeft: "30px"}}>
           <MdCancel style={{ marginRight: "5px" }} />
           Not Deployed
         </span>
       )}
 
       {isValid === 1 ? (
-        <span className="badge deployed" style={{ marginLeft: "10px" }}>
+        <span className="badge deployed" style={{ marginLeft: "30px" }}>
           <MdCheckCircle style={{ marginRight: "5px" }} />
           Valid
         </span>
       ) : (
-        <span className="badge not-deployed" style={{ marginLeft: "10px" }}>
+        <span className="badge not-deployed" style={{ marginLeft: "30px" }}>
           <MdCancel style={{ marginRight: "5px" }} />
           Invalid
         </span>
