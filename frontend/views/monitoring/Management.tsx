@@ -3,7 +3,10 @@ import { BsDiagram2 } from "react-icons/bs";
 import axios from "axios";
 import { MdOutlineInsertChartOutlined, MdChecklist, MdCancel, MdCheckCircle, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { Notyf } from "notyf";
+import { HiOutlineArrowSmallUp } from "react-icons/hi2";
 import "./MonitCSS.css"
+import { HiClipboardList } from "react-icons/hi";
+import { VscEyeClosed } from "react-icons/vsc";
 // @ts-ignore
 import BpmnJS from "bpmn-js";
 import "../microservice/fileList.css";
@@ -16,9 +19,15 @@ export default function Monitoring() {
   const [isExpanded, setIsExpanded] = useState(false);
   const bpmnContainerRef = useRef<HTMLDivElement | null>(null);
   const [isDeployed, setIsDeployed] = useState(0);  
+  const [optimization, setoptimization] = useState(1);  
   const [isValid, setisValid] = useState(1);  
   const iframeSampleRef = useRef<IframeSample>(null);
   const [showIframe, setShowIframe] = useState(true);
+  const simulationSectionRef = useRef<HTMLDivElement | null>(null);
+  // Valori dinamici per Process Info
+  const [deploymentId, setDeploymentId] = useState<string | null>(null);
+  const [runningInstances, setRunningInstances] = useState<number | null>(null);
+  const [manualTasks, setManualTasks] = useState<number | null>(null);
 
   useEffect(() => {
     fetchDiagramList();
@@ -93,6 +102,19 @@ export default function Monitoring() {
     }
   };
 
+  const copyToClipboard = (text: string) => {
+    if (!text) {
+      notyf.error("No Deployment ID to copy!");
+      return;
+    }
+    
+    navigator.clipboard.writeText(text).then(() => {
+      notyf.success("Copied to Clipboard!");
+    }).catch(() => {
+      notyf.error("Failed to copy!");
+    });
+  };
+
   const monitorDiagram = () => {
     const monitoringUrl = `http://localhost:8080/camunda/app/cockpit`;
     window.open(monitoringUrl, "_blank");
@@ -151,15 +173,18 @@ export default function Monitoring() {
       });
       const fileContent = response.data;
       const encodedContent = btoa(fileContent);
-
+  
       if (iframeSampleRef.current) {
         iframeSampleRef.current.loadBimpWithFile({
           fileName: file,
           fileContent: encodedContent,
         });
       }
-
+  
       setShowIframe(true); // Mostra l'iFrame
+  
+      // Scorri fino alla sezione "Business Process Simulation"
+      simulationSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     } catch (error) {
       console.error("Failed to simulate diagram:", error);
       notyf.error("Failed to simulate diagram!");
@@ -198,7 +223,6 @@ export default function Monitoring() {
             borderRadius: "5px",
             fontSize: "15px",
             color: "black",
-            justifyContent: "space-evenly",
             background: isExpanded && selectedFile === file ? "#f0fcff" : "#ffffff",
           }}
         >
@@ -249,17 +273,17 @@ export default function Monitoring() {
             )}
   </div>
           {isExpanded && selectedFile === file && (
-            <div style={{ display: "flex", flexDirection: "row", marginTop: "15px", backgroundColor: "#e6f7ff", padding: "10px", borderRadius: "8px" }}>
+            <div style={{ display: "flex", flexDirection: "row", marginTop: "1px", backgroundColor: "#e6f7ff", padding: "10px" }}>
         {/* Container del diagramma BPMN */}
         <div style={{ border: "1px solid #ddd", padding: "10px", flex: "3", height: "auto", overflow: "auto", background: "#fff", borderRadius: "8px" }}>
-            <h3 style={{ margin: "0", marginBottom: "10px" }}>BPMN Model</h3>
-            <div ref={bpmnContainerRef} style={{ border: "1px solid #ddd", height: "650px", width: "2000px", overflowX: "auto", overflowY: "auto", backgroundColor: "#f9f9f9" }}></div>
+            <h3 style={{ margin: "0", marginBottom: "10px" }}>Model Preview</h3>
+            <div ref={bpmnContainerRef} style={{ border: "1px solid #ddd", height: "400px", width: "2000px", overflowX: "auto", overflowY: "auto", backgroundColor: "#f9f9f9" }}></div>
         </div>
 
     {/* Pulsanti di controllo */}
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center", padding: "10px", flex: "1", gap: "10px", height: "100%" }}>
         {/* Pulsante Deploy */}
-        <button style={{ width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={deployDiagram}>
+        <button  disabled={isDeployed === 1} style={{ cursor: isDeployed === 1 ? "not-allowed" : "pointer", background: isDeployed === 1 ? "gray" : "white", opacity: isDeployed === 1 ? "0.5" : "1", width: "150px", height: "40px", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={deployDiagram}>
             <MdPlayCircleOutline style={{ marginRight: "5px" }} /> Deploy
         </button>
 
@@ -279,15 +303,35 @@ export default function Monitoring() {
         </button>
 
         {/* Pulsante Optimize */}
-        <button disabled style={{width: "150px", height: "40px", background: "white", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", cursor: "pointer", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
+        <button disabled={optimization === 1}  style={{opacity: optimization === 1 ? "0.5" : "1", cursor: optimization === 1 ? "not-allowed" : "pointer", width: "150px", height: "40px", color: "#324e6c", fontSize: "15px", borderRadius: "5px", border: "1px solid #324e6c", fontWeight: "bold", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={optimizeDiagram}>
             <MdAutoGraph style={{ marginRight: "5px" }} /> Optimize
         </button>
 
         {/* Titolo e Sottotitolo */}
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <h3 style={{ margin: "0", color: "#324e6c" }}>Process Variables</h3>
-            <p style={{ margin: "5px", fontSize: "14px", color: "#777" }}>Test 1</p>
-            <p style={{ margin: "5px", fontSize: "14px", color: "#777" }}>Test 2</p>
+            <h3 style={{ margin: "0", color: "#324e6c" }}>Process Info</h3>
+            <table className="process-info-table">
+              <tbody>
+                <tr>
+                  <td>Deployment ID:</td>
+                  <td>
+                    <HiClipboardList 
+                      style={{ cursor: "pointer", color: "#324e6c", marginRight: "5px" }} 
+                      onClick={() => copyToClipboard(deploymentId ? deploymentId.toString() : "")} 
+                      title="Copy Deployment ID"
+                    />
+                    {deploymentId ?? "Not available"}
+                  </td> </tr>
+                <tr>
+                  <td>Running Instances:</td>
+                  <td>{runningInstances ?? "-"}</td>
+                </tr>
+                <tr>
+                  <td>Manual Tasks:</td>
+                  <td>{manualTasks ?? "False"}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>       
 
     </div>
@@ -298,12 +342,33 @@ export default function Monitoring() {
         </div>
         
       ))}
-    {showIframe && (
-                <div style={{ marginTop: "15px" }}>
-                  <h3>Business Process Simulation</h3>
-                  <IframeSample ref={iframeSampleRef} />
-                </div>
-              )} 
+        {showIframe && (
+          <div ref={simulationSectionRef} style={{ marginTop: "15px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",  }}>
+              <h3> <MdOutlineInsertChartOutlined style={{ marginRight: "5px", fontSize:"15px" }} />Business Process Simulation</h3>
+              <button
+                style={{
+                  background: "white",
+                  color: "white",
+                  margin:"5px",
+                  marginLeft:"15px",
+                  borderRadius: "5px",
+                  border: "1px solid #324e6c",
+                  padding: "6px 8px",
+                  cursor: "pointer",
+                  fontSize: "8px",                 
+                }}
+                onClick={() => {
+                  setShowIframe(false); // Nasconde l'iFrame
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // Scorri verso l'alto
+                }}
+              >
+                <HiOutlineArrowSmallUp style={{color: "#1C2950", fontSize:"15px"}} />
+              </button>
+            </div>
+            <IframeSample ref={iframeSampleRef} />
+          </div>
+        )}
     </div>
   );
 }

@@ -12,6 +12,13 @@
     flex-grow: 1;
 }
 
+@media (max-width: 768px) {
+    .header-bar,
+    .file-info-item-name {
+      gridTemplateColumns: 1fr; /* Colonne diventano una singola riga */
+    }
+  }
+  
 .file-info-badge-name {
     box-sizing: border-box;
     white-space: nowrap;

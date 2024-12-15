@@ -5,14 +5,13 @@ import 'bpmn-js/dist/assets/diagram-js.css';
 import './fileList.css';
 import axios from 'axios';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
+import { MdOutlineInsertChartOutlined, MdChecklist, MdCancel, MdCheckCircle, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { BsDiagram2 } from "react-icons/bs";
+import { SiUml } from "react-icons/si";
 import { MdOutlineSearch } from "react-icons/md";
 import { MdFileUpload } from "react-icons/md";
 import { MdOutlineBrokenImage } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
-import { MdChecklist } from "react-icons/md";
-import { MdPlayCircleOutline } from "react-icons/md";
-import { MdAutoGraph } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
@@ -33,6 +32,7 @@ export default function BpmnEditor() {
     const [fileList, setFileList] = useState<string[]>([]);
     const [showModeler, setShowModeler] = useState(false); // New state to manage visibility
     const [deviceArray, setDeviceArray] = useState<Device[]>([]);
+    const [isValid, setisValid] = useState(1);  
 
     useEffect(() => {
         fetchData();
@@ -287,7 +287,7 @@ export default function BpmnEditor() {
                 });
     
                 // Esegui il redirect alla pagina /monitoring
-                window.location.href = '/monitoring';
+                window.location.href = '/management';
             } else if (result.isDismissed) {
                 console.log('Deployment cancelled.');
                 notyf.error('Deployment cancelled!');
@@ -303,102 +303,163 @@ export default function BpmnEditor() {
                     </div>
                 ) : (
                     <>
-                        <div style={{}}>
-                            {fileList.length > 0 && (
-                                <>
-                                    <h3 style={{margin:"10px"}}>Process Models</h3>
-                                    {fileList.map((file, index) => (
-                                        <div className="file-info" key={index} style={{ display: 'flex' }}>
-                                            <div
-                                                style={{
-                                                    border: '1px solid rgba(0, 0, 0, 0.05)',
-                                                    margin: '1px 10px',
-                                                    padding: '1px',
-                                                    borderRadius: '5px',
-                                                    marginBottom: '0px',
-                                                    fontSize: '15px',
-                                                    color: 'black',
-                                                    display: 'flex',
-                                                    width: '100%',
-                                                    alignItems: 'center',
-                                                }}
-                                            >
-                                                <BsDiagram2 style={{ padding: '10px', fontSize: '22px' }} />
-                                                <div
-                                                    className="file-info-item-name file-name"
-                                                    style={{
-                                                        fontSize: '14px',
-                                                        padding: '2px',
-                                                        color: 'black',
-                                                        marginRight: 'auto',
-                                                        whiteSpace: 'nowrap',
-                                                        overflow: 'hidden',
-                                                        textOverflow: 'ellipsis',
-                                                        maxWidth: '50%',
-                                                    }}
-                                                    title={file}
-                                                >
-                                                    {file.length > 20 ? `${file.substring(0, 20)}...` : file}
-                                                </div>
-    
-                                                <button
-                                                    style={{
-                                                        margin: '5px',
-                                                        background: '#aad4de',
-                                                        color: '#324e6c',
-                                                        fontSize: '15px',
-                                                        padding: '8px 12px',
-                                                        borderRadius: '5px',
-                                                        border: '1px solid #324e6c',
-                                                        cursor: 'pointer',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}
-                                                    onClick={() => loadDiagram(file)}
-                                                >
-                                                    <MdOutlineSearch style={{ marginRight: '5px' }} /> Visualize
-                                                </button>
-    
-                                                <button
-                                                    style={{
-                                                        margin: '5px',
-                                                        background: '#aad4de',
-                                                        color: '#324e6c',
-                                                        fontSize: '15px',
-                                                        padding: '8px 12px',
-                                                        borderRadius: '5px',
-                                                        border: '1px solid #324e6c',
-                                                        cursor: 'pointer',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}
-                                                    onClick={() => deleteDiagram(file)}
-                                                >
-                                                    <MdDeleteForever style={{ marginRight: '5px' }} /> Delete
-                                                </button>
-                                                <button
-                                                    style={{
-                                                        margin: '5px',
-                                                        background: '#aad4de',
-                                                        color: '#324e6c',
-                                                        fontSize: '15px',
-                                                        padding: '8px 12px',
-                                                        borderRadius: '5px',
-                                                        border: '1px solid #324e6c',
-                                                        cursor: 'pointer',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}
-                                                    onClick={() => manageDiagram(file)}
-                                                >
-                                                    <MdOutlineBrokenImage style={{ marginRight: '5px' }} /> Manage
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </>
-                            )}
-                        </div>
+                       <div>
+  {fileList.length > 0 && (
+    <>
+      <h3 style={{ margin: "10px" }}>Process Models</h3>
+      
+      {/* Header Bar */}
+      <div
+        className="header-bar"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(100px, 200px) minmax(150px, 300px) minmax(150px, 200px) minmax(150px, 200px)",
+          alignItems: "center",
+          padding: "5px",
+          marginLeft:"10px",
+          borderBottom: "1px solid #ccc",
+          background: "#f8f9fa",
+          fontWeight: "bold",
+          fontSize: "14px",
+          textAlign: "center",
+          width:"80%",
+        }}
+      >
+        <div>File Name</div>
+        <div>Data Model</div>
+        <div>XML Schema Validation</div>
+      </div>
+
+      {/* File List */}
+      {fileList.map((file, index) => (
+        <div
+          className="file-info-item-name file-name"
+          key={index}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 2fr 2fr 2fr",
+            alignItems: "center",
+            marginLeft:"10px",
+            padding: "1px",
+            width:"80%",
+            borderBottom: "1px solid #eee",
+          }}
+        >
+          {/* File Name */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "14px",
+              padding: "5px",
+           
+            }}
+            title={file}
+          >
+            <BsDiagram2 style={{ padding: "5px", fontSize: "22px" }} />
+            {file.length > 20 ? `${file.substring(0, 20)}...` : file}
+          </div>
+
+          {/* Data Model */}
+          <div style={{ textAlign: "center" }}>
+            <span style={{ padding: "5px 10px", background: "#f0f0f0", borderRadius: "5px" }}>
+            <SiUml style={{ marginRight: "5px" }} /> {null}
+            </span>
+          </div>
+
+          {/* Validation */}
+          <div style={{ textAlign: "center" }}>
+            {isValid === 1 ? (
+              <span
+                className="badge deployed"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  background: "#d4edda",
+                  color: "#155724",
+                  padding: "5px 10px",
+                  borderRadius: "5px",
+                  fontSize: "14px",
+                }}
+              >
+                <MdCheckCircle style={{ marginRight: "5px" }} />
+                Valid
+              </span>
+            ) : (
+              <span
+                className="badge not-deployed"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  background: "#f8d7da",
+                  color: "#721c24",
+                  padding: "5px 10px",
+                  borderRadius: "5px",
+                  fontSize: "14px",
+                }}
+              >
+                <MdCancel style={{ marginRight: "5px" }} />
+                Invalid
+              </span>
+            )}
+          </div>
+
+          {/* Actions */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+            <button
+              style={{
+                background: "#aad4de",
+                color: "#324e6c",
+                fontSize: "13px",
+                padding: "4px 6px",
+                borderRadius: "5px",
+                border: "1px solid #324e6c",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onClick={() => loadDiagram(file)}
+            >
+              <MdOutlineSearch style={{ marginRight: "5px" }} /> Visualize
+            </button>
+            <button
+              style={{
+                background: "#aad4de",
+                color: "#324e6c",
+                fontSize: "13px",
+                padding: "4px 6px",
+                borderRadius: "5px",
+                border: "1px solid #324e6c",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onClick={() => deleteDiagram(file)}
+            >
+              <MdDeleteForever style={{ marginRight: "5px" }} /> Delete
+            </button>
+            <button
+              style={{
+                background: "#aad4de",
+                color: "#324e6c",
+                fontSize: "13px",
+                padding: "4px 6px",
+                borderRadius: "5px",
+                border: "1px solid #324e6c",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onClick={() => manageDiagram(file)}
+            >
+              <MdOutlineBrokenImage style={{ marginRight: "5px" }} /> Manage
+            </button>
+          </div>
+        </div>
+      ))}
+    </>
+  )}
+</div>
                         <div>
                             {deviceArray.length > 0 && (
                                 <>
