@@ -298,8 +298,8 @@ export default function BpmnEditor() {
         <div>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
                 {fileList.length === 0 && deviceArray.length === 0 ? (
-                    <div style={{ margin: '20px', fontSize: '28px', color: '#555', textAlign: 'center', width: '100%' }}>
-                        Create or Import a new .bpmn diagram to start.
+                    <div style={{ margin: '20px', fontSize: '20px', color: '#777', fontStyle:"italic", textAlign: 'center', width: '100%' }}>
+                        Create or Import a new BPMN diagram to start.
                     </div>
                 ) : (
                     <>

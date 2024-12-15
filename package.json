@@ -3,7 +3,7 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
-    "@bpmn-io/properties-panel": "^3.18.2",
+    "@bpmn-io/properties-panel": "^3.25.1",
     "@hilla/form": "2.5.8",
     "@hilla/frontend": "2.5.8",
     "@hilla/generator-typescript-cli": "2.5.8",
@@ -32,6 +32,7 @@
     "bpmn-js-create-append-anything": "^0.5.1",
     "bpmn-js-properties-panel": "^1.26.0",
     "bpmn-js-token-simulation": "^0.34.1",
+    "camunda-bpmn-moddle": "^7.0.1",
     "classnames": "^2.3.2",
     "construct-style-sheets-polyfill": "3.1.0",
     "cors": "^2.8.5",
@@ -146,7 +147,8 @@
     "@hilla/react-auth": "$@hilla/react-auth",
     "@hilla/react-form": "$@hilla/react-form",
     "@hilla/generator-typescript-plugin-subtypes": "$@hilla/generator-typescript-plugin-subtypes",
-    "@hilla/react-crud": "$@hilla/react-crud"
+    "@hilla/react-crud": "$@hilla/react-crud",
+    "camunda-bpmn-moddle": "$camunda-bpmn-moddle"
   },
   "vaadin": {
     "dependencies": {
@@ -207,6 +209,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "490eba150961dfeb75e45f2e7918d066018a5304d9240b0efcd4faed32a98cf2"
+    "hash": "d55c65c75cbb14d8fce48754204f065dd52cd4ada12e37020cff9a9616ef9881"
   }
 }

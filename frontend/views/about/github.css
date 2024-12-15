@@ -14,7 +14,7 @@
     height: 100%;
     background: #a8bbcb; /* Colore di sfondo */
     z-index: 0; /* Dietro gli altri contenuti di .dvd-container */
-    filter: blur(10px); /* Effetto sfocatura */
+    filter: blur(10000000px); /* Effetto sfocatura */
 }
 
 .dvdLogo {
