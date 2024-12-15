@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import './github.css';
-import developer from "../../img/develop.gif"
-import {BsGithub} from "react-icons/bs";
 import img0 from '../../img/bounce/0.svg';
 import img1 from '../../img/bounce/1.svg';
 import img2 from '../../img/bounce/2.svg';
@@ -15,72 +13,71 @@ import img9 from '../../img/bounce/9.svg';
 import img10 from '../../img/bounce/10.svg';
 import img11 from '../../img/bounce/11.svg';
 import img12 from '../../img/bounce/12.svg';
+import './github.css';
+import developer from "../../img/develop.png"
+import {BsGithub} from "react-icons/bs";
 
 const DVDPlayer: React.FC = () => {
     useEffect(() => {
-        const dvdElements = Array.from(document.getElementsByClassName(
-            'dvdLogo'
-        )) as HTMLElement[];
+        const dvdElements = Array.from(
+            document.getElementsByClassName('dvdLogo')
+        ) as HTMLElement[];
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
-        const dvdWidth = dvdElements[0].clientWidth;
-        const dvdHeight = dvdElements[0].clientHeight;
-        let maxPosX = (screenWidth - dvdWidth) * 0.5; // Riduci il range orizzontale al 60% dello schermo
-        let maxPosY = (screenHeight - dvdHeight) * 0.7; // Aumenta il range verticale al 90% dello schermo
 
         const dvdsData = dvdElements.map((dvdElement) => {
-            const positionX = Math.random() * maxPosX;
-            const positionY = Math.random() * maxPosY;
-            const directionX = 1;
-            const directionY = 1;
+            const positionX = Math.random() * screenWidth;
+            const positionY = Math.random() * screenHeight;
+            const speedX = (Math.random() - 0.5) * 4; // Velocità casuale
+            const speedY = (Math.random() - 0.5) * 4;
 
             return {
                 element: dvdElement,
                 positionX,
                 positionY,
-                directionX,
-                directionY,
+                speedX,
+                speedY,
             };
         });
 
         const animateDVDs = () => {
-            requestAnimationFrame(animateDVDs);
-
             dvdsData.forEach((dvdData) => {
-                const { element, positionX, positionY, directionX, directionY } =
-                    dvdData;
+                let { positionX, positionY, speedX, speedY } = dvdData;
 
-                let newX = positionX + directionX;
-                let newY = positionY + directionY;
+                // Calcolo della nuova posizione
+                positionX += speedX;
+                positionY += speedY;
 
-                if (newX <= 0) {
-                    newX = 0;
-                    dvdData.directionX *= -1;
-                } else if (newX >= maxPosX) {
-                    newX = maxPosX;
-                    dvdData.directionX *= -1;
+                // Controllo dei bordi e inversione direzione
+                if (positionX <= 0 || positionX + 50 >= screenWidth) {
+                    speedX *= -1;
                 }
 
-                if (newY <= 0) {
-                    newY = 0;
-                    dvdData.directionY *= -1;
-                } else if (newY >= maxPosY) {
-                    newY = maxPosY;
-                    dvdData.directionY *= -1;
+                if (positionY <= 0 || positionY + 50 >= screenHeight) {
+                    speedY *= -1;
                 }
 
-                element.style.transform = `translate(${newX}px, ${newY}px)`;
+                dvdData.positionX = positionX;
+                dvdData.positionY = positionY;
+                dvdData.speedX = speedX;
+                dvdData.speedY = speedY;
 
-                dvdData.positionX = newX;
-                dvdData.positionY = newY;
+                // Applica la trasformazione
+                dvdData.element.style.transform = `translate(${positionX}px, ${positionY}px)`;
             });
+
+            requestAnimationFrame(animateDVDs);
         };
 
         animateDVDs();
     }, []);
 
-    const dvdImages = [
+    const redirectToGitHub = () => {
+        window.location.href = "https://github.com/IvanComp/DOLLY";
+    };
+
+    const bpmnImages = [
         img0,
         img1,
         img2,
@@ -93,29 +90,46 @@ const DVDPlayer: React.FC = () => {
         img9,
         img10,
         img11,
-        img12
+        img12,
     ].map((src, index) => (
         <img
             key={index}
             className="dvdLogo"
             src={src}
+            alt={`BPMN object ${index}`}
         />
     ));
 
-    const redirectToGitHub = () => {
-        window.location.href = "https://github.com/IvanComp/ADAPTIVE-SHADOW";
-    };
-
     return <div className="dvd-container">
-        <button
-            className="centered-button"
-            onClick={redirectToGitHub}
-            style={{ backgroundColor:"#fafaff", color:"#10ad73",position: "fixed", padding: '10px 20px', borderRadius: '15px', cursor: 'pointer', marginLeft: "30%", marginTop: "20%", zIndex: 1 }}
-        >
-            <BsGithub style={{ marginBottom: "12px", marginRight: "5px", height:"60px", width:"60px" }} />
-            <img style={{marginTop: "10px", position:"relative"}}  src={developer} alt="Animated icons by Lordicon.com" width="80" height="80"/>
-        </button>
-        {dvdImages}</div>;
+        <div className="background-blur"></div>
+<button
+    className="centered-button"
+    onClick={redirectToGitHub}
+    style={{
+        backgroundColor: "#fafaff",
+        color: "#1C2950",
+        position: "fixed",
+        padding: '10px 20px',
+        borderRadius: '15px',
+        cursor: 'pointer',
+        marginLeft: "30%",
+        marginTop: "20%",
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "10px", // Spaziatura tra icone
+    }}
+>
+    <BsGithub style={{ height: "50px", width: "50px" }} />
+    <img
+        style={{ width: "60px", height: "60px" }}
+        src={developer}
+        alt="Animated icons by Lordicon.com"
+    />
+</button>
+        {bpmnImages}</div>;
+    
 };
 
 export default DVDPlayer;

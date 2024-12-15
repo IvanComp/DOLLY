@@ -1,14 +1,32 @@
 .dvd-container {
-    background-color: #fafafb;
-    align-self: center; /* Sfondo leggermente sbiadito */
+    position: relative; /* Necessario per posizionare il figlio assolutamente */
+    background-color: rgba(168, 187, 203, 0.8); /* Colore semi-trasparente per un look uniforme */
+    height: 100vh;
+    overflow: hidden; /* Evita che gli elementi escano dai bordi */
+    margin:"300px";
+}
+
+.background-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    background: #a8bbcb; /* Colore di sfondo */
+    z-index: 0; /* Dietro gli altri contenuti di .dvd-container */
+    filter: blur(10px); /* Effetto sfocatura */
 }
 
 .dvdLogo {
-    opacity: 1; /* Opacità delle immagini (trasparenza) */
+    position: absolute;
+    width: 70px; /* Dimensioni oggetti BPMN */
+    height: 70px;
+    opacity: 1;
+    transition: transform 0.1s ease-in-out;
+    z-index: 1; /* Sopra lo sfondo sfocato */
 }
 
 body {
+    margin: 0;
     overflow: hidden;
 }
-
