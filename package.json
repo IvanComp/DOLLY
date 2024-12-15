@@ -30,7 +30,7 @@
     "bootstrap": "^5.3.3",
     "bpmn-js": "^13.0.4",
     "bpmn-js-create-append-anything": "^0.5.1",
-    "bpmn-js-properties-panel": "^1.26.0",
+    "bpmn-js-properties-panel": "^5.30.0",
     "bpmn-js-token-simulation": "^0.34.1",
     "camunda-bpmn-moddle": "^7.0.1",
     "classnames": "^2.3.2",
@@ -209,6 +209,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "d55c65c75cbb14d8fce48754204f065dd52cd4ada12e37020cff9a9616ef9881"
+    "hash": "e0ac54a699514687370e67d26ddaf89adfd207feaf4d796b61be0d4be60ab856"
   }
 }

@@ -1163,20 +1163,10 @@
   resolved "https://registry.npmjs.org/@bpmn-io/element-template-chooser/-/element-template-chooser-1.0.0.tgz"
   integrity sha512-jSzvoWwYiTpsR7X/+nhao8e8jfveTPLeT3cUUJYhcztLysJaJo+5VXX+QbzH4eFOCnqaoIz6ehbd8px4EjVYnA==
 
-"@bpmn-io/element-templates-validator@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.npmjs.org/@bpmn-io/element-templates-validator/-/element-templates-validator-0.14.0.tgz"
-  integrity sha512-b7/6AAFIG8e5mzgGZR7sLaQ/B36Iy0SKEdKvX7zYZVbguvqTP9GtBSAwDRSbJzKX0HKWSUfmjRFgfRhsjSNurA==
-  dependencies:
-    "@camunda/element-templates-json-schema" "^0.12.1"
-    "@camunda/zeebe-element-templates-json-schema" "^0.9.0"
-    json-source-map "^0.6.1"
-    min-dash "^4.0.0"
-
-"@bpmn-io/extract-process-variables@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.npmjs.org/@bpmn-io/extract-process-variables/-/extract-process-variables-0.8.0.tgz"
-  integrity sha512-yAS7ZYX+D56K+luC36u96eRMLb4VHcPUwTUqMZ/Z/Je2gou2DJLRbuBTHAB4jjKt4wFCHSG4B8Y+TrBciEYf4w==
+"@bpmn-io/extract-process-variables@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@bpmn-io/extract-process-variables/-/extract-process-variables-1.0.0.tgz"
+  integrity sha512-4EpxKwsV1h1ttlFywo8Af+JBhGzmmv63C8x2Fu5traH8z/4VJbPa2AncIU2GFHj7LYeZlygEDYWPB0QRYoQWKg==
   dependencies:
     min-dash "^4.0.0"
 
@@ -1216,16 +1206,6 @@
     focus-trap "^7.5.2"
     min-dash "^4.1.1"
     min-dom "^4.0.3"
-
-"@camunda/element-templates-json-schema@^0.12.1":
-  version "0.12.1"
-  resolved "https://registry.npmjs.org/@camunda/element-templates-json-schema/-/element-templates-json-schema-0.12.1.tgz"
-  integrity sha512-Hk0Fggw1fqsoeYXTC6/Ca5MyuseS3S2OAg6PGf9w7xcJf1RxJVHp20azAYhPK3bmgFXw/tBl/DMzZhyp+EDKtw==
-
-"@camunda/zeebe-element-templates-json-schema@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.npmjs.org/@camunda/zeebe-element-templates-json-schema/-/zeebe-element-templates-json-schema-0.9.0.tgz"
-  integrity sha512-umeLoy8erTiFCG92Z29kJ8VH6fHfFE+75HwQH/WwIRqa2AvNYrkSCNpXtTGwW/EjnyvGA6VcfqirZhibuuHMaA==
 
 "@codemirror/autocomplete@^6.10.1", "@codemirror/autocomplete@^6.16.2":
   version "6.18.3"
@@ -4033,10 +4013,10 @@ array-equal@^1.0.0:
   resolved "https://registry.npmjs.org/array-equal/-/array-equal-1.0.2.tgz"
   integrity sha512-gUHx76KtnhEgB3HOuFYiCm3FIdEs6ocM2asHvNTkfu/Y09qQVrrVVaOKENmS2KkSaGoxgXNqC+ZVtR/n0MOkSA==
 
-array-move@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/array-move/-/array-move-3.0.1.tgz"
-  integrity sha512-H3Of6NIn2nNU1gsVDqDnYKY/LCdWvCMMOWifNGhKcVQgiZ6nOek39aESOvro6zmueP07exSl93YLvkN4fZOkSg==
+array-move@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/array-move/-/array-move-4.0.0.tgz"
+  integrity sha512-+RY54S8OuVvg94THpneQvFRmqWdAHeqtMzgMW6JNurHxe8rsS07cHQdfGkXnTUXiBcyZ0j3SiDIxxj0RPiqCkQ==
 
 array-unique@^0.3.2:
   version "0.3.2"
@@ -4351,21 +4331,16 @@ bpmn-js-create-append-anything@^0.5.1:
   dependencies:
     "@bpmn-io/element-template-chooser" "^1.0.0"
 
-bpmn-js-properties-panel@^1.26.0:
-  version "1.26.0"
-  resolved "https://registry.npmjs.org/bpmn-js-properties-panel/-/bpmn-js-properties-panel-1.26.0.tgz"
-  integrity sha512-ureaMtsVtLD/ULezt+4gC9dCFKhQNg/w12qxoKT46JwL3f4FzmcCptZ/6zJrxit8bLV/tIMPAIOdcvanviWvrA==
+bpmn-js-properties-panel@^5.30.0:
+  version "5.30.0"
+  resolved "https://registry.npmjs.org/bpmn-js-properties-panel/-/bpmn-js-properties-panel-5.30.0.tgz"
+  integrity sha512-/9p+RJsbES6zw+asvvNG5mywnRvIDkiGdpTzMj2+axFYFrclRg6NFjA9MB4u/o3Au1IRiLuRrm+hlgzqHfNKUA==
   dependencies:
-    "@bpmn-io/element-templates-validator" "^0.14.0"
-    "@bpmn-io/extract-process-variables" "^0.8.0"
-    array-move "^3.0.1"
-    classnames "^2.3.1"
-    ids "^1.0.0"
-    min-dash "^4.0.0"
-    min-dom "^4.0.3"
-    preact-markup "^2.1.1"
-    semver-compare "^1.0.0"
-    uuid "^9.0.0"
+    "@bpmn-io/extract-process-variables" "^1.0.0"
+    array-move "^4.0.0"
+    ids "^1.0.5"
+    min-dash "^4.2.1"
+    min-dom "^4.2.1"
 
 bpmn-js-token-simulation@^0.34.1:
   version "0.34.1"
@@ -4658,9 +4633,9 @@ camelcase@^5.3.1:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 "camunda-bpmn-js-behaviors@>= 0.4":
-  version "1.8.0"
-  resolved "https://registry.npmjs.org/camunda-bpmn-js-behaviors/-/camunda-bpmn-js-behaviors-1.8.0.tgz"
-  integrity sha512-QsB/itcwgm+06kHBpVrWRSkYRduFll8VZ4QA/jtfxZcAM4wEpHwklxkQl9o2352FUNWsca3/clJXU8sEwnVASQ==
+  version "1.9.0"
+  resolved "https://registry.npmjs.org/camunda-bpmn-js-behaviors/-/camunda-bpmn-js-behaviors-1.9.0.tgz"
+  integrity sha512-s80UtNaEemOjmVjpgFaX81PK/+As4qPNdpJenyDXCalIDDdFNoKgqH/HjKlfhKq/PjUxgqY9p7FwbxKXe18Lmw==
   dependencies:
     ids "^1.0.0"
     min-dash "^4.0.0"
@@ -7181,10 +7156,10 @@ idb@^7.0.1:
   resolved "https://registry.npmjs.org/idb/-/idb-7.1.1.tgz"
   integrity sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==
 
-ids@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/ids/-/ids-1.0.0.tgz"
-  integrity sha512-Zvtq1xUto4LttpstyOlFum8lKx+i1OmRfg+6A9drFS9iSZsDPMHG4Sof/qwNR4kCU7jBeWFPrY2ocHxiz7cCRw==
+ids@^1.0.0, ids@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/ids/-/ids-1.0.5.tgz"
+  integrity sha512-XQ0yom/4KWTL29sLG+tyuycy7UmeaM/79GRtSJq6IG9cJGIPeBz5kwDCguie3TwxaMNIc3WtPi0cTa1XYHicpw==
 
 ieee754@^1.1.12, ieee754@^1.1.4, ieee754@^1.2.1:
   version "1.2.1"
@@ -7816,11 +7791,6 @@ json-schema@^0.4.0, json-schema@0.4.0:
   version "0.4.0"
   resolved "https://registry.npmjs.org/json-schema/-/json-schema-0.4.0.tgz"
   integrity sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==
-
-json-source-map@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.npmjs.org/json-source-map/-/json-source-map-0.6.1.tgz"
-  integrity sha512-1QoztHPsMQqhDq0hlXY5ZqcEdUzxQEIxgFkKl4WUp2pgShObl+9ovi4kRh2TfvAfxAoHOJ9vIMEqk3k4iex7tg==
 
 json-stringify-pretty-compact@^2.0.0:
   version "2.0.0"
@@ -8507,16 +8477,7 @@ min-dom@^3.1.2:
     matches-selector "^1.2.0"
     min-dash "^3.8.1"
 
-min-dom@^4.0.2, min-dom@^4.0.3, min-dom@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.npmjs.org/min-dom/-/min-dom-4.1.0.tgz"
-  integrity sha512-1lj1EyoSwY/UmTeT/hhPiZTsq+vK9D+8FAJ/53iK5jT1otkG9rJTixSKdjmTieEvdfES+sKbbTptzaQJhnacjA==
-  dependencies:
-    component-event "^0.2.1"
-    domify "^1.4.1"
-    min-dash "^4.0.0"
-
-min-dom@^4.2.1:
+min-dom@^4.0.2, min-dom@^4.0.3, min-dom@^4.1.0, min-dom@^4.2.1:
   version "4.2.1"
   resolved "https://registry.npmjs.org/min-dom/-/min-dom-4.2.1.tgz"
   integrity sha512-TMoL8SEEIhUWYgkj7XMSgxmwSyGI+4fP2KFFGnN3FbHfbGHVdsLYSz8LoIsgPhz4dWRmLvxWWSMgzZMJW5sZuA==
@@ -10083,12 +10044,7 @@ posthtml@^0.16.4, posthtml@^0.16.5:
     posthtml-parser "^0.11.0"
     posthtml-render "^3.0.0"
 
-preact-markup@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/preact-markup/-/preact-markup-2.1.1.tgz"
-  integrity sha512-8JL2p36mzK8XkspOyhBxUSPjYwMxDM0L5BWBZWxsZMVW8WsGQrYQDgVuDKkRspt2hwrle+Cxr/053hpc9BJwfw==
-
-preact@^10.11.2, preact@>=10:
+preact@^10.11.2:
   version "10.22.0"
   resolved "https://registry.npmjs.org/preact/-/preact-10.22.0.tgz"
   integrity sha512-RRurnSjJPj4rp5K6XoP45Ui33ncb7e4H7WiOHVpjbkvqvA3U+N8Z6Qbo0AE6leGYBV66n8EhEaFixvIu3SkxFw==
@@ -10922,11 +10878,6 @@ secure-json-parse@^2.4.0:
   version "2.7.0"
   resolved "https://registry.npmjs.org/secure-json-parse/-/secure-json-parse-2.7.0.tgz"
   integrity sha512-6aU+Rwsezw7VR8/nyvKTx8QpWH9FrcYiXXlqC4z5d5XQBDRqtbfsRjnwGyqbi3gddNtWHuEk9OANUotL26qKUw==
-
-semver-compare@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/semver-compare/-/semver-compare-1.0.0.tgz"
-  integrity sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow==
 
 semver@^5.3.0:
   version "5.7.2"
@@ -12193,11 +12144,6 @@ uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
-
-uuid@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz"
-  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 v8-compile-cache@^2.0.0:
   version "2.4.0"

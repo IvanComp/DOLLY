@@ -13,6 +13,7 @@ import "../microservice/fileList.css";
 // @ts-ignore
 import { IframeSample } from "../../components/bimp-ui/IframeSample";
 
+
 export default function Monitoring() {
   const [fileList, setFileList] = useState<string[]>([]);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -313,7 +314,7 @@ export default function Monitoring() {
             <table className="process-info-table">
               <tbody>
                 <tr>
-                  <td>Deployment ID:</td>
+                  <td>Deployment ID</td>
                   <td>
                     <HiClipboardList 
                       style={{ cursor: "pointer", color: "#324e6c", marginRight: "5px" }} 
@@ -323,12 +324,12 @@ export default function Monitoring() {
                     {deploymentId ?? "Not available"}
                   </td> </tr>
                 <tr>
-                  <td>Running Instances:</td>
+                  <td>Running Instances</td>
                   <td>{runningInstances ?? "-"}</td>
                 </tr>
                 <tr>
-                  <td>Manual Tasks:</td>
-                  <td>{manualTasks ?? "False"}</td>
+                  <td>Pednging Manual Tasks</td>
+                  <td>{manualTasks ?? "No"}</td>
                 </tr>
               </tbody>
             </table>

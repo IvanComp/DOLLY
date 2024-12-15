@@ -6,6 +6,8 @@
 {
   "_version": "9",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "jsx": "react-jsx",
     "inlineSources": true,
@@ -23,6 +25,8 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "baseUrl": "frontend",
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "resolveJsonModule": true,
     "paths": {
       "@vaadin/flow-frontend": ["generated/jar-resources"],
       "@vaadin/flow-frontend/*": ["generated/jar-resources/*"],
@@ -31,7 +35,8 @@
   },
   "include": [
     "frontend/**/*",
-    "types.d.ts"
+    "types.d.ts",
+    "types/**/*"
   ],
   "exclude": [
     "frontend/generated/jar-resources/**"

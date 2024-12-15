@@ -3,7 +3,9 @@ import React, { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPo
 import BpmnModeler from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 import 'bpmn-js/dist/assets/diagram-js.css';
 import './fileList.css';
+import './properties-panel.css';
 import axios from 'axios';
+import { MdClose, MdMenu } from 'react-icons/md'; // Icone per aprire/chiudere
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
 import { MdOutlineInsertChartOutlined, MdChecklist, MdCancel, MdCheckCircle, MdMonitorHeart, MdAutoGraph, MdPlayCircleOutline, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { BsDiagram2 } from "react-icons/bs";
@@ -16,10 +18,15 @@ import { Link } from "react-router-dom";
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import Swal from 'sweetalert2';
-// @ts-ignore
-import {BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import { useNavigate } from 'react-router-dom';
 import TokenSimulationModule from 'bpmn-js-token-simulation';
+import camundaModdle from 'camunda-bpmn-moddle/resources/camunda.json';
+// @ts-ignore
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule} from 'bpmn-js-properties-panel/dist/index.js';
+import { GrDocumentUpload } from "react-icons/gr";
+import { BiSave } from "react-icons/bi";
+import { BiPlus } from "react-icons/bi";
+import { LuRadioTower } from "react-icons/lu";
 
 interface Device {
     id: any;
@@ -33,6 +40,8 @@ export default function BpmnEditor() {
     const [showModeler, setShowModeler] = useState(false); // New state to manage visibility
     const [deviceArray, setDeviceArray] = useState<Device[]>([]);
     const [isValid, setisValid] = useState(1);  
+    const [isPropertiesVisible, setIsPropertiesVisible] = useState(false); // Stato per i pannelli
+    const [isExtraVisible, setIsExtraVisible] = useState(false); 
 
     useEffect(() => {
         fetchData();
@@ -79,6 +88,12 @@ export default function BpmnEditor() {
         }
     };
 
+    const togglePanels = () => {
+        setIsPropertiesVisible(!isPropertiesVisible);
+        setIsExtraVisible(!isExtraVisible);
+    };
+
+
     const notyf = new Notyf({duration: 3000, ripple: false,
         position: {
             x: 'right',
@@ -109,11 +124,14 @@ export default function BpmnEditor() {
             keyboard: {
                 bindTo: document
             },
-            additionalModules: [
+            propertiesPanel: {
+                parent: '#properties'
+              },
+              additionalModules: [
                 BpmnPropertiesPanelModule,
                 BpmnPropertiesProviderModule,
-                TokenSimulationModule
-            ]
+                CamundaPlatformPropertiesProviderModule,
+              ]
         });
         setBpmnModeler(modeler);
         modeler.createDiagram();
@@ -295,6 +313,7 @@ export default function BpmnEditor() {
         });
     };
     return (
+        
         <div>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
                 {fileList.length === 0 && deviceArray.length === 0 ? (
@@ -322,7 +341,7 @@ export default function BpmnEditor() {
           fontWeight: "bold",
           fontSize: "14px",
           textAlign: "center",
-          width:"80%",
+          width:"100%",
         }}
       >
         <div>File Name</div>
@@ -341,7 +360,7 @@ export default function BpmnEditor() {
             alignItems: "center",
             marginLeft:"10px",
             padding: "1px",
-            width:"80%",
+            width:"100%",
             borderBottom: "1px solid #eee",
           }}
         >
@@ -460,7 +479,137 @@ export default function BpmnEditor() {
     </>
   )}
 </div>
-                        <div>
+                        
+                    </>
+                )}
+            </div>
+
+            <div style={{ display: 'flex', height: '600px', border: 'solid 0.1px', margin: '10px 10px' }}>
+    {/* Contenitore del BPMN Modeler */}
+    <div id="bpmn-container" style={{ flex: '3', borderRight: '1px solid #ccc' }}>
+
+
+
+                <button 
+                title= "Import a BPMN Diagram"
+                style={{                  
+                    margin: '10px',
+                    fontWeight: 'bold',
+                    background: 'white',
+                    color: '#324e6c',
+                    fontSize: '12px',
+                    padding: '10px 10px',
+                    borderRadius: '5px',
+                    border: '2px solid #324e6c',
+                    cursor: 'pointer',
+                    marginTop: "10px"
+
+                }}
+            >
+                <GrDocumentUpload size={20}  style={{fontWeight:"bold"}}/>
+                
+                <input id="import-diagram" type="file" accept=".bpmn" style={{ display: 'none' }} onChange={importNewDiagram} />
+
+            </button>
+            <button
+            title= "Create a new BPMN Diagram"
+                style={{
+                    margin: '10px',
+                    fontWeight: 'bold',
+                    background: 'white',
+                    color: '#324e6c',
+                    fontSize: '12px',
+                    padding: '10px 10px',
+                    borderRadius: '5px',
+                    border: '2px solid #324e6c',
+                    cursor: 'pointer',
+                }}
+                onClick={createNewDiagram}
+            >
+                    
+            <BiPlus size={20}  style={{fontWeight:"bold"}}/>
+            </button>
+
+            <button
+                style={{
+                    margin: '10px',
+                    fontWeight: 'bold',
+                    background: 'white',
+                    color: '#324e6c',
+                    fontSize: '12px',
+                    padding: '10px 10px',
+                    borderRadius: '5px',
+                    border: '2px solid #324e6c',
+                    cursor: 'pointer',
+                }}
+                onClick={saveDiagram}
+            >
+
+            <BiSave size={20}  style={{fontWeight:"bold"}}/>
+
+            </button>
+
+            <button 
+                onClick={togglePanels} 
+                style={{
+                    visibility: isExtraVisible === true ? "hidden" : "visible",
+                    margin: '10px',
+                    fontWeight: 'bold',
+                    background: '#eaf3ed',
+                    color: '#324e6c',
+                    fontSize: '12px',
+                    padding: '10px 10px',
+                    borderRadius: '5px',
+                    border: '2px solid #324e6c',
+                    cursor: 'pointer',
+                    marginLeft: '10px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    whiteSpace: 'nowrap',
+                }}
+            >
+                <LuRadioTower size={20} style={{ fontWeight: "bold" }} />
+                <span style={{}}> Configure IoT Devices</span>
+            </button>
+
+    </div>
+    
+    {/* Contenitore del Pannello delle Proprietà */}
+    <div id="properties" style={{ flex: '1', padding: '10px', overflowY: 'auto', borderRight: '1px solid #ccc' }}>
+
+    </div>
+
+{isExtraVisible && (
+                <div 
+                    id="extra-panel" 
+                    style={{ 
+                        flex: '1', 
+                        padding: '10px', 
+                        overflowY: 'auto', 
+                        background: '#f9f9f9',
+                        transition: 'transform 0.3s ease' 
+                    }}
+                >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                    <h4 style={{ margin: 0 }}>IoT Devices Modeling</h4>
+                    <button 
+                        onClick={togglePanels} 
+                        style={{
+                            fontWeight: 'bold',
+                            background: 'white',
+                            color: '#324e6c',
+                            fontSize: '12px',
+                            padding: '5px 10px',
+                            borderRadius: '5px',
+                            border: '2px solid #324e6c',
+                            cursor: 'pointer',
+                        }}
+                    > 
+                        <MdClose size={14} />
+                    </button>
+                </div>
+                    <div>
                             {deviceArray.length > 0 && (
                                 <>
                                     <h3 style={{ marginLeft: '15px', marginTop: '15px' }}>Data Models</h3>
@@ -514,67 +663,10 @@ export default function BpmnEditor() {
                                 </>
                             )}
                         </div>
-                    </>
-                )}
-            </div>
-    
-            <button
-                style={{
-                    margin: '10px',
-                    fontWeight: 'bold',
-                    background: '#aad4de',
-                    color: '#324e6c',
-                    fontSize: '12px',
-                    padding: '10px 10px',
-                    borderRadius: '5px',
-                    border: '2px solid #324e6c',
-                    cursor: 'pointer',
-                    marginTop: "10px"
-
-                }}
-            >
-                <label htmlFor="import-diagram" style={{ cursor: 'pointer'}}>
-                    Import New Diagram
-                </label>
-                <input id="import-diagram" type="file" accept=".bpmn" style={{ display: 'none' }} onChange={importNewDiagram} />
-
-
-            </button>
-            <button
-                style={{
-                    margin: '10px',
-                    fontWeight: 'bold',
-                    background: '#aad4de',
-                    color: '#324e6c',
-                    fontSize: '12px',
-                    padding: '10px 10px',
-                    borderRadius: '5px',
-                    border: '2px solid #324e6c',
-                    cursor: 'pointer',
-                }}
-                onClick={createNewDiagram}
-            >
-                Create New Diagram
-            </button>
-            <button
-                style={{
-                    margin: '10px',
-                    fontWeight: 'bold',
-                    background: '#aad4de',
-                    color: '#324e6c',
-                    fontSize: '12px',
-                    padding: '10px 10px',
-                    borderRadius: '5px',
-                    border: '2px solid #324e6c',
-                    cursor: 'pointer',
-                    marginTop: "30px"
-                }}
-                onClick={saveDiagram}
-            >
-                Save Current Diagram
-            </button>
-    
-            <div id="bpmn-container" style={{ height: '600px', border: 'solid 0.1px', margin: '1px 10px' }}></div>
+                </div>
+            )}
+</div>
+            
         </div>
     );
 }
