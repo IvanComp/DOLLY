@@ -570,13 +570,13 @@ export default function BpmnEditor() {
                 }}
             >
                 <LuRadioTower size={20} style={{ fontWeight: "bold" }} />
-                <span style={{}}> Configure IoT Devices</span>
+                <p style={{fontSize:"10px"}}> Configure IoT Devices</p>
             </button>
 
     </div>
     
     {/* Contenitore del Pannello delle Proprietà */}
-    <div id="properties" style={{ flex: '1', padding: '10px', overflowY: 'auto', borderRight: '1px solid #ccc' }}>
+    <div id="properties" style={{ flex: '1', padding: '10px', borderRight: '1px solid #ccc' }}>
 
     </div>
 
@@ -591,24 +591,37 @@ export default function BpmnEditor() {
                         transition: 'transform 0.3s ease' 
                     }}
                 >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                    <h4 style={{ margin: 0 }}>IoT Devices Modeling</h4>
-                    <button 
-                        onClick={togglePanels} 
-                        style={{
-                            fontWeight: 'bold',
-                            background: 'white',
-                            color: '#324e6c',
-                            fontSize: '12px',
-                            padding: '5px 10px',
-                            borderRadius: '5px',
-                            border: '2px solid #324e6c',
-                            cursor: 'pointer',
-                        }}
-                    > 
-                        <MdClose size={14} />
-                    </button>
-                </div>
+                <div style={{ 
+    display: 'flex', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    position: 'relative',
+    marginBottom: '10px',
+    fontWeight: 'bold',
+}}>
+    {/* Testo IoT Devices centrato */}
+    <span style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', fontWeight: 'bold' }}>
+        IoT Devices
+    </span>
+
+    {/* Bottone tutto a destra */}
+    <button 
+        onClick={togglePanels} 
+        style={{
+            marginLeft: 'auto',
+            background: 'white',
+            color: '#324e6c',
+            fontSize: '12px',
+            padding: '5px 8px',
+            borderRadius: '5px',
+            border: '2px solid #324e6c',
+            cursor: 'pointer',
+        }}
+    > 
+        <MdClose size={8} />
+    </button>
+</div>
+
                     <div>
                             {deviceArray.length > 0 && (
                                 <>
